@@ -17,9 +17,13 @@ public sealed partial class HumanizerSourceGenerator
 
     sealed class LocaleRegistryInput(
         ImmutableArray<ResolvedLocaleDefinition> locales,
+        ImmutableArray<AcceptedCultureInput> acceptedCultures,
         ImmutableArray<Diagnostic> diagnostics,
         ImmutableHashSet<string> dataBackedFormatterProfiles,
-        ImmutableHashSet<string> dataBackedOrdinalizerProfiles)
+        ImmutableHashSet<string> dataBackedOrdinalizerProfiles,
+        string registryKey,
+        bool suppressOutput)
+        : IEquatable<LocaleRegistryInput>
     {
         /// <summary>
         /// Emits the registry wiring for the resolved locale set.
@@ -27,9 +31,12 @@ public sealed partial class HumanizerSourceGenerator
         /// parent chain and the current canonical locale feature set.
         /// </summary>
         readonly ImmutableArray<ResolvedLocaleDefinition> locales = locales;
+        readonly ImmutableArray<AcceptedCultureInput> acceptedCultures = acceptedCultures;
         readonly ImmutableArray<Diagnostic> diagnostics = diagnostics;
         readonly ImmutableHashSet<string> dataBackedFormatterProfiles = dataBackedFormatterProfiles;
         readonly ImmutableHashSet<string> dataBackedOrdinalizerProfiles = dataBackedOrdinalizerProfiles;
+        readonly string registryKey = registryKey;
+        readonly bool suppressOutput = suppressOutput;
 
         static readonly (string RegistryName, Func<ResolvedLocaleDefinition, LocaleFeature?> FeatureSelector)[] RegistrySelectors =
         [
@@ -43,12 +50,106 @@ public sealed partial class HumanizerSourceGenerator
             ("WordsToNumberConverterRegistry", static locale => locale.WordsToNumber)
         ];
 
-        public static LocaleRegistryInput Create(LocaleCatalogInput localeCatalog) =>
-            new(
+        public static LocaleRegistryInput Create(
+            LocaleCatalogInput localeCatalog,
+            InflectionCatalogInput.InflectionRegistryInput inflectionRegistry)
+        {
+            var suppressOutput = inflectionRegistry.HasErrors;
+            return new(
                 localeCatalog.Locales,
+                localeCatalog.AcceptedCultures,
                 localeCatalog.Diagnostics,
                 localeCatalog.DataBackedFormatterProfiles,
-                localeCatalog.DataBackedOrdinalizerProfiles);
+                localeCatalog.DataBackedOrdinalizerProfiles,
+                CreateRegistryKey(
+                    localeCatalog,
+                    inflectionRegistry.OwnershipKey,
+                    suppressOutput),
+                suppressOutput);
+        }
+
+        public bool Equals(LocaleRegistryInput? other) =>
+            other is not null &&
+            string.Equals(registryKey, other.registryKey, StringComparison.Ordinal);
+
+        public override bool Equals(object? obj) =>
+            Equals(obj as LocaleRegistryInput);
+
+        public override int GetHashCode() =>
+            StringComparer.Ordinal.GetHashCode(registryKey);
+
+        static string CreateRegistryKey(
+            LocaleCatalogInput localeCatalog,
+            string inflectionOwnershipKey,
+            bool suppressOutput)
+        {
+            var builder = new StringBuilder();
+            builder.Append(suppressOutput ? '1' : '0');
+            AppendKeyPart(builder, inflectionOwnershipKey);
+            foreach (var diagnostic in localeCatalog.Diagnostics)
+            {
+                AppendKeyPart(builder, diagnostic.Id);
+                AppendKeyPart(builder, diagnostic.GetMessage());
+            }
+
+            foreach (var locale in localeCatalog.Locales.OrderBy(
+                         static locale => locale.LocaleCode,
+                         StringComparer.Ordinal))
+            {
+                AppendKeyPart(builder, locale.LocaleCode);
+                foreach (var (_, selector) in RegistrySelectors)
+                {
+                    var feature = selector(locale);
+                    AppendKeyPart(builder, feature?.Kind);
+                    AppendKeyPart(builder, feature?.Argument);
+                }
+
+                AppendKeyPart(
+                    builder,
+                    locale.WordsToNumber?.ProfileRoot.GetRawText());
+                AppendKeyPart(
+                    builder,
+                    locale.NumberFormatting?.GetScalar("decimalSeparator"));
+                AppendKeyPart(
+                    builder,
+                    locale.NumberFormatting?.GetScalar("negativeSign"));
+                AppendKeyPart(
+                    builder,
+                    locale.NumberFormatting?.GetScalar("groupSeparator"));
+            }
+
+            foreach (var accepted in localeCatalog.AcceptedCultures)
+            {
+                AppendKeyPart(builder, accepted.Name);
+                AppendKeyPart(builder, accepted.LocaleProfileOwner);
+                AppendKeyPart(builder, accepted.InflectionOwner);
+                AppendKeyPart(builder, accepted.InflectionTerminal);
+            }
+
+            foreach (var profile in localeCatalog.DataBackedFormatterProfiles.OrderBy(
+                         static profile => profile,
+                         StringComparer.Ordinal))
+            {
+                AppendKeyPart(builder, profile);
+            }
+
+            foreach (var profile in localeCatalog.DataBackedOrdinalizerProfiles.OrderBy(
+                         static profile => profile,
+                         StringComparer.Ordinal))
+            {
+                AppendKeyPart(builder, profile);
+            }
+
+            return builder.ToString();
+        }
+
+        static void AppendKeyPart(StringBuilder builder, string? value)
+        {
+            builder.Append(value?.Length ?? -1);
+            builder.Append(':');
+            builder.Append(value);
+            builder.Append('|');
+        }
 
         public void Emit(SourceProductionContext context)
         {
@@ -57,7 +158,9 @@ public sealed partial class HumanizerSourceGenerator
                 context.ReportDiagnostic(diagnostic);
             }
 
-            if (locales.IsDefaultOrEmpty)
+            if (suppressOutput ||
+                !diagnostics.IsDefaultOrEmpty ||
+                locales.IsDefaultOrEmpty)
             {
                 return;
             }
@@ -130,6 +233,7 @@ public sealed partial class HumanizerSourceGenerator
                     builder.AppendLine(");");
                 }
 
+                builder.AppendLine("        registry.UseGeneratedCultureResolver();");
                 builder.AppendLine("    }");
                 builder.AppendLine("}");
 
@@ -143,6 +247,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             EmitWordsToDecimalNumberRegistrations(context);
+            EmitCultureResolver(context);
             EmitSupportedCultureApi(context);
             EmitNumberFormattingOverrides(context);
         }
@@ -185,6 +290,7 @@ public sealed partial class HumanizerSourceGenerator
                 builder.AppendLine("));");
             }
 
+            builder.AppendLine("        registry.UseGeneratedCultureResolver();");
             builder.AppendLine("    }");
             builder.AppendLine("}");
 
@@ -193,11 +299,74 @@ public sealed partial class HumanizerSourceGenerator
                 SourceText.From(builder.ToString(), Encoding.UTF8));
         }
 
-        void EmitSupportedCultureApi(SourceProductionContext context)
+        void EmitCultureResolver(SourceProductionContext context)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("#nullable enable");
+            builder.AppendLine("using System;");
+            builder.AppendLine();
+            builder.AppendLine("namespace Humanizer;");
+            builder.AppendLine();
+            builder.AppendLine("// CultureResolutionRecord fields: AcceptedName, LocaleProfileOwner, InflectionOwner, InflectionTerminal.");
+            builder.AppendLine("internal static class GeneratedCultureResolver");
+            builder.AppendLine("{");
+            builder.AppendLine("    static readonly CultureResolutionRecord[] Records =");
+            builder.AppendLine("    [");
+            foreach (var entry in acceptedCultures)
+            {
+                builder.Append("        new(");
+                builder.Append(QuoteLiteral(entry.Name));
+                builder.Append(", ");
+                builder.Append(QuoteLiteral(entry.LocaleProfileOwner));
+                builder.Append(", ");
+                builder.Append(entry.InflectionOwner is null ? "null" : QuoteLiteral(entry.InflectionOwner));
+                builder.Append(", ");
+                builder.Append(entry.InflectionTerminal is null
+                    ? "null"
+                    : "InflectionStatus." + entry.InflectionTerminal);
+                builder.AppendLine("),");
+            }
+
+            builder.AppendLine("    ];");
+            builder.AppendLine();
+            builder.AppendLine("    internal static bool TryResolve(string cultureName, out CultureResolutionRecord resolution)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        var low = 0;");
+            builder.AppendLine("        var high = Records.Length - 1;");
+            builder.AppendLine("        while (low <= high)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            var middle = low + ((high - low) / 2);");
+            builder.AppendLine("            var comparison = StringComparer.OrdinalIgnoreCase.Compare(Records[middle].AcceptedName, cultureName);");
+            builder.AppendLine("            if (comparison == 0)");
+            builder.AppendLine("            {");
+            builder.AppendLine("                resolution = Records[middle];");
+            builder.AppendLine("                return true;");
+            builder.AppendLine("            }");
+            builder.AppendLine();
+            builder.AppendLine("            if (comparison < 0)");
+            builder.AppendLine("            {");
+            builder.AppendLine("                low = middle + 1;");
+            builder.AppendLine("            }");
+            builder.AppendLine("            else");
+            builder.AppendLine("            {");
+            builder.AppendLine("                high = middle - 1;");
+            builder.AppendLine("            }");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        resolution = default;");
+            builder.AppendLine("        return false;");
+            builder.AppendLine("    }");
+            builder.AppendLine("}");
+
+            context.AddSource(
+                "GeneratedCultureResolver.g.cs",
+                SourceText.From(builder.ToString(), Encoding.UTF8));
+        }
+
+        static void EmitSupportedCultureApi(SourceProductionContext context)
         {
             var builder = new StringBuilder();
             builder.AppendLine("using System;");
-            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine("using System.Globalization;");
             builder.AppendLine();
             builder.AppendLine("namespace Humanizer;");
@@ -208,10 +377,7 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("    /// Determines whether Humanizer includes complete generated locale support for the specified culture.");
             builder.AppendLine("    /// </summary>");
             builder.AppendLine("    /// <param name=\"culture\">The culture to check.</param>");
-            builder.AppendLine("    /// <returns><see langword=\"true\"/> when the culture or one of its named parents has generated locale support; otherwise, <see langword=\"false\"/>.</returns>");
-            builder.AppendLine("    /// <remarks>");
-            builder.AppendLine("    /// This considers parent-culture fallback, but does not report support merely because Humanizer can fall back to its default English localizers.");
-            builder.AppendLine("    /// </remarks>");
+            builder.AppendLine("    /// <returns><see langword=\"true\"/> when the exact culture name has generated locale support; otherwise, <see langword=\"false\"/>.</returns>");
             builder.AppendLine("    /// <exception cref=\"ArgumentNullException\">Thrown when <paramref name=\"culture\"/> is <c>null</c>.</exception>");
             builder.AppendLine("    public static bool IsCultureSupported(CultureInfo culture)");
             builder.AppendLine("    {");
@@ -220,28 +386,8 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("            throw new ArgumentNullException(nameof(culture));");
             builder.AppendLine("        }");
             builder.AppendLine();
-            builder.AppendLine("        for (var current = culture; !string.IsNullOrEmpty(current.Name); current = current.Parent)");
-            builder.AppendLine("        {");
-            builder.AppendLine("            if (SupportedLocaleCodes.Contains(current.Name))");
-            builder.AppendLine("            {");
-            builder.AppendLine("                return true;");
-            builder.AppendLine("            }");
-            builder.AppendLine("        }");
-            builder.AppendLine();
-            builder.AppendLine("        return false;");
+            builder.AppendLine("        return GeneratedCultureResolver.TryResolve(culture.Name, out _);");
             builder.AppendLine("    }");
-            builder.AppendLine();
-            builder.AppendLine("    static readonly HashSet<string> SupportedLocaleCodes = new(StringComparer.OrdinalIgnoreCase)");
-            builder.AppendLine("    {");
-
-            foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
-            {
-                builder.Append("        \"");
-                builder.Append(locale.LocaleCode);
-                builder.AppendLine("\",");
-            }
-
-            builder.AppendLine("    };");
             builder.AppendLine("}");
 
             context.AddSource("Configurator.SupportedCultures.g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
@@ -399,17 +545,12 @@ public sealed partial class HumanizerSourceGenerator
             builder.Append(methodName);
             builder.AppendLine("(CultureInfo culture, out string? value)");
             builder.AppendLine("    {");
-            builder.AppendLine("        var current = culture;");
-            builder.AppendLine("        while (current is not null && !string.IsNullOrEmpty(current.Name))");
-            builder.AppendLine("        {");
-            builder.Append("            if (");
+            builder.AppendLine("        if (GeneratedCultureResolver.TryResolve(culture.Name, out var resolution) &&");
+            builder.Append("            ");
             builder.Append(dictionaryName);
-            builder.AppendLine(".TryGetValue(current.Name, out value))");
-            builder.AppendLine("            {");
-            builder.AppendLine("                return true;");
-            builder.AppendLine("            }");
-            builder.AppendLine();
-            builder.AppendLine("            current = current.Parent;");
+            builder.AppendLine(".TryGetValue(resolution.LocaleProfileOwner, out value))");
+            builder.AppendLine("        {");
+            builder.AppendLine("            return true;");
             builder.AppendLine("        }");
             builder.AppendLine();
             builder.AppendLine("        value = null;");

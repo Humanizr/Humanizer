@@ -13,6 +13,7 @@ public class LocaliserRegistry<TLocaliser>
     volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
     readonly ConditionalWeakTable<CultureInfo, StrongBox<TLocaliser>> cultureSpecificCache = new();
+    bool useGeneratedCultureResolver;
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -83,6 +84,9 @@ public class LocaliserRegistry<TLocaliser>
         }
     }
 
+    internal void UseGeneratedCultureResolver() =>
+        useGeneratedCultureResolver = true;
+
     Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
     {
         // Check if already frozen (fast path without lock)
@@ -100,6 +104,19 @@ public class LocaliserRegistry<TLocaliser>
                     frozenLocalisers = frozen;
                 }
             }
+        }
+
+        if (useGeneratedCultureResolver)
+        {
+            if (frozen.TryGetValue(culture.Name, out var exactLocaliser))
+            {
+                return exactLocaliser;
+            }
+
+            return GeneratedCultureResolver.TryResolve(culture.Name, out var resolution) &&
+                frozen.TryGetValue(resolution.LocaleProfileOwner, out var generatedLocaliser)
+                    ? generatedLocaliser
+                    : defaultLocaliser;
         }
 
         for (var c = culture; !string.IsNullOrEmpty(c.Name); c = c.Parent)

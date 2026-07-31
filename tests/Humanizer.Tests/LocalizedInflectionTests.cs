@@ -1,3 +1,5 @@
+using System.Numerics;
+
 using Humanizer.Tests.Localisation;
 
 public class LocalizedInflectionTests
@@ -90,16 +92,16 @@ public class LocalizedInflectionTests
         { "es", 1.1m, (int)CardinalPluralCategory.Other }
     };
 
-    public static TheoryData<decimal, decimal, decimal, int, int, decimal, decimal> CardinalOperandCases => new()
+    public static TheoryData<decimal, string, string, int, int, string, string> CardinalOperandCases => new()
     {
-        { 1m, 1m, 1m, 0, 0, 0m, 0m },
-        { 1.0m, 1.0m, 1m, 1, 0, 0m, 0m },
-        { 1.00m, 1.00m, 1m, 2, 0, 0m, 0m },
-        { 1.30m, 1.30m, 1m, 2, 1, 30m, 3m },
-        { 1.03m, 1.03m, 1m, 2, 2, 3m, 3m },
-        { 1.230m, 1.230m, 1m, 3, 2, 230m, 23m },
-        { -1.230m, 1.230m, 1m, 3, 2, 230m, 23m },
-        { -0.0000000000000000000000000010m, 0.0000000000000000000000000010m, 0m, 28, 27, 10m, 1m }
+        { 1m, "1", "1", 0, 0, "0", "0" },
+        { 1.0m, "10", "1", 1, 0, "0", "0" },
+        { 1.00m, "100", "1", 2, 0, "0", "0" },
+        { 1.30m, "130", "1", 2, 1, "30", "3" },
+        { 1.03m, "103", "1", 2, 2, "3", "3" },
+        { 1.230m, "1230", "1", 3, 2, "230", "23" },
+        { -1.230m, "1230", "1", 3, 2, "230", "23" },
+        { -0.0000000000000000000000000010m, "10", "0", 28, 27, "10", "1" }
     };
 
     [Theory]
@@ -150,21 +152,23 @@ public class LocalizedInflectionTests
     [MemberData(nameof(CardinalOperandCases))]
     public void PreservesCLDRDecimalOperands(
         decimal quantity,
-        decimal expectedN,
-        decimal expectedI,
+        string expectedAbsoluteDigits,
+        string expectedIntegerDigits,
         int expectedV,
         int expectedW,
-        decimal expectedF,
-        decimal expectedT)
+        string expectedFractionDigits,
+        string expectedFractionDigitsWithoutTrailingZeros)
     {
         var operands = CardinalPluralOperands.Create(quantity);
 
-        Assert.Equal(expectedN, operands.N);
-        Assert.Equal(expectedI, operands.I);
+        Assert.Equal(BigInteger.Parse(expectedAbsoluteDigits), operands.AbsoluteDigits);
+        Assert.Equal(BigInteger.Parse(expectedIntegerDigits), operands.IntegerDigits);
         Assert.Equal(expectedV, operands.V);
         Assert.Equal(expectedW, operands.W);
-        Assert.Equal(expectedF, operands.F);
-        Assert.Equal(expectedT, operands.T);
+        Assert.Equal(BigInteger.Parse(expectedFractionDigits), operands.FractionDigits);
+        Assert.Equal(
+            BigInteger.Parse(expectedFractionDigitsWithoutTrailingZeros),
+            operands.FractionDigitsWithoutTrailingZeros);
     }
 
     [Theory]
@@ -175,12 +179,16 @@ public class LocalizedInflectionTests
         var operands = CardinalPluralOperands.Create(
             decimal.Parse(quantity, CultureInfo.InvariantCulture));
 
-        Assert.Equal(decimal.MaxValue, operands.N);
-        Assert.Equal(decimal.MaxValue, operands.I);
+        Assert.Equal(
+            BigInteger.Parse("79228162514264337593543950335"),
+            operands.AbsoluteDigits);
+        Assert.Equal(
+            BigInteger.Parse("79228162514264337593543950335"),
+            operands.IntegerDigits);
         Assert.Equal(0, operands.V);
         Assert.Equal(0, operands.W);
-        Assert.Equal(0m, operands.F);
-        Assert.Equal(0m, operands.T);
+        Assert.Equal(BigInteger.Zero, operands.FractionDigits);
+        Assert.Equal(BigInteger.Zero, operands.FractionDigitsWithoutTrailingZeros);
     }
 
     [Fact]

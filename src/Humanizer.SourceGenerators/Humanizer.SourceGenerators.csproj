@@ -14,4 +14,8 @@
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\Humanizer\Localisation\GrammaticalNumber\CardinalPluralRuleMetadata.cs" Link="Common\CardinalPluralRuleMetadata.cs" />
+  </ItemGroup>
+
 </Project>

@@ -42,6 +42,8 @@ public sealed partial class HumanizerSourceGenerator
     /// </summary>
     internal sealed class LocaleCatalogInput(
         ImmutableArray<ResolvedLocaleDefinition> locales,
+        ImmutableArray<AcceptedCultureInput> acceptedCultures,
+        InflectionOwnerGraph inflectionOwners,
         ImmutableArray<Diagnostic> diagnostics,
         ImmutableHashSet<string> dataBackedFormatterProfiles,
         ImmutableHashSet<string> dataBackedOrdinalizerProfiles)
@@ -69,6 +71,8 @@ public sealed partial class HumanizerSourceGenerator
         ];
 
         public ImmutableArray<ResolvedLocaleDefinition> Locales { get; } = locales;
+        public ImmutableArray<AcceptedCultureInput> AcceptedCultures { get; } = acceptedCultures;
+        public InflectionOwnerGraph InflectionOwners { get; } = inflectionOwners;
         public ImmutableArray<Diagnostic> Diagnostics { get; } = diagnostics;
         public ImmutableHashSet<string> DataBackedFormatterProfiles { get; } = dataBackedFormatterProfiles;
         public ImmutableHashSet<string> DataBackedOrdinalizerProfiles { get; } = dataBackedOrdinalizerProfiles;
@@ -139,11 +143,292 @@ public sealed partial class HumanizerSourceGenerator
                 .Select(static feature => feature!.ProfileName!)
                 .ToImmutableHashSet(StringComparer.Ordinal);
 
+            var resolved = resolvedLocales.ToImmutable();
+            var inflectionOwners = CreateInflectionOwnerGraph(resolved, diagnostics);
             return new LocaleCatalogInput(
-                resolvedLocales.ToImmutable(),
+                resolved,
+                CreateAcceptedCultures(resolved, inflectionOwners, diagnostics),
+                inflectionOwners,
                 diagnostics.ToImmutable(),
                 formatterProfiles,
                 ordinalizerProfiles);
+        }
+
+        static ImmutableArray<AcceptedCultureInput> CreateAcceptedCultures(
+            ImmutableArray<ResolvedLocaleDefinition> locales,
+            InflectionOwnerGraph inflectionOwners,
+            ImmutableArray<Diagnostic>.Builder diagnostics)
+        {
+            var entries = AcceptedCultureCompatibility.Create(locales)
+                .ToDictionary(static entry => entry.Name, StringComparer.OrdinalIgnoreCase);
+
+            foreach (var locale in locales)
+            {
+                if (!locale.AuthoredFeatureNames.Contains("inflection") ||
+                    locale.Inflection is not { } inflection)
+                {
+                    continue;
+                }
+
+                if (!inflection.TryGetValue("acceptedCultures", out var acceptedValue) &&
+                    !inflection.TryGetValue("accepted-cultures", out acceptedValue))
+                {
+                    continue;
+                }
+
+                if (acceptedValue is not SimpleYamlSequence acceptedNames)
+                {
+                    diagnostics.Add(Diagnostic.Create(
+                        HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                        Location.None,
+                        locale.LocaleCode,
+                        "surfaces.inflection.acceptedCultures must be a block sequence."));
+                    continue;
+                }
+
+                var seenAcceptedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var item in acceptedNames.Items)
+                {
+                    if (item is not SimpleYamlScalar acceptedName ||
+                        string.IsNullOrWhiteSpace(acceptedName.Value))
+                    {
+                        diagnostics.Add(Diagnostic.Create(
+                            HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            locale.LocaleCode,
+                            "surfaces.inflection.acceptedCultures must contain non-empty scalar culture names."));
+                        continue;
+                    }
+
+                    if (!seenAcceptedNames.Add(acceptedName.Value))
+                    {
+                        diagnostics.Add(Diagnostic.Create(
+                            HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            locale.LocaleCode,
+                            $"Accepted culture '{acceptedName.Value}' is listed more than once."));
+                        continue;
+                    }
+
+                    var candidate = inflectionOwners.ResolveAcceptedCulture(
+                        new AcceptedCultureInput(
+                            acceptedName.Value,
+                            locale.LocaleCode,
+                            inflectionOwner: null));
+                    if (!SharesExactLanguageSubtag(candidate.Name, candidate.LocaleProfileOwner))
+                    {
+                        diagnostics.Add(Diagnostic.Create(
+                            HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            locale.LocaleCode,
+                            $"Accepted culture '{candidate.Name}' must share the primary language of locale profile owner '{candidate.LocaleProfileOwner}'."));
+                        continue;
+                    }
+
+                    if (entries.TryGetValue(candidate.Name, out var existing) &&
+                        !string.Equals(existing.LocaleProfileOwner, candidate.LocaleProfileOwner, StringComparison.Ordinal))
+                    {
+                        diagnostics.Add(Diagnostic.Create(
+                            HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            locale.LocaleCode,
+                            $"Accepted culture '{candidate.Name}' is already owned by locale profile '{existing.LocaleProfileOwner}'."));
+                        continue;
+                    }
+
+                    entries[candidate.Name] = candidate;
+                }
+            }
+
+            foreach (var entry in entries.Values.ToArray())
+            {
+                if (entry.InflectionOwner is null &&
+                    entry.InflectionTerminal is null)
+                {
+                    entries[entry.Name] =
+                        inflectionOwners.ResolveAcceptedCulture(entry);
+                }
+            }
+
+            if (inflectionOwners.HasAtomicOwner &&
+                entries.Values.FirstOrDefault(static entry =>
+                    entry.InflectionOwner is null &&
+                    entry.InflectionTerminal is null) is { } incomplete)
+            {
+                diagnostics.Add(Diagnostic.Create(
+                    HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                    Location.None,
+                    incomplete.Name,
+                    $"Partial inflection activation is forbidden: accepted culture '{incomplete.Name}' has neither a complete terminal owner nor an explicit identity disposition."));
+            }
+
+            return entries.Values
+                .OrderBy(static entry => entry.Name, StringComparer.OrdinalIgnoreCase)
+                .ToImmutableArray();
+        }
+
+        static InflectionOwnerGraph CreateInflectionOwnerGraph(
+            ImmutableArray<ResolvedLocaleDefinition> locales,
+            ImmutableArray<Diagnostic>.Builder diagnostics)
+        {
+            var edges = new Dictionary<string, string>(StringComparer.Ordinal);
+            var atomicSources = new Dictionary<string, string>(StringComparer.Ordinal);
+            var atomicScripts = new Dictionary<string, ImmutableArray<string>>(StringComparer.Ordinal);
+            var atomicCapabilities = new Dictionary<string, string>(StringComparer.Ordinal);
+
+            foreach (var locale in locales)
+            {
+                if (locale.Inflection is not { } inflection)
+                {
+                    continue;
+                }
+
+                var capability = inflection.GetScalar("capability");
+                if (capability is null or "inert")
+                {
+                    continue;
+                }
+
+                if (!locale.AuthoredFeatureNames.Contains("inflection"))
+                {
+                    if (locale.VariantOf is { } inheritedOwner)
+                    {
+                        edges[locale.LocaleCode] = inheritedOwner;
+                    }
+
+                    continue;
+                }
+
+                if (capability == "alias")
+                {
+                    if (inflection.GetScalar("owner") is { Length: > 0 } aliasOwner)
+                    {
+                        edges[locale.LocaleCode] = aliasOwner;
+                    }
+
+                    continue;
+                }
+
+                if (capability is not ("display-by-category" or "invariant"))
+                {
+                    continue;
+                }
+
+                var atomicOwner = inflection.GetScalar("owner") ?? locale.LocaleCode;
+                if (atomicSources.TryGetValue(atomicOwner, out var existingSource))
+                {
+                    diagnostics.Add(Diagnostic.Create(
+                        HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                        Location.None,
+                        locale.LocaleCode,
+                        $"Atomic inflection owner '{atomicOwner}' is authored by both '{existingSource}' and '{locale.LocaleCode}'."));
+                    continue;
+                }
+
+                atomicSources[atomicOwner] = locale.LocaleCode;
+                atomicScripts[atomicOwner] = GetInflectionScripts(inflection);
+                atomicCapabilities[atomicOwner] = capability;
+                edges[locale.LocaleCode] = atomicOwner;
+            }
+
+            var terminals = ImmutableDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
+            foreach (var locale in edges.Keys.OrderBy(static value => value, StringComparer.Ordinal))
+            {
+                var seen = new HashSet<string>(StringComparer.Ordinal);
+                var current = locale;
+                while (edges.TryGetValue(current, out var next))
+                {
+                    if (!seen.Add(current))
+                    {
+                        diagnostics.Add(Diagnostic.Create(
+                            HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            locale,
+                            $"Inflection owner cycle detected at '{current}'."));
+                        current = string.Empty;
+                        break;
+                    }
+
+                    current = next;
+                    if (atomicSources.ContainsKey(current))
+                    {
+                        break;
+                    }
+                }
+
+                if (current.Length == 0)
+                {
+                    continue;
+                }
+
+                if (!atomicSources.TryGetValue(current, out var atomicSource))
+                {
+                    diagnostics.Add(Diagnostic.Create(
+                        HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                        Location.None,
+                        locale,
+                        $"Inflection owner chain terminates at '{current}', which is not an authored atomic bundle."));
+                    continue;
+                }
+
+                if (!SharesExactLanguageSubtag(locale, atomicSource))
+                {
+                    diagnostics.Add(Diagnostic.Create(
+                        HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                        Location.None,
+                        locale,
+                        $"Inflection owner '{current}' must share the primary language of '{locale}'."));
+                    continue;
+                }
+
+                var localeScript = GetEffectiveScript(locale);
+                var ownerScript = GetEffectiveScript(atomicSource);
+                if (ownerScript is null &&
+                    atomicScripts.TryGetValue(current, out var declaredScripts) &&
+                    declaredScripts.Length == 1)
+                {
+                    ownerScript = declaredScripts[0];
+                }
+
+                if (!string.Equals(locale, atomicSource, StringComparison.Ordinal) &&
+                    (localeScript is null ||
+                     ownerScript is null ||
+                     !string.Equals(
+                         localeScript,
+                         ownerScript,
+                         StringComparison.OrdinalIgnoreCase)))
+                {
+                    diagnostics.Add(Diagnostic.Create(
+                        HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                        Location.None,
+                        locale,
+                        $"Inflection owner '{current}' has effective script '{ownerScript}', incompatible with '{locale}' effective script '{localeScript}'."));
+                    continue;
+                }
+
+                terminals[locale] = current;
+            }
+
+            return new(
+                terminals.ToImmutable(),
+                atomicSources.ToImmutableDictionary(StringComparer.Ordinal),
+                atomicScripts.ToImmutableDictionary(StringComparer.Ordinal),
+                atomicCapabilities.ToImmutableDictionary(StringComparer.Ordinal));
+        }
+
+        static ImmutableArray<string> GetInflectionScripts(SimpleYamlMapping inflection)
+        {
+            if (!inflection.TryGetValue("scripts", out var value) ||
+                value is not SimpleYamlSequence sequence)
+            {
+                return [];
+            }
+
+            return sequence.Items
+                .OfType<SimpleYamlScalar>()
+                .Select(static item => item.Value)
+                .Where(static script => !string.IsNullOrWhiteSpace(script))
+                .ToImmutableArray();
         }
 
         static LocaleDefinition ParseLocaleDefinition(string localeCode, string fileText)
@@ -387,6 +672,58 @@ public sealed partial class HumanizerSourceGenerator
                 .FirstOrDefault(static subtag => subtag.Length == 4 && subtag.All(char.IsLetter));
         }
 
+        internal static string? GetEffectiveScript(string localeCode)
+        {
+            if (GetScriptSubtag(localeCode) is { } script)
+            {
+                return NormalizeScriptAlias(script);
+            }
+
+            return AcceptedCultureCompatibility.TryGetEffectiveScript(
+                localeCode,
+                out var effectiveScript)
+                    ? effectiveScript
+                    : GetExactLanguageSubtag(localeCode).ToLowerInvariant() switch
+                    {
+                        "zh" when localeCode.Contains(
+                            "-CHT",
+                            StringComparison.OrdinalIgnoreCase) => "Hant",
+                        "zh" when localeCode.Contains(
+                            "-CHS",
+                            StringComparison.OrdinalIgnoreCase) => "Hans",
+                        "zh" when localeCode.Contains(
+                            "-TW",
+                            StringComparison.OrdinalIgnoreCase) ||
+                            localeCode.Contains(
+                                "-HK",
+                                StringComparison.OrdinalIgnoreCase) ||
+                            localeCode.Contains(
+                                "-MO",
+                                StringComparison.OrdinalIgnoreCase) => "Hant",
+                        "zh" => "Hans",
+                        "sr" => "Cyrl",
+                        "pa" when localeCode.Contains(
+                            "-PK",
+                            StringComparison.OrdinalIgnoreCase) => "Arab",
+                        "pa" => "Guru",
+                        "uz" when localeCode.Contains(
+                            "-AF",
+                            StringComparison.OrdinalIgnoreCase) => "Arab",
+                        "uz" => "Latn",
+                        _ => null
+                    };
+        }
+
+        static string NormalizeScriptAlias(string script) =>
+            string.Equals(script, "Aran", StringComparison.OrdinalIgnoreCase)
+                ? "Arab"
+                : script;
+
+        internal static string ToDeclaredScript(string effectiveScript) =>
+            effectiveScript is "Hans" or "Hant"
+                ? "Hani"
+                : effectiveScript;
+
         static LocaleFeature? ResolveFeature(
             string localeCode,
             string featureName,
@@ -567,7 +904,7 @@ public sealed partial class HumanizerSourceGenerator
                 return localValue;
             }
 
-            if (featureName == "durationCases")
+            if (featureName is "durationCases" or "inflection")
             {
                 return localValue;
             }
@@ -846,6 +1183,80 @@ public sealed partial class HumanizerSourceGenerator
                 null);
     }
 
+    internal sealed class InflectionOwnerGraph(
+        ImmutableDictionary<string, string> terminalOwners,
+        ImmutableDictionary<string, string> atomicSources,
+        ImmutableDictionary<string, ImmutableArray<string>> atomicScripts,
+        ImmutableDictionary<string, string> atomicCapabilities)
+    {
+        readonly ImmutableDictionary<string, string> terminalOwners = terminalOwners;
+        readonly ImmutableDictionary<string, string> atomicSources = atomicSources;
+        readonly ImmutableDictionary<string, ImmutableArray<string>> atomicScripts = atomicScripts;
+        readonly ImmutableDictionary<string, string> atomicCapabilities = atomicCapabilities;
+
+        public ImmutableHashSet<string> AtomicOwners { get; } =
+            atomicSources.Keys.ToImmutableHashSet(StringComparer.Ordinal);
+
+        public bool HasAtomicOwner => atomicSources.Count > 0;
+
+        public bool TryGetTerminalOwner(string localeCode, out string owner) =>
+            terminalOwners.TryGetValue(localeCode, out owner!);
+
+        public AcceptedCultureInput ResolveAcceptedCulture(
+            AcceptedCultureInput entry)
+        {
+            if (!TryGetTerminalOwner(entry.LocaleProfileOwner, out var owner) ||
+                !atomicCapabilities.TryGetValue(owner, out var capability))
+            {
+                return entry;
+            }
+
+            if (IsAcceptedCultureScriptCompatible(entry.Name, owner))
+            {
+                return entry.WithInflection(owner, terminal: null);
+            }
+
+            return entry.WithInflection(
+                owner: null,
+                capability == "invariant" ? "Invariant" : "Unsupported");
+        }
+
+        public bool IsAcceptedCultureScriptCompatible(
+            string acceptedName,
+            string owner)
+        {
+            if (!atomicSources.TryGetValue(owner, out var sourceLocale) ||
+                !atomicScripts.TryGetValue(owner, out var declaredScripts))
+            {
+                return false;
+            }
+
+            var acceptedScript = LocaleCatalogInput.GetEffectiveScript(acceptedName);
+            var ownerScript = LocaleCatalogInput.GetEffectiveScript(sourceLocale);
+            if (ownerScript is null &&
+                !AcceptedCultureCompatibility.IsFrozenName(sourceLocale) &&
+                declaredScripts.Length == 1)
+            {
+                ownerScript = declaredScripts[0];
+            }
+
+            if (acceptedScript is null ||
+                ownerScript is null ||
+                !string.Equals(
+                    acceptedScript,
+                    ownerScript,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            var declaredScript = LocaleCatalogInput.ToDeclaredScript(acceptedScript);
+            return declaredScripts.Contains(
+                declaredScript,
+                StringComparer.OrdinalIgnoreCase);
+        }
+    }
+
     internal sealed class LocaleFeature(
         string ownerLocaleCode,
         string featureName,
@@ -919,7 +1330,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var index = 0;
-            var value = ParseBlock(lines, ref index, 0);
+            var value = ParseBlock(lines, ref index, 0, rejectDuplicateKeys: false);
             return value is not SimpleYamlMapping mapping ? throw new InvalidOperationException("Locale YAML root must be a mapping.") : mapping;
         }
 
@@ -994,16 +1405,24 @@ public sealed partial class HumanizerSourceGenerator
             return builder.ToString().TrimEnd();
         }
 
-        static SimpleYamlValue ParseBlock(IReadOnlyList<LineInfo> lines, ref int index, int indent)
+        static SimpleYamlValue ParseBlock(
+            IReadOnlyList<LineInfo> lines,
+            ref int index,
+            int indent,
+            bool rejectDuplicateKeys)
         {
             return index >= lines.Count
                 ? throw new InvalidOperationException("Unexpected end of YAML document.")
                 : IsSequenceItem(lines[index].Content)
-                ? ParseSequence(lines, ref index, indent)
-                : ParseMapping(lines, ref index, indent);
+                ? ParseSequence(lines, ref index, indent, rejectDuplicateKeys)
+                : ParseMapping(lines, ref index, indent, rejectDuplicateKeys);
         }
 
-        static SimpleYamlSequence ParseSequence(IReadOnlyList<LineInfo> lines, ref int index, int indent)
+        static SimpleYamlSequence ParseSequence(
+            IReadOnlyList<LineInfo> lines,
+            ref int index,
+            int indent,
+            bool rejectDuplicateKeys)
         {
             var items = ImmutableArray.CreateBuilder<SimpleYamlValue>();
 
@@ -1032,14 +1451,20 @@ public sealed partial class HumanizerSourceGenerator
 
                 if (remainder.Length == 0)
                 {
-                    items.Add(ParseBlock(lines, ref index, indent + 2));
+                    items.Add(ParseBlock(lines, ref index, indent + 2, rejectDuplicateKeys));
                     continue;
                 }
 
                 var inlineSeparator = FindMappingSeparator(remainder);
                 if (inlineSeparator > 0)
                 {
-                    items.Add(ParseInlineSequenceMapping(lines, ref index, indent + 2, remainder, line.LineNumber));
+                    items.Add(ParseInlineSequenceMapping(
+                        lines,
+                        ref index,
+                        indent + 2,
+                        remainder,
+                        line.LineNumber,
+                        rejectDuplicateKeys));
                     continue;
                 }
 
@@ -1054,20 +1479,48 @@ public sealed partial class HumanizerSourceGenerator
             ref int index,
             int indent,
             string firstEntry,
-            int lineNumber)
+            int lineNumber,
+            bool rejectDuplicateKeys)
         {
             var values = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
             var duplicateKeys = ImmutableArray.CreateBuilder<string>();
-            ParseMappingEntry(values, duplicateKeys, firstEntry, indent, lineNumber, lines, ref index);
-            ParseMappingContinuation(values, duplicateKeys, lines, ref index, indent);
+            // ParseSequence has already advanced past the "- key: value" line. ParseMappingEntry
+            // advances once itself, so rewind to keep the first continuation entry.
+            index--;
+            ParseMappingEntry(
+                values,
+                duplicateKeys,
+                firstEntry,
+                indent,
+                lineNumber,
+                lines,
+                ref index,
+                rejectDuplicateKeys);
+            ParseMappingContinuation(
+                values,
+                duplicateKeys,
+                lines,
+                ref index,
+                indent,
+                rejectDuplicateKeys);
             return new SimpleYamlMapping(values.ToImmutable(), duplicateKeys.ToImmutable());
         }
 
-        static SimpleYamlMapping ParseMapping(IReadOnlyList<LineInfo> lines, ref int index, int indent)
+        static SimpleYamlMapping ParseMapping(
+            IReadOnlyList<LineInfo> lines,
+            ref int index,
+            int indent,
+            bool rejectDuplicateKeys)
         {
             var values = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
             var duplicateKeys = ImmutableArray.CreateBuilder<string>();
-            ParseMappingContinuation(values, duplicateKeys, lines, ref index, indent);
+            ParseMappingContinuation(
+                values,
+                duplicateKeys,
+                lines,
+                ref index,
+                indent,
+                rejectDuplicateKeys);
             return new SimpleYamlMapping(values.ToImmutable(), duplicateKeys.ToImmutable());
         }
 
@@ -1076,7 +1529,8 @@ public sealed partial class HumanizerSourceGenerator
             ImmutableArray<string>.Builder duplicateKeys,
             IReadOnlyList<LineInfo> lines,
             ref int index,
-            int indent)
+            int indent,
+            bool rejectDuplicateKeys)
         {
             while (index < lines.Count)
             {
@@ -1096,7 +1550,15 @@ public sealed partial class HumanizerSourceGenerator
                     break;
                 }
 
-                ParseMappingEntry(values, duplicateKeys, line.Content, indent, line.LineNumber, lines, ref index);
+                ParseMappingEntry(
+                    values,
+                    duplicateKeys,
+                    line.Content,
+                    indent,
+                    line.LineNumber,
+                    lines,
+                    ref index,
+                    rejectDuplicateKeys);
             }
         }
 
@@ -1107,7 +1569,8 @@ public sealed partial class HumanizerSourceGenerator
             int indent,
             int lineNumber,
             IReadOnlyList<LineInfo> lines,
-            ref int index)
+            ref int index,
+            bool rejectDuplicateKeys)
         {
             var separator = FindMappingSeparator(content);
             if (separator <= 0)
@@ -1122,6 +1585,12 @@ public sealed partial class HumanizerSourceGenerator
                 throw new InvalidOperationException($"Invalid mapping key on line {lineNumber}.");
             }
 
+            if ((rejectDuplicateKeys || key == "inflection") && values.ContainsKey(key))
+            {
+                throw new InvalidOperationException(
+                    $"Duplicate mapping key '{key}' on line {lineNumber}.");
+            }
+
             var remainder = content.Substring(separator + 1).TrimStart();
             index++;
 
@@ -1130,7 +1599,11 @@ public sealed partial class HumanizerSourceGenerator
 
             if (remainder.Length == 0)
             {
-                values[key] = ParseBlock(lines, ref index, indent + 2);
+                values[key] = ParseBlock(
+                    lines,
+                    ref index,
+                    indent + 2,
+                    rejectDuplicateKeys || key == "inflection");
                 return;
             }
 
