@@ -1,0 +1,42 @@
+---
+id: whats-new
+title: What's new in Humanizer 2.11.10
+sidebar_position: 1
+diataxis: explanation
+persona: upgrading developer
+---
+
+# What's new in Humanizer 2.11.10
+
+Humanizer 2.11.10, released June 7, 2021, added a .NET 6 target and support for
+the new `DateOnly` and `TimeOnly` types. It also corrected casing and inflection
+edge cases and expanded several localized features.
+
+## Date-only and time-only APIs
+
+The .NET 6 package asset gained:
+
+- `Humanize` overloads for `DateOnly`, `TimeOnly`, and their nullable forms.
+- `DateOnly.ToOrdinalWords()` plus the `InDate` and `OnDate` fluent helpers.
+- Configurable humanization strategies for both new types.
+
+These APIs are specific to the `net6.0` asset. The package continued to include
+its `netstandard1.0` and `netstandard2.0` assets. See
+[the implementation in #1080](https://github.com/Humanizr/Humanizer/pull/1080).
+
+## Text and localization corrections
+
+- Title casing now keeps short articles, conjunctions, and prepositions
+  lowercase where appropriate, and handles multiword uppercase input more
+  consistently.
+- Singularizing `ties` now produces `tie`.
+- Danish gained localized cardinal directions.
+- French and Turkish number-to-words conversion now covers values beyond the
+  32-bit integer range.
+
+## Full release record
+
+Read the [2.11.10 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v2.11.10)
+for the issue and pull-request list. The
+[v2.10.1 to v2.11.10 comparison](https://github.com/Humanizr/Humanizer/compare/v2.10.1...v2.11.10)
+contains the complete code and contributor history.

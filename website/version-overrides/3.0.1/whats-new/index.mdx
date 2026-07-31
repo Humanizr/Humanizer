@@ -1,0 +1,55 @@
+---
+id: whats-new
+title: What's new in Humanizer 3.0.1
+sidebar_position: 1
+diataxis: explanation
+persona: developer evaluating an upgrade
+---
+
+# What's new in Humanizer 3.0.1
+
+Humanizer `3.0.1` is the first stable Humanizer 3 snapshot after the release
+candidates. For users coming from the previous stable snapshot, `2.14.1`, it
+also marks the public arrival of the Humanizer 3 migration.
+
+## First stable Humanizer 3 snapshot
+
+Humanizer 3 consolidates public types from namespaces such as
+`Humanizer.Bytes`, `Humanizer.Configuration`, and `Humanizer.Localisation` into
+`Humanizer`. The `HUMANIZER001` analyzer and code fix help migrate old namespace
+usage.
+
+Package assets now target `netstandard2.0`, `net48`, `net8.0`, and `net10.0`;
+the 2.x `netstandard1.0` and `net6.0` assets are no longer present. The release
+also includes API, behavior, and locale-package changes. Use the
+[Humanizer 3 migration guide](../upgrading/version-3-migration.mdx) for the
+upgrade steps and compatibility details.
+
+## Changes after the final release candidate
+
+The changes from `v3.0.0-rc.30` to `v3.0.1` are stabilization and build
+maintenance rather than new runtime features.
+
+## Analyzer stabilization
+
+The Humanizer 3 namespace-migration analyzer and code fix
+[gained CI coverage and corrections for qualified namespace usage](https://github.com/Humanizr/Humanizer/pull/1641).
+The analyzer now reports the outer matching qualified name instead of
+duplicate nested diagnostics, and the code fix handles the reported namespace
+node correctly.
+
+## Build and maintenance updates
+
+The repository build
+[moved from the .NET 10 release-candidate SDK to the stable `10.0.100` SDK](https://github.com/Humanizr/Humanizer/pull/1647).
+[Duplicated regular-expression patterns were also consolidated](https://github.com/Humanizr/Humanizer/pull/1648)
+so modern generated-regex and legacy runtime-regex paths share the same
+patterns; this was a maintenance change, not a formatting behavior change.
+
+## Full release details
+
+- [Humanizer 3.0.1 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v3.0.1)
+- [Compare v3.0.0-rc.30 with v3.0.1](https://github.com/Humanizr/Humanizer/compare/v3.0.0-rc.30...v3.0.1)
+- [Compare the previous stable snapshot, v2.14.1, with v3.0.1](https://github.com/Humanizr/Humanizer/compare/v2.14.1...v3.0.1)
+
+The comparisons contain the complete commit and contributor history.

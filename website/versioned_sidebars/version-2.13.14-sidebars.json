@@ -1,6 +1,7 @@
 {
   "docs": [
     "index",
+    "whats-new/whats-new",
     {
       "type": "category",
       "label": "Start here",

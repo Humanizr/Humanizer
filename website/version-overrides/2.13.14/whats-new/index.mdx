@@ -1,0 +1,55 @@
+---
+id: whats-new
+title: What's new in Humanizer 2.13.14
+sidebar_position: 1
+---
+
+# What's new in Humanizer 2.13.14
+
+Released on November 16, 2021, Humanizer 2.13.14 added new time, unit, and
+localization APIs alongside language coverage and focused correctness fixes.
+
+## New formatting APIs
+
+- On .NET 6, `TimeOnly.ToClockNotation` converts a time to readable clock
+  notation, optionally rounds to five-minute boundaries, and supports
+  culture-specific converters. The release shipped default and Brazilian
+  Portuguese implementations
+  ([#1134](https://github.com/Humanizr/Humanizer/pull/1134)).
+- `TimeUnit.ToSymbol` provides localized unit symbols, and `ByteRate.Humanize`
+  uses them for culture-aware rate output
+  ([#1106](https://github.com/Humanizr/Humanizer/pull/1106),
+  [#1108](https://github.com/Humanizr/Humanizer/pull/1108)).
+- Tuple wording became culture-aware, including Turkish support
+  ([#1094](https://github.com/Humanizr/Humanizer/pull/1094)).
+- Heading parsing gained localized abbreviated headings and
+  `FromHeadingArrow`
+  ([#1117](https://github.com/Humanizr/Humanizer/pull/1117)).
+
+## Language coverage
+
+- Icelandic support was added across number and ordinal words, dates, time
+  spans, byte sizes, headings, and collections
+  ([#1116](https://github.com/Humanizr/Humanizer/pull/1116)).
+- Latvian gained number-to-words conversion
+  ([#902](https://github.com/Humanizr/Humanizer/pull/902)).
+- The release also added German byte-size and heading translations and Greek
+  ordinal words; the
+  [release notes](https://github.com/Humanizr/Humanizer/releases/tag/v2.13.14)
+  list the remaining formatter registrations and locale changes.
+
+## Correctness fixes
+
+- `Dehumanize` now preserves PascalCase word boundaries when input is already
+  dehumanized ([#1122](https://github.com/Humanizr/Humanizer/pull/1122)).
+- Parameterless `ByteSize.ToString()` no longer emits excessive numeric
+  precision ([#1114](https://github.com/Humanizr/Humanizer/pull/1114)).
+- English inflection no longer singularizes “toes” to “to”, and “metadata” is
+  treated as uncountable
+  ([#1136](https://github.com/Humanizr/Humanizer/pull/1136),
+  [#1135](https://github.com/Humanizr/Humanizer/pull/1135)).
+
+See the [2.13.14 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v2.13.14)
+for the full release record. The
+[2.11.10 to 2.13.14 tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.11.10...v2.13.14)
+contains the complete commit and contributor history.

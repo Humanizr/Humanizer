@@ -12,11 +12,11 @@
     "start/quick-start.mdx",
     "start/troubleshooting.mdx",
     "contributing/index.mdx",
-    "contributing/report-language-issue.mdx"
+    "contributing/report-language-issue.mdx",
+    "whats-new/index.mdx"
   ],
   "exclusions": [
     "upgrading/version-4-migration.mdx",
-    "whats-new/index.mdx",
     "contributing/adding-or-updating-a-locale.mdx",
     "contributing/choosing-or-extending-a-locale-engine.mdx",
     "contributing/locale-yaml-how-to.mdx",

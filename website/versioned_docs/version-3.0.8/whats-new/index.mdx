@@ -1,0 +1,45 @@
+---
+id: whats-new
+title: What's new in Humanizer 3.0.8
+sidebar_position: 1
+diataxis: explanation
+persona: developer evaluating an upgrade
+---
+
+# What's new in Humanizer 3.0.8
+
+Humanizer `3.0.8` is a compatibility, analyzer, and localization patch. It
+restores behavior that affected upgrades from Humanizer 2 and improves the
+packaged namespace-migration analyzer.
+
+## Compatibility fixes
+
+- The [`ToQuantity` overloads that accept `int`](https://github.com/Humanizr/Humanizer/pull/1679)
+  are restored. They delegate to the existing `long` implementation and remove
+  overload ambiguity for F# callers.
+- [Title casing now capitalizes the first word](https://github.com/Humanizr/Humanizer/pull/1678)
+  even when it is an article, conjunction, or preposition. For example,
+  `a great movie` becomes `A Great Movie`.
+- [Humanizing underscore- or dash-separated words](https://github.com/Humanizr/Humanizer/pull/1660)
+  uses fewer intermediate allocations while preserving the existing output.
+
+## Analyzer compatibility
+
+The `Humanizer.Core` package now
+[includes analyzer builds for Roslyn 3.8, 4.8, and 4.14](https://github.com/Humanizr/Humanizer/pull/1676),
+with a baseline fallback for hosts that cannot select Roslyn-versioned
+components. The analyzer and code fix were also adjusted to avoid newer
+dependencies when running on older hosts.
+
+## Portuguese unit resources
+
+Portuguese (`pt`) and Brazilian Portuguese (`pt-BR`)
+[gain the missing data-unit names and symbols](https://github.com/Humanizr/Humanizer/pull/1667)
+used by byte-size formatting, plus time-unit symbols.
+
+## Full release details
+
+- [Humanizer 3.0.8 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v3.0.8)
+- [Compare v3.0.1 with v3.0.8](https://github.com/Humanizr/Humanizer/compare/v3.0.1...v3.0.8)
+
+The comparison contains the complete commit and contributor history.
