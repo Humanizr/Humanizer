@@ -439,9 +439,8 @@ public sealed partial class HumanizerSourceGenerator
         {
             var placeholders = ImmutableArray.CreateBuilder<string>();
 
-            foreach (Match match in PlaceholderRegex.Matches(template))
+            foreach (var placeholderName in GetPlaceholderNames(template))
             {
-                var placeholderName = match.Groups["name"].Value;
                 if (int.TryParse(placeholderName, out _))
                 {
                     throw new InvalidOperationException($"Template '{path}' cannot use numeric placeholder '{{{placeholderName}}}'.");
@@ -511,9 +510,8 @@ public sealed partial class HumanizerSourceGenerator
 
         static string ValidateLiteralText(string path, string text, params string[] allowedPlaceholders)
         {
-            foreach (Match match in PlaceholderRegex.Matches(text))
+            foreach (var placeholder in GetPlaceholderNames(text))
             {
-                var placeholder = match.Groups["name"].Value;
                 if (int.TryParse(placeholder, out _))
                 {
                     throw new InvalidOperationException($"Phrase '{path}' cannot use numeric placeholder '{{{placeholder}}}'.");
@@ -536,19 +534,21 @@ public sealed partial class HumanizerSourceGenerator
             return text;
         }
 
+        static IEnumerable<string> GetPlaceholderNames(string text) =>
+            PlaceholderRegex.Matches(text)
+                .Cast<Match>()
+                .Select(static match => match.Groups["name"].Value);
+
         static SimpleYamlMapping ExpectMapping(SimpleYamlValue value, string path) =>
             value as SimpleYamlMapping ??
             throw new InvalidOperationException($"Phrase section '{path}' must be a mapping.");
 
         static void RejectUnknownKeys(SimpleYamlMapping mapping, string path, params string[] allowedKeys)
         {
-            foreach (var key in mapping.Values.Keys)
+            foreach (var key in mapping.Values.Keys.Where(key => !allowedKeys.Contains(key, StringComparer.Ordinal)))
             {
-                if (!allowedKeys.Contains(key, StringComparer.Ordinal))
-                {
-                    throw new InvalidOperationException(
-                        $"Phrase section '{path}' defines unsupported property '{key}'. Supported properties: {string.Join(", ", allowedKeys)}.");
-                }
+                throw new InvalidOperationException(
+                    $"Phrase section '{path}' defines unsupported property '{key}'. Supported properties: {string.Join(", ", allowedKeys)}.");
             }
         }
     }
