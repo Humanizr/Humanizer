@@ -24,9 +24,8 @@ public sealed partial class HumanizerSourceGenerator
         {
             var profiles = ImmutableArray.CreateBuilder<TimeOnlyToClockNotationProfileDefinition>();
             var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var locale in localeCatalog.Locales)
+            foreach (var feature in localeCatalog.Locales.Select(static locale => locale.TimeOnlyToClockNotation))
             {
-                var feature = locale.TimeOnlyToClockNotation;
                 if (feature is not { UsesGeneratedProfile: true } ||
                     !seenProfiles.Add(feature.ProfileName!))
                 {

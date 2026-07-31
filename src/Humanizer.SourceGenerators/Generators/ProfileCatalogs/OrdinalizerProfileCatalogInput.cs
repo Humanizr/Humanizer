@@ -21,9 +21,8 @@ public sealed partial class HumanizerSourceGenerator
         {
             var profiles = ImmutableArray.CreateBuilder<OrdinalizerProfileDefinition>();
             var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var locale in localeCatalog.Locales)
+            foreach (var feature in localeCatalog.Locales.Select(static locale => locale.Ordinalizer))
             {
-                var feature = locale.Ordinalizer;
                 if (feature is not { UsesGeneratedProfile: true } ||
                     !seenProfiles.Add(feature.ProfileName!))
                 {
