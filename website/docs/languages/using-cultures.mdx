@@ -15,9 +15,11 @@ test. Set `CurrentCulture` and `CurrentUICulture` together at a request,
 message, or job boundary for APIs that use ambient culture.
 
 Culture names are .NET culture identifiers. A specific culture such as
-`fr-FR` can fall back through its .NET parent chain to neutral `fr` locale
-data. Humanizer then uses the registry default only if no registered parent
-matches.
+`fr-FR` can map to neutral `fr` locale data when that exact regional name is in
+Humanizer's generated accepted-culture inventory. Built-in registries use this
+generated map and do not walk arbitrary .NET parents. A caller-created
+`LocaliserRegistry<TLocaliser>` retains parent-chain fallback and uses its
+default only when no registered parent matches.
 
 ## Example
 
@@ -58,16 +60,16 @@ Humanizer APIs can use either one. Setting only one can produce mixed-language
 output. Avoid changing ambient culture in a shared request path when an
 explicit overload exists.
 
-Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
-only identifies where the data came from. It does not establish that French
-Canadian wording matches every neutral-French choice.
+Profile reuse is resolution, not parity proof. If an accepted `fr-CA` mapping
+reaches `fr`, that only identifies where the data came from. It does not
+establish that French Canadian wording matches every neutral-French choice.
 
 ## Choose an application fallback
 
 Use `Configurator.IsCultureSupported(culture)` before choosing an application
-fallback. It checks generated Humanizer locale data through the named parent
-chain and does not return `true` merely because the default English localizers
-could produce output:
+fallback. It checks the exact culture name against Humanizer's generated
+accepted-culture inventory and does not return `true` merely because an
+arbitrary parent or the default English localizers could produce output:
 
 ```csharp
 var requested = CultureInfo.GetCultureInfo("fr-FR");

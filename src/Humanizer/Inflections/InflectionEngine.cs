@@ -777,8 +777,7 @@ sealed class InflectionBundle
             ? input
             : input.Normalize(NormalizationForm.FormC);
         var projection = GetProjection(normalized);
-        if (!IsSafeCaseProjection(normalized) ||
-            !IsScriptEligible(normalized, allowNonLetters: true))
+        if (!IsScriptEligible(normalized, allowNonLetters: true))
         {
             return new(InflectionStatus.Unsupported, input);
         }
@@ -1058,6 +1057,11 @@ sealed class InflectionBundle
         CaseProjection projection,
         InflectionStatus status)
     {
+        if (output.Length == 0 || !IsWellFormedUtf16(output))
+        {
+            return new(InflectionStatus.Unsupported, input);
+        }
+
         string projected;
         if (casing == InflectionCasing.LowerTitleUpper &&
             projection == CaseProjection.Title)
@@ -1086,8 +1090,7 @@ sealed class InflectionBundle
             projected = output;
         }
 
-        if (!IsSafeCaseProjection(projected) ||
-            !IsScriptEligible(projected, allowNonLetters: true))
+        if (!IsScriptEligible(projected, allowNonLetters: true))
         {
             return new(InflectionStatus.Unsupported, input);
         }
@@ -1095,29 +1098,6 @@ sealed class InflectionBundle
         return string.Equals(projected, input, StringComparison.Ordinal)
             ? new(InflectionStatus.Invariant, input)
             : new(status, projected);
-    }
-
-    bool IsSafeCaseProjection(string value)
-    {
-        if (casing != InflectionCasing.LowerTitleUpper)
-        {
-            return true;
-        }
-
-        for (var index = 0; index < value.Length; index++)
-        {
-            if (char.IsHighSurrogate(value[index]))
-            {
-                index++;
-            }
-            else
-            {
-                _ = char.ToLowerInvariant(value[index]);
-                _ = char.ToUpperInvariant(value[index]);
-            }
-        }
-
-        return true;
     }
 
     static CaseProjection GetProjection(string value)

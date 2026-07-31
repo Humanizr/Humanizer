@@ -15,10 +15,11 @@ export const supportedCultures =
 # Supported cultures
 
 Humanizer 4 ships a complete generated locale profile for every code listed
-here. A regional culture can be supported through a listed same-language
-parent, so use `Configurator.IsCultureSupported` to check a requested
-`CultureInfo`. Calendar or numeric formatting uses .NET globalization data
-when a profile does not need a Humanizer override.
+here. An explicitly accepted regional culture can reuse a listed same-language
+profile, so use `Configurator.IsCultureSupported` to check the requested
+`CultureInfo` by exact name. Humanizer does not infer support by walking an
+arbitrary .NET parent chain. Calendar or numeric formatting uses .NET
+globalization data when a profile does not need a Humanizer override.
 
 ## Example
 

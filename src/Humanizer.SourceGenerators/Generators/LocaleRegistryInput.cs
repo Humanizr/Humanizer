@@ -312,7 +312,9 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("{");
             builder.AppendLine("    static readonly CultureResolutionRecord[] Records =");
             builder.AppendLine("    [");
-            foreach (var entry in acceptedCultures)
+            foreach (var entry in acceptedCultures.OrderBy(
+                         static entry => entry.Name,
+                         StringComparer.OrdinalIgnoreCase))
             {
                 builder.Append("        new(");
                 builder.Append(QuoteLiteral(entry.Name));
@@ -378,6 +380,9 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("    /// </summary>");
             builder.AppendLine("    /// <param name=\"culture\">The culture to check.</param>");
             builder.AppendLine("    /// <returns><see langword=\"true\"/> when the exact culture name has generated locale support; otherwise, <see langword=\"false\"/>.</returns>");
+            builder.AppendLine("    /// <remarks>");
+            builder.AppendLine("    /// This checks the exact accepted-culture inventory and does not walk <see cref=\"CultureInfo.Parent\"/>. Caller-created <see cref=\"LocaliserRegistry{TLocaliser}\"/> instances retain parent-culture fallback.");
+            builder.AppendLine("    /// </remarks>");
             builder.AppendLine("    /// <exception cref=\"ArgumentNullException\">Thrown when <paramref name=\"culture\"/> is <c>null</c>.</exception>");
             builder.AppendLine("    public static bool IsCultureSupported(CultureInfo culture)");
             builder.AppendLine("    {");

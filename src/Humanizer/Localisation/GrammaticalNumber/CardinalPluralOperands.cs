@@ -357,6 +357,7 @@ readonly struct CardinalPluralOperands
         var sum = lowProductHigh + highProductLow;
         if (sum < lowProductHigh)
             highProductHigh++;
+        // Ryu's fixed-point multiplier requires shift to be greater than 64.
         var distance = shift - 64;
         return sum >> distance | highProductHigh << (64 - distance);
     }

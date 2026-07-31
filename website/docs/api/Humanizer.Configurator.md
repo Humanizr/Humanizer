@@ -217,6 +217,9 @@ The culture to check\.
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 Thrown when [culture](Humanizer.Configurator.md#Humanizer.Configurator.IsCultureSupported(System.Globalization.CultureInfo).culture 'Humanizer\.Configurator\.IsCultureSupported\(System\.Globalization\.CultureInfo\)\.culture') is `null`\.
 
+### Remarks
+This checks the exact accepted\-culture inventory and does not walk [System\.Globalization\.CultureInfo\.Parent](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.parent 'System\.Globalization\.CultureInfo\.Parent')\. Caller\-created [LocaliserRegistry&lt;TLocaliser&gt;](Humanizer.LocaliserRegistry_TLocaliser_.md 'Humanizer\.LocaliserRegistry\<TLocaliser\>') instances retain parent\-culture fallback\.
+
 <a name='Humanizer.Configurator.UseEnumDescriptionPropertyLocator(System.Func_System.Reflection.PropertyInfo,bool_)'></a>
 
 ## Configurator\.UseEnumDescriptionPropertyLocator\(Func\<PropertyInfo,bool\>\) Method

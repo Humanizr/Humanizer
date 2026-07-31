@@ -13,7 +13,7 @@ public class LocaliserRegistry<TLocaliser>
     volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
     readonly ConditionalWeakTable<CultureInfo, StrongBox<TLocaliser>> cultureSpecificCache = new();
-    bool useGeneratedCultureResolver;
+    volatile bool useGeneratedCultureResolver;
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -84,8 +84,19 @@ public class LocaliserRegistry<TLocaliser>
         }
     }
 
-    internal void UseGeneratedCultureResolver() =>
-        useGeneratedCultureResolver = true;
+    internal void UseGeneratedCultureResolver()
+    {
+        lock (lockObject)
+        {
+            if (frozenLocalisers != null)
+            {
+                throw new InvalidOperationException(
+                    "Cannot change culture resolution after the registry has been used.");
+            }
+
+            useGeneratedCultureResolver = true;
+        }
+    }
 
     Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
     {

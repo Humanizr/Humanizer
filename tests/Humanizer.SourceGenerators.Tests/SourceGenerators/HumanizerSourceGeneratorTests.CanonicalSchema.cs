@@ -477,6 +477,12 @@ surfaces:
         Assert.Empty(runResult.Diagnostics);
         var resolver = GetGeneratedSource(runResult, "GeneratedCultureResolver.g.cs");
         var supportedCultures = GetGeneratedSource(runResult, "Configurator.SupportedCultures.g.cs");
+        var acceptedNames = resolver
+            .Split('\n')
+            .Select(static line => line.Trim())
+            .Where(static line => line.StartsWith("new(\"", StringComparison.Ordinal))
+            .Select(static line => line.Split('"')[1])
+            .ToArray();
 
         Assert.Contains(
             "new(\"fr-FR\", \"fr\", null, null)",
@@ -497,10 +503,15 @@ surfaces:
             "new(\"zh-HK\", \"zh-Hant\", null, null)",
             StringComparison.Ordinal);
         Assert.True(zhHansIndex >= 0 && zhHansIndex < zhHkIndex);
+        Assert.Equal(
+            acceptedNames.OrderBy(
+                static name => name,
+                StringComparer.OrdinalIgnoreCase),
+            acceptedNames);
         Assert.Contains("LocaleProfileOwner", resolver, StringComparison.Ordinal);
         Assert.Contains("InflectionOwner", resolver, StringComparison.Ordinal);
         Assert.DoesNotContain("CultureInfo.Parent", resolver, StringComparison.Ordinal);
-        Assert.DoesNotContain(".Parent", supportedCultures, StringComparison.Ordinal);
+        Assert.DoesNotContain("current.Parent", supportedCultures, StringComparison.Ordinal);
     }
 
     [Fact]

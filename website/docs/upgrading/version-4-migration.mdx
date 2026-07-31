@@ -409,6 +409,25 @@ formats no longer reuse whichever formatter was resolved first.
 | **Verify** | Resolve two same-name culture instances with visibly different number-format properties and confirm that each produces its own output. |
 | **Evidence** | The candidate [registry cache](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/src/Humanizer/Configuration/LocaliserRegistry.cs#L15-L41) and [same-name culture test](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/Localisation/LocaliserRegistryTests.cs#L48-L78). |
 
+### Recheck exact culture support
+
+`Configurator.IsCultureSupported` and Humanizer's built-in registries now use
+the generated accepted-culture inventory. They resolve only names that appear
+in that inventory and do not infer support by walking `CultureInfo.Parent`.
+An accepted regional name can still map to a neutral same-language profile.
+Caller-created `LocaliserRegistry<TLocaliser>` instances retain their existing
+parent-chain fallback.
+
+| Migration detail | What to do |
+| --- | --- |
+| **Affected callers** | Applications that used `Configurator.IsCultureSupported` to accept any child of a supported neutral culture, or that relied on an unlisted parent fallback in a built-in registry. |
+| **Before** | The support check and built-in registries walk the requested culture's named parent chain. |
+| **After** | The exact culture name must exist in the generated accepted-culture inventory; an accepted name can map to a neutral profile without a runtime parent walk. |
+| **Symptom** | `IsCultureSupported` returns `false`, or a built-in registry uses its default, for a previously unlisted child culture. |
+| **Minimal action** | Check every culture name the application accepts. Use a listed accepted name, request an explicit mapping when the regional culture is valid, or choose the application's fallback deliberately. |
+| **Verify** | Compare a known accepted regional name such as `fr-FR` with an unlisted child name, and confirm caller-created registries still follow their registered parent chain. |
+| **Evidence** | The generated [exact-name resolver](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs) and its [accepted-culture regression tests](https://github.com/Humanizr/Humanizer/blob/main/tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.CanonicalSchema.cs). |
+
 ### Rebaseline localized exact strings
 
 Humanizer 4 replaces satellite-resource locale assemblies with generated locale

@@ -8,8 +8,9 @@ public class CardinalPluralOperandsTests
     [Fact]
     public void Create_MixedDoubleSet_MeetsPerformanceGate()
     {
-        if (Environment.GetEnvironmentVariable("HUMANIZER_RUN_PERFORMANCE_GATES") != "1")
-            return;
+        Assert.SkipUnless(
+            Environment.GetEnvironmentVariable("HUMANIZER_RUN_PERFORMANCE_GATES") == "1",
+            "performance gate disabled");
 
         var values = new double[1_024];
         values[0] = 1.25;
@@ -245,6 +246,28 @@ public class CardinalPluralOperandsTests
             9_223_372_036_854_775_802L);
 
         Assert.Equal(CardinalPluralCategory.Few, category);
+    }
+
+    [Theory]
+    [InlineData(101, (int)CardinalPluralCategory.Few)]
+    [InlineData(119, (int)CardinalPluralCategory.Few)]
+    [InlineData(120, (int)CardinalPluralCategory.Other)]
+    public void RomanianCLDR48ModuloBoundariesSelectExpectedCategory(
+        long quantity,
+        int expected)
+    {
+        var category = CardinalPluralRules.Select(
+            CardinalPluralRuleKind.Romanian,
+            quantity);
+
+        Assert.Equal((CardinalPluralCategory)expected, category);
+    }
+
+    [Fact]
+    public void UnknownCardinalRuleMetadataFailsClosed()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => CardinalPluralRuleMetadata.GetReachableCategories("Unknown"));
     }
 
     [Theory]

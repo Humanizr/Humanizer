@@ -32,6 +32,11 @@ layout and [supported cultures](../languages/supported-cultures.mdx) for the
 generated inventory. Use `Configurator.IsCultureSupported` before selecting an
 application fallback.
 
+Culture support checks are now explicit and deterministic. The method tests the
+requested culture's exact name against Humanizer's generated accepted-culture
+inventory; it does not walk arbitrary .NET parent cultures. Built-in registries
+use the same generated mapping.
+
 ## Make durations fit the interface
 
 Duration formatting can use localized compact symbols, retain sub-second values

@@ -1,5 +1,3 @@
-using System.Reflection;
-
 public class LocalizedInflectionEngineTests
 {
     static readonly string[] LatinScript = ["Latn"];
@@ -84,29 +82,15 @@ public class LocalizedInflectionEngineTests
         string owner,
         string noun)
     {
-        var constructor = typeof(InflectionBundle)
-            .GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .SingleOrDefault(static candidate =>
-            {
-                var parameters = candidate.GetParameters();
-                return parameters.Length == 8 &&
-                    parameters[2].ParameterType.Name == "InflectionCapability" &&
-                    parameters[6].ParameterType == typeof(InflectionLexeme[]);
-            });
-        Assert.NotNull(constructor);
-        var capabilityType = constructor.GetParameters()[2].ParameterType;
-        var capability = Enum.Parse(capabilityType, "Invariant");
-        var bundle = Assert.IsType<InflectionBundle>(constructor.Invoke(
-        [
+        var bundle = new InflectionBundle(
             owner,
             CardinalPluralRuleKind.Other,
-            capability,
+            InflectionCapability.Invariant,
             InflectionCasing.LowerTitleUpper,
             LatinScript,
-            Array.Empty<string>(),
-            Array.Empty<InflectionLexeme>(),
-            Array.Empty<InflectionRule>()
-        ]));
+            [],
+            [],
+            []);
         var input = new string(noun.ToCharArray());
 
         var result = bundle.Inflect(
@@ -630,15 +614,19 @@ public class LocalizedInflectionEngineTests
     [Fact]
     public void WarmExactNumericSingletonSelectionDoesNotAllocate()
     {
+        const int warmupIterations = 10_000;
         const int iterations = 1000;
         var input = new string("singleton".ToCharArray());
         var operands = CardinalPluralOperands.Create(1m);
-        _ = ExactNumericSingletonBundle.Inflect(
-            input,
-            InflectionDirection.Forward,
-            allowProductive: true,
-            CardinalPluralCategory.Other,
-            operands);
+        for (var index = 0; index < warmupIterations; index++)
+        {
+            _ = ExactNumericSingletonBundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                CardinalPluralCategory.Other,
+                operands);
+        }
 
         var before = GC.GetAllocatedBytesForCurrentThread();
         InflectionResult result = default;
@@ -663,23 +651,27 @@ public class LocalizedInflectionEngineTests
     [Fact]
     public void WarmExactNumericSingletonNumericOverloadsDoNotAllocate()
     {
+        const int warmupIterations = 10_000;
         const int iterations = 1000;
         var input = new string("unit".ToCharArray());
-        _ = ExactNumericSingletonBundle.Inflect(
-            input,
-            InflectionDirection.Forward,
-            allowProductive: true,
-            quantity: 1L);
-        _ = ExactNumericSingletonBundle.Inflect(
-            input,
-            InflectionDirection.Forward,
-            allowProductive: true,
-            quantity: 1.00m);
-        _ = ExactNumericSingletonBundle.Inflect(
-            input,
-            InflectionDirection.Forward,
-            allowProductive: true,
-            quantity: 1d);
+        for (var index = 0; index < warmupIterations; index++)
+        {
+            _ = ExactNumericSingletonBundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                quantity: 1L);
+            _ = ExactNumericSingletonBundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                quantity: 1.00m);
+            _ = ExactNumericSingletonBundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                quantity: 1d);
+        }
 
         var beforeLong = GC.GetAllocatedBytesForCurrentThread();
         InflectionResult longResult = default;
@@ -1396,6 +1388,67 @@ public class LocalizedInflectionEngineTests
     }
 
     [Fact]
+    public void EmptyProjectedOutputFailsClosed()
+    {
+        var bundle = RuleBundle(new InflectionRule(
+            "zz.forward.empty",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "y",
+            precedingNot: [],
+            dictionaryPlural: string.Empty,
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: false,
+            requiresExistingLexeme: false));
+        var input = new string("City".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unsupported, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void IllFormedProjectedOutputFailsClosed()
+    {
+        foreach (var output in new[]
+                 {
+                     new string(['\uD800']),
+                     new string(['\uDC00'])
+                 })
+        {
+            var bundle = RuleBundle(new InflectionRule(
+                "zz.forward.ill-formed",
+                InflectionDirection.Forward,
+                100,
+                prefix: string.Empty,
+                suffix: "y",
+                precedingNot: [],
+                dictionaryPlural: output,
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: false,
+                requiresExistingLexeme: false));
+            var input = new string("City".ToCharArray());
+
+            var result = bundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                category: null);
+
+            Assert.Equal(InflectionStatus.Unsupported, result.Status);
+            Assert.Same(input, result.Value);
+        }
+    }
+
+    [Fact]
     public void MissingLexemeDisplayCategoryFailsClosed()
     {
         var bundle = new InflectionBundle(
@@ -1531,15 +1584,19 @@ public class LocalizedInflectionEngineTests
         bool hasRules,
         int directionValue)
     {
+        const int warmupIterations = 10_000;
         const int iterations = 1000;
         var bundle = hasRules ? Bundle : NoRuleBundle;
         var direction = (InflectionDirection)directionValue;
         var input = new string(value.ToCharArray());
-        _ = bundle.Inflect(
-            input,
-            direction,
-            allowProductive,
-            category: null);
+        for (var index = 0; index < warmupIterations; index++)
+        {
+            _ = bundle.Inflect(
+                input,
+                direction,
+                allowProductive,
+                category: null);
+        }
 
         var before = GC.GetAllocatedBytesForCurrentThread();
         InflectionResult result = default;
@@ -1572,6 +1629,7 @@ public class LocalizedInflectionEngineTests
     [InlineData((int)InflectionCasing.None, (int)InflectionDirection.Reverse)]
     public void WarmMixedCaseUnknownDoesNotAllocate(int casing, int direction)
     {
+        const int warmupIterations = 10_000;
         const int iterations = 1000;
         var bundle = new InflectionBundle(
             "zz",
@@ -1594,11 +1652,14 @@ public class LocalizedInflectionEngineTests
             ((InflectionDirection)direction == InflectionDirection.Forward
                 ? "cITy"
                 : "cITies").ToCharArray());
-        _ = bundle.Inflect(
-            input,
-            (InflectionDirection)direction,
-            allowProductive: true,
-            category: null);
+        for (var index = 0; index < warmupIterations; index++)
+        {
+            _ = bundle.Inflect(
+                input,
+                (InflectionDirection)direction,
+                allowProductive: true,
+                category: null);
+        }
 
         var before = GC.GetAllocatedBytesForCurrentThread();
         InflectionResult result = default;
