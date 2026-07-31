@@ -51,6 +51,17 @@ public sealed partial class HumanizerSourceGenerator
             "inflection"
         ];
 
+        static readonly string[] FormatterGrammarPropertyNames =
+        [
+            "pluralRule",
+            "casePluralRule",
+            "dataUnitPluralRule",
+            "dataUnitNonIntegralForm",
+            "prepositionMode",
+            "secondaryPlaceholderMode",
+            "timeUnitGenders"
+        ];
+
         internal static CanonicalLocaleDocument Parse(string localeCode, string fileText)
         {
             var root = SimpleYamlParser.Parse(fileText);
@@ -144,21 +155,9 @@ public sealed partial class HumanizerSourceGenerator
                     case "formatter":
                         features["formatter"] = surfaceMapping;
                         var grammar = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-                        foreach (var propertyName in new[]
+                        foreach (var propertyName in FormatterGrammarPropertyNames.Where(surfaceMapping.Values.ContainsKey))
                         {
-                            "pluralRule",
-                            "casePluralRule",
-                            "dataUnitPluralRule",
-                            "dataUnitNonIntegralForm",
-                            "prepositionMode",
-                            "secondaryPlaceholderMode",
-                            "timeUnitGenders"
-                        })
-                        {
-                            if (surfaceMapping.TryGetValue(propertyName, out var propertyValue))
-                            {
-                                grammar[propertyName] = propertyValue;
-                            }
+                            grammar[propertyName] = surfaceMapping.Values[propertyName];
                         }
 
                         if (grammar.Count > 0)
