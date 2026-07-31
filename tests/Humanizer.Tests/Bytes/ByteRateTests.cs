@@ -168,7 +168,7 @@ public class ByteRateTests
     }
 
     [Fact]
-    public void ObjectEqualityRequiresMatchingRuntimeTypes()
+    public void EqualityAndComparisonDistinguishRuntimeTypes()
     {
         var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
         var derivedRate = new DerivedByteRate(ByteSize.FromBytes(800), TimeSpan.FromSeconds(20));
@@ -180,8 +180,14 @@ public class ByteRateTests
         Assert.False(EqualityComparer<ByteRate>.Default.Equals(derivedRate, rate));
         Assert.False(rate.Equals((object)derivedRate));
         Assert.False(derivedRate.Equals((object)rate));
+        var comparison = rate.CompareTo(derivedRate);
+        Assert.NotEqual(0, comparison);
+        Assert.Equal(-Math.Sign(comparison), Math.Sign(derivedRate.CompareTo(rate)));
+        Assert.Equal(comparison, ((IComparable)rate).CompareTo(derivedRate));
+        Assert.Equal(2, new SortedSet<ByteRate> { rate, derivedRate }.Count);
         Assert.True(derivedRate.Equals(equivalentDerivedRate));
         Assert.True(derivedRate.Equals((object)equivalentDerivedRate));
+        Assert.Equal(0, derivedRate.CompareTo(equivalentDerivedRate));
     }
 
     [Fact]
