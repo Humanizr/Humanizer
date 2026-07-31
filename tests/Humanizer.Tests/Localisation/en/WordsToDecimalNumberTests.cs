@@ -46,6 +46,8 @@ public class WordsToDecimalNumberTests
     [InlineData("one point 2", "2")]
     [InlineData("one dot two", "one dot two")]
     [InlineData("onepointtwo", "onepointtwo")]
+    [InlineData("onepoint two", "onepoint two")]
+    [InlineData("one pointtwo", "one pointtwo")]
     [InlineData("one point twothree", "twothree")]
     [InlineData("minusone point two", "minusone")]
     public void RejectsMalformedDecimalPhrases(string words, string expectedUnrecognizedWord)
@@ -106,6 +108,26 @@ public class WordsToDecimalNumberTests
             " \t ",
             [],
             []));
+
+    [Fact]
+    public void EmbeddedIgnorableMarkerPreservesBoundaryShortCircuit()
+    {
+        const string words = "xm";
+        const string marker = "m\u00AD";
+        Assert.Equal(1, CultureInfo.CurrentCulture.CompareInfo.IndexOf(
+            words,
+            marker,
+            CompareOptions.IgnoreCase));
+        var converter = new LocalizedWordsToDecimalNumberConverter(
+            CultureInfo.CurrentCulture,
+            marker,
+            [],
+            []);
+
+        Assert.False(converter.TryConvert(words, out var parsed, out var unrecognizedNumber));
+        Assert.Equal(0m, parsed);
+        Assert.Equal(words, unrecognizedNumber);
+    }
 
     [Fact]
     public void RejectsFractionBeyondDecimalScale()
