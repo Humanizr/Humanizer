@@ -39,7 +39,8 @@
   "exclusions": [
     "scenarios/parse-number-words.mdx",
     "concepts/trimming-and-native-aot.mdx",
-    "upgrading/main-preview.mdx",
+    "upgrading/version-4-migration.mdx",
+    "whats-new/index.mdx",
     "_examples/scenarios-parse-number-words/ParseNumberWords.csproj",
     "_examples/scenarios-parse-number-words/Program.cs",
     "_examples/scenarios-aot/Aot.csproj",

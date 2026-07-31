@@ -20,7 +20,8 @@
     "_examples/scenarios-parse-number-words/Program.cs"
   ],
   "exclusions": [
-    "upgrading/main-preview.mdx",
+    "upgrading/version-4-migration.mdx",
+    "whats-new/index.mdx",
     "contributing/adding-or-updating-a-locale.mdx",
     "contributing/choosing-or-extending-a-locale-engine.mdx",
     "contributing/locale-yaml-how-to.mdx",

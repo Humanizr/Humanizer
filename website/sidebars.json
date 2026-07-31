@@ -1,6 +1,7 @@
 {
   "docs": [
     "index",
+    "whats-new/whats-new",
     {
       "type": "category",
       "label": "Start here",
@@ -92,7 +93,7 @@
         "upgrading/2-x-lines",
         "upgrading/version-3-migration",
         "upgrading/version-3-patch-line",
-        "upgrading/main-preview"
+        "upgrading/version-4-migration"
       ]
     },
     {
