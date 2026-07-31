@@ -246,16 +246,14 @@ public sealed partial class HumanizerSourceGenerator
                     }
 
                     var largeUnits = EngineContractUtilities.GetRequiredElement(root, "largeUnits");
-                    foreach (var index in new[] { 3, 6 })
+                    if (TryGetIndexedString(largeUnits, 3, out var tera))
                     {
-                        if (TryGetIndexedString(largeUnits, index, out var scaleWord))
-                        {
-                            AddMetricScaleWord(
-                                index == 3 ? 'T' : 'Y',
-                                scaleWord,
-                                null,
-                                words);
-                        }
+                        AddMetricScaleWord('T', tera, null, words);
+                    }
+
+                    if (TryGetIndexedString(largeUnits, 6, out var yotta))
+                    {
+                        AddMetricScaleWord('Y', yotta, null, words);
                     }
 
                     break;
