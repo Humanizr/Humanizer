@@ -5,4 +5,6 @@ Indian scale: one hundred crore
 Fraction: 1 1/4
 Financial: 壹拾
 Estonian scale: triljon
+Long max: üheksa triljonit kakssada kakskümmend kolm biljardit kolmsada seitsekümmend kaks biljonit kolmkümmend kuus miljardit kaheksasada viiskümmend neli miljonit seitsesada seitsekümmend viis tuhat kaheksasada seitse
+Long min: miinus üheksa triljonit kakssada kakskümmend kolm biljardit kolmsada seitsekümmend kaks biljonit kolmkümmend kuus miljardit kaheksasada viiskümmend neli miljonit seitsesada seitsekümmend viis tuhat kaheksasada kaheksa
 Roman: XIV

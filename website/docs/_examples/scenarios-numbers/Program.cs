@@ -14,4 +14,6 @@ Console.WriteLine($"Indian scale: {1_000_000_000L.ToIndianWords(IndianScaleStyle
 Console.WriteLine($"Fraction: {1.25m.Fractionalize(5, 0m)}");
 Console.WriteLine($"Financial: {10L.ToChineseFinancialCharacters(simplifiedChinese)}");
 Console.WriteLine($"Estonian scale: {1_000_000_000_000_000_000L.ToWords(estonian)}");
+Console.WriteLine($"Long max: {long.MaxValue.ToWords(estonian)}");
+Console.WriteLine($"Long min: {long.MinValue.ToWords(estonian)}");
 Console.WriteLine($"Roman: {14.ToRoman()}");
