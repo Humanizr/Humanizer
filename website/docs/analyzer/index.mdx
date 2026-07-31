@@ -26,10 +26,12 @@ dotnet add <app-project.csproj> package Humanizer --version 4.0.0
 dotnet restore <app-project.csproj>
 dotnet format <solution-or-project> analyzers --diagnostics HUMANIZER001 --severity info
 dotnet build <app-project.csproj> --no-restore
-dotnet test <app-project.csproj> --no-restore
+dotnet test <test-project-or-solution>
 ```
 
-Replace the placeholders with paths relative to the repository root.
+Replace the placeholders with paths relative to the repository root. The test
+path must identify the repository's test project or a solution that includes
+its tests.
 
 The code action is named **Update to Humanizer namespace** and supports Roslyn
 Fix All. Review the result: Fix All replaces each matching directive or
