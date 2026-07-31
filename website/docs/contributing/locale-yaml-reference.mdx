@@ -9,9 +9,7 @@ example: illustrative
 
 # Locale YAML reference
 
-## Orientation
-
-This is the index for the canonical `main/preview` authoring contract under
+This is the index for the v4 authoring contract on `main` under
 `src/Humanizer/Locales/*.yml`. Use the smallest reference that answers the
 question:
 
@@ -25,7 +23,7 @@ Together with [Locale YAML how-to](./locale-yaml-how-to.mdx) and
 describe the checked-in locale contract without requiring contributors to
 reverse-engineer generator source.
 
-## Example
+## Start with a minimal variant
 
 A regional variant declares its parent and overrides only real differences:
 
@@ -243,7 +241,7 @@ Examples in the current repo:
 - `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
 - `en-IN.yml` declares `variantOf: 'en'` and overrides only the `number.words` fields that genuinely differ.
 
-## Pitfall
+## Use only documented schema
 
 Do not invent fields, use empty mappings as inheritance sentinels, copy a
 parent file into every variant, or reference generator-internal profile keys.
@@ -251,12 +249,6 @@ Changing `engine` replaces that mapped block instead of merging it.
 
 The reference describes accepted structure; it does not prove that authored
 words or inherited behavior are natural for a culture.
-
-## Version notes
-
-This schema documents the canonical `main/preview` locale YAML compiler.
-Published releases through `3.0.10` use their own checked-in localization and
-package shapes. Do not backport a field merely because it appears here.
 
 ## Related guides and API
 

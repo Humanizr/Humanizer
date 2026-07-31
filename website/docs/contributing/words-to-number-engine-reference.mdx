@@ -9,13 +9,11 @@ example: illustrative
 
 # Words-to-number engine reference
 
-## Orientation
-
 Choose a parser engine only after mapping the language's token normalization,
 cardinal composition, scales, and ordinal behavior. Render-side number words
 use a separate engine catalogue.
 
-## Example
+## Configure a parser engine
 
 ```yaml
 surfaces:
@@ -238,15 +236,10 @@ Fields:
 - `teenLeaderToken`
 - `teenLeaderBases`
 
-## Pitfall
+## Prove parsing separately
 
 A number-to-words engine does not imply a matching parser. Prove cardinal and
 ordinal parsing independently, including normalization and ambiguous tokens.
-
-## Version notes
-
-These parser engines are the accepted `main/preview` contracts. Historical
-branches may expose fewer engines or handwritten converters.
 
 ## Related guides and API
 

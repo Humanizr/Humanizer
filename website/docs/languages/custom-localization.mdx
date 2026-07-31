@@ -9,8 +9,6 @@ example: illustrative
 
 # Customize localization
 
-## Orientation
-
 Prefer a per-call culture or transformer first. Use a custom localiser only
 when an application needs process-wide behavior that the selected locale does
 not provide.
@@ -22,7 +20,7 @@ humanization strategies are separate process-wide properties.
 
 ## Example
 
-In `Humanizer 4`, register before any code resolves the formatter registry:
+Register before any code resolves the formatter registry:
 
 ```csharp
 using System.Globalization;
@@ -43,22 +41,23 @@ sealed class ProductFormatter(CultureInfo culture)
 }
 ```
 
-The result is `just now`. Register the narrowest component that owns the
+The output is `just now`. Register the narrowest component that owns the
 behavior; do not replace a formatter merely to change number words.
 
-In Humanizer 4, a custom formatter used by `HumanizeWithCase` must also
-implement `IGrammaticalCaseTimeSpanFormatter`. A custom global time-span
-strategy must implement `IGrammaticalCaseTimeSpanHumanizeStrategy`. Existing
-`IFormatter` and `ITimeSpanHumanizeStrategy` implementations continue to work
-for the existing duration APIs, but case-aware calls fail with
-`NotSupportedException` instead of silently using another locale.
+## Support case-aware durations
 
-## Pitfall
+A custom formatter used by `HumanizeWithCase` must also implement
+`IGrammaticalCaseTimeSpanFormatter`. A custom global time-span strategy must
+implement `IGrammaticalCaseTimeSpanHumanizeStrategy`. Existing `IFormatter`
+and `ITimeSpanHumanizeStrategy` implementations continue to work for the
+existing duration APIs, but case-aware calls fail with `NotSupportedException`
+instead of silently using another locale.
 
-In Humanizer `3.x` and `Humanizer 4`, a `LocaliserRegistry` freezes on first
-resolution. A later `Register` call throws. Configure registries once during
-startup, before hosted services, request handlers, or static initializers can
-call Humanizer.
+## Configure before first use
+
+A `LocaliserRegistry` freezes on first resolution. A later `Register` call
+throws. Configure registries once during startup, before hosted services,
+request handlers, or static initializers can call Humanizer.
 
 Custom global components affect every caller that resolves that culture.
 For request-specific text transformation, implement `IStringTransformer` or
@@ -68,18 +67,10 @@ If the built-in locale is wrong rather than product-specific, follow the
 [language correction guide](../contributing/report-language-issue.mdx) or
 [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
 
-## Version notes
-
-Humanizer `2.x` registries remain mutable; `3.x` and `Humanizer 4` freeze them
-after first use. Constructor shapes and available registries are
-version-specific public API. Compile against the selected package and follow
-that snapshot's API reference rather than copying a `Humanizer 4` extension
-into a historical application.
-
 ## Related guides and API
 
 - [Culture and global configuration](../concepts/culture-and-configuration.mdx)
 - [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
 - [Format durations and ages](../scenarios/durations-and-ages.mdx)
 - [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

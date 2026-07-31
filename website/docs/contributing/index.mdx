@@ -9,7 +9,7 @@ example: illustrative
 
 # Contribute to Humanizer documentation and languages
 
-## Orientation
+These pages describe the contributor workflow for v4 development on `main`.
 
 Start with the smallest path that matches the problem:
 
@@ -23,13 +23,13 @@ Start with the smallest path that matches the problem:
 Language contribution is visible here without being a prerequisite for using
 Humanizer. User guidance stays under [Languages and cultures](../languages/index.mdx).
 
-## Example
+## Report enough detail to reproduce the issue
 
 A useful issue report is a compact, reproducible record:
 
 ```text
 Culture: fr-CA
-Humanizer version: 3.0.10
+Humanizer version: <version>
 API call: 2.ToWords(culture)
 Expected: ...
 Actual: ...
@@ -39,19 +39,12 @@ Platform/TFM: macOS, net8.0
 That is enough to route the problem before anyone changes locale ownership or
 grammar.
 
-## Pitfall
+## Reproduce before changing locale ownership
 
 Do not start by copying a parent locale or adding a culture code to a registry.
 A successful lookup is not proof of natural output, and package presence is
 not capability coverage. Trace the owning YAML surface and reproduce the
 behavior first.
-
-## Version notes
-
-The YAML and generator workflow in this contributor cluster describes
-`main/preview`. Published releases through `3.0.10` have version-specific
-package and localization implementations. Report the exact version, and make
-changes against the branch that owns that version.
 
 ## Related guides and API
 

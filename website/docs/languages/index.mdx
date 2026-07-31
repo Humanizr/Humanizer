@@ -9,19 +9,15 @@ example: illustrative
 
 # Languages and cultures
 
-## Orientation
-
 Humanizer localizes behavior by culture, not by translating one final string.
-Choose a culture for the operation, then confirm that it is listed for the
-selected documentation version. Every listed culture supports every applicable
-localized feature.
+Choose a culture for the operation, then confirm that it or one of its named
+parents has a generated [Humanizer 4 locale profile](./supported-cultures.mdx).
+`Configurator.IsCultureSupported` performs the same parent-chain check in
+application code.
 
-The package and the culture are separate choices. Published releases through
-`3.0.10` use the `Humanizer` metapackage to bring in `Humanizer.Core` and its
-locale packages. Humanizer 4 is consolidated: one
-`Humanizer` reference contains the runtime, generated locale data, and
-analyzers. Installing a culture-specific package does not select that culture,
-and selecting a culture does not install a missing historical package.
+Humanizer 4 ships its runtime, generated locale data, and analyzers in the
+single `Humanizer` package. Installing the package does not select a culture;
+the application still chooses one with `CultureInfo`.
 
 ## Example
 
@@ -35,29 +31,28 @@ var french = CultureInfo.GetCultureInfo("fr-FR");
 Console.WriteLine(42.ToWords(french));
 ```
 
+The output is:
+
+```text
+quarante-deux
+```
+
 Use [culture selection](./using-cultures.mdx) for per-call and ambient-culture
-patterns. Use [supported cultures](./supported-cultures.mdx)
-for the selected-version inventory.
-Use the [scenario finder](../scenarios/index.mdx) to reach the focused guide for
-number words, dates, clock notation, collections, or another localized task.
+patterns. Use [supported cultures](./supported-cultures.mdx) for the current
+inventory. Use the [scenario finder](../scenarios/index.mdx) to reach the
+focused guide for number words, dates, clock notation, collections, or another
+localized task.
 
-Found a wrong translation, inflection, parser result, or platform-specific
-format? Follow the [language correction guide](../contributing/report-language-issue.mdx)
-or [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
-
-## Pitfall
+## How culture fallback works
 
 Do not infer support from a package name or English fallback. A regional
 culture can reuse a same-language parent such as `fr`; that is an
 implementation detail, not partial support. Report incorrect inherited
 behavior just as you would incorrect directly authored behavior.
 
-## Version notes
-
-The generated coverage page is scoped to the selected documentation version.
-Stable snapshots use their own package and documentation evidence. Package
-consolidation is Humanizer 4 behavior, while published versions through
-`3.0.10` retain the metapackage and locale-package model.
+Found a wrong translation, parser result, or platform-specific format? Follow
+the [language correction guide](../contributing/report-language-issue.mdx) or
+[open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
 
 ## Related guides and API
 
@@ -65,4 +60,4 @@ consolidation is Humanizer 4 behavior, while published versions through
 - [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
 - [Scenario finder](../scenarios/index.mdx)
 - [Package selection](../start/package-selection.md)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

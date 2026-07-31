@@ -9,8 +9,6 @@ example: illustrative
 
 # Choose or extend a locale engine
 
-## Orientation
-
 Locale YAML owns words, phrases, lexical tables, switches, and structural
 engine choices. Shared runtime kernels own reusable algorithms. Generator C#
 maps a validated YAML structure to typed cached runtime objects. Runtime code
@@ -28,7 +26,7 @@ Use the first path that fits:
 The [engine catalogues](./locale-yaml-reference.mdx) list the existing
 contracts and fields.
 
-## Example
+## Reuse or extend an engine
 
 ### Reuse an existing engine
 
@@ -85,7 +83,7 @@ Keep a residual leaf when the morphology is still genuinely procedural,
 generalizing it would require imperative hooks, and no second locale supports
 a coherent abstraction. State that reason in the pull request.
 
-## Pitfall
+## Keep engines reusable and runtime dispatch static
 
 Do not create a generic-sounding engine that still switches on culture names.
 Do not add one flag per exceptional locale, expose generator-internal profile
@@ -96,13 +94,6 @@ Generated locale dispatch must remain direct and cached. Do not introduce
 runtime YAML/JSON parsing, reflection-based registry construction, or
 per-call profile creation. Benchmark shared-kernel changes against the path
 they replace.
-
-## Version notes
-
-The generated engine architecture and paths on this page describe
-`main/preview`. Historical branches can use handwritten converters and
-different generator contracts. Inspect the target branch before applying a
-current engine name or migration sequence.
 
 ## Related guides and API
 

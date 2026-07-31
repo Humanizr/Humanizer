@@ -9,8 +9,6 @@ example: illustrative
 
 # Locale parity and preflight
 
-## Orientation
-
 Before editing, create `artifacts/YYYY-MM-DD-<locale>-parity-map.md`. The
 artifact is local, gitignored working evidence. Cover these canonical surfaces:
 
@@ -33,7 +31,7 @@ At the top of the artifact, keep three summaries:
 
 The final effective gap set must be empty.
 
-## Example
+## Record ownership and proof
 
 Use only explicit states:
 
@@ -62,7 +60,7 @@ verification result. Include separate lines for nested required blocks such as
 `number.words`, `number.parse`, each `phrases` family, ordinal variants, and
 authored calendar arrays.
 
-## Pitfall
+## Do not substitute broad test results for proof
 
 Do not mark a row proved because the full suite passed. Name the exact
 assertion. Registry presence, non-empty output, a culture-aware platform
@@ -75,12 +73,6 @@ confidence, limitations, rejected alternatives, and the accepted outputs.
 If any row remains `unknown`, `missing`, `english-fallback`, or otherwise lacks
 proof, report `parity not complete`; do not smooth it into a general statement
 that tests pass.
-
-## Version notes
-
-This parity contract applies to `main/preview` locale work. A historical
-correction should use the tests and ownership model of its branch, but it still
-must not claim correctness from generic or English fallback.
 
 ## Related guides and API
 

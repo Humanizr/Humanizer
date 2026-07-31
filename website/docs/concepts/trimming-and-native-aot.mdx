@@ -11,52 +11,30 @@ import aot from '!!raw-loader!../_examples/scenarios-aot/Program.cs';
 
 # Trimming and Native AOT
 
-## Orientation
-
-Humanizer `3.0.1` and later publish compatibility metadata for trimming and
-Native AOT on compatible target frameworks. Most extension methods are static
-and trim naturally. Enum humanization and dehumanization are the important
+Humanizer 4's .NET 8 and newer assets publish compatibility metadata for
+trimming and Native AOT. Enum humanization and dehumanization are the important
 choice points: use generic overloads when the enum type is known at compile
 time, and treat the runtime `Enum` and `Type` overloads as
 reflection-dependent.
 
 ## Example
 
-This tiny executable uses only generic enum APIs. Documentation validation runs it normally, publishes it as a self-contained trimmed application, and publishes it with Native AOT on supported host operating-system and architecture combinations:
+This executable uses generic enum APIs:
 
 <CodeBlock language="csharp" title="Program.cs">{aot}</CodeBlock>
 
-The repository verifier is:
+It prints:
 
-```console
-pwsh tools/docs/verify-aot.ps1
+```text
+Ready to ship
 ```
 
-It tests the selected Humanizer NuGet package from an isolated package cache.
-The normal documentation test gate invokes it automatically. A supported host
-must complete both publish modes and run both binaries. An unsupported local
-OS/architecture is reported and skipped; CI can require a supported host with:
-
-```console
-pwsh tools/docs/test.ps1 -RequireNativeAot
-```
-
-### Prefer statically known enum types
-
-```csharp
-var state = "Ready to ship".DehumanizeTo<JobState>();
-var label = JobState.ReadyToShip.Humanize(
-    LetterCasing.Sentence,
-    EnumHumanizeSource.EnumName);
-```
-
-The generic parameter gives the trimmer and AOT compiler the enum’s public
+The generic parameter gives the trimmer and AOT compiler the enum's public
 fields. By contrast, `DehumanizeTo(string, Type, ...)` and the base-`Enum`
 `Humanize(...)` overloads construct generic methods through reflection and are
-annotated with both `RequiresUnreferencedCode` and `RequiresDynamicCode`. The
-source-selecting humanization overload is available on `Humanizer 4`.
+annotated with both `RequiresUnreferencedCode` and `RequiresDynamicCode`.
 
-### Read warnings as API feedback
+## Treat linker warnings as API feedback
 
 An `IL2026` warning on a runtime enum overload means the linker cannot prove
 the target enum members survive. `IL3050` means Native AOT cannot guarantee
@@ -64,20 +42,17 @@ creation of the required code. Replacing the overload with the generic form is
 the normal remediation; suppressing either warning does not make the dynamic
 path safe.
 
-## Pitfall
+## Validate the published application
 
-Assembly compatibility metadata is not proof that every consumer call, dependency, target framework, and runtime identifier is safe. Keep trim warnings enabled, publish the actual application in CI, and execute a smoke path through its Humanizer calls. Reflection-heavy application code around Humanizer can still require its own annotations.
-
-## Version notes
-
-This compatibility claim begins with Humanizer `3.0.1`; `2.x` snapshots must
-exclude this page. Humanizer 4 emits `IsTrimmable` and, on compatible TFMs,
-`IsAotCompatible` metadata. The publish verifier is the behavioral proof for
-`3.0.10` and Humanizer 4, rather than a promise about every historical target
-framework.
+Assembly compatibility metadata is not proof that every consumer call,
+dependency, target framework, and runtime identifier is safe. Keep trim
+warnings enabled, publish the actual application in CI, and execute a smoke
+path through its Humanizer calls. Reflection-heavy application code around
+Humanizer can still require its own annotations.
 
 ## Related guides and API
 
 - [Enums and flags](../scenarios/enums-and-flags.mdx)
 - [Troubleshooting](../start/troubleshooting.mdx)
-- [Selected-version API reference](../api/index.md)
+- [Enum humanization API](../api/Humanizer.EnumHumanizeExtensions.md)
+- [Enum dehumanization API](../api/Humanizer.EnumDehumanizeExtensions.md)

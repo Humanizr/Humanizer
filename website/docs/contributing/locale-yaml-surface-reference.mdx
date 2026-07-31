@@ -9,13 +9,11 @@ example: illustrative
 
 # Locale YAML surface reference
 
-## Orientation
-
 This reference lists the canonical surface fields, shared strategy values,
 date and ordinal blocks, formatter data, and clock notation data. Use the
 engine catalogues for number parsing and rendering contracts.
 
-## Example
+## Author only owned values
 
 ```yaml
 surfaces:
@@ -915,16 +913,11 @@ Notes:
 - Non-bucketed minutes fall to range-based defaults or `defaultTemplate`.
 - Day-period hour resolution is template-aware: templates that reference `{nextHour}` or `{nextArticle}` base the day period on hour+1 (since the phrasing is relative to the next hour), while templates using `{hour}` base the period on the current hour.
 
-## Pitfall
+## Keep surfaces separate
 
 Keep `formatter` separate from `phrases`, and keep `number.words`
 separate from `number.parse`. Calendar and number-formatting overrides are
 optional compatibility contracts, not placeholders for platform defaults.
-
-## Version notes
-
-These fields and strategy values describe `main/preview`. Verify the schema
-on a historical branch before applying them there.
 
 ## Related guides and API
 
