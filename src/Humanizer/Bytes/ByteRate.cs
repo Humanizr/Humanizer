@@ -143,10 +143,16 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
     }
 
     /// <inheritdoc />
+    /// <remarks>
+    /// Equality requires the other instance to have the same runtime type.
+    /// </remarks>
     public bool Equals(ByteRate? other) =>
         other?.GetType() == GetType() && BytesPerSecond.Equals(other.BytesPerSecond);
 
     /// <inheritdoc />
+    /// <remarks>
+    /// Equality requires the other instance to have the same runtime type.
+    /// </remarks>
     public override bool Equals(object? obj) =>
         obj?.GetType() == GetType() && Equals((ByteRate)obj);
 
