@@ -268,6 +268,9 @@ internal sealed class LocalizedWordsToDecimalNumberConverter : IWordsToDecimalNu
                 return -1;
             }
 
+            if (markerIndex > words.Length - decimalMarker.Length)
+                return -1;
+
             var markerEnd = markerIndex + decimalMarker.Length;
             if (allowsJoinedTokens)
             {

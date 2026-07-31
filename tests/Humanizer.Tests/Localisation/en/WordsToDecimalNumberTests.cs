@@ -109,17 +109,20 @@ public class WordsToDecimalNumberTests
             [],
             []));
 
-    [Fact]
-    public void EmbeddedIgnorableMarkerPreservesBoundaryShortCircuit()
+    [Theory]
+    [InlineData("en-US", "xm", 1)]
+    [InlineData("en-US", "x m", 2)]
+    [InlineData("zh-CN", "xm", 1)]
+    public void EmbeddedIgnorableMarkerDoesNotReadPastInput(string cultureName, string words, int expectedIndex)
     {
-        const string words = "xm";
+        var culture = CultureInfo.GetCultureInfo(cultureName);
         const string marker = "m\u00AD";
-        Assert.Equal(1, CultureInfo.CurrentCulture.CompareInfo.IndexOf(
+        Assert.Equal(expectedIndex, culture.CompareInfo.IndexOf(
             words,
             marker,
             CompareOptions.IgnoreCase));
         var converter = new LocalizedWordsToDecimalNumberConverter(
-            CultureInfo.CurrentCulture,
+            culture,
             marker,
             [],
             []);
