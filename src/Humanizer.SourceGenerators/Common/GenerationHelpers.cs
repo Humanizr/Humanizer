@@ -90,23 +90,7 @@ public sealed partial class HumanizerSourceGenerator
         static string Quote(string value) => "\"" + Escape(value) + "\"";
     }
 
-    static string GetTokenMapPropertyName(string localeCode)
-    {
-        var segments = localeCode.Split(['-', '_'], StringSplitOptions.RemoveEmptyEntries);
-        var builder = new StringBuilder(localeCode.Length);
-
-        foreach (var segment in segments)
-        {
-            var lower = segment.ToLowerInvariant();
-            builder.Append(char.ToUpperInvariant(lower[0]));
-            if (lower.Length > 1)
-            {
-                builder.Append(lower, 1, lower.Length - 1);
-            }
-        }
-
-        return builder.ToString();
-    }
+    static string GetTokenMapPropertyName(string localeCode) => ToEnumMemberName(localeCode);
 
     static string Escape(string value) => value.Replace("\\", "\\\\").Replace("\"", "\\\"");
 
@@ -189,9 +173,8 @@ public sealed partial class HumanizerSourceGenerator
         var segments = value.Split(['-', '_'], StringSplitOptions.RemoveEmptyEntries);
         var builder = new StringBuilder(value.Length);
 
-        foreach (var segment in segments)
+        foreach (var lower in segments.Select(static segment => segment.ToLowerInvariant()))
         {
-            var lower = segment.ToLowerInvariant();
             builder.Append(char.ToUpperInvariant(lower[0]));
             if (lower.Length > 1)
             {
@@ -466,14 +449,8 @@ public sealed partial class HumanizerSourceGenerator
     {
         var first = true;
 
-        foreach (var emitter in emitters)
+        foreach (var argument in emitters.Select(emitter => emitter(element)).OfType<string>())
         {
-            var argument = emitter(element);
-            if (argument is null)
-            {
-                continue;
-            }
-
             if (!first)
             {
                 builder.Append(", ");
