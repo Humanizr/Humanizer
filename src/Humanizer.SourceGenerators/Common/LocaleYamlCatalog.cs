@@ -159,12 +159,9 @@ public sealed partial class HumanizerSourceGenerator
             ImmutableArray<ResolvedLocaleDefinition>.Builder cache,
             ImmutableArray<Diagnostic>.Builder diagnostics)
         {
-            foreach (var cached in cache)
+            if (cache.FirstOrDefault(cached => cached.LocaleCode == localeCode) is { } cached)
             {
-                if (cached.LocaleCode == localeCode)
-                {
-                    return cached;
-                }
+                return cached;
             }
 
             if (!parsedLocales.TryGetValue(localeCode, out var locale))
@@ -215,12 +212,13 @@ public sealed partial class HumanizerSourceGenerator
             _ = resolving.Remove(localeCode);
 
             var resolvedFeatures = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-            foreach (var featureName in SupportedFeatureNames)
+            foreach (var resolvedFeature in SupportedFeatureNames
+                         .Select(featureName => (
+                             Name: featureName,
+                             Value: ResolveFeatureValue(locale.LocaleCode, locale.Inherits, featureName, locale.Features, inherited.ResolvedFeatures)))
+                         .Where(static feature => feature.Value is not null))
             {
-                if (ResolveFeatureValue(locale.LocaleCode, locale.Inherits, featureName, locale.Features, inherited.ResolvedFeatures) is { } resolvedFeatureValue)
-                {
-                    resolvedFeatures[featureName] = resolvedFeatureValue;
-                }
+                resolvedFeatures[resolvedFeature.Name] = resolvedFeature.Value!;
             }
 
             var resolvedFeatureMap = resolvedFeatures.ToImmutable();
@@ -388,15 +386,9 @@ public sealed partial class HumanizerSourceGenerator
 
         static string? GetScriptSubtag(string localeCode)
         {
-            foreach (var subtag in localeCode.Split('-').Skip(1))
-            {
-                if (subtag.Length == 4 && subtag.All(char.IsLetter))
-                {
-                    return subtag;
-                }
-            }
-
-            return null;
+            return localeCode.Split('-')
+                .Skip(1)
+                .FirstOrDefault(static subtag => subtag.Length == 4 && subtag.All(char.IsLetter));
         }
 
         static LocaleFeature? ResolveFeature(
@@ -462,13 +454,10 @@ public sealed partial class HumanizerSourceGenerator
                 throw new InvalidOperationException($"Locale '{localeCode}.headings' must be a mapping.");
             }
 
-            foreach (var property in mapping.Values.Keys)
+            foreach (var property in mapping.Values.Keys.Where(static property => property is not ("full" or "short")))
             {
-                if (property is not ("full" or "short"))
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.headings' defines unsupported property '{property}'. Supported properties: full, short.");
-                }
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.headings' defines unsupported property '{property}'. Supported properties: full, short.");
             }
 
             return new HeadingSet(

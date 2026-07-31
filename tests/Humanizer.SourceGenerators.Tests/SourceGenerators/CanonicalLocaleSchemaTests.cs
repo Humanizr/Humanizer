@@ -1208,6 +1208,12 @@ surfaces:
   calendar:
     eraNames: {}
 """, "unsupported property 'eraNames'")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  compass:
+    unexpected: {}
+""", "unsupported property 'unexpected'")]
     public void CanonicalSchemaRejectsUnsupportedCanonicalProperties(string yaml, string expectedMessage)
     {
         var catalog = CreateCatalog(("zz", yaml));
