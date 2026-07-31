@@ -1,0 +1,20 @@
+changelog:
+  exclude:
+    labels:
+      - no release notes
+      - maintenance
+  categories:
+    - title: Breaking changes
+      labels:
+        - breaking change
+    - title: Features
+      labels:
+        - enhancement
+        - perf
+    - title: Fixes
+      labels:
+        - bug
+        - security
+    - title: Documentation
+      labels:
+        - documentation
