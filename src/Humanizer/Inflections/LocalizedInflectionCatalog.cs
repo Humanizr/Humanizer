@@ -92,6 +92,7 @@ static partial class LocalizedInflectionCatalog
 
     static bool TryResolveRule(CultureInfo culture, out CardinalPluralRuleKind rule)
     {
+        rule = default;
         if (GeneratedCultureResolver.TryResolve(culture.Name, out var resolution))
         {
             if (TryResolveRuleCore(culture.Name, out rule))
@@ -100,7 +101,6 @@ static partial class LocalizedInflectionCatalog
             return TryResolveRuleCore(resolution.LocaleProfileOwner, out rule);
         }
 
-        rule = default;
         return false;
     }
 
