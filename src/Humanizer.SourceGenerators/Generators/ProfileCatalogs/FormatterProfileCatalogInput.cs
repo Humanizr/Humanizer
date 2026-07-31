@@ -301,12 +301,9 @@ public sealed partial class HumanizerSourceGenerator
                 yield break;
             }
 
-            foreach (var item in property.EnumerateArray())
+            foreach (var item in property.EnumerateArray().Where(static item => item.ValueKind == JsonValueKind.String))
             {
-                if (item.ValueKind == JsonValueKind.String)
-                {
-                    yield return item.GetString()!;
-                }
+                yield return item.GetString()!;
             }
         }
 

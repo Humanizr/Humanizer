@@ -627,11 +627,14 @@ wordsToNumber:
     public void NumberToWordsProfilesUseSharedEastAsianEngine()
     {
         var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
+        var metricScaleSource = GetGeneratedSource("LocalizedMetricScaleWordCatalog.g.cs");
 
         Assert.Contains("new EastAsianGroupedNumberToWordsConverter(", source);
         Assert.DoesNotContain("new ChineseNumberToWordsConverter()", source);
         Assert.DoesNotContain("new JapaneseNumberToWordsConverter()", source);
         Assert.DoesNotContain("new KoreanNumberToWordsConverter()", source);
+        Assert.Contains("case 'T': value = \"兆\"; return true;", metricScaleSource);
+        Assert.Contains("case 'Y': value = \"𥝱\"; return true;", metricScaleSource);
     }
 
     [Fact]
@@ -1156,8 +1159,10 @@ formatter:
       form: 'dual'
       units:
         - 'day'
+        - 42
       tenses:
         - 'past'
+        - 42
   exactTimeSpanForms:
     -
       number: 2
