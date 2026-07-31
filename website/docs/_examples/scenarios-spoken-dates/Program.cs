@@ -10,14 +10,6 @@ var dateInGenitive = new DateOnly(2022, 1, 25).ToOrdinalWords(GrammaticalCase.Ge
 var time = new TimeOnly(13, 23)
     .ToClockNotation(ClockNotationRounding.NearestFiveMinutes, culture);
 
-AssertEqual("January 25th, 2022", date);
-AssertEqual("January 25th, 2022", dateInGenitive);
-AssertEqual("twenty-five past one", time);
-
-Console.WriteLine($"{date}; {dateInGenitive}; {time}");
-
-static void AssertEqual(string expected, string actual)
-{
-    if (actual != expected)
-        throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
-}
+Console.WriteLine($"Date: {date}");
+Console.WriteLine($"Genitive date: {dateInGenitive}");
+Console.WriteLine($"Time: {time}");

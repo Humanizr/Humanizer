@@ -1,0 +1,4 @@
+State: Waiting for payment
+Parsed: AwaitingPayment
+Drinks: tea, coffee, and water
+People: Ada and Grace

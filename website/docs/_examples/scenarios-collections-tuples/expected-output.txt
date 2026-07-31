@@ -1,0 +1,5 @@
+US: tea, coffee, and water
+UK: tea, coffee and water
+People: Ada and Grace
+Cleaned: tea and coffee
+Tuple: quadruple

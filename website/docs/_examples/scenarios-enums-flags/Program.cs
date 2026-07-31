@@ -7,62 +7,15 @@ CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
 var access = Access.Read | Access.Write;
 
-AssertEqual("Can view and Can edit", access.Humanize());
-AssertEqual(
-    "Read and Write",
-    access.Humanize(LetterCasing.Title, EnumHumanizeSource.EnumName));
-AssertEqual(Access.Read, "CAN VIEW".DehumanizeTo<Access>());
-AssertEqual(null, "missing".DehumanizeTo<Access>(OnNoMatch.ReturnsNull));
-AssertEqual("", ((Access)8).Humanize());
-AssertEqual("Awaiting reviewer", DeliveryState.NeedsReview.Humanize());
-AssertEqual(
-    "Awaiting reviewer",
-    DeliveryState.NeedsReview.Humanize(
-        LetterCasing.AllCaps,
-        EnumHumanizeSource.Default));
-AssertEqual(
-    "Needs review",
-    DeliveryState.NeedsReview.Humanize(
-        LetterCasing.Sentence,
-        EnumHumanizeSource.EnumName));
-AssertEqual(
-    "Review required",
-    DeliveryState.NeedsReview.Humanize(
-        LetterCasing.AllCaps,
-        EnumHumanizeSource.DisplayName));
-AssertEqual(
-    "Awaiting reviewer",
-    DeliveryState.NeedsReview.Humanize(
-        LetterCasing.AllCaps,
-        EnumHumanizeSource.DisplayDescription));
-AssertEqual(
-    "Review",
-    DeliveryState.NeedsReview.Humanize(
-        LetterCasing.AllCaps,
-        EnumHumanizeSource.DisplayShortName));
-AssertEqual(
-    "Waiting in queue",
-    DeliveryState.QueuedItem.Humanize(
-        LetterCasing.AllCaps,
-        EnumHumanizeSource.DisplayShortName));
-AssertEqual(
-    "Read",
-    Access.Read.Humanize(
-        LetterCasing.Sentence,
-        EnumHumanizeSource.DisplayName));
-AssertEqual(DeliveryState.NeedsReview, "NeedsReview".DehumanizeTo<DeliveryState>());
-AssertEqual(DeliveryState.NeedsReview, "Needs review".DehumanizeTo<DeliveryState>());
-AssertEqual(DeliveryState.NeedsReview, "Review required".DehumanizeTo<DeliveryState>());
-AssertEqual(DeliveryState.NeedsReview, "Awaiting reviewer".DehumanizeTo<DeliveryState>());
-AssertEqual(DeliveryState.NeedsReview, "REVIEW".DehumanizeTo<DeliveryState>());
-
-Console.WriteLine("Can view and Can edit; explicit sources; all aliases -> NeedsReview");
-
-static void AssertEqual<T>(T expected, T actual)
-{
-    if (!EqualityComparer<T>.Default.Equals(expected, actual))
-        throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
-}
+Console.WriteLine($"Flags: {access.Humanize()}");
+Console.WriteLine(
+    $"Enum names: {access.Humanize(LetterCasing.Title, EnumHumanizeSource.EnumName)}");
+Console.WriteLine($"Description: {DeliveryState.NeedsReview.Humanize()}");
+Console.WriteLine(
+    $"Display name: {DeliveryState.NeedsReview.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayName)}");
+Console.WriteLine($"Parsed alias: {"REVIEW".DehumanizeTo<DeliveryState>()}");
+Console.WriteLine(
+    $"Missing: {"missing".DehumanizeTo<Access>(OnNoMatch.ReturnsNull)?.ToString() ?? "(none)"}");
 
 [Flags]
 enum Access

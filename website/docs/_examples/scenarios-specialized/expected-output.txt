@@ -1,0 +1,6 @@
+Heading: southwest ↙
+Roman: XIV
+Multiplier: 2,000,000
+Unit: min
+Tuple: quadruple
+Titles: An Apple, Bear, The Theater

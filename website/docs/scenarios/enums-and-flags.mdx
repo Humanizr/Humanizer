@@ -8,27 +8,26 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import enumsFlags from '!!raw-loader!../_examples/scenarios-enums-flags/Program.cs';
+import enumsFlagsOutput from '!!raw-loader!../_examples/scenarios-enums-flags/expected-output.txt';
 
 # Humanize and parse enums and flags
 
-## Orientation
-
-Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. On `Humanizer 4`, dehumanization also recognizes the raw name, its humanized form, and authored display aliases. Flags enums are decomposed and joined through the active collection formatter.
+Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. Dehumanization also recognizes the raw name, its humanized form, and authored display aliases. Flags enums are decomposed and joined through the active collection formatter.
 
 ## Example
 
-The executable verifies a two-flag value, explicit enum-name and
-`DisplayAttribute` source selection, every dehumanization alias,
-case-insensitive generic dehumanization, no-match behavior, metadata fallback,
-and an unknown flag bit:
+The executable shows a two-flag value, explicit enum-name and
+`DisplayAttribute` source selection, alias dehumanization, and no-match behavior:
 
 <CodeBlock language="csharp" title="Program.cs">{enumsFlags}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{enumsFlagsOutput}</CodeBlock>
 
 ### Choose metadata and casing
 
 Humanizer prefers supported description/display metadata before deriving words
 from the member name. That chosen value is also the member's dehumanization
-label. On `Humanizer 4`, `LetterCasing` changes only labels derived from the
+label. `LetterCasing` changes only labels derived from the
 member name; authored metadata preserves its exact casing.
 `Configurator.UseEnumDescriptionPropertyLocator` can select a custom
 description-like property globally and must run before enum metadata is
@@ -36,7 +35,7 @@ cached.
 
 ### Select the humanization source
 
-On `Humanizer 4`, pass both `LetterCasing` and `EnumHumanizeSource` when the
+Pass both `LetterCasing` and `EnumHumanizeSource` when the
 default metadata precedence is not the desired presentation:
 
 - `Default` preserves the existing precedence. A `DisplayAttribute` uses its
@@ -65,7 +64,7 @@ change dehumanization aliases or their collision rules.
 
 ### Parse accepted aliases
 
-On `Humanizer 4`, `DehumanizeTo<TEnum>` recognizes the raw member name, its
+`DehumanizeTo<TEnum>` recognizes the raw member name, its
 humanized form, and `DisplayAttribute` name, description, and short-name
 values. It also recognizes a configured description attribute value when that
 value becomes the member's authored description. Matching is
@@ -79,27 +78,16 @@ The default `DehumanizeTo<TEnum>` throws `NoMatchFoundException`. Pass `OnNoMatc
 
 Known nonzero flags are humanized and joined using the current UI culture. A defined zero member uses its label. A value containing only unknown bits humanizes to an empty string.
 
-## Pitfall
+## Prefer unambiguous aliases and generic overloads
 
-Aliases should be unambiguous even though matching is case-insensitive. On
-`Humanizer 4`, a current humanized representation takes precedence over a
+Aliases should be unambiguous even though matching is case-insensitive. A
+current humanized representation takes precedence over a
 supplemental alias when labels collide; collisions among supplemental aliases
 retain the later enum value in unsigned numeric order. Prefer the generic enum
 overloads. Runtime enum humanization and the runtime `Type` dehumanization
 overload use reflection and are annotated with `RequiresDynamicCode` and
 `RequiresUnreferencedCode`; they are not the safe default for trimmed or Native
 AOT applications.
-
-## Version notes
-
-Enum APIs span the documented corpus, but Humanizer 3 changes generic
-constraints and metadata configuration. The flags example runs against the
-selected package. Consult the selected API before migrating code that stores
-values as the base `Enum` type. Metadata casing preservation when a
-`LetterCasing` argument is supplied, and dehumanization through raw,
-humanized, and supplemental metadata aliases, are `Humanizer 4` behavior.
-`EnumHumanizeSource` and its two casing-plus-source overloads are also
-`Humanizer 4` APIs.
 
 ## Related guides and API
 

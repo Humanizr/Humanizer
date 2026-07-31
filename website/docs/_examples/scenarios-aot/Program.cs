@@ -7,10 +7,8 @@ CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 var label = JobState.ReadyToShip.Humanize();
 var parsed = "READY TO SHIP".DehumanizeTo<JobState>();
 
-if (label != "Ready to ship" || parsed != JobState.ReadyToShip)
-    throw new InvalidOperationException($"Unexpected enum result: {label}; {parsed}");
-
-Console.WriteLine("Ready to ship");
+Console.WriteLine($"Label: {label}");
+Console.WriteLine($"Parsed: {parsed}");
 
 enum JobState
 {

@@ -1,0 +1,5 @@
+DateTime: yesterday
+DateTimeOffset: yesterday
+DateOnly: yesterday
+TimeOnly: a minute from now
+Duration: 2 hours, 5 minutes

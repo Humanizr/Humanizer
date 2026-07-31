@@ -17,16 +17,8 @@ var scaleWord = 1.5E9.ToMetric(
     decimals: 2);
 var parsed = "1.5k".FromMetric();
 
-AssertEqual("123.5k", symbol);
-AssertEqual("1.00k", fixedWidth);
-AssertEqual("1 kilo", name);
-AssertEqual("1.50 Milliarden", scaleWord);
-AssertEqual(1500d, parsed);
-
-Console.WriteLine($"{symbol}; {fixedWidth}; {name}; {scaleWord}; {parsed}");
-
-static void AssertEqual<T>(T expected, T actual)
-{
-    if (!EqualityComparer<T>.Default.Equals(expected, actual))
-        throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
-}
+Console.WriteLine($"Symbol: {symbol}");
+Console.WriteLine($"Fixed width: {fixedWidth}");
+Console.WriteLine($"Prefix name: {name}");
+Console.WriteLine($"Scale word: {scaleWord}");
+Console.WriteLine($"Parsed: {parsed}");

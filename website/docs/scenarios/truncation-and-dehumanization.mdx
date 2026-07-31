@@ -8,18 +8,20 @@ persona: returning developer
 
 import CodeBlock from '@theme/CodeBlock';
 import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
+import stringsOutput from '!!raw-loader!../_examples/scenarios-strings/expected-output.txt';
 
 # Truncation and dehumanization
-
-## Orientation
 
 Use `Truncate` to fit display text into a character or word budget without hand-written substring rules. Select a built-in `ITruncator` according to what the length means. Use string `Dehumanize` separately when readable words must become a PascalCase-shaped identifier.
 
 ## Example
 
-The truncation and dehumanization calls in this verified source produce `Customer…`, preserve four complete words, and produce `CustomerOrderHistory`:
+The truncation and dehumanization calls in this source produce `Customer…`
+and `CustomerOrderHistory`:
 
 <CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{stringsOutput}</CodeBlock>
 
 ### Choose the truncator
 
@@ -37,17 +39,11 @@ The default marker is the single-character ellipsis `…`. Pass a custom marker 
 
 `Dehumanize` removes word separators and produces PascalCase. It is suitable for application-controlled labels and scaffolding, not for reconstructing an original identifier.
 
-## Pitfall
+## Account for truncation markers and lost information
 
 The marker consumes budget for fixed-length strategies. When the marker itself fills the available length, preserve-word strategies can return only the marker or an empty result. Truncation preserves null input, but an application still needs to decide whether null and empty text mean the same thing.
 
 `Dehumanize` is not a lossless inverse: punctuation, casing, acronym, and word-boundary information can be discarded.
-
-## Version notes
-
-The verified source compiles and runs against the selected package. Truncator
-strategies exist across the documented corpus, but overload order and Unicode
-behavior vary; consult the selected-version API before editing an old call.
 
 ## Related guides and API
 

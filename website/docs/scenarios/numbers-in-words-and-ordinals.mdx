@@ -8,10 +8,9 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import numbers from '!!raw-loader!../_examples/scenarios-numbers/Program.cs';
+import numbersOutput from '!!raw-loader!../_examples/scenarios-numbers/expected-output.txt';
 
 # Write numbers and ordinals in words
-
-## Orientation
 
 Use `ToWords` for cardinal words, `ToOrdinalWords` for word ordinals, and
 `Ordinalize` when the number should remain numeric with a localized ordinal
@@ -23,11 +22,13 @@ English output needs an explicit named-scale or crore-based vocabulary.
 
 ## Example
 
-The shared number example verifies cardinal words, locale-specific magnitude
-names, 64-bit ordinals, common fractions, simplified and traditional Chinese
-financial characters, and the established number-formatting helpers:
+The shared number example shows cardinal and ordinal words, a 64-bit ordinal,
+Indian and Estonian scale names, a common fraction, Chinese financial
+characters, and a Roman numeral:
 
 <CodeBlock language="csharp" title="Program.cs">{numbers}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{numbersOutput}</CodeBlock>
 
 ### Choose the output
 
@@ -56,7 +57,7 @@ not change `ToWords`, configured converters, or other locales.
 
 ### Format 64-bit ordinals
 
-In Humanizer 4, numeric `Ordinalize` overloads accept the full `long` range and
+Numeric `Ordinalize` overloads accept the full `long` range and
 retain the selected culture, gender, and `WordForm` rules. String `Ordinalize`
 remains `int`-bounded; parse to `long` first when the input can exceed that
 range.
@@ -93,7 +94,7 @@ domain policy separately.
 
 ### Use the full `long` range
 
-In Humanizer 4, every built-in number-word locale supports the full signed
+Every built-in number-word locale supports the full signed
 `long` range. Estonian follows its authored scale names through `triljon`;
 Albanian uses `miliar`, `bilion`, `biliar`, and `trilion`, with their plural
 forms. The executable above calls `ToWords` for both `long.MaxValue` and
@@ -102,21 +103,12 @@ or `NotImplementedException` as a partial-coverage boundary. Custom converters
 can retain narrower ranges when their profiles do not define the required
 scale words.
 
-## Pitfall
+## Check locale capabilities and numeric limits
 
 Grammar features differ by locale. Do not infer gender, abbreviation, Eifeler,
 or ordinal-word support from cardinal support. String `Ordinalize` parses the
 input using culture and can throw for malformed or out-of-range text; prefer
 the numeric overload when the application already has a number.
-
-## Version notes
-
-The basic number-word and ordinal APIs span the documented corpus, but overloads
-and locale grammar have changed. `Fractionalize`, Chinese financial numerals,
-64-bit numeric ordinals, Indian scale vocabulary selection, and the Estonian
-and Albanian scale corrections described above are available in the Humanizer
-4 NuGet package. The verified source runs against the selected package.
-Historical snapshots link to their own capability data and signatures.
 
 ## Related guides and API
 

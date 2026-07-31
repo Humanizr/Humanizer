@@ -8,10 +8,9 @@ persona: returning developer
 
 import CodeBlock from '@theme/CodeBlock';
 import enumsCollections from '!!raw-loader!../_examples/scenarios-enums-collections/Program.cs';
+import enumsCollectionsOutput from '!!raw-loader!../_examples/scenarios-enums-collections/expected-output.txt';
 
 # Enum and collection scenarios
-
-## Orientation
 
 Enums and collections both become readable presentation text, but their contracts are different. Enum conversion maps between a typed member and a label, while collection humanization delegates conjunction and punctuation to a locale-aware formatter.
 
@@ -20,23 +19,19 @@ Enums and collections both become readable presentation text, but their contract
 
 ## Example
 
-This verified survey shows a description override, automatic enum casing, case-insensitive enum dehumanization, and an English collection:
+This program shows a description override, case-insensitive enum dehumanization, and an English collection:
 
 <CodeBlock language="csharp" title="Program.cs">{enumsCollections}</CodeBlock>
 
+<CodeBlock language="text" title="Output">{enumsCollectionsOutput}</CodeBlock>
+
 The source also projects `Person` records to display names. Follow the focused pages for flags, unknown values, localized punctuation, and custom formatters.
 
-## Pitfall
+## Make labels unambiguous and culture explicit
 
-Enum labels must be unambiguous even though matching is case-insensitive. The default no-match behavior throws. Collection output is culture-specific and can differ by selected release; scope `CurrentUICulture` before formatting in tests or background work.
+Enum labels must be unambiguous even though matching is case-insensitive. The default no-match behavior throws. Collection output is culture-specific; scope `CurrentUICulture` before formatting in tests or background work.
 
 For trimmed or Native AOT code, prefer generic enum APIs. The runtime `Type` dehumanization overload uses reflection and carries linker/AOT warnings.
-
-## Version notes
-
-The verified survey compiles and runs against the selected package. Enum
-generic constraints and metadata configuration change in Humanizer 3. Locale
-punctuation is versioned data even when the source call compiles unchanged.
 
 ## Related guides and API
 

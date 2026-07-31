@@ -1,0 +1,6 @@
+Elapsed: 2 hours, 5 minutes
+Natural list: 1 minute and 2 seconds
+Symbols: 1h, 3s, 1ms
+Fractional: 1.5 seconds
+Parsed: 01:30:15.2500000
+Age: two years old

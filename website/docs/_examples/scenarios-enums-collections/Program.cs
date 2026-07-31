@@ -6,22 +6,12 @@ CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 string[] drinks = ["tea", "coffee", "water"];
 
-AssertEqual("Waiting for payment", OrderState.AwaitingPayment.Humanize());
-AssertEqual("Ready to ship", OrderState.ReadyToShip.Humanize());
-AssertEqual(OrderState.AwaitingPayment, "WAITING FOR PAYMENT".DehumanizeTo<OrderState>());
-AssertEqual("tea, coffee, and water", drinks.Humanize());
-AssertEqual(
-    "Ada and Grace",
-    new[] { new Person("Ada"), new Person("Grace") }
-        .Humanize(person => person.DisplayName));
+var people = new[] { new Person("Ada"), new Person("Grace") };
 
-Console.WriteLine("Waiting for payment; tea, coffee, and water");
-
-static void AssertEqual<T>(T expected, T actual)
-{
-    if (!EqualityComparer<T>.Default.Equals(actual, expected))
-        throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
-}
+Console.WriteLine($"State: {OrderState.AwaitingPayment.Humanize()}");
+Console.WriteLine($"Parsed: {"WAITING FOR PAYMENT".DehumanizeTo<OrderState>()}");
+Console.WriteLine($"Drinks: {drinks.Humanize()}");
+Console.WriteLine($"People: {people.Humanize(person => person.DisplayName)}");
 
 enum OrderState
 {

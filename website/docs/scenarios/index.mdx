@@ -8,12 +8,11 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
+import quickStartOutput from '!!raw-loader!../_examples/quick-start/expected-output.txt';
 
 # Find a Humanizer scenario
 
-## Orientation
-
-Start with the value you already have and the text you need to produce. Humanizer keeps dates, durations, numbers, byte sizes, enums, and collections as typed values until the display boundary; each guide below shows the operation, deterministic culture or clock setup, failure behavior, and the versions where the API exists.
+Start with the value you already have and the text you need to produce. Humanizer keeps dates, durations, numbers, byte sizes, enums, and collections as typed values until the display boundary; each guide below shows the operation, deterministic culture or clock setup, and failure behavior.
 
 | You have | You want | Start here |
 | --- | --- | --- |
@@ -26,11 +25,12 @@ Start with the value you already have and the text you need to produce. Humanize
 
 ## Example
 
-Every substantive scenario imports source compiled and run against the selected
-package. This smallest example demonstrates the shared rule: set culture
-explicitly, call Humanizer at the presentation boundary, and assert the result.
+This smallest example demonstrates the shared rule: set culture explicitly
+and call Humanizer at the presentation boundary.
 
 <CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{quickStartOutput}</CodeBlock>
 
 ### Less common tasks
 
@@ -39,16 +39,12 @@ explicitly, call Humanizer at the presentation boundary, and assert the result.
 - [Specialized formatting utilities](./specialized-formatting-utilities.mdx)
 - [Trimming and Native AOT](../concepts/trimming-and-native-aot.mdx)
 
-## Pitfall
+## Keep the typed value
 
 Humanized output is presentation text, not a stable storage or wire format. Keep the original typed value and regenerate text for the active culture. A parser such as `TryToNumber` or `ByteSize.TryParse` has an explicit input contract; it does not make arbitrary humanized output round-trip safe.
-
-## Version notes
-
-The site covers selected releases from `2.10.1` through `3.0.10` plus `Humanizer 4`. Use the version selector before copying a call. Focused pages state important API boundaries, and unavailable pages are removed or replaced in historical snapshots.
 
 ## Related guides and API
 
 - [Install Humanizer](../start/installation.mdx)
 - [Troubleshooting](../start/troubleshooting.mdx)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

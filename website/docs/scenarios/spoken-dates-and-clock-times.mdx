@@ -8,20 +8,21 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import spokenDates from '!!raw-loader!../_examples/scenarios-spoken-dates/Program.cs';
+import spokenDatesOutput from '!!raw-loader!../_examples/scenarios-spoken-dates/expected-output.txt';
 
 # Produce spoken dates and clock times
-
-## Orientation
 
 Use date ordinal words when a calendar date should read naturally, and clock notation when a `TimeOnly` value should become a phrase such as “twenty-five past one.” These are localized presentation operations, distinct from relative time and numeric ordinal suffixes.
 
 ## Example
 
-Date ordinal words use ambient culture. Humanizer 4 can pass a culture directly
-to clock notation; this executable demonstrates that overload while also
+Date ordinal words use ambient culture. Clock notation can take a culture
+directly; this executable demonstrates that overload while also
 scoping both ambient cultures for the date API:
 
 <CodeBlock language="csharp" title="Program.cs">{spokenDates}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{spokenDatesOutput}</CodeBlock>
 
 ### Date ordinal words
 
@@ -36,10 +37,10 @@ together at the boundary.
 `TimeOnly.ToClockNotation()` renders the exact minute.
 `ClockNotationRounding.NearestFiveMinutes` first rounds to the nearest
 five-minute boundary, then selects the phrase. Rounding can cross an hour or
-day-period boundary. The Humanizer 4 overload that also accepts a `CultureInfo`
+day-period boundary. The overload that also accepts a `CultureInfo`
 avoids changing ambient culture.
 
-## Pitfall
+## Check culture support
 
 Every culture listed by `Configurator.IsCultureSupported` supplies date ordinal
 words, the grammatical-case overload, and clock notation. A locale whose date
@@ -48,12 +49,6 @@ Supported same-language descendants inherit their parent locale's behavior;
 no supported non-English culture reaches the English default. Unsupported
 cultures can use a configured registry default, so the completeness guarantee
 applies only when `Configurator.IsCultureSupported` returns `true`.
-
-## Version notes
-
-`DateTime.ToOrdinalWords` predates the documented corpus. `DateOnly` date words
-begin with its framework support in `2.11.10`. Clock notation appears in
-`2.13.14`; the explicit-culture clock overload is available in Humanizer 4.
 
 ## Related guides and API
 

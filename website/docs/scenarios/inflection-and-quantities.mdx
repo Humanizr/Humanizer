@@ -8,20 +8,20 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import inflection from '!!raw-loader!../_examples/scenarios-inflection/Program.cs';
+import inflectionOutput from '!!raw-loader!../_examples/scenarios-inflection/expected-output.txt';
 
 # Pluralize and singularize nouns
-
-## Orientation
 
 Use `Pluralize` or `Singularize` when the application has an English noun but not a count. Use `ToQuantity` when the count and noun belong together. Humanizer’s vocabulary handles common irregular and uncountable English nouns; an application can add domain-specific rules before it begins formatting text.
 
 ## Example
 
 This isolated executable covers a built-in English irregular noun, a quantity
-written as words, one application-specific irregular pair, and caller-authored
-Polish plural forms:
+written as words, and one application-specific irregular pair:
 
 <CodeBlock language="csharp" title="Program.cs">{inflection}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{inflectionOutput}</CodeBlock>
 
 ### Tell Humanizer what the input means
 
@@ -35,62 +35,31 @@ Polish plural forms:
 
 Numeric format strings and providers control the displayed number. They do not turn the English inflector into a localized noun engine.
 
-### Pluralize a localized noun for a count
-
-On `Humanizer 4`, `PluralizationForms.TryPluralize` selects a
-caller-supplied form using the explicit culture's Unicode CLDR decimal cardinal
-rule. Every supported culture supplies this rule. If the selected form was not
-supplied, the operation returns `false`; it does not guess morphology or fall
-back to English. Use `PluralizationForms.Invariant` for a word that never
-changes, or explicitly supply equal forms when categories share spelling. The
-encoded decimal scale is significant, so a culture can select different forms
-for `1m` and `1.0m`.
-
-CLDR categories are count-selection tags, not complete grammatical categories.
-`PluralizationForms` models one noun's singular and plural forms. Call
-`TrySingularize` on that form set to resolve any exact authored form back to
-its singular spelling. Matching is Unicode NFC-normalized, ordinal, and
-case-sensitive.
-
-The selector follows the
-[Unicode CLDR plural-rule contract](https://cldr.unicode.org/index/cldr-spec/plural-rules)
-and its [decimal operands](https://unicode.org/reports/tr35/tr35-numbers.html).
 ### Extend the vocabulary
 
 `Vocabularies.Default` supports `AddIrregular`, `AddUncountable`, `AddPlural`, and `AddSingular`. Prefer an irregular or uncountable entry over a broad regular expression. Set `matchEnding: false` when a rule must match the entire noun instead of every word ending with the same letters.
 
-In Humanizer 4, `AddAcronym` uses the same vocabulary to preserve the
+`AddAcronym` uses the same vocabulary to preserve the
 canonical casing of a domain acronym during string humanization. Registration
 is case-insensitive, but the registered spelling controls the output. Acronyms
 must contain letters only.
 
-## Pitfall
+## Configure vocabularies at startup
 
-Vocabulary changes, including acronym registrations in Humanizer 4, are
+Vocabulary changes, including acronym registrations, are
 process-global. Register domain words once during startup and test them in an
 isolated process; do not add rules per request. `ToQuantity` treats exactly `1`
 and `-1` as singular. Fractional values, `NaN`, and infinity use the plural
 form.
 
-The existing `Pluralize`, `Singularize`, vocabulary, and `ToQuantity` APIs
-continue to pluralize and singularize English nouns. Every supported culture
-supplies the cardinal rule used by `PluralizationForms`.
-
-## Version notes
-
-Core inflection is available across the documented release set. Individual
-vocabulary rules and overloads have changed, and early Humanizer `3.0.x`
-temporarily lacked quantity overloads restored by `3.0.8`. The verified source
-runs against the selected package. `AddAcronym` is available on
-`Humanizer 4`.
-Culture-explicit `PluralizationForms` are new in v4.
+`Pluralize`, `Singularize`, vocabulary, and `ToQuantity` pluralize and
+singularize English nouns.
 
 ## Related guides and API
 
 - [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
 - [Localization and extensibility](./localization-and-extensibility.mdx)
 - [InflectorExtensions API](../api/Humanizer.InflectorExtensions.md)
-- [PluralizationForms API](../api/Humanizer.PluralizationForms.md)
 - [ToQuantityExtensions API](../api/Humanizer.ToQuantityExtensions.md)
 - [ShowQuantityAs API](../api/Humanizer.ShowQuantityAs.md)
 - [Vocabularies API](../api/Humanizer.Vocabularies.md)
