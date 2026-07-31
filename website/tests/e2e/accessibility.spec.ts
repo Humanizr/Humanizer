@@ -43,6 +43,41 @@ async function expectNoSeriousAccessibilityViolations(page: Page) {
   expect(violations).toEqual([]);
 }
 
+test('responsive tables retain native headers without JavaScript', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: {width: 320, height: 900},
+  });
+  const page = await context.newPage();
+
+  try {
+    await page.goto('/docs/next/scenarios/');
+
+    const table = page.locator('table').first();
+    await expect(table).toBeVisible();
+    await expect(table).not.toHaveClass(/humanizerResponsiveTable--enhanced/);
+    await expect(table.locator('thead th')).toHaveCount(3);
+    await expect(table.locator('thead')).toBeVisible();
+    expect(
+      await page.evaluate(() => {
+        const tableElement = document.querySelector('table');
+        return (
+          document.documentElement.scrollWidth <=
+            document.documentElement.clientWidth &&
+          Boolean(
+            tableElement &&
+              tableElement.scrollWidth <= tableElement.clientWidth,
+          )
+        );
+      }),
+    ).toBe(true);
+  } finally {
+    await context.close();
+  }
+});
+
 for (const colorScheme of ['light', 'dark'] as const) {
   for (const route of routes) {
     test(`${route.name} has no serious accessibility violations in ${colorScheme} mode`, async ({

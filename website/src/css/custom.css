@@ -421,12 +421,12 @@ html[data-theme='dark'] .prism-code .token.comment {
 }
 
 @media (max-width: 996px) {
-  .humanizerResponsiveTable {
+  .humanizerResponsiveTable--enhanced {
     border: 0;
     display: block;
   }
 
-  .humanizerResponsiveTable thead {
+  .humanizerResponsiveTable--enhanced thead {
     clip-path: inset(50%);
     height: 1px;
     overflow: hidden;
@@ -435,21 +435,21 @@ html[data-theme='dark'] .prism-code .token.comment {
     width: 1px;
   }
 
-  .humanizerResponsiveTable caption {
+  .humanizerResponsiveTable--enhanced caption {
     display: block;
   }
 
-  .humanizerResponsiveTable tbody {
+  .humanizerResponsiveTable--enhanced tbody {
     display: grid;
     gap: 0.75rem;
   }
 
-  .humanizerResponsiveTable tbody tr {
+  .humanizerResponsiveTable--enhanced tbody tr {
     border: 1px solid var(--humanizer-rule);
     display: grid;
   }
 
-  .humanizerResponsiveTable tbody :is(th, td) {
+  .humanizerResponsiveTable--enhanced tbody :is(th, td) {
     border: 0;
     border-bottom: 1px solid var(--humanizer-rule);
     display: grid;
@@ -459,27 +459,29 @@ html[data-theme='dark'] .prism-code .token.comment {
     width: 100%;
   }
 
-  .humanizerResponsiveTable tbody th[scope='row'] {
+  .humanizerResponsiveTable--enhanced tbody th[scope='row'] {
     background: var(--humanizer-paper-raised);
     display: block;
   }
 
-  .humanizerResponsiveTable tbody :is(th, td):last-child {
+  .humanizerResponsiveTable--enhanced tbody :is(th, td):last-child {
     border-bottom: 0;
   }
 
-  .humanizerResponsiveTable tbody td::before {
+  .humanizerResponsiveTable--enhanced tbody td::before {
     color: var(--humanizer-ink-muted);
     content: attr(data-label);
     font-size: 0.78rem;
     font-weight: 800;
   }
 
-  .humanizerResponsiveTable tbody td:is([data-label=''], :not([data-label])) {
+  .humanizerResponsiveTable--enhanced
+    tbody
+    td:is([data-label=''], :not([data-label])) {
     grid-template-columns: 1fr;
   }
 
-  .humanizerResponsiveTable
+  .humanizerResponsiveTable--enhanced
     tbody
     td:is([data-label=''], :not([data-label]))::before {
     content: none;

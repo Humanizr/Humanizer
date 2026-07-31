@@ -52,6 +52,8 @@ function enhanceTable(table: HTMLTableElement, tableId: string) {
       });
     });
   });
+
+  table.classList.add('humanizerResponsiveTable--enhanced');
 }
 
 export function ResponsiveTable({
