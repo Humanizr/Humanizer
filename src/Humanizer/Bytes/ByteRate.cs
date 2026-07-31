@@ -128,7 +128,6 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
 
     /// <summary>
     /// Compares this rate with another rate after normalizing both to bytes per second.
-    /// Rates with equal normalized values and different runtime types have distinct sort positions.
     /// </summary>
     /// <param name="other">The rate to compare with.</param>
     public int CompareTo(ByteRate? other)
