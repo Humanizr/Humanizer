@@ -44,7 +44,7 @@ Before the fix, a build reports `HUMANIZER001`:
 ```csharp
 using Humanizer.Bytes;
 
-var size = Humanizer.Bytes.ByteSize.FromKilobytes(10);
+var size = new Humanizer.Bytes.ByteSize(10 * 1024);
 ```
 
 ```text
@@ -56,7 +56,7 @@ After the fix:
 ```csharp
 using Humanizer;
 
-var size = Humanizer.ByteSize.FromKilobytes(10);
+var size = new Humanizer.ByteSize(10 * 1024);
 Console.WriteLine(size);
 ```
 
