@@ -7,17 +7,16 @@ sidebar_position: 0
 
 # Humanizer documentation
 
-Turn program-shaped values into text people can read. These guides cover
-Humanizer from a first installation through the most common string, date,
-number, enum, collection, and localization tasks.
+Humanizer 4 turns program-shaped values into text people can read. These docs
+cover the current package, APIs, and behavior.
 
 ## Start here
 
 - [What Humanizer does](./start/overview.mdx) — decide where it belongs in an application.
-- [Install Humanizer](./start/installation.mdx) — choose a version and add the package.
-- [Five-minute quick start](./start/quick-start.mdx) — run a verified first example.
-- [Choose the right package](./start/package-selection.md) — understand the release-specific package layout.
-- [Troubleshoot Humanizer](./start/troubleshooting.mdx) — diagnose version, culture, parser, analyzer, and AOT problems.
+- [Install Humanizer](./start/installation.mdx) — add the package to a project.
+- [Developer quick start](./start/quick-start.mdx) — run a small, deterministic example.
+- [Configuration basics](./start/configuration.mdx) — choose per-call, ambient, or global configuration.
+- [Troubleshoot Humanizer](./start/troubleshooting.mdx) — diagnose package, culture, parser, analyzer, and AOT problems.
 
 ## Solve a task
 
@@ -28,19 +27,18 @@ number, enum, collection, and localization tasks.
 - [Humanize enums, flags, and collections](./scenarios/enums-and-collections.mdx)
 - [Configure localization and extensibility](./scenarios/localization-and-extensibility.mdx)
 
-For exact signatures, open the [API reference](./api/index.md). The version
-selector keeps guides, examples, and API pages in the same release.
+For exact signatures, open the [API reference](./api/index.md). It is generated
+from Humanizer 4.
 
 ## Use and improve languages
 
-- [Languages and cultures](./languages/index.mdx) — choose a culture and understand the package boundary.
-- [Supported cultures](./languages/supported-cultures.mdx) — find the culture codes supported by this version.
+- [Languages and cultures](./languages/index.mdx) — choose a culture and understand localization behavior.
+- [Supported cultures](./languages/supported-cultures.mdx) — find the culture codes supported by Humanizer 4.
 - [Report or correct a language issue](./contributing/report-language-issue.mdx) — provide the linguistic and platform context needed for a reliable fix.
 - [Contribute to Humanizer](./contributing/index.mdx) — follow the locale, validation, and documentation workflows.
 
 ## Maintain a project
 
-- [Plan an upgrade](./upgrading/index.mdx) — follow every compatibility boundary between two supported versions.
-- [Upgrade to Humanizer 4](./upgrading/main-preview.mdx) — review verified differences from `3.0.10`.
+- [Upgrade from an earlier release](./upgrading/index.mdx) — follow the version-specific migration guidance.
 - [Migrate namespaces with the analyzer](./analyzer/index.mdx) — configure and run the bundled analyzer locally and in CI.
 - [Publish trimmed or Native AOT](./concepts/trimming-and-native-aot.mdx) — choose linker-safe enum APIs and run the publish proof.

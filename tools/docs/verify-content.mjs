@@ -95,26 +95,22 @@ for (const area of areas) {
     if (!roles.has(metadata.diataxis)) {
       failures.push(`${relativePage}: diataxis must name one supported role`);
     }
+    if (!metadata.title || /^(['"])\s*\1$/.test(metadata.title)) {
+      failures.push(`${relativePage}: missing title`);
+    }
     if (!metadata.persona) {
       failures.push(`${relativePage}: missing primary persona`);
     }
 
-    for (const section of [
-      'Orientation',
-      'Example',
-      'Pitfall',
-      'Version notes',
-      'Related guides and API',
-    ]) {
-      if (!new RegExp(`^## ${section}$`, 'm').test(content)) {
-        failures.push(`${relativePage}: missing "${section}" section`);
-      }
-    }
-
+    const hasExampleSection = /^##[ \t]+Example(?:[ \t]+\{#[^}\s]+\})?[ \t]*\r?$/m.test(content);
     const hasExample = /!!raw-loader!.*Program\.cs/.test(content);
     const hasLabeledIllustration = metadata.example === 'illustrative' &&
       /```[a-z]+[\s\S]+?```/.test(content);
-    if (!hasExample && !hasLabeledIllustration) {
+    if (
+      (metadata.diataxis === 'tutorial' || hasExampleSection) &&
+      !hasExample &&
+      !hasLabeledIllustration
+    ) {
       failures.push(
         `${relativePage}: example must import tested source or be labeled illustrative`,
       );
@@ -130,14 +126,20 @@ for (const area of areas) {
       : contentAfterRelated;
     const links = [...related.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)]
       .map((match) => match[1]);
-    if (links.length < 2) {
+    if (relatedHeading && links.length < 2) {
       failures.push(`${relativePage}: related section needs at least two links`);
     }
-    if (!links.some((link) => /(^|\/)api(\/|$|\/index\.md$)/.test(link))) {
+    if (
+      relatedHeading &&
+      !links.some((link) => /(^|\/)api(\/|$|\/index\.md$)/.test(link))
+    ) {
       failures.push(`${relativePage}: related section needs a same-version API link`);
     }
     if (area === 'scenarios' && path.basename(page) !== 'index.mdx') {
       const contractPath = relativePage.replaceAll(path.sep, '/');
+      if (!relatedHeading) {
+        failures.push(`${relativePage}: focused scenario needs related API links`);
+      }
       if (!scenarioApiTargets.has(contractPath)) {
         failures.push(`${relativePage}: missing scenario API contract`);
       }

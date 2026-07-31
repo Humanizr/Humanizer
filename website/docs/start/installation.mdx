@@ -6,55 +6,33 @@ diataxis: how-to
 persona: new developer
 ---
 
-import CodeBlock from '@theme/CodeBlock';
-import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
-
 # Install Humanizer
 
-## Orientation
-
-Install the `Humanizer` package in the project that produces user-facing text. Select the documentation version that matches the package version in your application before copying commands or API links.
-
-## Example
-
-Install Humanizer 4 from NuGet:
+Humanizer 4 ships as one NuGet package. Install it in the project that produces
+user-facing text:
 
 ```console
 dotnet add package Humanizer --version 4.0.0
 ```
 
-Then add `using Humanizer;` and run this verified program:
+Add `using Humanizer;` where you use its extension methods. The package includes
+the library, locale data, and analyzers; there is no package choice to make.
 
-<CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
-
-The project must target a framework supported by the selected package.
 Humanizer 4 ships `net11.0`, `net10.0`, `net8.0`, `net48`, and
 `netstandard2.0` assets.
 
-## Confirm the reference
-
-Run:
+## Confirm the reference {#example}
 
 ```console
 dotnet list package
 ```
 
-The project should list `Humanizer` at the version you selected. In centrally managed repositories, put the version in `Directory.Packages.props` and omit `--version` from the project command.
-
-## Pitfall
-
-Do not assume that every framework capable of consuming `netstandard2.0` is supported. For the current release line, .NET Framework support is explicitly .NET Framework 4.8.
-
-## Version notes
-
-Humanizer 4 is consolidated into the `Humanizer` package. Releases through
-`3.0.10` use a metapackage over `Humanizer.Core` and locale packages. See
-[package selection](./package-selection.md) before replacing package references
-during an upgrade.
+The project should list `Humanizer` at version `4.0.0`. In a centrally managed
+repository, put the version in `Directory.Packages.props` and omit `--version`
+from the project command.
 
 ## Related guides and API
 
-- [Package selection](./package-selection.md)
 - [Quick start](./quick-start.mdx)
 - [Troubleshooting](./troubleshooting.mdx)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

@@ -1,6 +1,6 @@
 ---
 id: quick-start
-title: Five-minute quick start
+title: Developer quick start
 sidebar_position: 4
 diataxis: tutorial
 persona: new developer
@@ -9,15 +9,14 @@ persona: new developer
 import CodeBlock from '@theme/CodeBlock';
 import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
 
-# Five-minute quick start
+# Developer quick start
 
-## Orientation
+Create a console app, install Humanizer, and produce one deterministic duration.
+You need a .NET 8 or newer SDK.
 
-You will create a console app, install Humanizer, and produce one deterministic duration. You need a .NET 8 or newer SDK.
+## Create and run {#example}
 
-## Example
-
-Create the project and install Humanizer 4 from NuGet:
+Create the project and install Humanizer 4:
 
 ```console
 dotnet new console --name HumanizerQuickStart
@@ -43,19 +42,12 @@ The program prints exactly:
 2 minutes
 ```
 
-The assertion fails immediately if the selected package produces a different value.
-
-## Pitfall
-
-Many Humanizer operations use the current culture or UI culture when no culture is supplied. Set both explicitly in examples, tests, background work, and any operation whose output must be predictable.
-
-## Version notes
-
-This source is compiled and run during documentation validation. Historical
-snapshots retain the same source and resolve their declared package version.
+Many Humanizer operations use the current culture or UI culture when no culture
+is supplied. Set both explicitly in tests, background work, and any operation
+whose output must be predictable.
 
 ## Related guides and API
 
 - [Configuration basics](./configuration.mdx)
 - [Dates, times, durations, and age](../scenarios/dates-times-durations-and-age.mdx)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

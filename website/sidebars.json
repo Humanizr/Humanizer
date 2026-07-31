@@ -8,7 +8,6 @@
       "items": [
         "start/overview",
         "start/installation",
-        "start/package-selection",
         "start/quick-start",
         "start/configuration",
         "start/troubleshooting"
