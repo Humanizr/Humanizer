@@ -9,6 +9,9 @@ const workflow = readFileSync(
   'utf8',
 );
 const normalizedWorkflow = workflow.replaceAll('\r\n', '\n');
+const docsReleaseTarget = normalizedWorkflow.match(
+  /^  DOCS_RELEASE_TARGET: (.+)$/m,
+)?.[1];
 const deploymentGuide = readFileSync(
   fileURLToPath(
     new URL('../docs/contributing/documentation.mdx', import.meta.url),
@@ -143,6 +146,7 @@ function release({
   smokeAttempt = deploymentAttempt,
   sourceSha = '0123456789abcdef0123456789abcdef01234567',
   stageAttempt = deploymentAttempt,
+  target = docsReleaseTarget,
 }) {
   const manifest = {
     archiveRunAttempt: archiveAttempt,
@@ -170,6 +174,7 @@ function release({
     manifest,
     publishedAt,
     tag: `docs-pages-deployment-v1-${deploymentRunId}-${deploymentAttempt}`,
+    target,
   };
 }
 
@@ -180,6 +185,8 @@ function validRelease(candidate) {
     candidate.immutable &&
     candidate.digestValid &&
     manifest.schemaVersion === 1 &&
+    (candidate.target === docsReleaseTarget ||
+      candidate.target === manifest.sourceSha) &&
     candidate.tag ===
       `docs-pages-deployment-v1-${manifest.deploymentRunId}-${manifest.publicationRunAttempt}` &&
     candidate.assets.join() === deploymentAssets(manifest).join()
@@ -620,8 +627,115 @@ test('deployment release stays draft until production is verified', () => {
   assert.match(record, /"\$draft" != false[\s\S]*?"\$immutable" != true/);
 });
 
+test('release targets remain storage metadata while manifests retain source identity', () => {
+  const historicalSource = '0123456789abcdef0123456789abcdef01234567';
+  const staged = release({sourceSha: historicalSource});
+  const evidence = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {
+      1: {
+        conclusion: 'success',
+        deploy: 'success',
+        'production-smoke': 'success',
+        'stage-pages-release': 'success',
+      },
+    },
+  };
+  const stage = normalizedWorkflow
+    .split('\n  stage-pages-release:\n')[1]
+    .split('\n  deploy:\n')[0];
+  const record = normalizedWorkflow
+    .split('\n  record-production-deployment:\n')[1]
+    .split('\n  recover-after-production-failure:\n')[0];
+  const restore = normalizedWorkflow
+    .split('- name: Restore retained Pages artifact')[1]
+    .split('- name: Extract retained Pages artifact')[0];
+  const prior = normalizedWorkflow
+    .split('- name: Inspect retained prior artifact')[1]
+    .split('- name: Download prior Pages artifact')[0];
+
+  assert.equal(docsReleaseTarget, 'main');
+  assert.equal(
+    normalizedWorkflow.match(/--target "\$DOCS_RELEASE_TARGET"/g)?.length,
+    3,
+  );
+  assert.doesNotMatch(
+    normalizedWorkflow,
+    /--target "\$(?:PRIOR_)?SOURCE_SHA"/,
+  );
+  assert.match(stage, /"\$target" != "\$DOCS_RELEASE_TARGET"/);
+  assert.doesNotMatch(stage, /"\$target" != "\$SOURCE_SHA"/);
+  assert.equal(
+    record.match(/"\$target" != "\$DOCS_RELEASE_TARGET"/g)?.length,
+    3,
+  );
+  assert.doesNotMatch(record, /"\$target" != "\$SOURCE_SHA"/);
+  assert.match(
+    restore,
+    /\.target_commitish == \$releaseTarget\s+or \.target_commitish == \$source/,
+  );
+  assert.match(
+    prior,
+    /"\$target" != "\$DOCS_RELEASE_TARGET" &&\s+"\$target" != "\$PRIOR_SOURCE_SHA"/,
+  );
+
+  assert.equal(staged.target, 'main');
+  assert.equal(staged.manifest.sourceSha, historicalSource);
+  assert.equal(validEvidence(staged, evidence), true);
+  assert.equal(
+    validEvidence(
+      {...staged, target: staged.manifest.sourceSha},
+      evidence,
+    ),
+    true,
+  );
+
+  const legacy = release({
+    sourceSha: historicalSource,
+    target: historicalSource,
+  });
+  assert.equal(validEvidence(legacy, evidence), true);
+  assert.equal(validRelease({...legacy, target: ''}), false);
+  assert.equal(validRelease({...legacy, target: 'release/storage'}), false);
+  assert.equal(
+    validRelease({
+      ...legacy,
+      manifest: {
+        ...legacy.manifest,
+        sourceSha: 'fedcba9876543210fedcba9876543210fedcba98',
+      },
+    }),
+    false,
+  );
+
+  for (const manifest of [
+    {...staged.manifest, archiveRunAttempt: 2},
+    {...staged.manifest, stageRunAttempt: 2},
+    {...staged.manifest, deployRunAttempt: 2},
+    {...staged.manifest, smokeRunAttempt: 2},
+  ]) {
+    assert.equal(validEvidence({...staged, manifest}, evidence), false);
+  }
+  assert.equal(
+    productionMatchesCandidate(
+      staged.manifest,
+      {
+        ...staged.manifest,
+        sourceSha: 'fedcba9876543210fedcba9876543210fedcba98',
+      },
+    ),
+    false,
+  );
+  assert.equal(
+    productionMatchesCandidate(
+      staged.manifest,
+      {...staged.manifest, archiveRunId: 101},
+    ),
+    false,
+  );
+});
+
 test('candidate staging tolerates eventual release-list visibility', () => {
-  const sourceSha = '0123456789abcdef0123456789abcdef01234567';
   const stage = normalizedWorkflow
     .split('\n  stage-pages-release:\n')[1]
     .split('\n  deploy:\n')[0];
@@ -644,7 +758,7 @@ test('candidate staging tolerates eventual release-list visibility', () => {
     id: 300,
     immutable: false,
     tag_name: 'docs-pages-candidate-v1-200-1',
-    target_commitish: sourceSha,
+    target_commitish: docsReleaseTarget,
   };
   const select = (pages) =>
     spawnSync(
@@ -663,13 +777,12 @@ test('candidate staging tolerates eventual release-list visibility', () => {
   assert.equal(visible.status, 0, visible.stderr);
   assert.equal(
     visible.stdout.trimEnd(),
-    `300\ttrue\tfalse\t${sourceSha}\t3\tdeployment-200-1.json,github-pages-100-1.tar,github-pages-100-1.tar.sha256`,
+    `300\ttrue\tfalse\t${docsReleaseTarget}\t3\tdeployment-200-1.json,github-pages-100-1.tar,github-pages-100-1.tar.sha256`,
   );
   assert.notEqual(select([[candidate, candidate]]).status, 0);
 });
 
 test('final publication tolerates eventual release-list visibility', () => {
-  const sourceSha = '0123456789abcdef0123456789abcdef01234567';
   const record = normalizedWorkflow
     .split('\n  record-production-deployment:\n')[1]
     .split('\n  recover-after-production-failure:\n')[0];
@@ -692,7 +805,7 @@ test('final publication tolerates eventual release-list visibility', () => {
     id: 400,
     immutable: false,
     tag_name: 'docs-pages-deployment-v1-200-1',
-    target_commitish: sourceSha,
+    target_commitish: docsReleaseTarget,
   };
   const select = (pages) =>
     spawnSync(
@@ -711,7 +824,7 @@ test('final publication tolerates eventual release-list visibility', () => {
   assert.equal(visible.status, 0, visible.stderr);
   assert.equal(
     visible.stdout.trimEnd(),
-    `400\ttrue\tfalse\t${sourceSha}\t3\tdeployment-200-1.json,github-pages-200-1.tar,github-pages-200-1.tar.sha256`,
+    `400\ttrue\tfalse\t${docsReleaseTarget}\t3\tdeployment-200-1.json,github-pages-200-1.tar,github-pages-200-1.tar.sha256`,
   );
   assert.notEqual(select([[finalRelease, finalRelease]]).status, 0);
 });
