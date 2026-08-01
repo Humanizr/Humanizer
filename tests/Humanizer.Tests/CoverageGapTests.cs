@@ -906,6 +906,7 @@ public class CoverageGapTests
     [InlineData("first", 1)]
     [InlineData("score one", 20)]
     [InlineData("score five", 25)]
+    [InlineData("one and two", 3)]
     [InlineData("twenty teen three", 33)]
     [InlineData("two hundred three", 203)]
     [InlineData("two thousand three", 2003)]

@@ -144,36 +144,16 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
     /// </summary>
     /// <param name="token">The token to inspect.</param>
     /// <returns><c>true</c> if the token should be skipped; otherwise, <c>false</c>.</returns>
-    bool ShouldIgnore(string token)
-    {
-        foreach (var ignoredToken in profile.IgnoredTokens)
-        {
-            if (token == ignoredToken)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    bool ShouldIgnore(string token) =>
+        Array.IndexOf(profile.IgnoredTokens, token) >= 0;
 
     /// <summary>
     /// Returns <c>true</c> when the next token is a supported follower for the vigesimal leader.
     /// </summary>
     /// <param name="token">The token to inspect.</param>
     /// <returns><c>true</c> if the token is a known follower; otherwise, <c>false</c>.</returns>
-    bool IsVigesimalFollower(string token)
-    {
-        foreach (var follower in profile.VigesimalFollowerTokens)
-        {
-            if (token == follower)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    bool IsVigesimalFollower(string token) =>
+        Array.IndexOf(profile.VigesimalFollowerTokens, token) >= 0;
 }
 
 /// <summary>

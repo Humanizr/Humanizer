@@ -343,18 +343,8 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// </summary>
     /// <param name="token">The normalized token to inspect.</param>
     /// <returns><c>true</c> if the token is configured as ignorable; otherwise, <c>false</c>.</returns>
-    bool ShouldIgnore(string token)
-    {
-        foreach (var ignoredToken in profile.IgnoredTokens)
-        {
-            if (token == ignoredToken)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    bool ShouldIgnore(string token) =>
+        Array.IndexOf(profile.IgnoredTokens, token) >= 0;
 
     /// <summary>
     /// Normalizes words for dictionary lookup by lowercasing them and removing periods.
