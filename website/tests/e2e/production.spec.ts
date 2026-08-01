@@ -49,21 +49,24 @@ test('deployed site preserves reader, version, search, and legacy contracts', as
   for (const expected of [
     {
       canonical: 'https://humanizr.net/docs/start/quick-start/',
+      heading: 'Five-minute quick start',
       path: '/docs/start/quick-start/',
     },
     {
       canonical: 'https://humanizr.net/docs/2.10.1/start/quick-start/',
+      heading: 'Five-minute quick start',
       path: '/docs/2.10.1/start/quick-start/',
     },
     {
       canonical: 'https://humanizr.net/docs/next/start/quick-start/',
+      heading: 'Developer quick start',
       noIndex: true,
       path: '/docs/next/start/quick-start/',
     },
   ]) {
     await page.goto(expected.path);
     await expect(
-      page.getByRole('heading', {name: 'Five-minute quick start'}),
+      page.getByRole('heading', {name: expected.heading}),
     ).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
