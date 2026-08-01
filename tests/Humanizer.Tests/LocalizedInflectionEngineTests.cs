@@ -338,35 +338,39 @@ public class LocalizedInflectionEngineTests
         }
     }
 
-    [Fact]
-    public void ExactNumericSingletonUsesAbsoluteDecimalValueAcrossScales()
+    public static TheoryData<decimal, string> ExactNumericSingletonDecimalCases =>
+        new()
+        {
+            { 1m, "singleton" },
+            { 1.0m, "singleton" },
+            { 1.00m, "singleton" },
+            { -1m, "singleton" },
+            { -1.0m, "singleton" },
+            { -1.00m, "singleton" },
+            { 0m, "units" },
+            { 2m, "units" },
+            { -2m, "units" },
+            { 0.5m, "units" },
+            { -0.5m, "units" },
+            { 1.0001m, "units" },
+            { -1.0001m, "units" },
+            { decimal.MinValue, "units" }
+        };
+
+    [Theory]
+    [MemberData(nameof(ExactNumericSingletonDecimalCases))]
+    public void ExactNumericSingletonUsesAbsoluteDecimalValueAcrossScales(
+        decimal quantity,
+        string expected)
     {
-        foreach (var quantity in new[] { 1m, 1.0m, 1.00m, -1m, -1.0m, -1.00m })
-        {
-            var result = ExactNumericSingletonBundle.Inflect(
-                "unit",
-                InflectionDirection.Forward,
-                allowProductive: true,
-                quantity);
+        var result = ExactNumericSingletonBundle.Inflect(
+            "unit",
+            InflectionDirection.Forward,
+            allowProductive: true,
+            quantity);
 
-            Assert.Equal(InflectionStatus.Exact, result.Status);
-            Assert.Equal("singleton", result.Value);
-        }
-
-        foreach (var quantity in new[]
-                 {
-                     0m, 2m, -2m, 0.5m, -0.5m, 1.0001m, -1.0001m, decimal.MinValue
-                 })
-        {
-            var result = ExactNumericSingletonBundle.Inflect(
-                "unit",
-                InflectionDirection.Forward,
-                allowProductive: true,
-                quantity);
-
-            Assert.Equal(InflectionStatus.Exact, result.Status);
-            Assert.Equal("units", result.Value);
-        }
+        Assert.Equal(InflectionStatus.Exact, result.Status);
+        Assert.Equal(expected, result.Value);
     }
 
     [Fact]
@@ -399,65 +403,54 @@ public class LocalizedInflectionEngineTests
         Assert.Equal("units", longMinimum.Value);
     }
 
-    [Fact]
-    public void ExactNumericSingletonPreservesFiniteDoubleIdentity()
+    public static TheoryData<double, string> ExactNumericSingletonDoubleCases =>
+        new()
+        {
+            { 1d, "singleton" },
+            { -1d, "singleton" },
+            { 0d, "units" },
+            { 2d, "units" },
+            { -2d, "units" },
+            { 0.5d, "units" },
+            { -0.5d, "units" },
+            { 1.0000000000000002d, "units" },
+            { 0.9999999999999999d, "units" },
+            { (double)decimal.MaxValue, "units" },
+            { (double)decimal.MinValue, "units" },
+            { double.MaxValue, "units" },
+            { double.MinValue, "units" }
+        };
+
+    [Theory]
+    [MemberData(nameof(ExactNumericSingletonDoubleCases))]
+    public void ExactNumericSingletonPreservesFiniteDoubleIdentity(
+        double quantity,
+        string expected)
     {
-        foreach (var quantity in new[] { 1d, -1d })
-        {
-            var result = ExactNumericSingletonBundle.Inflect(
-                "unit",
-                InflectionDirection.Forward,
-                allowProductive: true,
-                quantity);
+        var result = ExactNumericSingletonBundle.Inflect(
+            "unit",
+            InflectionDirection.Forward,
+            allowProductive: true,
+            quantity);
 
-            Assert.Equal("singleton", result.Value);
-        }
-
-        foreach (var quantity in new[]
-                 {
-                     0d,
-                     2d,
-                     -2d,
-                     0.5d,
-                     -0.5d,
-                     1.0000000000000002d,
-                     0.9999999999999999d,
-                     (double)decimal.MaxValue,
-                     (double)decimal.MinValue,
-                     double.MaxValue,
-                     double.MinValue
-                 })
-        {
-            var result = ExactNumericSingletonBundle.Inflect(
-                "unit",
-                InflectionDirection.Forward,
-                allowProductive: true,
-                quantity);
-
-            Assert.Equal("units", result.Value);
-        }
+        Assert.Equal(expected, result.Value);
     }
 
-    [Fact]
-    public void ExactNumericSingletonKeepsNonFiniteExactInput()
+    [Theory]
+    [InlineData(double.NaN)]
+    [InlineData(double.PositiveInfinity)]
+    [InlineData(double.NegativeInfinity)]
+    public void ExactNumericSingletonKeepsNonFiniteExactInput(double quantity)
     {
-        foreach (var quantity in new[]
-                 {
-                     double.NaN,
-                     double.PositiveInfinity,
-                     double.NegativeInfinity
-                 })
-        {
-            var input = new string("unit".ToCharArray());
-            var result = ExactNumericSingletonBundle.Inflect(
-                input,
-                InflectionDirection.Forward,
-                allowProductive: true,
-                quantity);
+        var input = new string("unit".ToCharArray());
+        var result = ExactNumericSingletonBundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            quantity);
 
-            Assert.Equal(InflectionStatus.Unsupported, result.Status);
-            Assert.Same(input, result.Value);
-        }
+        Assert.Equal(InflectionStatus.Unsupported, result.Status);
+        Assert.Same(input, result.Value);
     }
 
     [Fact]
@@ -1414,38 +1407,34 @@ public class LocalizedInflectionEngineTests
         Assert.Same(input, result.Value);
     }
 
-    [Fact]
-    public void IllFormedProjectedOutputFailsClosed()
+    [Theory]
+    [InlineData(0xD800)]
+    [InlineData(0xDC00)]
+    public void IllFormedProjectedOutputFailsClosed(int outputCodeUnit)
     {
-        foreach (var output in new[]
-                 {
-                     new string(['\uD800']),
-                     new string(['\uDC00'])
-                 })
-        {
-            var bundle = RuleBundle(new InflectionRule(
-                "zz.forward.ill-formed",
-                InflectionDirection.Forward,
-                100,
-                prefix: string.Empty,
-                suffix: "y",
-                precedingNot: [],
-                dictionaryPlural: output,
-                display: [],
-                excludedSurfaces: [],
-                reverseEnabled: false,
-                requiresExistingLexeme: false));
-            var input = new string("City".ToCharArray());
+        var output = new string((char)outputCodeUnit, 1);
+        var bundle = RuleBundle(new InflectionRule(
+            "zz.forward.ill-formed",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "y",
+            precedingNot: [],
+            dictionaryPlural: output,
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: false,
+            requiresExistingLexeme: false));
+        var input = new string("City".ToCharArray());
 
-            var result = bundle.Inflect(
-                input,
-                InflectionDirection.Forward,
-                allowProductive: true,
-                category: null);
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
 
-            Assert.Equal(InflectionStatus.Unsupported, result.Status);
-            Assert.Same(input, result.Value);
-        }
+        Assert.Equal(InflectionStatus.Unsupported, result.Status);
+        Assert.Same(input, result.Value);
     }
 
     [Fact]
@@ -1803,26 +1792,27 @@ public class LocalizedInflectionEngineTests
             formatter.TimeSpanHumanize(TimeUnit.Second, 2));
     }
 
-    [Fact]
-    public void IllFormedUtf16ReturnsTheOriginalReference()
+    [Theory]
+    [InlineData(0xD800, -1)]
+    [InlineData(0xDC00, -1)]
+    [InlineData(0xD800, 'a')]
+    [InlineData('a', 0xDC00)]
+    public void IllFormedUtf16ReturnsTheOriginalReference(
+        int firstCodeUnit,
+        int secondCodeUnit)
     {
-        foreach (var invalid in new[]
-                 {
-                     new string(['\uD800']),
-                     new string(['\uDC00']),
-                     new string(['\uD800', 'a']),
-                     new string(['a', '\uDC00'])
-                 })
-        {
-            var invalidResult = Bundle.Inflect(
-                invalid,
-                InflectionDirection.Forward,
-                allowProductive: true,
-                category: null);
+        var invalid = secondCodeUnit < 0
+            ? new string((char)firstCodeUnit, 1)
+            : new string([(char)firstCodeUnit, (char)secondCodeUnit]);
 
-            Assert.Equal(InflectionStatus.Unsupported, invalidResult.Status);
-            Assert.Same(invalid, invalidResult.Value);
-        }
+        var invalidResult = Bundle.Inflect(
+            invalid,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unsupported, invalidResult.Status);
+        Assert.Same(invalid, invalidResult.Value);
     }
 
     [Fact]

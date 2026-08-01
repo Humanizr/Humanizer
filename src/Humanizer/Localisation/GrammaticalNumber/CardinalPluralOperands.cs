@@ -3,7 +3,9 @@ using System.Numerics;
 namespace Humanizer;
 
 /// <summary>
-/// Decimal operands defined by Unicode CLDR cardinal plural rules.
+/// Exact operands defined by Unicode CLDR cardinal plural rules for
+/// <see cref="decimal"/>, <see cref="long"/>, and <see cref="double"/> quantities,
+/// with digit components stored as <see cref="BigInteger"/> values.
 /// </summary>
 readonly struct CardinalPluralOperands
 {
@@ -49,6 +51,11 @@ readonly struct CardinalPluralOperands
         W = visibleFractionDigitCountWithoutTrailingZeros;
     }
 
+    /// <summary>
+    /// Gets whether the source value has an exact operand representation.
+    /// Unsupported inputs fail closed as the default instance, where this value is
+    /// <see langword="false"/>.
+    /// </summary>
     public bool IsSupported { get; }
     public BigInteger AbsoluteDigits { get; }
     public BigInteger IntegerDigits { get; }
@@ -129,7 +136,7 @@ readonly struct CardinalPluralOperands
         decimalExponent = exponent - scale;
     }
 
-    static void GetLegacyShortestRoundTrip(
+    internal static void GetLegacyShortestRoundTrip(
         double value,
         out ulong digits,
         out int decimalExponent)

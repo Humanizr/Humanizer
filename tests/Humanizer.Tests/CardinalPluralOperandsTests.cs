@@ -169,6 +169,42 @@ public class CardinalPluralOperandsTests
         Assert.Equal(expectedScale, operands.V);
     }
 
+    [Theory]
+    [InlineData(1L, "5", -324)]
+    [InlineData(3L, "15", -324)]
+    [InlineData(0x0010000000000000L, "22250738585072014", -324)]
+    [InlineData(0x3FF0000000000000L, "1", 0)]
+    [InlineData(0x4000000000000000L, "2", 0)]
+    [InlineData(0x2A1A165700694830L, "7109025719833441", -121)]
+    [InlineData(0x7FEFFFFFFFFFFFFFL, "17976931348623157", 292)]
+    public void LegacyShortestRoundTrip_MatchesReferenceAndModernRuntime(
+        long bits,
+        string expectedDigitsText,
+        int expectedDecimalExponent)
+    {
+        var value = BitConverter.Int64BitsToDouble(bits);
+
+        CardinalPluralOperands.GetLegacyShortestRoundTrip(
+            value,
+            out var actualDigits,
+            out var actualDecimalExponent);
+
+        var expectedDigits = ulong.Parse(
+            expectedDigitsText,
+            CultureInfo.InvariantCulture);
+        Assert.Equal(expectedDigits, actualDigits);
+        Assert.Equal(expectedDecimalExponent, actualDecimalExponent);
+
+#if !NETFRAMEWORK
+        ParseRuntimeRoundTrip(
+            value.ToString("R", CultureInfo.InvariantCulture),
+            out var runtimeDigits,
+            out var runtimeDecimalExponent);
+        Assert.Equal(runtimeDigits, actualDigits);
+        Assert.Equal(runtimeDecimalExponent, actualDecimalExponent);
+#endif
+    }
+
     [Fact]
     public void Create_DoubleExtremes_PreserveExactShortestOperands()
     {
@@ -283,5 +319,30 @@ public class CardinalPluralOperandsTests
 
         Assert.False(success);
         Assert.Equal(CardinalPluralCategory.Other, category);
+    }
+
+    static void ParseRuntimeRoundTrip(
+        string roundTrip,
+        out ulong digits,
+        out int decimalExponent)
+    {
+        var exponentMarker = roundTrip.IndexOf('E');
+        var significandEnd = exponentMarker < 0 ? roundTrip.Length : exponentMarker;
+        var exponent = exponentMarker < 0
+            ? 0
+            : int.Parse(
+                roundTrip[(exponentMarker + 1)..],
+                CultureInfo.InvariantCulture);
+        var decimalPoint = roundTrip.IndexOf('.');
+        var scale = decimalPoint < 0 ? 0 : significandEnd - decimalPoint - 1;
+        digits = 0;
+        for (var index = 0; index < significandEnd; index++)
+        {
+            var character = roundTrip[index];
+            if (character != '.')
+                digits = digits * 10 + (uint)(character - '0');
+        }
+
+        decimalExponent = exponent - scale;
     }
 }
