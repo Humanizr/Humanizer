@@ -298,7 +298,12 @@ surfaces:
 
         Assert.Equal("conjunction", baseLocale.CollectionFormatter!.Kind);
         Assert.Equal("and", baseLocale.CollectionFormatter.Argument);
-        Assert.Equal("russian", baseLocale.Grammar!.GetScalar("pluralRule"));
+        var grammar = Assert.IsType<HumanizerSourceGenerator.SimpleYamlMapping>(baseLocale.Grammar);
+        Assert.Equal("russian", grammar.GetScalar("pluralRule"));
+        Assert.Equal("russian", grammar.GetScalar("dataUnitPluralRule"));
+        var timeUnitGenders = Assert.IsType<HumanizerSourceGenerator.SimpleYamlMapping>(grammar.Values["timeUnitGenders"]);
+        Assert.Equal("feminine", timeUnitGenders.GetScalar("hour"));
+        Assert.False(grammar.Values.ContainsKey("engine"));
         Assert.Equal("russian", GetRequiredString(baseLocale.Formatter!, "pluralRule"));
         Assert.Equal("profiled", GetRequiredString(baseLocale.Formatter!, "engine"));
         Assert.Equal("conjunctional-scale", GetRequiredString(baseLocale.NumberToWords!, "engine"));
