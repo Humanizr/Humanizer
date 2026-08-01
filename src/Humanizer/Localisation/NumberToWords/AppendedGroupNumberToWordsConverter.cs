@@ -30,7 +30,9 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
 
     string ConvertPositive(ulong number, GrammaticalGender gender)
     {
-        var result = string.Empty;
+        string? result = null;
+        StringBuilder? builder = null;
+        var renderedGroupCount = 0;
         var groupLevel = 0;
 
         // Walk from least significant triad to most significant triad so the group word can be
@@ -119,39 +121,67 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
 
             if (!string.IsNullOrEmpty(process))
             {
-                if (groupLevel > 0)
+                string? groupWord = null;
+                if (groupLevel > 0 && groupNumber != 2)
                 {
-                    if (!string.IsNullOrEmpty(result))
+                    groupWord = groupNumber switch
                     {
-                        // Once a higher group already exists, the conjunction belongs between the
-                        // group words rather than inside the current triad fragment.
-                        result = profile.ConjunctionWord + " " + result;
-                    }
-
-                    if (groupNumber != 2)
-                    {
-                        if (groupNumber % 100 != 1)
-                        {
-                            // Singular, plural, and appended group words are data-driven because
-                            // different locales use different inflection rules for the same group.
-                            result = groupNumber is >= 3 and <= 10
-                                ? profile.PluralGroups[groupLevel] + " " + result
-                                : (string.IsNullOrEmpty(result) ? profile.Groups[groupLevel] : profile.AppendedGroups[groupLevel]) + " " + result;
-                        }
-                        else
-                        {
-                            result = profile.Groups[groupLevel] + " " + result;
-                        }
-                    }
+                        >= 3 and <= 10 => profile.PluralGroups[groupLevel],
+                        _ when groupNumber % 100 == 1 || result == null => profile.Groups[groupLevel],
+                        _ => profile.AppendedGroups[groupLevel]
+                    };
                 }
 
-                result = process + " " + result;
+                if (result == null)
+                {
+                    result = groupWord == null
+                        ? process
+                        : string.Concat(process, " ", groupWord);
+                }
+                else if (renderedGroupCount == 1)
+                {
+                    var separator = groupWord == null
+                        ? string.Concat(profile.ConjunctionWord, " ")
+                        : string.Concat(groupWord, " ", profile.ConjunctionWord, " ");
+                    result = string.Concat(process, " ", separator, result);
+                }
+                else
+                {
+                    builder ??= new(result);
+                    builder.Insert(0, ' ').Insert(0, profile.ConjunctionWord);
+
+                    if (groupWord != null)
+                    {
+                        builder.Insert(0, ' ').Insert(0, groupWord);
+                    }
+
+                    builder.Insert(0, ' ').Insert(0, process);
+                }
+
+                renderedGroupCount++;
             }
 
             groupLevel++;
         }
 
-        return result.Trim();
+        if (builder == null)
+        {
+            return result!.Trim();
+        }
+
+        var startIndex = 0;
+        while (startIndex < builder.Length && char.IsWhiteSpace(builder[startIndex]))
+        {
+            startIndex++;
+        }
+
+        var endIndex = builder.Length;
+        while (endIndex > startIndex && char.IsWhiteSpace(builder[endIndex - 1]))
+        {
+            endIndex--;
+        }
+
+        return builder.ToString(startIndex, endIndex - startIndex);
     }
 
     /// <summary>
