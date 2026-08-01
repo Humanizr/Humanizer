@@ -62,6 +62,7 @@ public static class LocaleNumberMagnitudeTheoryData
         { "af", 1001L, "een duisend en een" },
         { "af", 1000001L, "een miljoen en een" },
         { "ar", 1001L, "ألف و واحد" },
+        { "ar", 2001L, "ألفان و واحد" },
         { "ar", 1000001L, "مليون و واحد" },
         { "az", 1001L, "min bir" },
         { "az", 1000001L, "bir milyon bir" },
