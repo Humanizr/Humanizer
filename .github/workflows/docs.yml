@@ -48,6 +48,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  DOCS_RELEASE_TARGET: main
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_NOLOGO: true
   GH_REPO: ${{ github.repository }}
@@ -428,13 +429,17 @@ jobs:
               jq -r \
                 --arg archive "$archive_name" \
                 --arg checksum "$checksum_name" \
+                --arg releaseTarget "$DOCS_RELEASE_TARGET" \
                 --arg source "$ROLLBACK_SOURCE_SHA" '
                   [
                     .[][]
                     | select(
                         .draft == false
                         and .immutable == true
-                        and .target_commitish == $source
+                        and (
+                          .target_commitish == $releaseTarget
+                          or .target_commitish == $source
+                        )
                       )
                     | select(
                         ([.assets[].name] | index($archive)) != null
@@ -1070,7 +1075,10 @@ jobs:
             IFS=$'\t' read -r immutable target asset_count asset_names \
               <<<"$release"
             if [[ "$immutable" != true ||
-                  "$target" != "$PRIOR_SOURCE_SHA" ||
+                  (
+                    "$target" != "$DOCS_RELEASE_TARGET" &&
+                    "$target" != "$PRIOR_SOURCE_SHA"
+                  ) ||
                   "$asset_count" != 3 ||
                   "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ]]; then
               echo "Prior rollback release is invalid." >&2
@@ -1176,7 +1184,7 @@ jobs:
             "prior-archive/${pointer_name}" \
             --latest=false \
             --prerelease \
-            --target "$PRIOR_SOURCE_SHA" \
+            --target "$DOCS_RELEASE_TARGET" \
             --title "Documentation deployment ${PRIOR_DEPLOYMENT_RUN_ID}/${PRIOR_DEPLOYMENT_RUN_ATTEMPT}" \
             --notes "Automation-owned Pages artifact for exact rollback."
           mkdir prior-verify
@@ -1282,7 +1290,7 @@ jobs:
               --draft \
               --latest=false \
               --prerelease \
-              --target "$SOURCE_SHA" \
+              --target "$DOCS_RELEASE_TARGET" \
               --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
               --notes "Automation-owned exact deployment candidate."
             for attempt in {1..10}; do
@@ -1298,7 +1306,7 @@ jobs:
           IFS=$'\t' read -r release_id draft immutable target \
             asset_count asset_names <<<"$release"
           if [[ ! "$release_id" =~ ^[0-9]+$ ||
-                "$target" != "$SOURCE_SHA" ||
+                "$target" != "$DOCS_RELEASE_TARGET" ||
                 "$asset_count" != 3 ||
                 "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ||
                 ! (
@@ -1492,7 +1500,7 @@ jobs:
           if [[ "$source_tag" != "${release_prefix}${source_attempt}" ||
                 ! "$source_attempt" =~ ^[0-9]+$ ||
                 ! "$release_id" =~ ^[0-9]+$ ||
-                "$target" != "$SOURCE_SHA" ||
+                "$target" != "$DOCS_RELEASE_TARGET" ||
                 "$asset_count" != 3 ||
                 "$manifest_count" != 1 ||
                 ! "$manifest_asset_id" =~ ^[0-9]+$ ||
@@ -1688,7 +1696,7 @@ jobs:
               --draft \
               --latest=false \
               --prerelease \
-              --target "$SOURCE_SHA" \
+              --target "$DOCS_RELEASE_TARGET" \
               --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
               --notes "Automation-owned exact deployment release."
             for attempt in {1..10}; do
@@ -1704,7 +1712,7 @@ jobs:
           IFS=$'\t' read -r release_id draft immutable target \
             asset_count asset_names <<<"$release"
           if [[ ! "$release_id" =~ ^[0-9]+$ ||
-                "$target" != "$SOURCE_SHA" ||
+                "$target" != "$DOCS_RELEASE_TARGET" ||
                 "$asset_count" != 3 ||
                 "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ||
                 ! (
@@ -1750,7 +1758,7 @@ jobs:
             <<<"$published"
           if [[ "$draft" != false ||
                 "$immutable" != true ||
-                "$target" != "$SOURCE_SHA" ||
+                "$target" != "$DOCS_RELEASE_TARGET" ||
                 "$asset_count" != 3 ||
                 "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ]]; then
             echo "Published deployment release is invalid." >&2
