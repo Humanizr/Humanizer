@@ -166,17 +166,17 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// Parses an exact ordinal string, an ordinal scale value, or a glued ordinal-scale suffix.
     /// </summary>
     /// <param name="words">The normalized ordinal phrase.</param>
-    /// <param name="ordinalScaleMap">The ordinal scale lookup table.</param>
+    /// <param name="ordinalScaleLookup">The ordinal scale lookup table.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was recognized; otherwise, <c>false</c>.</returns>
-    bool TryParseExtendedOrdinal(string words, FrozenDictionary<string, long> ordinalScaleMap, out long value)
+    bool TryParseExtendedOrdinal(string words, FrozenDictionary<string, long> ordinalScaleLookup, out long value)
     {
         if (exactOrdinalMap?.TryGetValue(words, out value) == true)
         {
             return true;
         }
 
-        if (ordinalScaleMap.TryGetValue(words, out var scaleValue))
+        if (ordinalScaleLookup.TryGetValue(words, out var scaleValue))
         {
             value = scaleValue;
             return true;
@@ -550,7 +550,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// Parses a terminal exact ordinal.
     /// </summary>
     /// <param name="token">The current token.</param>
-    /// <param name="exactOrdinalMap">The exact ordinal lookup table.</param>
+    /// <param name="exactOrdinalLookup">The exact ordinal lookup table.</param>
     /// <param name="tokenizer">The active tokenizer.</param>
     /// <param name="pendingToken">A token that should be returned before reading from <paramref name="tokenizer"/>.</param>
     /// <param name="total">The accumulated large-scale value.</param>
@@ -560,7 +560,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <returns><c>true</c> if the current token completed an exact ordinal parse; otherwise, <c>false</c>.</returns>
     bool TryParseTerminalExactOrdinal(
         string token,
-        FrozenDictionary<string, long>? exactOrdinalMap,
+        FrozenDictionary<string, long>? exactOrdinalLookup,
         ref WordsToNumberTokenizer.Enumerator tokenizer,
         ref string? pendingToken,
         long total,
@@ -568,7 +568,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         out long value,
         out string? unrecognizedWord)
     {
-        if (exactOrdinalMap?.TryGetValue(token, out var exactOrdinalValue) != true)
+        if (exactOrdinalLookup?.TryGetValue(token, out var exactOrdinalValue) != true)
         {
             value = default;
             unrecognizedWord = null;
@@ -603,8 +603,8 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// Parses a terminal exact ordinal or ordinal-scale token when extended ordinal rules are available.
     /// </summary>
     /// <param name="token">The current token.</param>
-    /// <param name="exactOrdinalMap">The exact ordinal lookup table.</param>
-    /// <param name="ordinalScaleMap">The ordinal scale lookup table.</param>
+    /// <param name="exactOrdinalLookup">The exact ordinal lookup table.</param>
+    /// <param name="ordinalScaleLookup">The ordinal scale lookup table.</param>
     /// <param name="tokenizer">The active tokenizer.</param>
     /// <param name="pendingToken">A token that should be returned before reading from <paramref name="tokenizer"/>.</param>
     /// <param name="total">The accumulated large-scale value.</param>
@@ -614,8 +614,8 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <returns><c>true</c> if the current token completed an ordinal parse; otherwise, <c>false</c>.</returns>
     bool TryParseTerminalExtendedOrdinal(
         string token,
-        FrozenDictionary<string, long>? exactOrdinalMap,
-        FrozenDictionary<string, long> ordinalScaleMap,
+        FrozenDictionary<string, long>? exactOrdinalLookup,
+        FrozenDictionary<string, long> ordinalScaleLookup,
         ref WordsToNumberTokenizer.Enumerator tokenizer,
         ref string? pendingToken,
         long total,
@@ -625,8 +625,8 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     {
         var ordinalValue = default(long);
         var ordinalScaleValue = default(long);
-        var isExactOrdinal = exactOrdinalMap?.TryGetValue(token, out ordinalValue) == true;
-        var isOrdinalScale = ordinalScaleMap.TryGetValue(token, out ordinalScaleValue);
+        var isExactOrdinal = exactOrdinalLookup?.TryGetValue(token, out ordinalValue) == true;
+        var isOrdinalScale = ordinalScaleLookup.TryGetValue(token, out ordinalScaleValue);
         if (!isExactOrdinal && !isOrdinalScale)
         {
             value = default;
