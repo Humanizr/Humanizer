@@ -684,7 +684,7 @@ test('release targets remain storage metadata while manifests retain source iden
   assert.equal(validEvidence(staged, evidence), true);
   assert.equal(
     validEvidence(
-      {...staged, targetRefSha: 'fedcba9876543210fedcba9876543210fedcba98'},
+      {...staged, target: staged.manifest.sourceSha},
       evidence,
     ),
     true,
