@@ -135,18 +135,8 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     /// </summary>
     /// <param name="token">The token to inspect.</param>
     /// <returns><c>true</c> if the token should be skipped; otherwise, <c>false</c>.</returns>
-    bool ShouldIgnore(string token)
-    {
-        foreach (var ignoredToken in profile.IgnoredTokens)
-        {
-            if (token == ignoredToken)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    bool ShouldIgnore(string token) =>
+        Array.IndexOf(profile.IgnoredTokens, token) >= 0;
 
     /// <summary>
     /// Tries to strip a linked suffix from a token and resolve the base token as a cardinal value.
