@@ -933,9 +933,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <returns><c>true</c> if the token should be skipped; otherwise, <c>false</c>.</returns>
     bool ShouldIgnore(string token)
     {
-        foreach (var ignoredToken in rules.IgnoredTokens)
+        var ignoredTokens = rules.IgnoredTokens;
+        for (var index = 0; index < ignoredTokens.Length; index++)
         {
-            if (token == ignoredToken)
+            if (token == ignoredTokens[index])
             {
                 return true;
             }
@@ -957,9 +958,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
-        foreach (var multiplierToken in rules.MultiplierTokens)
+        var multiplierTokens = rules.MultiplierTokens;
+        for (var index = 0; index < multiplierTokens.Length; index++)
         {
-            if (token == multiplierToken)
+            if (token == multiplierTokens[index])
             {
                 return true;
             }
@@ -1135,9 +1137,9 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <returns><c>true</c> if the token matches one of the candidates; otherwise, <c>false</c>.</returns>
     static bool IsMatch(string[] candidates, string token)
     {
-        foreach (var candidate in candidates)
+        for (var index = 0; index < candidates.Length; index++)
         {
-            if (token == candidate)
+            if (token == candidates[index])
             {
                 return true;
             }

@@ -1282,6 +1282,42 @@ public class ScaleLeadingCompoundWordsToNumberConverterTests
 
 public class TokenMapWordsToNumberConverterTests
 {
+    [Theory]
+    [InlineData("one ignore-first two", 3)]
+    [InlineData("one ignore-middle two", 3)]
+    [InlineData("one ignore-last two", 3)]
+    [InlineData("two multiply-first", 20)]
+    [InlineData("two multiply-middle", 20)]
+    [InlineData("two multiply-last", 20)]
+    [InlineData("two teen-first", 12)]
+    [InlineData("two teen-middle", 12)]
+    [InlineData("two teen-last", 12)]
+    [InlineData("two hundred-first", 200)]
+    [InlineData("two hundred-middle", 200)]
+    [InlineData("two hundred-last", 200)]
+    [InlineData("two MULTIPLY-MIDDLE", 12)]
+    public void ConfiguredTokenMembershipMatchesEveryArrayPositionOrdinally(string words, long expected)
+    {
+        var converter = new TokenMapWordsToNumberConverter(CreateMembershipRules());
+
+        Assert.True(converter.TryConvert(words, out var parsed, out var unrecognizedWord));
+        Assert.Equal(expected, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Theory]
+    [InlineData("one IGNORE-MIDDLE two", "IGNORE-MIDDLE")]
+    [InlineData("two TEEN-MIDDLE", "TEEN-MIDDLE")]
+    [InlineData("two HUNDRED-MIDDLE", "HUNDRED-MIDDLE")]
+    public void ConfiguredTokenMembershipRejectsCaseMismatches(string words, string expectedUnrecognizedWord)
+    {
+        var converter = new TokenMapWordsToNumberConverter(CreateMembershipRules());
+
+        Assert.False(converter.TryConvert(words, out var parsed, out var unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+    }
+
     [Fact]
     public void SignedOrdinalAbbreviationParsesAfterNegativePrefixNormalization()
     {
@@ -1392,6 +1428,26 @@ public class TokenMapWordsToNumberConverterTests
         Assert.True(converter.TryConvert("foo", out scaleOrdinalValue));
         Assert.Equal(11, scaleOrdinalValue);
     }
+
+    static TokenMapWordsToNumberRules CreateMembershipRules() => new()
+    {
+        CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+        {
+            ["one"] = 1,
+            ["two"] = 2,
+            ["multiply-first"] = 10,
+            ["multiply-middle"] = 10,
+            ["multiply-last"] = 10,
+            ["MULTIPLY-MIDDLE"] = 10
+        }.ToFrozenDictionary(StringComparer.Ordinal),
+        IgnoredTokens = ["ignore-first", "ignore-middle", "ignore-last"],
+        MultiplierTokens = ["multiply-first", "multiply-middle", "multiply-last"],
+        TeenSuffixTokens = ["teen-first", "teen-middle", "teen-last"],
+        HundredSuffixTokens = ["hundred-first", "hundred-middle", "hundred-last"],
+        HundredSuffixMinValue = 1,
+        HundredSuffixMaxValue = 9,
+        NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
+    };
 }
 
 [UseCulture("zh-CN")]
