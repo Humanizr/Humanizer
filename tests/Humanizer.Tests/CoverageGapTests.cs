@@ -61,6 +61,19 @@ public class CoverageGapTests
         Assert.Equal(7, ordinals[expectedKey]);
     }
 
+    [Fact]
+    public void GreedyOrdinalBuilderKeepsFirstValueForDuplicateNormalizedForms()
+    {
+        var ordinals = GreedyCompoundWordsToNumberConverter.BuildOrdinalMap(
+            new GenderEchoOrdinalConverter(),
+            "0123456789.",
+            string.Empty,
+            [new("masculine", "ordinal"), new("feminine", "ordinal")]);
+
+        Assert.Equal(1, ordinals["ordinal"]);
+        Assert.Single(ordinals);
+    }
+
     [Theory]
     [InlineData("42", 42)]
     [InlineData("minus two", -2)]
