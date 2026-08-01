@@ -321,6 +321,7 @@ public class CardinalPluralOperandsTests
         Assert.Equal(CardinalPluralCategory.Other, category);
     }
 
+#if !NETFRAMEWORK
     static void ParseRuntimeRoundTrip(
         string roundTrip,
         out ulong digits,
@@ -345,4 +346,5 @@ public class CardinalPluralOperandsTests
 
         decimalExponent = exponent - scale;
     }
+#endif
 }
