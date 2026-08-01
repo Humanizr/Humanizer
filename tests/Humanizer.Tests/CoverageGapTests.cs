@@ -1290,6 +1290,32 @@ public class CoverageGapTests
     }
 
     [Fact]
+    public void ConjunctionalScaleTerminalAndStrategyMatchesBooleanIdentity()
+    {
+        var converter = new ConjunctionalScaleNumberToWordsConverter(CreateConjunctionalScaleProfile(
+            ConjunctionalScaleAndStrategy.WithinGroupAndTerminalScaleSubHundredRemainder));
+        var values = new[] { false, true };
+
+        foreach (var addAnd in values)
+            foreach (var hasHundreds in values)
+                foreach (var hasScalePrefix in values)
+                    foreach (var isTerminalScaleRemainder in values)
+                    {
+                        var expected = addAnd && (hasHundreds || (hasScalePrefix && isTerminalScaleRemainder));
+                        var actual = InvokePrivate<bool>(
+                            typeof(ConjunctionalScaleNumberToWordsConverter),
+                            converter,
+                            "ShouldAddAnd",
+                            addAnd,
+                            hasHundreds,
+                            hasScalePrefix,
+                            isTerminalScaleRemainder);
+
+                        Assert.Equal(expected, actual);
+                    }
+    }
+
+    [Fact]
     public void ScaleStrategyConverterCoversNorwegianOrdinalAndErrorBranches()
     {
         var converter = new ScaleStrategyNumberToWordsConverter(CreateScaleStrategyProfile(

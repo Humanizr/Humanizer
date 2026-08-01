@@ -216,7 +216,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             ConjunctionalScaleAndStrategy.WithinGroupAndAfterScaleSubHundredRemainder => hasHundreds || hasScalePrefix,
             ConjunctionalScaleAndStrategy.WithinGroupOnly => hasHundreds,
             ConjunctionalScaleAndStrategy.AfterScaleSubHundredRemainderOnly => !hasHundreds && hasScalePrefix,
-            ConjunctionalScaleAndStrategy.WithinGroupAndTerminalScaleSubHundredRemainder => hasHundreds || (!hasHundreds && hasScalePrefix && isTerminalScaleRemainder),
+            ConjunctionalScaleAndStrategy.WithinGroupAndTerminalScaleSubHundredRemainder => hasHundreds || (hasScalePrefix && isTerminalScaleRemainder),
             ConjunctionalScaleAndStrategy.Never => false,
             _ => throw new InvalidOperationException("Unsupported conjunctional-scale strategy.")
         };
