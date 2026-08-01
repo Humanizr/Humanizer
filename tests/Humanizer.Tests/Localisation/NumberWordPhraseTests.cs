@@ -108,6 +108,14 @@ public class NumberWordPhraseTests
     }
 
     [Theory]
+    [InlineData(2000, "duemillesimo")]
+    [InlineData(2000000, "duemilionesimo")]
+    public void ItalianExactScaleOrdinalsUseTheOutermostMatchingScale(int number, string expected)
+    {
+        Assert.Equal(expected, number.ToOrdinalWords(GetCulture("it")));
+    }
+
+    [Theory]
     [MemberData(nameof(LocaleAdditionalNumberTheoryData.AdditionalOrdinalGenderCases), MemberType = typeof(LocaleAdditionalNumberTheoryData))]
     public void UsesExpectedAdditionalOrdinalGenderCases(string localeName, int number, GrammaticalGender gender, string expected)
     {

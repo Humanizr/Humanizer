@@ -187,6 +187,8 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// </summary>
     string ApplyExactScaleOrdinalTransforms(string words, long number)
     {
+        var exactOrdinalSuffix = string.Empty;
+
         // Walk from the largest scale downward so the first exact scale match wins. A smaller
         // match would be wrong here because the rewrite needs the outermost terminating scale.
         foreach (var scale in profile.Scales)
@@ -210,13 +212,15 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
 
             if (!string.IsNullOrEmpty(scale.ExactOrdinalSuffix) && (ulong)number > scale.Value)
             {
-                words += scale.ExactOrdinalSuffix;
+                exactOrdinalSuffix = scale.ExactOrdinalSuffix;
             }
 
             break;
         }
 
-        return words;
+        return string.IsNullOrEmpty(exactOrdinalSuffix)
+            ? words
+            : words + exactOrdinalSuffix;
     }
 
     /// <summary>
