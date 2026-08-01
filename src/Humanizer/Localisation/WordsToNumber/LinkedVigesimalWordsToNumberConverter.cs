@@ -210,10 +210,12 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
     {
         for (var index = start; index < end; index++)
         {
-            foreach (var scale in profile.TokenizedScales.Where(scale => (ulong)scale.Value < parentScaleValue))
+            for (var scaleIndex = 0; scaleIndex < profile.TokenizedScales.Length; scaleIndex++)
             {
-                if (TryMatchTokenPhrase(tokens, index, end, scale.NameTokens, out _) ||
-                    TryMatchTokenPhrase(tokens, index, end, scale.NameWithRemainderTokens, out _))
+                var scale = profile.TokenizedScales[scaleIndex];
+                if ((ulong)scale.Value < parentScaleValue &&
+                    (TryMatchTokenPhrase(tokens, index, end, scale.NameTokens, out _) ||
+                     TryMatchTokenPhrase(tokens, index, end, scale.NameWithRemainderTokens, out _)))
                 {
                     return index;
                 }
@@ -226,9 +228,11 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
     bool TryParseExact(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         var lastCandidateEnd = Math.Min(end, start + profile.MaximumExactTokenCount);
-        foreach (var candidate in profile.MultiTokenExactWords.Where(candidate => start + candidate.Tokens.Length <= lastCandidateEnd))
+        for (var candidateIndex = 0; candidateIndex < profile.MultiTokenExactWords.Length; candidateIndex++)
         {
-            if (candidate.Value >= 0 &&
+            var candidate = profile.MultiTokenExactWords[candidateIndex];
+            if (start + candidate.Tokens.Length <= lastCandidateEnd &&
+                candidate.Value >= 0 &&
                 (ulong)candidate.Value <= maxValue &&
                 TryMatchTokenPhrase(tokens, start, end, candidate.Tokens, out next))
             {
