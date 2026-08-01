@@ -66,7 +66,7 @@ test('deployed site preserves reader, version, search, and legacy contracts', as
   ]) {
     await page.goto(expected.path);
     await expect(
-      page.getByRole('heading', {name: expected.heading}),
+      page.getByRole('heading', {name: expected.heading, exact: true}),
     ).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
