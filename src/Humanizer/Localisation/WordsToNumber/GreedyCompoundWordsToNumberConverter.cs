@@ -107,18 +107,13 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         {
             foreach (var gender in new[] { GrammaticalGender.Masculine, GrammaticalGender.Feminine })
             {
-                var ordinal = Normalize(
+                ordinals.TryAdd(Normalize(
                     converter.ConvertToOrdinal(number, gender),
                     charactersToRemove,
                     charactersToReplaceWithSpace,
                     textReplacements,
                     lowercase,
-                    removeDiacritics);
-
-                if (!ordinals.ContainsKey(ordinal))
-                {
-                    ordinals[ordinal] = number;
-                }
+                    removeDiacritics), number);
             }
         }
 
