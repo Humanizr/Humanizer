@@ -160,9 +160,7 @@ public sealed partial class HumanizerSourceGenerator
             ImmutableArray<Diagnostic>.Builder diagnostics)
         {
             if (cache.FirstOrDefault(cached => cached.LocaleCode == localeCode) is { } cached)
-            {
                 return cached;
-            }
 
             if (!parsedLocales.TryGetValue(localeCode, out var locale))
             {
@@ -217,9 +215,7 @@ public sealed partial class HumanizerSourceGenerator
                              Name: featureName,
                              Value: ResolveFeatureValue(locale.LocaleCode, locale.Inherits, featureName, locale.Features, inherited.ResolvedFeatures)))
                          .Where(static feature => feature.Value is not null))
-            {
                 resolvedFeatures[resolvedFeature.Name] = resolvedFeature.Value!;
-            }
 
             var resolvedFeatureMap = resolvedFeatures.ToImmutable();
             var grammar = TryResolveLocalePart(
