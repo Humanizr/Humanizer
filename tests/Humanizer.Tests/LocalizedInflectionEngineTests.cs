@@ -2042,6 +2042,131 @@ public class LocalizedInflectionEngineTests
     }
 
     [Fact]
+    public void DirectReverseExistingLexemeRequirementRejectsUnknownOutput()
+    {
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.LowerTitleUpper,
+            ["Latn"],
+            [],
+            [Lexeme("zz.city", "city", "urbanities")],
+            [
+                new(
+                    "zz.reverse.consonant-y",
+                    InflectionDirection.Reverse,
+                    100,
+                    prefix: string.Empty,
+                    suffix: "ies",
+                    precedingNot: [],
+                    dictionaryPlural: "{stem}y",
+                    display: [],
+                    excludedSurfaces: [],
+                    reverseEnabled: false,
+                    requiresExistingLexeme: true)
+            ]);
+        var input = new string("parties".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void DirectReverseExcludedLexemeRejectsAcceptedOutput()
+    {
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.LowerTitleUpper,
+            ["Latn"],
+            [],
+            [Lexeme("zz.party", "party", "celebrations")],
+            [
+                new(
+                    "zz.reverse.consonant-y",
+                    InflectionDirection.Reverse,
+                    100,
+                    prefix: string.Empty,
+                    suffix: "ies",
+                    precedingNot: [],
+                    dictionaryPlural: "{stem}y",
+                    display: [],
+                    excludedSurfaces: [],
+                    excludedLexemes: new ushort[] { 0 },
+                    reverseEnabled: false,
+                    requiresExistingLexeme: false)
+            ]);
+        var input = new string("parties".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void DirectReverseRulesUseAuthoredRank()
+    {
+        InflectionRule[] rules =
+        [
+            new(
+                "zz.reverse.consonant-y",
+                InflectionDirection.Reverse,
+                100,
+                prefix: string.Empty,
+                suffix: "ies",
+                precedingNot: [],
+                dictionaryPlural: "{stem}y",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: false,
+                requiresExistingLexeme: false),
+            new(
+                "zz.reverse.fallback-s",
+                InflectionDirection.Reverse,
+                10,
+                prefix: string.Empty,
+                suffix: "s",
+                precedingNot: [],
+                dictionaryPlural: "{stem}",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: false,
+                requiresExistingLexeme: false)
+        ];
+        foreach (var orderedRules in new[] { rules, rules.Reverse().ToArray() })
+        {
+            var bundle = new InflectionBundle(
+                "zz",
+                CardinalPluralRuleKind.Other,
+                InflectionCasing.LowerTitleUpper,
+                ["Latn"],
+                [],
+                [],
+                orderedRules);
+
+            var result = bundle.Inflect(
+                "cities",
+                InflectionDirection.Reverse,
+                allowProductive: true,
+                category: null);
+
+            Assert.Equal(InflectionStatus.Productive, result.Status);
+            Assert.Equal("city", result.Value);
+        }
+    }
+
+    [Fact]
     public void ForeignScriptCombiningMarkIsRejected()
     {
         var bundle = new InflectionBundle(

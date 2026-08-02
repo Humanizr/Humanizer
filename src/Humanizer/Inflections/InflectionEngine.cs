@@ -937,7 +937,8 @@ sealed class InflectionBundle
         StringComparison comparison,
         InflectionUnicodeScripts detectedScripts)
     {
-        string? directCandidate = null;
+        InflectionRule? selectedDirectRule = null;
+        var selectedDirectCandidate = default(ReverseCandidate);
         var reverseCandidate = default(ReverseCandidate);
         var hasReverseCandidate = false;
         foreach (var rule in rules)
@@ -953,15 +954,21 @@ sealed class InflectionBundle
                 }
 
                 var directResult = template.Replace("{stem}", stem);
-                if (directCandidate is not null &&
-                    !string.Equals(directCandidate, directResult, comparison) ||
-                    hasReverseCandidate &&
-                    !reverseCandidate.Equals(directResult, comparison))
+                var directCandidate = new ReverseCandidate(
+                    directResult,
+                    directResult.Length,
+                    prefix: string.Empty,
+                    suffix: string.Empty);
+                if (IsReverseCandidateAllowed(rule, directCandidate, comparison) &&
+                    !TrySelectDirectReverseCandidate(
+                        rule,
+                        directCandidate,
+                        comparison,
+                        ref selectedDirectRule,
+                        ref selectedDirectCandidate))
                 {
                     return new(InflectionStatus.Ambiguous, input);
                 }
-
-                directCandidate = directResult;
             }
 
             if (rule.Direction == InflectionDirection.Forward &&
@@ -974,9 +981,7 @@ sealed class InflectionBundle
                     out var candidate))
             {
                 if (hasReverseCandidate &&
-                    !reverseCandidate.Equals(candidate, comparison) ||
-                    directCandidate is not null &&
-                    !candidate.Equals(directCandidate, comparison))
+                    !reverseCandidate.Equals(candidate, comparison))
                 {
                     return new(InflectionStatus.Ambiguous, input);
                 }
@@ -986,9 +991,19 @@ sealed class InflectionBundle
             }
         }
 
-        if (directCandidate is not null)
+        if (selectedDirectRule is not null)
         {
-            return Project(input, directCandidate, projection, InflectionStatus.Productive);
+            if (hasReverseCandidate &&
+                !selectedDirectCandidate.Equals(reverseCandidate, comparison))
+            {
+                return new(InflectionStatus.Ambiguous, input);
+            }
+
+            return Project(
+                input,
+                selectedDirectCandidate.Materialize(),
+                projection,
+                InflectionStatus.Productive);
         }
 
         return hasReverseCandidate
@@ -998,6 +1013,32 @@ sealed class InflectionBundle
                 projection,
                 InflectionStatus.Productive)
             : new(InflectionStatus.Unknown, input);
+    }
+
+    static bool TrySelectDirectReverseCandidate(
+        InflectionRule rule,
+        ReverseCandidate candidate,
+        StringComparison comparison,
+        ref InflectionRule? selectedRule,
+        ref ReverseCandidate selectedCandidate)
+    {
+        if (selectedRule is null)
+        {
+            selectedRule = rule;
+            selectedCandidate = candidate;
+            return true;
+        }
+
+        var rank = CompareRuleRank(rule, selectedRule.Value);
+        if (rank > 0)
+        {
+            selectedRule = rule;
+            selectedCandidate = candidate;
+            return true;
+        }
+
+        return rank != 0 ||
+            selectedCandidate.Equals(candidate, comparison);
     }
 
     InflectionResult TryExact(
@@ -1390,20 +1431,24 @@ sealed class InflectionBundle
             }
         }
 
-        if (rule.RequiresExistingLexeme || rule.ExcludedLexemes.Length > 0)
+        return IsReverseCandidateAllowed(rule, candidate, comparison);
+    }
+
+    bool IsReverseCandidateAllowed(
+        InflectionRule rule,
+        ReverseCandidate candidate,
+        StringComparison comparison)
+    {
+        if (!rule.RequiresExistingLexeme && rule.ExcludedLexemes.Length == 0)
         {
-            if (!TryFindAcceptedSingular(
-                    candidate,
-                    comparison,
-                    out var lexemeIndex) ||
-                rule.ExcludedLexemes.Contains(lexemeIndex))
-            {
-                candidate = default;
-                return false;
-            }
+            return true;
         }
 
-        return true;
+        return TryFindAcceptedSingular(
+                candidate,
+                comparison,
+                out var lexemeIndex) &&
+            !rule.ExcludedLexemes.Contains(lexemeIndex);
     }
 
     bool TryFindAcceptedSingular(
