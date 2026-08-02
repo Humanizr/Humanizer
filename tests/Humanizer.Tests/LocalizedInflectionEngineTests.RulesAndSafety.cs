@@ -32,7 +32,7 @@ public partial class LocalizedInflectionEngineTests
         var rules = reverseRules
             ? new[] { longRule, shortRule }
             : [shortRule, longRule];
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -95,7 +95,7 @@ public partial class LocalizedInflectionEngineTests
         var rules = reverseRules
             ? new[] { suffixRule, prefixRule }
             : [prefixRule, suffixRule];
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -158,7 +158,7 @@ public partial class LocalizedInflectionEngineTests
         var rules = reverseRules
             ? new[] { suffixRule, prefixRule }
             : [prefixRule, suffixRule];
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -214,7 +214,7 @@ public partial class LocalizedInflectionEngineTests
         var rules = reverseRules
             ? new[] { finalSigmaRule, sigmaRule }
             : [sigmaRule, finalSigmaRule];
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -237,7 +237,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void NonOverlappingEqualLengthRulesRemainProductive()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -338,7 +338,7 @@ public partial class LocalizedInflectionEngineTests
     public void ReversedForwardRuleHonorsLexemeExclusions()
     {
         ushort[] excludedLexemes = [0];
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -462,7 +462,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void MissingLexemeDisplayCategoryFailsClosed()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -642,7 +642,7 @@ public partial class LocalizedInflectionEngineTests
     {
         const int warmupIterations = 10_000;
         const int iterations = 1000;
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             (InflectionCasing)casing,
@@ -694,7 +694,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ReverseExistingLexemeRequirementUsesAcceptedSingularForms()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -732,7 +732,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void DirectReverseExistingLexemeRequirementRejectsUnknownOutput()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -768,7 +768,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void DirectReverseExcludedLexemeRejectsAcceptedOutput()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -834,7 +834,7 @@ public partial class LocalizedInflectionEngineTests
         ];
         foreach (var orderedRules in new[] { rules, rules.Reverse().ToArray() })
         {
-            var bundle = new InflectionBundle(
+            var bundle = CreateBundle(
                 "zz",
                 CardinalPluralRuleKind.Other,
                 InflectionCasing.LowerTitleUpper,
@@ -891,7 +891,7 @@ public partial class LocalizedInflectionEngineTests
                 reverseEnabled: false,
                 requiresExistingLexeme: true,
                 countabilities: (InflectionCountability)countabilities);
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -1064,7 +1064,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ForeignScriptCombiningMarkIsRejected()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -1104,7 +1104,7 @@ public partial class LocalizedInflectionEngineTests
         string prefix,
         string stem)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -1207,7 +1207,7 @@ public partial class LocalizedInflectionEngineTests
             countability);
 
     static InflectionBundle RuleBundle(InflectionRule rule) =>
-        new(
+        CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -1217,7 +1217,7 @@ public partial class LocalizedInflectionEngineTests
             [rule]);
 
     static InflectionBundle DualScriptRuleBundle(InflectionRule rule) =>
-        new(
+        CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -1227,7 +1227,7 @@ public partial class LocalizedInflectionEngineTests
             [rule]);
 
     static InflectionBundle ScriptRuleBundle(string script, string prefix) =>
-        new(
+        CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,

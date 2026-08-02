@@ -111,51 +111,6 @@ readonly struct InflectionResult(InflectionStatus status, string value)
     public string Value { get; } = value;
 }
 
-readonly struct InflectionDisplayForm(
-    CardinalPluralCategory category,
-    string preferred,
-    string[] accepted)
-{
-    public CardinalPluralCategory Category { get; } = category;
-    public string Preferred { get; } = preferred;
-    public string[] Accepted { get; } = accepted;
-}
-
-sealed class InflectionLexeme(
-    string id,
-    string singular,
-    string dictionaryPlural,
-    string[] acceptedSingular,
-    string[] acceptedDictionaryPlural,
-    InflectionDisplayForm[] display,
-    InflectionCountability countability = InflectionCountability.Count)
-{
-    public string Id { get; } = id;
-    public string Singular { get; } = singular;
-    public string DictionaryPlural { get; } = dictionaryPlural;
-    public string[] AcceptedSingular { get; } = acceptedSingular;
-    public string[] AcceptedDictionaryPlural { get; } = acceptedDictionaryPlural;
-    public InflectionDisplayForm[] Display { get; } = display;
-    public InflectionCountability Countability { get; } = countability;
-
-    public bool TryGetDisplay(
-        CardinalPluralCategory category,
-        [NotNullWhen(true)] out string? value)
-    {
-        foreach (var form in Display)
-        {
-            if (form.Category == category)
-            {
-                value = form.Preferred;
-                return true;
-            }
-        }
-
-        value = null;
-        return false;
-    }
-}
-
 readonly struct InflectionLexemeDisplay(
     CardinalPluralCategory category,
     int preferredEntryIndex)
@@ -584,99 +539,6 @@ sealed class InflectionBundle
         this.forwardEntries = forwardEntries;
         this.reverseEntries = reverseEntries;
         this.rules = rules;
-    }
-
-    internal InflectionBundle(
-        string owner,
-        CardinalPluralRuleKind cardinalRule,
-        InflectionCasing casing,
-        string[] scripts,
-        string[] skipSimpleWords,
-        InflectionLexeme[] lexemes,
-        InflectionRule[] rules)
-        : this(
-            owner,
-            cardinalRule,
-            InflectionCapability.DisplayByCategory,
-            InflectionQuantitySelector.None,
-            casing,
-            scripts,
-            skipSimpleWords,
-            BuildData(lexemes, casing),
-            rules)
-    {
-    }
-
-    internal InflectionBundle(
-        string owner,
-        CardinalPluralRuleKind cardinalRule,
-        InflectionCapability capability,
-        InflectionCasing casing,
-        string[] scripts,
-        string[] skipSimpleWords,
-        InflectionLexeme[] lexemes,
-        InflectionRule[] rules)
-        : this(
-            owner,
-            cardinalRule,
-            capability,
-            InflectionQuantitySelector.None,
-            casing,
-            scripts,
-            skipSimpleWords,
-            BuildData(lexemes, casing),
-            rules)
-    {
-    }
-
-    internal InflectionBundle(
-        string owner,
-        CardinalPluralRuleKind cardinalRule,
-        InflectionCapability capability,
-        InflectionQuantitySelector quantitySelector,
-        InflectionCasing casing,
-        string[] scripts,
-        string[] skipSimpleWords,
-        InflectionLexeme[] lexemes,
-        InflectionRule[] rules)
-        : this(
-            owner,
-            cardinalRule,
-            capability,
-            quantitySelector,
-            casing,
-            scripts,
-            skipSimpleWords,
-            BuildData(lexemes, casing),
-            rules)
-    {
-    }
-
-    InflectionBundle(
-        string owner,
-        CardinalPluralRuleKind cardinalRule,
-        InflectionCapability capability,
-        InflectionQuantitySelector quantitySelector,
-        InflectionCasing casing,
-        string[] scripts,
-        string[] skipSimpleWords,
-        CompactInflectionData data,
-        InflectionRule[] rules)
-        : this(
-            owner,
-            cardinalRule,
-            capability,
-            quantitySelector,
-            casing,
-            scripts,
-            skipSimpleWords,
-            data.Lexemes,
-            data.Entries,
-            data.Candidates,
-            data.ForwardEntries,
-            data.ReverseEntries,
-            rules)
-    {
     }
 
     public string Owner { get; }
@@ -1905,34 +1767,13 @@ sealed class InflectionBundle
         StringComparison comparison) =>
         comparison == StringComparison.Ordinal
             ? string.CompareOrdinal(left, right)
-            : CompareSimpleCase(left, right);
+            : InflectionUnicodeData.CompareSimpleCase(left, right);
 
     internal static int CompareInflectionKeys(string left, string right) =>
-        CompareSimpleCase(left, right);
+        InflectionUnicodeData.CompareSimpleCase(left, right);
 
     internal static int FoldInflectionScalar(int scalar) =>
         FoldSimpleCase(scalar);
-
-    static int CompareSimpleCase(string left, string right)
-    {
-        var leftIndex = 0;
-        var rightIndex = 0;
-        while (leftIndex < left.Length && rightIndex < right.Length)
-        {
-            var leftScalar = FoldSimpleCase(ReadScalar(left, ref leftIndex, left.Length));
-            var rightScalar = FoldSimpleCase(ReadScalar(right, ref rightIndex, right.Length));
-            if (leftScalar != rightScalar)
-            {
-                return leftScalar.CompareTo(rightScalar);
-            }
-        }
-
-        return leftIndex < left.Length
-            ? 1
-            : rightIndex < right.Length
-                ? -1
-                : 0;
-    }
 
     static int ReadScalar(
         string value,
@@ -1978,6 +1819,7 @@ sealed class InflectionBundle
         return true;
     }
 
+    // <generated-unicode-nfc-quick-check>
     // Unicode 16.0.0 NFC_QC=No/Maybe ranges from DerivedNormalizationProps.txt
     // (SHA-256 4d4c03892dea9146d674b686e495df2d55a28d071ac474041d73518f887abddc).
     static readonly InflectionUnicodeRange[] UncertainNfcQuickCheckRanges =
@@ -2102,113 +1944,10 @@ sealed class InflectionBundle
         new(0x1D1BB, 0x1D1C0),
         new(0x2F800, 0x2FA1D),
     ];
+    // </generated-unicode-nfc-quick-check>
 
     static int FoldSimpleCase(int scalar) =>
         InflectionUnicodeData.FoldSimpleCase(scalar);
-
-    static CompactInflectionData BuildData(
-        InflectionLexeme[] lexemes,
-        InflectionCasing casing)
-    {
-        var comparer = casing == InflectionCasing.LowerTitleUpper
-            ? InflectionOrdinalIgnoreCaseComparer.Instance
-            : StringComparer.Ordinal;
-        var candidatesBySurface =
-            new Dictionary<string, Dictionary<int, InflectionExactRole>>(comparer);
-        for (var index = 0; index < lexemes.Length; index++)
-        {
-            var lexeme = lexemes[index];
-            AddCandidates(
-                candidatesBySurface,
-                lexeme.AcceptedSingular,
-                index,
-                InflectionExactRole.Singular);
-            AddCandidates(
-                candidatesBySurface,
-                lexeme.AcceptedDictionaryPlural,
-                index,
-                InflectionExactRole.DictionaryPlural);
-            foreach (var display in lexeme.Display)
-            {
-                AddCandidates(
-                    candidatesBySurface,
-                    display.Accepted,
-                    index,
-                    GetDisplayRole(display.Category));
-            }
-        }
-
-        var entryIndexBySurface = new Dictionary<string, int>(comparer);
-        var entries = new List<InflectionLexemeEntry>(candidatesBySurface.Count);
-        var candidates = new List<InflectionLexemeCandidate>();
-        foreach (var pair in candidatesBySurface.OrderBy(
-                     static pair => pair.Key,
-                     comparer))
-        {
-            var entryIndex = entries.Count;
-            entryIndexBySurface.Add(pair.Key, entryIndex);
-            var candidateOffset = candidates.Count;
-            foreach (var candidate in pair.Value.OrderBy(
-                         static candidate => candidate.Key))
-            {
-                candidates.Add(new(candidate.Key, candidate.Value));
-            }
-
-            entries.Add(new(
-                pair.Key,
-                candidateOffset,
-                candidates.Count - candidateOffset));
-        }
-
-        var compactLexemes = new InflectionLexemeRecord[lexemes.Length];
-        for (var index = 0; index < lexemes.Length; index++)
-        {
-            var lexeme = lexemes[index];
-            compactLexemes[index] = new(
-                lexeme.Id,
-                entryIndexBySurface[lexeme.Singular],
-                entryIndexBySurface[lexeme.DictionaryPlural],
-                lexeme.Display
-                    .Select(display => new InflectionLexemeDisplay(
-                        display.Category,
-                        entryIndexBySurface[display.Preferred]))
-                    .ToArray(),
-                lexeme.Countability);
-        }
-
-        var allIndexes = Enumerable.Range(0, entries.Count).ToArray();
-        var wide = entries.Count > ushort.MaxValue;
-        return new(
-            compactLexemes,
-            entries.ToArray(),
-            candidates.ToArray(),
-            CreateIndexes(allIndexes, wide),
-            CreateIndexes(allIndexes, wide));
-    }
-
-    static InflectionEntryIndexes CreateIndexes(int[] indexes, bool wide) =>
-        wide
-            ? new(indexes)
-            : new(indexes.Select(static index => (ushort)index).ToArray());
-
-    static void AddCandidates(
-        Dictionary<string, Dictionary<int, InflectionExactRole>> candidatesBySurface,
-        string[] forms,
-        int lexemeIndex,
-        InflectionExactRole role)
-    {
-        foreach (var form in forms)
-        {
-            if (!candidatesBySurface.TryGetValue(form, out var candidates))
-            {
-                candidates = [];
-                candidatesBySurface[form] = candidates;
-            }
-
-            candidates.TryGetValue(lexemeIndex, out var roles);
-            candidates[lexemeIndex] = roles | role;
-        }
-    }
 
     static InflectionExactRole GetTargetRole(
         InflectionDirection direction,
@@ -2231,64 +1970,10 @@ sealed class InflectionBundle
             _ => InflectionExactRole.None
         };
 
-    sealed class CompactInflectionData(
-        InflectionLexemeRecord[] lexemes,
-        InflectionLexemeEntry[] entries,
-        InflectionLexemeCandidate[] candidates,
-        InflectionEntryIndexes forwardEntries,
-        InflectionEntryIndexes reverseEntries)
-    {
-        public InflectionLexemeRecord[] Lexemes { get; } = lexemes;
-        public InflectionLexemeEntry[] Entries { get; } = entries;
-        public InflectionLexemeCandidate[] Candidates { get; } = candidates;
-        public InflectionEntryIndexes ForwardEntries { get; } = forwardEntries;
-        public InflectionEntryIndexes ReverseEntries { get; } = reverseEntries;
-    }
-
-
-
     readonly struct InflectionUnicodeRange(int first, int last)
     {
         public int First { get; } = first;
         public int Last { get; } = last;
-    }
-
-    sealed class InflectionOrdinalIgnoreCaseComparer : StringComparer
-    {
-        public static readonly InflectionOrdinalIgnoreCaseComparer Instance = new();
-
-        public override int Compare(string? left, string? right)
-        {
-            if (ReferenceEquals(left, right))
-            {
-                return 0;
-            }
-
-            if (left is null)
-            {
-                return -1;
-            }
-
-            return right is null
-                ? 1
-                : CompareStrings(left, right, StringComparison.OrdinalIgnoreCase);
-        }
-
-        public override bool Equals(string? left, string? right) =>
-            Compare(left, right) == 0;
-
-        public override int GetHashCode(string value)
-        {
-            var hash = 17;
-            for (var index = 0; index < value.Length;)
-            {
-                hash = unchecked(
-                    (hash * 31) +
-                    FoldSimpleCase(ReadScalar(value, ref index, value.Length)));
-            }
-
-            return hash;
-        }
     }
 
     enum CaseProjection

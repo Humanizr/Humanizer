@@ -46,6 +46,7 @@ internal enum InflectionUnicodeScripts : uint
 /// </summary>
 internal static class InflectionUnicodeData
 {
+    // <generated-unicode-letter-mark>
     // Unicode 16.0.0 letter and mark categories, compressed into 998 ranges.
     // UnicodeData.txt SHA-256:
     // ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f.
@@ -83,6 +84,9 @@ Ir6bBYDOAvJAwCC6A+ABglqQLeB0wDraCZAYugiAEJRN0Ca+QbDbK98D
 """;
 
     static readonly int[] UnicodeLetterMarkRanges = DecodeUnicodeLetterMarkRanges();
+    // </generated-unicode-letter-mark>
+
+    // <generated-unicode-case-fold>
     // Unicode 16.0.0 CaseFolding.txt C+S mappings, compressed into 697
     // source ranges from 1,484 mappings. Source SHA-256:
     // 6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb.
@@ -122,6 +126,9 @@ Ir6bBYDOAvJAwCC6A+ABglqQLeB0wDraCZAYugiAEJRN0Ca+QbDbK98D
     static readonly int[] SimpleCaseFoldRanges = DecodeMappingRanges(
         SimpleCaseFoldData,
         SimpleCaseFoldRangeCount);
+    // </generated-unicode-case-fold>
+
+    // <generated-unicode-uppercase>
     // Unicode 16.0.0 UnicodeData.txt simple uppercase mappings, compressed
     // into 690 source ranges from 1,477 mappings. Source SHA-256:
     // ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f.
@@ -161,6 +168,9 @@ Ir6bBYDOAvJAwCC6A+ABglqQLeB0wDraCZAYugiAEJRN0Ca+QbDbK98D
     static readonly int[] SimpleUppercaseRanges = DecodeMappingRanges(
         SimpleUppercaseData,
         SimpleUppercaseRangeCount);
+    // </generated-unicode-uppercase>
+
+    // <generated-unicode-case-categories>
     // Unicode 16.0.0 lowercase, uppercase, and titlecase categories, compressed
     // into 1,323 ranges. UnicodeData.txt SHA-256:
     // ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f.
@@ -223,6 +233,7 @@ AQABtQ4JAQsTARoFAdsTIQIiIQE=
 """;
 
     static readonly int[] UnicodeCaseRanges = DecodeUnicodeCaseRanges();
+    // </generated-unicode-case-categories>
 
     internal static InflectionUnicodeCase GetCase(int scalar)
     {
@@ -274,6 +285,65 @@ AQABtQ4JAQsTARoFAdsTIQIiIQE=
     internal static int ToUpperSimple(int scalar) =>
         MapSimple(scalar, SimpleUppercaseRanges, SimpleUppercaseRangeCount);
 
+    internal static int CompareSimpleCase(string left, string right)
+    {
+        var leftIndex = 0;
+        var rightIndex = 0;
+        while (leftIndex < left.Length && rightIndex < right.Length)
+        {
+            var leftScalar = FoldSimpleCase(ReadScalar(left, ref leftIndex));
+            var rightScalar = FoldSimpleCase(ReadScalar(right, ref rightIndex));
+            if (leftScalar != rightScalar)
+            {
+                return leftScalar.CompareTo(rightScalar);
+            }
+        }
+
+        return leftIndex < left.Length
+            ? 1
+            : rightIndex < right.Length
+                ? -1
+                : 0;
+    }
+
+    internal sealed class SimpleCaseComparer : StringComparer
+    {
+        internal static readonly SimpleCaseComparer Instance = new();
+
+        public override int Compare(string? left, string? right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return 0;
+            }
+
+            if (left is null)
+            {
+                return -1;
+            }
+
+            return right is null
+                ? 1
+                : CompareSimpleCase(left, right);
+        }
+
+        public override bool Equals(string? left, string? right) =>
+            Compare(left, right) == 0;
+
+        public override int GetHashCode(string value)
+        {
+            var hash = 17;
+            for (var index = 0; index < value.Length;)
+            {
+                hash = unchecked(
+                    (hash * 31) +
+                    FoldSimpleCase(ReadScalar(value, ref index)));
+            }
+
+            return hash;
+        }
+    }
+
     static int MapSimple(int scalar, int[] ranges, int rangeCount)
     {
         var low = 0;
@@ -322,6 +392,19 @@ AQABtQ4JAQsTARoFAdsTIQIiIQE=
         }
 
         return ranges;
+    }
+
+    static int ReadScalar(string value, ref int index)
+    {
+        var first = value[index++];
+        if (char.IsHighSurrogate(first) &&
+            index < value.Length &&
+            char.IsLowSurrogate(value[index]))
+        {
+            return char.ConvertToUtf32(first, value[index++]);
+        }
+
+        return first;
     }
 
     internal static bool TryGetScript(
@@ -386,6 +469,7 @@ AQABtQ4JAQsTARoFAdsTIQIiIQE=
         return InflectionUnicodeScripts.None;
     }
 
+    // <generated-unicode-scripts>
     // Checked generated table from Unicode 16.0.0 Scripts.txt
     // (SHA-256 9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039)
     // and ScriptExtensions.txt
@@ -929,6 +1013,8 @@ AQABtQ4JAQsTARoFAdsTIQIiIQE=
         new(0x31350, 0x323AF, InflectionUnicodeScripts.Hani | InflectionUnicodeScripts.Jpan | InflectionUnicodeScripts.Kore),
         new(0xE0100, 0xE01EF, InflectionUnicodeScripts.All),
     ];
+    // </generated-unicode-scripts>
+
     readonly struct InflectionUnicodeScriptRange(
         int first,
         int last,

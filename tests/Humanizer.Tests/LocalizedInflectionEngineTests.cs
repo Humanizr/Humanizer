@@ -2,7 +2,7 @@ public partial class LocalizedInflectionEngineTests
 {
     static readonly string[] LatinScript = ["Latn"];
 
-    static readonly InflectionBundle Bundle = new(
+    static readonly InflectionBundle Bundle = CreateBundle(
         "zz",
         CardinalPluralRuleKind.EnglishLike,
         InflectionCasing.LowerTitleUpper,
@@ -25,7 +25,7 @@ public partial class LocalizedInflectionEngineTests
                 requiresExistingLexeme: false)
         ]);
 
-    static readonly InflectionBundle NoRuleBundle = new(
+    static readonly InflectionBundle NoRuleBundle = CreateBundle(
         "zz",
         CardinalPluralRuleKind.Other,
         InflectionCasing.LowerTitleUpper,
@@ -34,7 +34,7 @@ public partial class LocalizedInflectionEngineTests
         [],
         []);
 
-    static readonly InflectionBundle ExactNumericSingletonBundle = new(
+    static readonly InflectionBundle ExactNumericSingletonBundle = CreateBundle(
         "zz",
         CardinalPluralRuleKind.Other,
         InflectionCapability.DisplayByCategory,
@@ -82,7 +82,7 @@ public partial class LocalizedInflectionEngineTests
         string owner,
         string noun)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             owner,
             CardinalPluralRuleKind.Other,
             InflectionCapability.Invariant,
@@ -143,7 +143,7 @@ public partial class LocalizedInflectionEngineTests
         string input,
         string expected)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -165,7 +165,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ExactLookupCannotBypassDeclaredScriptSafety()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -314,7 +314,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ExactLookupPrecedesProductiveRuleScriptScope()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -346,7 +346,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void SharedHanScalarCanMatchMultipleFamilyScopesAndRemainAmbiguous()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -396,7 +396,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void KanaNarrowsSharedOwnerToJapaneseRuleScope()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -536,7 +536,7 @@ public partial class LocalizedInflectionEngineTests
         int casing,
         int direction)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             (InflectionCasing)casing,
@@ -581,7 +581,7 @@ public partial class LocalizedInflectionEngineTests
         string input,
         string expected)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             (InflectionCasing)casing,
@@ -622,7 +622,7 @@ public partial class LocalizedInflectionEngineTests
         int expectedStatus,
         string expectedValue)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -789,7 +789,7 @@ public partial class LocalizedInflectionEngineTests
         double quantity,
         string expected)
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.SouthSlavic,
             InflectionCasing.Exact,
@@ -844,7 +844,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ExactNumericSingletonDoesNotChangeUnoptedOrProductiveSelection()
     {
-        var selectorDisabled = new InflectionBundle(
+        var selectorDisabled = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -863,7 +863,7 @@ public partial class LocalizedInflectionEngineTests
                     ])
             ],
             []);
-        var unopted = new InflectionBundle(
+        var unopted = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCapability.DisplayByCategory,
@@ -881,7 +881,7 @@ public partial class LocalizedInflectionEngineTests
                     [new(CardinalPluralCategory.Other, "units", ["units"])])
             ],
             []);
-        var productive = new InflectionBundle(
+        var productive = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCapability.DisplayByCategory,
@@ -952,7 +952,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ExactNumericSingletonWaitsForUniqueLexemeRecognition()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCapability.DisplayByCategory,
@@ -1107,7 +1107,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void ReverseCollisionIsAnExplicitAmbiguousTerminal()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -1154,7 +1154,7 @@ public partial class LocalizedInflectionEngineTests
         ];
         foreach (var orderedRules in new[] { rules, rules.Reverse().ToArray() })
         {
-            var bundle = new InflectionBundle(
+            var bundle = CreateBundle(
                 "zz",
                 CardinalPluralRuleKind.Other,
                 InflectionCasing.LowerTitleUpper,
@@ -1193,7 +1193,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void AcceptedTargetAlternativeRetainsExactInputReference()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -1243,7 +1243,7 @@ public partial class LocalizedInflectionEngineTests
     [Fact]
     public void CrossRoleExactCollisionIsAmbiguous()
     {
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.Exact,
@@ -1276,7 +1276,7 @@ public partial class LocalizedInflectionEngineTests
         var lexemes = reverseLexemes
             ? new[] { finalSigma, sigma }
             : [sigma, finalSigma];
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -1311,7 +1311,7 @@ public partial class LocalizedInflectionEngineTests
             Lexeme("zz.fullwidth-z", "\uFF5A", "\uFF5As"),
             Lexeme("zz.supplementary-latin", "\U00010780", "\U00010780s")
         };
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
@@ -1345,7 +1345,7 @@ public partial class LocalizedInflectionEngineTests
     {
         var first = script == "Latn" ? "\u00DF" : "\u03B8";
         var second = script == "Latn" ? "\u1E9E" : "\u03F4";
-        var bundle = new InflectionBundle(
+        var bundle = CreateBundle(
             "zz",
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,

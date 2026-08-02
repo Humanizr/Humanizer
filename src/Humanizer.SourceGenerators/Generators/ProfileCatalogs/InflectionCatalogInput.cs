@@ -10,10 +10,10 @@ namespace Humanizer.SourceGenerators;
 public sealed partial class HumanizerSourceGenerator
 {
     internal static int CompareInflectionKeys(string left, string right) =>
-        InflectionCatalogInput.CompareSimpleCase(left, right);
+        global::Humanizer.InflectionUnicodeData.CompareSimpleCase(left, right);
 
     internal static int FoldInflectionScalar(int scalar) =>
-        InflectionCatalogInput.FoldSimpleCase(scalar);
+        global::Humanizer.InflectionUnicodeData.FoldSimpleCase(scalar);
 
     // Owners use ushort indexes through 65,535 entries, then fall back to int indexes.
     internal static bool RequiresWideInflectionIndexes(int entryCount) =>
@@ -592,7 +592,7 @@ public sealed partial class HumanizerSourceGenerator
         static InflectionLexemeTableInput BuildLexemeTable(InflectionOwnerInput owner)
         {
             var comparer = owner.Casing == "lower-title-upper"
-                ? InflectionSimpleCaseComparer.Instance
+                ? global::Humanizer.InflectionUnicodeData.SimpleCaseComparer.Instance
                 : StringComparer.Ordinal;
             var candidatesBySurface =
                 new Dictionary<string, Dictionary<int, int>>(comparer);
@@ -695,82 +695,6 @@ public sealed partial class HumanizerSourceGenerator
                 _ => throw new InvalidOperationException(
                     $"Unsupported inflection display category '{category}'.")
             };
-
-        internal static int CompareSimpleCase(string left, string right)
-        {
-            var leftIndex = 0;
-            var rightIndex = 0;
-            while (leftIndex < left.Length && rightIndex < right.Length)
-            {
-                var leftScalar = FoldSimpleCase(ReadScalar(left, ref leftIndex));
-                var rightScalar = FoldSimpleCase(ReadScalar(right, ref rightIndex));
-                if (leftScalar != rightScalar)
-                {
-                    return leftScalar.CompareTo(rightScalar);
-                }
-            }
-
-            return leftIndex < left.Length
-                ? 1
-                : rightIndex < right.Length
-                    ? -1
-                    : 0;
-        }
-
-        internal static int FoldSimpleCase(int scalar) =>
-            global::Humanizer.InflectionUnicodeData.FoldSimpleCase(scalar);
-
-        static int ReadScalar(string value, ref int index)
-        {
-            var first = value[index++];
-            if (char.IsHighSurrogate(first) &&
-                index < value.Length &&
-                char.IsLowSurrogate(value[index]))
-            {
-                return char.ConvertToUtf32(first, value[index++]);
-            }
-
-            return first;
-        }
-
-
-        sealed class InflectionSimpleCaseComparer : StringComparer
-        {
-            internal static readonly InflectionSimpleCaseComparer Instance = new();
-
-            public override int Compare(string? left, string? right)
-            {
-                if (ReferenceEquals(left, right))
-                {
-                    return 0;
-                }
-
-                if (left is null)
-                {
-                    return -1;
-                }
-
-                return right is null
-                    ? 1
-                    : CompareSimpleCase(left, right);
-            }
-
-            public override bool Equals(string? left, string? right) =>
-                Compare(left, right) == 0;
-
-            public override int GetHashCode(string value)
-            {
-                var hash = 17;
-                for (var index = 0; index < value.Length;)
-                {
-                    hash = unchecked(
-                        (hash * 31) +
-                        FoldSimpleCase(ReadScalar(value, ref index)));
-                }
-
-                return hash;
-            }
-        }
 
         static void EmitStringArray(
             StringBuilder builder,
@@ -1644,7 +1568,7 @@ public sealed partial class HumanizerSourceGenerator
                     .Concat(lexeme.DictionaryPlural.Accepted)
                     .Concat(lexeme.Display.Values.SelectMany(static form => form.Accepted))
                     .Distinct(casing == "lower-title-upper"
-                        ? InflectionSimpleCaseComparer.Instance
+                        ? global::Humanizer.InflectionUnicodeData.SimpleCaseComparer.Instance
                         : StringComparer.Ordinal);
                 if (forms.Skip(1).Any())
                 {
