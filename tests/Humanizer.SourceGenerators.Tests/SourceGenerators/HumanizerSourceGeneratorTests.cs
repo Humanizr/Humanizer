@@ -72,6 +72,77 @@ public partial class HumanizerSourceGeneratorTests
     }
 
     [Fact]
+    public void TimeOnlyClockNotationProfilesEmitSparseMinuteWordsAtTheirNumericSlots()
+    {
+        const string locale = """
+locale: 'zz'
+surfaces:
+  durationCases:
+    classification: 'not-applicable'
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    minuteWordsMap:
+      1: 'one minute'
+      59: 'fifty-nine minutes'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            "src/Humanizer/Locales/zz.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var expectedSlots = Enumerable.Range(0, 60)
+            .Select(static index => index switch
+            {
+                1 => "\"one minute\"",
+                59 => "\"fifty-nine minutes\"",
+                _ => "\"\""
+            });
+        var expectedArray = "new string[] { " + string.Join(", ", expectedSlots) + " }";
+        var source = GetGeneratedSource(runResult, "TimeOnlyToClockNotationProfileCatalog.g.cs");
+
+        Assert.Contains(expectedArray, source, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ChildClockMinuteWordsOverrideEquivalentParentNumericKeys()
+    {
+        const string parentLocale = """
+locale: 'zz'
+surfaces:
+  durationCases:
+    classification: 'not-applicable'
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      1: 'parent minute'
+""";
+
+        const string childLocale = """
+locale: 'zz-child'
+variantOf: 'zz'
+surfaces:
+  clock:
+    minuteWordsMap:
+      01: 'child minute'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", parentLocale),
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz-child.yml", childLocale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "TimeOnlyToClockNotationProfileCatalog.g.cs");
+        var childProfile = ExtractCacheClassBody(source, "zz_child_cache");
+
+        Assert.Contains("new string[] { \"\", \"child minute\" }", childProfile, StringComparison.Ordinal);
+        Assert.DoesNotContain("parent minute", childProfile, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void ChildDatePatternsOverrideInheritedDefaultDateConverters()
     {
         const string baseLocale = """

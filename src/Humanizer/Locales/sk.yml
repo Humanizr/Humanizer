@@ -1229,9 +1229,8 @@ surfaces:
     hourMode: 'h24'
     hourGender: 'feminine'
     minuteWordsMap:
-      - ''
-      - 'jedna'
-      - 'dve'
+      1: 'jedna'
+      2: 'dve'
     hourSuffixSingular: 'hodina'
     hourSuffixPaucal: 'hodiny'
     hourSuffixPlural: 'hodín'

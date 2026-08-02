@@ -875,7 +875,7 @@ The `{dayPeriod}` placeholder allows inline day-period placement within bucket t
 - `hourOneWord`: override word for hour one
 - `hourTwelveWord`: override word for hour twelve
 - `hourWordsMap`: optional dense sequence of locale-specific hour words indexed by the resolved hour value, used instead of `ToWords()` when the locale needs pre-declined or article-attached forms (e.g., Arabic). The required length depends on `hourMode`: 13 entries (indices 0-12) for `h12`, or 24 entries (indices 0-23) for `h24`/`numeric`.
-- `minuteWordsMap`: optional dense sequence of locale-specific minute words
+- `minuteWordsMap`: optional locale-specific minute words indexed from 0 through 59. Use a dense sequence for a complete table, or a sparse numeric mapping such as `1: 'one'` when only selected minute values need authored forms. Sparse mappings reject duplicate, non-integer, negative, and out-of-range keys.
 
 **Hour suffixes:**
 

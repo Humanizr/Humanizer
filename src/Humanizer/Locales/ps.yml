@@ -863,8 +863,7 @@ surfaces:
       - 'یوولس بجې'
       - 'دولس بجې'
     minuteWordsMap:
-      - ''
-      - 'یوه'
+      1: 'یوه'
     min0: '{dayPeriod} {hour}'
     defaultTemplate: '{dayPeriod} {hour} او {minutes} {minuteSuffix}'
     minuteSuffixSingular: 'دقیقه'
