@@ -52,7 +52,7 @@ These instructions apply to the entire repository.
 - Provide meaningful examples in documentation and XML summaries where appropriate.
 
 ## Issue Communication
-- For issue-driven work, especially reports from external contributors, communicate politely in the public issue: thank or acknowledge the reporter once reproduction is confirmed; link the fixing pull request; distinguish reproduced, fixed, merged, and released states; keep promised sibling or applicability follow-ups current; and post a final resolution without claiming release before publication. Do not add noisy pre-reproduction updates or disclose security-sensitive details.
+- For issue-driven work, especially reports from external contributors, communicate politely in the public issue: thank or acknowledge the reporter once reproduction is confirmed; link any fixing pull request when one exists; distinguish reproduced, fixed, merged, and released states; keep promised sibling or applicability follow-ups current; and post a final resolution without claiming release before publication. Do not add noisy pre-reproduction updates or disclose security-sensitive details.
 
 ## Pull Request Guidelines
 - Keep changes focused with clear commit messages.
