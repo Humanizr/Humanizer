@@ -15,15 +15,15 @@ Here is a checklist you should tick through before submitting a pull request:
 
  - [ ] This PR body matches the current template, contains no stale draft instructions, and the PR is ready, not draft
  - [ ] Exact evidence pair: `baseSha=<base>` / `headSha=<head>`
- - [ ] Thermos correctness, breakage, security, and developer-experience review ran on that exact pair: `<evidence>`
- - [ ] Thermos code-quality and maintainability review ran on that exact pair: `<evidence>`
- - [ ] Real findings were fixed and both reviews reran on the replacement head, or no findings were reported
+ - [ ] Thermos correctness, breakage, security, and developer-experience review finished final clean/APPROVE and merge-eligible on that exact pair: `<evidence>`
+ - [ ] Thermos code-quality and maintainability review finished final clean/APPROVE and merge-eligible on that exact pair: `<evidence>`
+ - [ ] Every finding has an explicit disposition: valid findings were fixed and both reviews reran on the replacement pair; invalid or non-actionable findings record evidence, reason, and final reviewer acceptance; or reviewers accepted `no valid findings; no push required`
  - [ ] Applicable tests, format, build, package, documentation, browser, security, and platform gates pass on that exact pair: `<evidence>`
  - [ ] `compound-engineering:ce-babysit-pr` covered the exact pair through the current-head reviewer lifecycle, CI, base movement, and a quiet settle; terminal clean evidence: `<evidence>`
  - [ ] If either SHA changed, both Thermos reviews, every applicable check, and babysitting reran; stale evidence was removed
  - [ ] All actionable review threads are resolved; any `needs-human` item pauses merge
  - [ ] The head is current and mergeable, and terminal hosted CI and ruleset checks are green
  - [ ] Security: Codex Security proof-of-concept or attack-path closure passes, or N/A: `<evidence>`
- - [ ] Docs/UI: desktop, mobile, light, dark, accessibility, links, and version snapshots pass, or N/A: `<evidence>`
+ - [ ] Rendered docs/site/UI: desktop, mobile, light, dark, accessibility, links, and version snapshots pass for affected rendered surfaces, or N/A: `<evidence>`
  - [ ] Localization/source generator: applicable locale, schema, generator, and runtime matrices pass with no partial or English fallback, or N/A: `<evidence>`
  - [ ] Merge owner will merge only the exact approved head
