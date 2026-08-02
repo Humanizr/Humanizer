@@ -1136,50 +1136,40 @@ public struct ByteSize(double byteSize) :
     static string ReplaceFormatToken(string format, string token, string replacement)
     {
         var maskedFormat = MaskFormatLiterals(format);
-        var searchStart = 0;
-        var indexes = new List<int>();
-        while (true)
-        {
-            var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                maskedFormat,
-                token,
-                searchStart,
-                CompareOptions.OrdinalIgnoreCase);
-            if (index < 0)
-            {
-                break;
-            }
-
-            indexes.Add(index);
-            searchStart = index + token.Length;
-        }
-
-        for (var index = indexes.Count - 1; index >= 0; index--)
-        {
-            format = format.Remove(indexes[index], token.Length).Insert(indexes[index], replacement);
-        }
-
-        return format;
+        return ReplaceOrdinalIgnoreCase(format, maskedFormat, token, replacement);
     }
 
-    static string ReplaceOrdinalIgnoreCase(string value, string oldValue, string newValue)
+    static string ReplaceOrdinalIgnoreCase(string value, string oldValue, string newValue) =>
+        ReplaceOrdinalIgnoreCase(value, value, oldValue, newValue);
+
+    static string ReplaceOrdinalIgnoreCase(string value, string searchValue, string oldValue, string newValue)
     {
         var searchStart = 0;
-        while (true)
+        var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+            searchValue,
+            oldValue,
+            searchStart,
+            CompareOptions.OrdinalIgnoreCase);
+        if (index < 0)
         {
-            var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                value,
+            return value;
+        }
+
+        var result = new StringBuilder(value.Length);
+        do
+        {
+            result.Append(value, searchStart, index - searchStart);
+            result.Append(newValue);
+            searchStart = index + oldValue.Length;
+            index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                searchValue,
                 oldValue,
                 searchStart,
                 CompareOptions.OrdinalIgnoreCase);
-            if (index < 0)
-            {
-                return value;
-            }
-
-            value = value.Remove(index, oldValue.Length).Insert(index, newValue);
-            searchStart = index + newValue.Length;
         }
+        while (index >= 0);
+
+        return result.Append(value, searchStart, value.Length - searchStart).ToString();
     }
 
     static SystemUnit[] GetUnits(ByteSizeUnitSystem unitSystem) =>
