@@ -467,6 +467,36 @@ public class MetricNumeralTests
     }
 
     [Theory]
+    [InlineData(-1)]
+    [InlineData(16)]
+    [InlineData(int.MaxValue)]
+    public void ToMetric_KeepTrailingZeros_RejectsInvalidPrecision(int decimals)
+    {
+        var formats = MetricNumeralFormats.KeepTrailingZeros | MetricNumeralFormats.WithSpace;
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => 0L.ToMetric(formats, decimals));
+        Assert.Throws<ArgumentOutOfRangeException>(() => 0d.ToMetric(formats, decimals));
+        Assert.Throws<ArgumentOutOfRangeException>(() => 0.ToMetric(formats, decimals));
+        Assert.Throws<ArgumentOutOfRangeException>(() => 1000L.ToMetric(formats, decimals));
+        Assert.Throws<ArgumentOutOfRangeException>(() => 1000d.ToMetric(formats, decimals));
+        Assert.Throws<ArgumentOutOfRangeException>(() => 1000.ToMetric(formats, decimals));
+    }
+
+    [Fact]
+    public void ToMetric_KeepTrailingZeros_AcceptsBoundedPrecision()
+    {
+        Assert.Equal("0", 0L.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 0));
+        Assert.Equal("0.00", 0d.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 2));
+        Assert.Equal($"0.{new string('0', 15)}", 0.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 15));
+        Assert.Equal($"1.{new string('0', 15)}k", 1000L.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 15));
+
+        Assert.Equal("0", 0L.ToMetric(decimals: int.MaxValue));
+        Assert.Equal("0", 0d.ToMetric(decimals: int.MaxValue));
+        Assert.Equal("0", 0.ToMetric(decimals: int.MaxValue));
+        Assert.Equal("1k", 1000L.ToMetric(decimals: int.MaxValue));
+    }
+
+    [Theory]
     [InlineData("0.00", 0d)]
     [InlineData("123.00", 123d)]
     [InlineData("1.20k", 1200d)]

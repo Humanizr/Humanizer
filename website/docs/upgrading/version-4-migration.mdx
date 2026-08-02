@@ -299,7 +299,8 @@ days.
 The `decimals` argument to `ToMetric` now sets the maximum number of
 fractional digits. Trailing zeroes are omitted unless
 `MetricNumeralFormats.KeepTrailingZeros` is supplied, and rounding can promote
-the result to the next metric unit.
+the result to the next metric unit. Fixed-width precision must be from 0 through
+15 when `KeepTrailingZeros` is supplied.
 
 | Call | `3.0.10` | Humanizer 4 candidate |
 | --- | --- | --- |
