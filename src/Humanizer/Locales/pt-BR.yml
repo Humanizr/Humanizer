@@ -471,7 +471,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourGender: 'feminine'
-    minuteGender: 'feminine'
+    minuteGender: 'masculine'
     singularArticle: 'a'
     pluralArticle: 'as'
     midnight: 'meia-noite'

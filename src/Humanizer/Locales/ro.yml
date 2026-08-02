@@ -596,6 +596,7 @@ surfaces:
   clock:
     engine: 'phrase-clock'
     hourMode: 'h12'
+    minuteGender: 'neuter'
     min0: 'ora {hour}'
     defaultTemplate: 'ora {hour} și {minutes}'
 

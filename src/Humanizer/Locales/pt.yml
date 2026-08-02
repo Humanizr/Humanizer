@@ -909,7 +909,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourGender: 'feminine'
-    minuteGender: 'feminine'
+    minuteGender: 'masculine'
     midnight: 'meia-noite'
     midday: 'meio-dia'
     min0: '{hour} horas'
