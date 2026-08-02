@@ -1228,6 +1228,10 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h24'
     hourGender: 'feminine'
+    minuteWordsMap:
+      - ''
+      - 'jedna'
+      - 'dve'
     hourSuffixSingular: 'hodina'
     hourSuffixPaucal: 'hodiny'
     hourSuffixPlural: 'hodín'

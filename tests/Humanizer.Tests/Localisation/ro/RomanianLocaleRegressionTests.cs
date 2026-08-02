@@ -39,5 +39,15 @@ public class RomanianLocaleRegressionTests
         Assert.Equal(
             "ora unu",
             new TimeOnly(13, 0).ToClockNotation(ClockNotationRounding.None, Romanian));
+
+    [Theory]
+    [InlineData(1, "ora cinci și unu")]
+    [InlineData(2, "ora cinci și două")]
+    [InlineData(21, "ora cinci și douăzeci și unu")]
+    [InlineData(22, "ora cinci și douăzeci și două")]
+    public void ClockNotationUsesNeuterMinuteValues(int minutes, string expected) =>
+        Assert.Equal(
+            expected,
+            new TimeOnly(5, minutes).ToClockNotation(ClockNotationRounding.None, Romanian));
 #endif
 }
