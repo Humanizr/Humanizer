@@ -496,6 +496,14 @@ surfaces:
             "new(\"ca-ES-valencia\", \"ca\", null, null)",
             resolver,
             StringComparison.Ordinal);
+        Assert.Contains(
+            "new(\"pa-Aran-PK\", \"pa-Arab\", null, null)",
+            resolver,
+            StringComparison.Ordinal);
+        Assert.DoesNotContain(
+            "new(\"pa-Aran-PK\", \"pa\",",
+            resolver,
+            StringComparison.Ordinal);
         var zhHansIndex = resolver.IndexOf(
             "new(\"zh-Hans\", \"zh-Hans\", null, null)",
             StringComparison.Ordinal);

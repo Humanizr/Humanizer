@@ -1712,6 +1712,12 @@ surfaces:
             "ur",
             catalog.AcceptedCultures.Single(static culture =>
                 culture.Name == "ur-Aran-IN").LocaleProfileOwner);
+        var arabicPunjabi = catalog.AcceptedCultures.Single(static culture =>
+            culture.Name == "pa-Aran-PK");
+        Assert.Equal("pa-Arab", arabicPunjabi.LocaleProfileOwner);
+        Assert.Equal(
+            "Arab",
+            HumanizerSourceGenerator.LocaleCatalogInput.GetEffectiveScript(arabicPunjabi.Name));
         Assert.Equal(
             "ur-IN",
             catalog.AcceptedCultures.Single(static culture =>
@@ -1743,6 +1749,33 @@ surfaces:
         Assert.All(catalog.AcceptedCultures, static culture => Assert.Null(culture.InflectionOwner));
     }
 
+    [Theory]
+    [InlineData("pa-Guru-IN", "pa", "Guru")]
+    [InlineData("pa-Arab-PK", "pa-Arab", "Arab")]
+    [InlineData("pa-Aran-PK", "pa-Arab", "Arab")]
+    [InlineData("sr-Cyrl-RS", "sr", "Cyrl")]
+    [InlineData("sr-Latn-RS", "sr-Latn", "Latn")]
+    [InlineData("uz-Cyrl-UZ", "uz-Cyrl-UZ", "Cyrl")]
+    [InlineData("uz-Latn-UZ", "uz-Latn-UZ", "Latn")]
+    [InlineData("ur-Aran-IN", "ur", "Arab")]
+    [InlineData("zh-CHS", "zh-Hans", "Hans")]
+    [InlineData("zh-CHT", "zh-Hant", "Hant")]
+    public void AcceptedCultureCompatibilityKeepsDistinctScriptOwnersAligned(
+        string name,
+        string expectedOwner,
+        string expectedScript)
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+
+        var acceptedCulture = catalog.AcceptedCultures.Single(culture =>
+            culture.Name == name);
+
+        Assert.Equal(expectedOwner, acceptedCulture.LocaleProfileOwner);
+        Assert.Equal(
+            expectedScript,
+            HumanizerSourceGenerator.LocaleCatalogInput.GetEffectiveScript(name));
+    }
+
     [Fact]
     public void AcceptedCultureCompatibilityMatchesTheIndependentFrozenSnapshotHash()
     {
@@ -1760,7 +1793,7 @@ surfaces:
         var actual = Convert.ToHexString(
                 SHA256.HashData(Encoding.UTF8.GetBytes(snapshot)))
             .ToLowerInvariant();
-        const string expected = "091bde3d8176b78ea5ed4dca0100d017699089eb2473cfdfc958f5054f0474ee"; // DevSkim: ignore DS173237
+        const string expected = "a8c95bbd2f66dd1699a5d13a8218831e6298ddc43461c4fd84d4033ab38ef914"; // DevSkim: ignore DS173237
         var substituted = snapshot.Replace(
             "af\taf\tLatn",
             "af\ten\tLatn",
