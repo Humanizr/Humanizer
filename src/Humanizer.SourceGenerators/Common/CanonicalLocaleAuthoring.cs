@@ -267,7 +267,7 @@ public sealed partial class HumanizerSourceGenerator
             const string path = "surfaces.clock.minuteWordsMap";
             SimpleYamlValue normalizedMinuteWordsMap = minuteWordsMap switch
             {
-                SimpleYamlSequence sequence => ValidateMinuteWordsSequence(localeCode, path, sequence),
+                SimpleYamlSequence sequence => NormalizeMinuteWordsSequence(localeCode, path, sequence),
                 SimpleYamlMapping mapping => NormalizeMinuteWordsMapping(localeCode, path, mapping),
                 _ => throw new InvalidOperationException(
                     $"Locale '{localeCode}.{path}' must be a sequence or sparse numeric mapping.")
@@ -278,7 +278,7 @@ public sealed partial class HumanizerSourceGenerator
             return new SimpleYamlMapping(normalizedClockSurface.ToImmutable());
         }
 
-        static SimpleYamlSequence ValidateMinuteWordsSequence(
+        static SimpleYamlMapping NormalizeMinuteWordsSequence(
             string localeCode,
             string path,
             SimpleYamlSequence sequence)
@@ -289,12 +289,14 @@ public sealed partial class HumanizerSourceGenerator
                     $"Locale '{localeCode}.{path}' must contain at most 60 entries for minute slots 0 through 59.");
             }
 
+            var normalizedValues = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
             for (var index = 0; index < sequence.Items.Length; index++)
             {
                 ValidateMinuteWordValue(localeCode, path, index.ToString(CultureInfo.InvariantCulture), sequence.Items[index], allowEmpty: true);
+                normalizedValues[index.ToString(CultureInfo.InvariantCulture)] = sequence.Items[index];
             }
 
-            return sequence;
+            return new SimpleYamlMapping(normalizedValues.ToImmutable());
         }
 
         static SimpleYamlMapping NormalizeMinuteWordsMapping(

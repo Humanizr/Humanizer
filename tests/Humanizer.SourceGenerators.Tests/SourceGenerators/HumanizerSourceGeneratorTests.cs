@@ -143,6 +143,43 @@ surfaces:
     }
 
     [Fact]
+    public void ChildSparseClockMinuteWordsOverlayDenseParentSlots()
+    {
+        const string parentLocale = """
+locale: 'zz'
+surfaces:
+  durationCases:
+    classification: 'not-applicable'
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      - ''
+      - 'parent one'
+      - 'parent two'
+""";
+
+        const string childLocale = """
+locale: 'zz-child'
+variantOf: 'zz'
+surfaces:
+  clock:
+    minuteWordsMap:
+      1: 'child one'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", parentLocale),
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz-child.yml", childLocale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "TimeOnlyToClockNotationProfileCatalog.g.cs");
+        var childProfile = ExtractCacheClassBody(source, "zz_child_cache");
+
+        Assert.Contains("new string[] { \"\", \"child one\", \"parent two\" }", childProfile, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void ChildDatePatternsOverrideInheritedDefaultDateConverters()
     {
         const string baseLocale = """
