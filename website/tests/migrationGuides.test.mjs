@@ -39,8 +39,13 @@ test('the v4 migration guide is pinned to live source and the latest main previe
   assert.match(guide, /Humanizr\/Humanizer\/pull\/1931/);
   assert.match(guide, /three billion/);
   assert.match(guide, /Pick\(IComparable\)/);
+  assert.match(guide, /IComparable<ByteRate>.*`CS0121` ambiguous call/);
   assert.match(guide, /base\/derived comparisons remain type-sensitive/);
   assert.match(guide, /ByteRateTests\.cs#L149-L197/);
+  assert.match(guide, /MetricNumeralFormats\.cs#L38-L42/);
+  assert.match(guide, /pt-BR\/NumberToWordsTests\.cs#L6-L14/);
+  assert.match(guide, /pl\/PolishPaucalTests\.cs#L9-L32/);
+  assert.match(guide, /el\/GreekNumberToWordsTests\.cs#L8-L22/);
   assert.match(guide, /"everything0"\.Dehumanize\(\).*Everything 0.*Everything0/);
   assert.match(guide, /`bs` feminine ordinal words \| English fallback `second` \| Bosnian `druga`/);
   assert.match(guide, /blob\/v3\.0\.10\/src\/Humanizer\/Configuration\/NumberToWordsConverterRegistry\.cs/);
@@ -61,7 +66,7 @@ test('the v4 migration guide is pinned to live source and the latest main previe
   assert.match(guide, /TimeOnlyToClockNotationConvertersRegistry\.cs/);
   assert.match(guide, /Localisation\/cs\/CzechClockNotationTests\.cs/);
   assert.match(guide, /Localisation\/sk\/SlovakClockNotationTests\.cs/);
-  assert.match(guide, /Localisation\/ro\/RomanianLocaleRegressionTests\.cs/);
+  assert.match(guide, /Localisation\/ro\/RomanianLocaleRegressionTests\.cs#L37-L52/);
   assert.doesNotMatch(guide, /42b876dd85a882e3ebee377d36be388b2fbb0b34/);
   assert.doesNotMatch(guide, /`a Great Movie` \| `A Great Movie`/);
   assert.doesNotMatch(guide, /`1\.00k` \| `1k`/);
