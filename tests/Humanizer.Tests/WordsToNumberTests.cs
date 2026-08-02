@@ -531,6 +531,7 @@ public class WordsToNumberTests_Swedish
     [InlineData("tjugoett", 21, null)]
     [InlineData("hundraåtta", 108, null)]
     [InlineData("ett tusen", 1000, null)]
+    [InlineData("etttusenfem", 1005, null)]
     [InlineData("ett tusen hundraelva", 1111, null)]
     [InlineData("en miljon", 1000000, null)]
     [InlineData("första", 1, null)]
@@ -550,6 +551,34 @@ public class WordsToNumberTests_Swedish
         Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("sv-SE", "tusen", "minus ")]
+    [InlineData("nb-NO", "tusen", "minus ")]
+    [InlineData("is-IS", "þúsund", "mínus ")]
+    public void TryToNumber_BoundsCompoundScaleRecursion(string cultureName, string scale, string negativePrefix)
+    {
+        var culture = CultureInfo.GetCultureInfo(cultureName);
+        var legitimateWords = string.Concat(Enumerable.Repeat(scale, 64));
+        Assert.Equal(64000, legitimateWords.ToNumber(culture));
+        Assert.Equal(64000.1m, $"{legitimateWords} komma {1.ToWords(culture)}".ToDecimalNumber(culture));
+
+        var words = string.Concat(Enumerable.Repeat(scale, 256));
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+        Assert.False(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+        Assert.Equal(0, parsedNumber);
+        Assert.NotNull(unrecognizedWord);
+        Assert.True(allocated < 8_000_000, $"Compound-scale rejection allocated {allocated:N0} bytes.");
+        Assert.Throws<ArgumentException>(() => words.ToNumber(culture));
+
+        Assert.False($"{negativePrefix}{words}".TryToNumber(out parsedNumber, culture, out unrecognizedWord));
+        Assert.Equal(0, parsedNumber);
+        Assert.NotNull(unrecognizedWord);
+        Assert.False($"{words} komma {1.ToWords(culture)}".TryToDecimalNumber(out var parsedDecimal, culture, out unrecognizedWord));
+        Assert.Equal(0, parsedDecimal);
+        Assert.NotNull(unrecognizedWord);
     }
 }
 

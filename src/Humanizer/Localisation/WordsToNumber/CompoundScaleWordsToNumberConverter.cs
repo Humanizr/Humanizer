@@ -14,6 +14,8 @@ namespace Humanizer;
 /// </summary>
 internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
+    const int MaximumParseDepth = 128;
+
     readonly CompoundScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
@@ -85,6 +87,19 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(string words, out long value)
     {
+        var remainingWork = (long)words.Length * 32L;
+        return TryParseCardinal(words, 0, ref remainingWork, out value);
+    }
+
+    bool TryParseCardinal(string words, int depth, ref long remainingWork, out long value)
+    {
+        if (depth >= MaximumParseDepth || remainingWork-- <= 0)
+        {
+            remainingWork = -1;
+            value = default;
+            return false;
+        }
+
         if (profile.CardinalMap.TryGetValue(words, out value))
         {
             return true;
@@ -107,7 +122,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
                     continue;
                 }
 
-                if (!TryParseCardinal(token, out var tokenValue))
+                if (!TryParseCardinal(token, depth + 1, ref remainingWork, out var tokenValue))
                 {
                     value = default;
                     return false;
@@ -149,12 +164,31 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
             var right = words[(index + scale.Length)..].Trim();
             long factor = 1;
 
-            if ((string.IsNullOrEmpty(left) || TryParseCardinal(left, out factor)) &&
-                TryParseOptional(right, out var remainder))
+            if (!string.IsNullOrEmpty(left) &&
+                !TryParseCardinal(left, depth + 1, ref remainingWork, out factor))
             {
-                value = checked(checked(factor * profile.CardinalMap[scale]) + remainder);
-                return true;
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
+                continue;
             }
+
+            if (!TryParseOptional(right, depth + 1, ref remainingWork, out var remainder))
+            {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
+                continue;
+            }
+
+            value = checked(checked(factor * profile.CardinalMap[scale]) + remainder);
+            return true;
         }
 
         // The tens fallback handles glued compounds where the tens stem is written as one token
@@ -174,10 +208,16 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
                 return true;
             }
 
-            if (TryParseCardinal(remainder, out var unit) && unit is >= 1 and <= 9)
+            if (TryParseCardinal(remainder, depth + 1, ref remainingWork, out var unit) && unit is >= 1 and <= 9)
             {
                 value = checked(profile.CardinalMap[tens] + unit);
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                return false;
             }
         }
 
@@ -191,7 +231,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// <param name="words">The remainder text following a scale token.</param>
     /// <param name="value">When this method returns, the parsed remainder value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string words, out long value)
+    bool TryParseOptional(string words, int depth, ref long remainingWork, out long value)
     {
         if (string.IsNullOrEmpty(words))
         {
@@ -212,7 +252,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
             }
         }
 
-        return TryParseCardinal(words, out value);
+        return TryParseCardinal(words, depth, ref remainingWork, out value);
     }
 
     /// <summary>
