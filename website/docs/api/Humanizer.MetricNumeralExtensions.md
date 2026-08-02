@@ -76,6 +76,11 @@ The maximum number of fractional digits to include\. When [KeepTrailingZeros](Hu
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A valid Metric representation
 
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[decimals](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thisdouble,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).decimals 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this double, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)\.decimals') is outside the range 0 through 15 when [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used\.
+
 ### Example
 
 ```csharp
@@ -121,6 +126,11 @@ The maximum number of fractional digits to include\. When [KeepTrailingZeros](Hu
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A valid Metric representation
 
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[decimals](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thisint,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).decimals 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this int, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)\.decimals') is outside the range 0 through 15 when [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used\.
+
 ### Example
 
 ```csharp
@@ -165,6 +175,11 @@ The maximum number of fractional digits to include\. When [KeepTrailingZeros](Hu
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A valid Metric representation
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[decimals](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thislong,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).decimals 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this long, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)\.decimals') is outside the range 0 through 15 when [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used\.
 
 ### Example
 
