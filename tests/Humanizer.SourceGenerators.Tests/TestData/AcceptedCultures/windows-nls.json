@@ -1,0 +1,1922 @@
+[
+    {
+        "AcceptedName":  "af",
+        "LocaleProfileOwner":  "af"
+    },
+    {
+        "AcceptedName":  "af-NA",
+        "LocaleProfileOwner":  "af"
+    },
+    {
+        "AcceptedName":  "af-ZA",
+        "LocaleProfileOwner":  "af"
+    },
+    {
+        "AcceptedName":  "am",
+        "LocaleProfileOwner":  "am"
+    },
+    {
+        "AcceptedName":  "am-ET",
+        "LocaleProfileOwner":  "am"
+    },
+    {
+        "AcceptedName":  "ar",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-001",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-AE",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-BH",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-DJ",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-DZ",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-EG",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-ER",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-IL",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-IQ",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-JO",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-KM",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-KW",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-LB",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-LY",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-MA",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-MR",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-OM",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-PS",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-QA",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-SA",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-SD",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-SO",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-SS",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-SY",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-TD",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-TN",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "ar-YE",
+        "LocaleProfileOwner":  "ar"
+    },
+    {
+        "AcceptedName":  "as",
+        "LocaleProfileOwner":  "as"
+    },
+    {
+        "AcceptedName":  "as-IN",
+        "LocaleProfileOwner":  "as"
+    },
+    {
+        "AcceptedName":  "az",
+        "LocaleProfileOwner":  "az"
+    },
+    {
+        "AcceptedName":  "az-Cyrl",
+        "LocaleProfileOwner":  "az"
+    },
+    {
+        "AcceptedName":  "az-Cyrl-AZ",
+        "LocaleProfileOwner":  "az"
+    },
+    {
+        "AcceptedName":  "az-Latn",
+        "LocaleProfileOwner":  "az"
+    },
+    {
+        "AcceptedName":  "az-Latn-AZ",
+        "LocaleProfileOwner":  "az"
+    },
+    {
+        "AcceptedName":  "be",
+        "LocaleProfileOwner":  "be"
+    },
+    {
+        "AcceptedName":  "be-BY",
+        "LocaleProfileOwner":  "be"
+    },
+    {
+        "AcceptedName":  "bg",
+        "LocaleProfileOwner":  "bg"
+    },
+    {
+        "AcceptedName":  "bg-BG",
+        "LocaleProfileOwner":  "bg"
+    },
+    {
+        "AcceptedName":  "bn",
+        "LocaleProfileOwner":  "bn"
+    },
+    {
+        "AcceptedName":  "bn-BD",
+        "LocaleProfileOwner":  "bn"
+    },
+    {
+        "AcceptedName":  "bn-IN",
+        "LocaleProfileOwner":  "bn"
+    },
+    {
+        "AcceptedName":  "bs",
+        "LocaleProfileOwner":  "bs"
+    },
+    {
+        "AcceptedName":  "bs-Cyrl",
+        "LocaleProfileOwner":  "bs"
+    },
+    {
+        "AcceptedName":  "bs-Cyrl-BA",
+        "LocaleProfileOwner":  "bs"
+    },
+    {
+        "AcceptedName":  "bs-Latn",
+        "LocaleProfileOwner":  "bs"
+    },
+    {
+        "AcceptedName":  "bs-Latn-BA",
+        "LocaleProfileOwner":  "bs"
+    },
+    {
+        "AcceptedName":  "ca",
+        "LocaleProfileOwner":  "ca"
+    },
+    {
+        "AcceptedName":  "ca-AD",
+        "LocaleProfileOwner":  "ca"
+    },
+    {
+        "AcceptedName":  "ca-ES",
+        "LocaleProfileOwner":  "ca"
+    },
+    {
+        "AcceptedName":  "ca-ES-valencia",
+        "LocaleProfileOwner":  "ca"
+    },
+    {
+        "AcceptedName":  "ca-FR",
+        "LocaleProfileOwner":  "ca"
+    },
+    {
+        "AcceptedName":  "ca-IT",
+        "LocaleProfileOwner":  "ca"
+    },
+    {
+        "AcceptedName":  "cs",
+        "LocaleProfileOwner":  "cs"
+    },
+    {
+        "AcceptedName":  "cs-CZ",
+        "LocaleProfileOwner":  "cs"
+    },
+    {
+        "AcceptedName":  "cy",
+        "LocaleProfileOwner":  "cy"
+    },
+    {
+        "AcceptedName":  "cy-GB",
+        "LocaleProfileOwner":  "cy"
+    },
+    {
+        "AcceptedName":  "da",
+        "LocaleProfileOwner":  "da"
+    },
+    {
+        "AcceptedName":  "da-DK",
+        "LocaleProfileOwner":  "da"
+    },
+    {
+        "AcceptedName":  "da-GL",
+        "LocaleProfileOwner":  "da"
+    },
+    {
+        "AcceptedName":  "de",
+        "LocaleProfileOwner":  "de"
+    },
+    {
+        "AcceptedName":  "de-AT",
+        "LocaleProfileOwner":  "de"
+    },
+    {
+        "AcceptedName":  "de-BE",
+        "LocaleProfileOwner":  "de"
+    },
+    {
+        "AcceptedName":  "de-CH",
+        "LocaleProfileOwner":  "de-CH"
+    },
+    {
+        "AcceptedName":  "de-DE",
+        "LocaleProfileOwner":  "de"
+    },
+    {
+        "AcceptedName":  "de-IT",
+        "LocaleProfileOwner":  "de"
+    },
+    {
+        "AcceptedName":  "de-LI",
+        "LocaleProfileOwner":  "de-LI"
+    },
+    {
+        "AcceptedName":  "de-LU",
+        "LocaleProfileOwner":  "de"
+    },
+    {
+        "AcceptedName":  "el",
+        "LocaleProfileOwner":  "el"
+    },
+    {
+        "AcceptedName":  "el-CY",
+        "LocaleProfileOwner":  "el"
+    },
+    {
+        "AcceptedName":  "el-GR",
+        "LocaleProfileOwner":  "el"
+    },
+    {
+        "AcceptedName":  "en",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-001",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-029",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-150",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-AE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-AG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-AI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-AS",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-AT",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-AU",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BB",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BS",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BW",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-BZ",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CA",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CC",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CH",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CK",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CX",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-CY",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-DE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-DK",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-DM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-ER",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-FI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-FJ",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-FK",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-FM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GB",
+        "LocaleProfileOwner":  "en-GB"
+    },
+    {
+        "AcceptedName":  "en-GD",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GH",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GU",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-GY",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-HK",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-ID",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-IE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-IL",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-IM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-IN",
+        "LocaleProfileOwner":  "en-IN"
+    },
+    {
+        "AcceptedName":  "en-IO",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-JE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-JM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-KE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-KI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-KN",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-KY",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-LC",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-LR",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-LS",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MH",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MO",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MP",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MS",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MT",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MU",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MV",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MW",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-MY",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NA",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NF",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NL",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NR",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NU",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-NZ",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-PG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-PH",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-PK",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-PN",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-PR",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-PW",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-RW",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SB",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SC",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SD",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SE",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SH",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SL",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SS",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SX",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-SZ",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-TC",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-TK",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-TO",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-TT",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-TV",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-TZ",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-UG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-UM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-US",
+        "LocaleProfileOwner":  "en-US"
+    },
+    {
+        "AcceptedName":  "en-VC",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-VG",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-VI",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-VU",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-WS",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-ZA",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-ZM",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "en-ZW",
+        "LocaleProfileOwner":  "en"
+    },
+    {
+        "AcceptedName":  "es",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-419",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-AR",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-BO",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-BR",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-BZ",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-CL",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-CO",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-CR",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-CU",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-DO",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-EC",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-ES",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-GQ",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-GT",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-HN",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-MX",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-NI",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-PA",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-PE",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-PH",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-PR",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-PY",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-SV",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-US",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-UY",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "es-VE",
+        "LocaleProfileOwner":  "es"
+    },
+    {
+        "AcceptedName":  "et",
+        "LocaleProfileOwner":  "et"
+    },
+    {
+        "AcceptedName":  "et-EE",
+        "LocaleProfileOwner":  "et"
+    },
+    {
+        "AcceptedName":  "eu",
+        "LocaleProfileOwner":  "eu"
+    },
+    {
+        "AcceptedName":  "eu-ES",
+        "LocaleProfileOwner":  "eu"
+    },
+    {
+        "AcceptedName":  "fa",
+        "LocaleProfileOwner":  "fa"
+    },
+    {
+        "AcceptedName":  "fa-AF",
+        "LocaleProfileOwner":  "fa"
+    },
+    {
+        "AcceptedName":  "fa-IR",
+        "LocaleProfileOwner":  "fa"
+    },
+    {
+        "AcceptedName":  "fi",
+        "LocaleProfileOwner":  "fi"
+    },
+    {
+        "AcceptedName":  "fi-FI",
+        "LocaleProfileOwner":  "fi"
+    },
+    {
+        "AcceptedName":  "fil",
+        "LocaleProfileOwner":  "fil"
+    },
+    {
+        "AcceptedName":  "fil-PH",
+        "LocaleProfileOwner":  "fil"
+    },
+    {
+        "AcceptedName":  "fr",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-029",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-BE",
+        "LocaleProfileOwner":  "fr-BE"
+    },
+    {
+        "AcceptedName":  "fr-BF",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-BI",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-BJ",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-BL",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-CA",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-CD",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-CF",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-CG",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-CH",
+        "LocaleProfileOwner":  "fr-CH"
+    },
+    {
+        "AcceptedName":  "fr-CI",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-CM",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-DJ",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-DZ",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-FR",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-GA",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-GF",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-GN",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-GP",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-GQ",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-HT",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-KM",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-LU",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MA",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MC",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MF",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MG",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-ML",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MQ",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MR",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-MU",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-NC",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-NE",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-PF",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-PM",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-RE",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-RW",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-SC",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-SN",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-SY",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-TD",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-TG",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-TN",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-VU",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-WF",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "fr-YT",
+        "LocaleProfileOwner":  "fr"
+    },
+    {
+        "AcceptedName":  "ga",
+        "LocaleProfileOwner":  "ga"
+    },
+    {
+        "AcceptedName":  "ga-GB",
+        "LocaleProfileOwner":  "ga"
+    },
+    {
+        "AcceptedName":  "ga-IE",
+        "LocaleProfileOwner":  "ga"
+    },
+    {
+        "AcceptedName":  "gl",
+        "LocaleProfileOwner":  "gl"
+    },
+    {
+        "AcceptedName":  "gl-ES",
+        "LocaleProfileOwner":  "gl"
+    },
+    {
+        "AcceptedName":  "gu",
+        "LocaleProfileOwner":  "gu"
+    },
+    {
+        "AcceptedName":  "gu-IN",
+        "LocaleProfileOwner":  "gu"
+    },
+    {
+        "AcceptedName":  "ha",
+        "LocaleProfileOwner":  "ha"
+    },
+    {
+        "AcceptedName":  "ha-Latn",
+        "LocaleProfileOwner":  "ha"
+    },
+    {
+        "AcceptedName":  "ha-Latn-GH",
+        "LocaleProfileOwner":  "ha"
+    },
+    {
+        "AcceptedName":  "ha-Latn-NE",
+        "LocaleProfileOwner":  "ha"
+    },
+    {
+        "AcceptedName":  "ha-Latn-NG",
+        "LocaleProfileOwner":  "ha"
+    },
+    {
+        "AcceptedName":  "he",
+        "LocaleProfileOwner":  "he"
+    },
+    {
+        "AcceptedName":  "he-IL",
+        "LocaleProfileOwner":  "he"
+    },
+    {
+        "AcceptedName":  "hi",
+        "LocaleProfileOwner":  "hi"
+    },
+    {
+        "AcceptedName":  "hi-IN",
+        "LocaleProfileOwner":  "hi"
+    },
+    {
+        "AcceptedName":  "hi-Latn",
+        "LocaleProfileOwner":  "hi"
+    },
+    {
+        "AcceptedName":  "hi-Latn-IN",
+        "LocaleProfileOwner":  "hi"
+    },
+    {
+        "AcceptedName":  "hr",
+        "LocaleProfileOwner":  "hr"
+    },
+    {
+        "AcceptedName":  "hr-BA",
+        "LocaleProfileOwner":  "hr"
+    },
+    {
+        "AcceptedName":  "hr-HR",
+        "LocaleProfileOwner":  "hr"
+    },
+    {
+        "AcceptedName":  "hu",
+        "LocaleProfileOwner":  "hu"
+    },
+    {
+        "AcceptedName":  "hu-HU",
+        "LocaleProfileOwner":  "hu"
+    },
+    {
+        "AcceptedName":  "hy",
+        "LocaleProfileOwner":  "hy"
+    },
+    {
+        "AcceptedName":  "hy-AM",
+        "LocaleProfileOwner":  "hy"
+    },
+    {
+        "AcceptedName":  "id",
+        "LocaleProfileOwner":  "id"
+    },
+    {
+        "AcceptedName":  "id-ID",
+        "LocaleProfileOwner":  "id"
+    },
+    {
+        "AcceptedName":  "ig",
+        "LocaleProfileOwner":  "ig"
+    },
+    {
+        "AcceptedName":  "ig-NG",
+        "LocaleProfileOwner":  "ig"
+    },
+    {
+        "AcceptedName":  "is",
+        "LocaleProfileOwner":  "is"
+    },
+    {
+        "AcceptedName":  "is-IS",
+        "LocaleProfileOwner":  "is"
+    },
+    {
+        "AcceptedName":  "it",
+        "LocaleProfileOwner":  "it"
+    },
+    {
+        "AcceptedName":  "it-CH",
+        "LocaleProfileOwner":  "it"
+    },
+    {
+        "AcceptedName":  "it-IT",
+        "LocaleProfileOwner":  "it"
+    },
+    {
+        "AcceptedName":  "it-SM",
+        "LocaleProfileOwner":  "it"
+    },
+    {
+        "AcceptedName":  "it-VA",
+        "LocaleProfileOwner":  "it"
+    },
+    {
+        "AcceptedName":  "ja",
+        "LocaleProfileOwner":  "ja"
+    },
+    {
+        "AcceptedName":  "ja-JP",
+        "LocaleProfileOwner":  "ja"
+    },
+    {
+        "AcceptedName":  "ka",
+        "LocaleProfileOwner":  "ka"
+    },
+    {
+        "AcceptedName":  "ka-GE",
+        "LocaleProfileOwner":  "ka"
+    },
+    {
+        "AcceptedName":  "kk",
+        "LocaleProfileOwner":  "kk"
+    },
+    {
+        "AcceptedName":  "kk-KZ",
+        "LocaleProfileOwner":  "kk"
+    },
+    {
+        "AcceptedName":  "km",
+        "LocaleProfileOwner":  "km"
+    },
+    {
+        "AcceptedName":  "km-KH",
+        "LocaleProfileOwner":  "km"
+    },
+    {
+        "AcceptedName":  "kn",
+        "LocaleProfileOwner":  "kn"
+    },
+    {
+        "AcceptedName":  "kn-IN",
+        "LocaleProfileOwner":  "kn"
+    },
+    {
+        "AcceptedName":  "ko",
+        "LocaleProfileOwner":  "ko"
+    },
+    {
+        "AcceptedName":  "kok",
+        "LocaleProfileOwner":  "kok"
+    },
+    {
+        "AcceptedName":  "kok-IN",
+        "LocaleProfileOwner":  "kok"
+    },
+    {
+        "AcceptedName":  "ko-KP",
+        "LocaleProfileOwner":  "ko"
+    },
+    {
+        "AcceptedName":  "ko-KR",
+        "LocaleProfileOwner":  "ko"
+    },
+    {
+        "AcceptedName":  "ku",
+        "LocaleProfileOwner":  "ku"
+    },
+    {
+        "AcceptedName":  "ku-Arab",
+        "LocaleProfileOwner":  "ku"
+    },
+    {
+        "AcceptedName":  "ku-Arab-IQ",
+        "LocaleProfileOwner":  "ku"
+    },
+    {
+        "AcceptedName":  "ku-Arab-IR",
+        "LocaleProfileOwner":  "ku"
+    },
+    {
+        "AcceptedName":  "ky",
+        "LocaleProfileOwner":  "ky"
+    },
+    {
+        "AcceptedName":  "ky-KG",
+        "LocaleProfileOwner":  "ky"
+    },
+    {
+        "AcceptedName":  "lb",
+        "LocaleProfileOwner":  "lb"
+    },
+    {
+        "AcceptedName":  "lb-LU",
+        "LocaleProfileOwner":  "lb"
+    },
+    {
+        "AcceptedName":  "lo",
+        "LocaleProfileOwner":  "lo"
+    },
+    {
+        "AcceptedName":  "lo-LA",
+        "LocaleProfileOwner":  "lo"
+    },
+    {
+        "AcceptedName":  "lt",
+        "LocaleProfileOwner":  "lt"
+    },
+    {
+        "AcceptedName":  "lt-LT",
+        "LocaleProfileOwner":  "lt"
+    },
+    {
+        "AcceptedName":  "lv",
+        "LocaleProfileOwner":  "lv"
+    },
+    {
+        "AcceptedName":  "lv-LV",
+        "LocaleProfileOwner":  "lv"
+    },
+    {
+        "AcceptedName":  "mk",
+        "LocaleProfileOwner":  "mk"
+    },
+    {
+        "AcceptedName":  "mk-MK",
+        "LocaleProfileOwner":  "mk"
+    },
+    {
+        "AcceptedName":  "ml",
+        "LocaleProfileOwner":  "ml"
+    },
+    {
+        "AcceptedName":  "ml-IN",
+        "LocaleProfileOwner":  "ml"
+    },
+    {
+        "AcceptedName":  "mn",
+        "LocaleProfileOwner":  "mn"
+    },
+    {
+        "AcceptedName":  "mn-Cyrl",
+        "LocaleProfileOwner":  "mn"
+    },
+    {
+        "AcceptedName":  "mn-MN",
+        "LocaleProfileOwner":  "mn"
+    },
+    {
+        "AcceptedName":  "mn-Mong",
+        "LocaleProfileOwner":  "mn"
+    },
+    {
+        "AcceptedName":  "mn-Mong-CN",
+        "LocaleProfileOwner":  "mn"
+    },
+    {
+        "AcceptedName":  "mn-Mong-MN",
+        "LocaleProfileOwner":  "mn"
+    },
+    {
+        "AcceptedName":  "mr",
+        "LocaleProfileOwner":  "mr"
+    },
+    {
+        "AcceptedName":  "mr-IN",
+        "LocaleProfileOwner":  "mr"
+    },
+    {
+        "AcceptedName":  "ms",
+        "LocaleProfileOwner":  "ms"
+    },
+    {
+        "AcceptedName":  "ms-BN",
+        "LocaleProfileOwner":  "ms"
+    },
+    {
+        "AcceptedName":  "ms-ID",
+        "LocaleProfileOwner":  "ms"
+    },
+    {
+        "AcceptedName":  "ms-MY",
+        "LocaleProfileOwner":  "ms"
+    },
+    {
+        "AcceptedName":  "ms-SG",
+        "LocaleProfileOwner":  "ms"
+    },
+    {
+        "AcceptedName":  "mt",
+        "LocaleProfileOwner":  "mt"
+    },
+    {
+        "AcceptedName":  "mt-MT",
+        "LocaleProfileOwner":  "mt"
+    },
+    {
+        "AcceptedName":  "my",
+        "LocaleProfileOwner":  "my"
+    },
+    {
+        "AcceptedName":  "my-MM",
+        "LocaleProfileOwner":  "my"
+    },
+    {
+        "AcceptedName":  "nb",
+        "LocaleProfileOwner":  "nb"
+    },
+    {
+        "AcceptedName":  "nb-NO",
+        "LocaleProfileOwner":  "nb"
+    },
+    {
+        "AcceptedName":  "nb-SJ",
+        "LocaleProfileOwner":  "nb"
+    },
+    {
+        "AcceptedName":  "ne",
+        "LocaleProfileOwner":  "ne"
+    },
+    {
+        "AcceptedName":  "ne-IN",
+        "LocaleProfileOwner":  "ne"
+    },
+    {
+        "AcceptedName":  "ne-NP",
+        "LocaleProfileOwner":  "ne"
+    },
+    {
+        "AcceptedName":  "nl",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-AW",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-BE",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-BQ",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-CW",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-NL",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-SR",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nl-SX",
+        "LocaleProfileOwner":  "nl"
+    },
+    {
+        "AcceptedName":  "nn",
+        "LocaleProfileOwner":  "nn"
+    },
+    {
+        "AcceptedName":  "nn-NO",
+        "LocaleProfileOwner":  "nn"
+    },
+    {
+        "AcceptedName":  "or",
+        "LocaleProfileOwner":  "or"
+    },
+    {
+        "AcceptedName":  "or-IN",
+        "LocaleProfileOwner":  "or"
+    },
+    {
+        "AcceptedName":  "pa",
+        "LocaleProfileOwner":  "pa"
+    },
+    {
+        "AcceptedName":  "pa-Arab",
+        "LocaleProfileOwner":  "pa-Arab"
+    },
+    {
+        "AcceptedName":  "pa-Arab-PK",
+        "LocaleProfileOwner":  "pa-Arab"
+    },
+    {
+        "AcceptedName":  "pa-Guru",
+        "LocaleProfileOwner":  "pa"
+    },
+    {
+        "AcceptedName":  "pa-IN",
+        "LocaleProfileOwner":  "pa"
+    },
+    {
+        "AcceptedName":  "pl",
+        "LocaleProfileOwner":  "pl"
+    },
+    {
+        "AcceptedName":  "pl-PL",
+        "LocaleProfileOwner":  "pl"
+    },
+    {
+        "AcceptedName":  "ps",
+        "LocaleProfileOwner":  "ps"
+    },
+    {
+        "AcceptedName":  "ps-AF",
+        "LocaleProfileOwner":  "ps"
+    },
+    {
+        "AcceptedName":  "ps-PK",
+        "LocaleProfileOwner":  "ps"
+    },
+    {
+        "AcceptedName":  "pt",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-AO",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-BR",
+        "LocaleProfileOwner":  "pt-BR"
+    },
+    {
+        "AcceptedName":  "pt-CH",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-CV",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-GQ",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-GW",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-LU",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-MO",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-MZ",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-PT",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-ST",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "pt-TL",
+        "LocaleProfileOwner":  "pt"
+    },
+    {
+        "AcceptedName":  "ro",
+        "LocaleProfileOwner":  "ro"
+    },
+    {
+        "AcceptedName":  "ro-MD",
+        "LocaleProfileOwner":  "ro"
+    },
+    {
+        "AcceptedName":  "ro-RO",
+        "LocaleProfileOwner":  "ro"
+    },
+    {
+        "AcceptedName":  "ru",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "ru-BY",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "ru-KG",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "ru-KZ",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "ru-MD",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "ru-RU",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "ru-UA",
+        "LocaleProfileOwner":  "ru"
+    },
+    {
+        "AcceptedName":  "si",
+        "LocaleProfileOwner":  "si"
+    },
+    {
+        "AcceptedName":  "si-LK",
+        "LocaleProfileOwner":  "si"
+    },
+    {
+        "AcceptedName":  "sk",
+        "LocaleProfileOwner":  "sk"
+    },
+    {
+        "AcceptedName":  "sk-SK",
+        "LocaleProfileOwner":  "sk"
+    },
+    {
+        "AcceptedName":  "sl",
+        "LocaleProfileOwner":  "sl"
+    },
+    {
+        "AcceptedName":  "sl-SI",
+        "LocaleProfileOwner":  "sl"
+    },
+    {
+        "AcceptedName":  "so",
+        "LocaleProfileOwner":  "so"
+    },
+    {
+        "AcceptedName":  "so-DJ",
+        "LocaleProfileOwner":  "so"
+    },
+    {
+        "AcceptedName":  "so-ET",
+        "LocaleProfileOwner":  "so"
+    },
+    {
+        "AcceptedName":  "so-KE",
+        "LocaleProfileOwner":  "so"
+    },
+    {
+        "AcceptedName":  "so-SO",
+        "LocaleProfileOwner":  "so"
+    },
+    {
+        "AcceptedName":  "sq",
+        "LocaleProfileOwner":  "sq"
+    },
+    {
+        "AcceptedName":  "sq-AL",
+        "LocaleProfileOwner":  "sq"
+    },
+    {
+        "AcceptedName":  "sq-MK",
+        "LocaleProfileOwner":  "sq"
+    },
+    {
+        "AcceptedName":  "sq-XK",
+        "LocaleProfileOwner":  "sq"
+    },
+    {
+        "AcceptedName":  "sr",
+        "LocaleProfileOwner":  "sr"
+    },
+    {
+        "AcceptedName":  "sr-Cyrl",
+        "LocaleProfileOwner":  "sr"
+    },
+    {
+        "AcceptedName":  "sr-Cyrl-BA",
+        "LocaleProfileOwner":  "sr"
+    },
+    {
+        "AcceptedName":  "sr-Cyrl-ME",
+        "LocaleProfileOwner":  "sr"
+    },
+    {
+        "AcceptedName":  "sr-Cyrl-RS",
+        "LocaleProfileOwner":  "sr"
+    },
+    {
+        "AcceptedName":  "sr-Cyrl-XK",
+        "LocaleProfileOwner":  "sr"
+    },
+    {
+        "AcceptedName":  "sr-Latn",
+        "LocaleProfileOwner":  "sr-Latn"
+    },
+    {
+        "AcceptedName":  "sr-Latn-BA",
+        "LocaleProfileOwner":  "sr-Latn"
+    },
+    {
+        "AcceptedName":  "sr-Latn-ME",
+        "LocaleProfileOwner":  "sr-Latn"
+    },
+    {
+        "AcceptedName":  "sr-Latn-RS",
+        "LocaleProfileOwner":  "sr-Latn"
+    },
+    {
+        "AcceptedName":  "sr-Latn-XK",
+        "LocaleProfileOwner":  "sr-Latn"
+    },
+    {
+        "AcceptedName":  "sv",
+        "LocaleProfileOwner":  "sv"
+    },
+    {
+        "AcceptedName":  "sv-AX",
+        "LocaleProfileOwner":  "sv"
+    },
+    {
+        "AcceptedName":  "sv-FI",
+        "LocaleProfileOwner":  "sv"
+    },
+    {
+        "AcceptedName":  "sv-SE",
+        "LocaleProfileOwner":  "sv"
+    },
+    {
+        "AcceptedName":  "sw",
+        "LocaleProfileOwner":  "sw"
+    },
+    {
+        "AcceptedName":  "sw-CD",
+        "LocaleProfileOwner":  "sw"
+    },
+    {
+        "AcceptedName":  "sw-KE",
+        "LocaleProfileOwner":  "sw"
+    },
+    {
+        "AcceptedName":  "sw-TZ",
+        "LocaleProfileOwner":  "sw"
+    },
+    {
+        "AcceptedName":  "sw-UG",
+        "LocaleProfileOwner":  "sw"
+    },
+    {
+        "AcceptedName":  "ta",
+        "LocaleProfileOwner":  "ta"
+    },
+    {
+        "AcceptedName":  "ta-IN",
+        "LocaleProfileOwner":  "ta"
+    },
+    {
+        "AcceptedName":  "ta-LK",
+        "LocaleProfileOwner":  "ta"
+    },
+    {
+        "AcceptedName":  "ta-MY",
+        "LocaleProfileOwner":  "ta"
+    },
+    {
+        "AcceptedName":  "ta-SG",
+        "LocaleProfileOwner":  "ta"
+    },
+    {
+        "AcceptedName":  "te",
+        "LocaleProfileOwner":  "te"
+    },
+    {
+        "AcceptedName":  "te-IN",
+        "LocaleProfileOwner":  "te"
+    },
+    {
+        "AcceptedName":  "th",
+        "LocaleProfileOwner":  "th"
+    },
+    {
+        "AcceptedName":  "th-TH",
+        "LocaleProfileOwner":  "th"
+    },
+    {
+        "AcceptedName":  "tk",
+        "LocaleProfileOwner":  "tk"
+    },
+    {
+        "AcceptedName":  "tk-TM",
+        "LocaleProfileOwner":  "tk"
+    },
+    {
+        "AcceptedName":  "tr",
+        "LocaleProfileOwner":  "tr"
+    },
+    {
+        "AcceptedName":  "tr-CY",
+        "LocaleProfileOwner":  "tr"
+    },
+    {
+        "AcceptedName":  "tr-TR",
+        "LocaleProfileOwner":  "tr"
+    },
+    {
+        "AcceptedName":  "uk",
+        "LocaleProfileOwner":  "uk"
+    },
+    {
+        "AcceptedName":  "uk-UA",
+        "LocaleProfileOwner":  "uk"
+    },
+    {
+        "AcceptedName":  "ur",
+        "LocaleProfileOwner":  "ur"
+    },
+    {
+        "AcceptedName":  "ur-IN",
+        "LocaleProfileOwner":  "ur-IN"
+    },
+    {
+        "AcceptedName":  "ur-PK",
+        "LocaleProfileOwner":  "ur-PK"
+    },
+    {
+        "AcceptedName":  "uz-Cyrl-UZ",
+        "LocaleProfileOwner":  "uz-Cyrl-UZ"
+    },
+    {
+        "AcceptedName":  "uz-Latn-UZ",
+        "LocaleProfileOwner":  "uz-Latn-UZ"
+    },
+    {
+        "AcceptedName":  "vi",
+        "LocaleProfileOwner":  "vi"
+    },
+    {
+        "AcceptedName":  "vi-VN",
+        "LocaleProfileOwner":  "vi"
+    },
+    {
+        "AcceptedName":  "yo",
+        "LocaleProfileOwner":  "yo"
+    },
+    {
+        "AcceptedName":  "yo-BJ",
+        "LocaleProfileOwner":  "yo"
+    },
+    {
+        "AcceptedName":  "yo-NG",
+        "LocaleProfileOwner":  "yo"
+    },
+    {
+        "AcceptedName":  "zh-CHS",
+        "LocaleProfileOwner":  "zh-Hans"
+    },
+    {
+        "AcceptedName":  "zh-CHT",
+        "LocaleProfileOwner":  "zh-Hant"
+    },
+    {
+        "AcceptedName":  "zh-CN",
+        "LocaleProfileOwner":  "zh-CN"
+    },
+    {
+        "AcceptedName":  "zh-Hans",
+        "LocaleProfileOwner":  "zh-Hans"
+    },
+    {
+        "AcceptedName":  "zh-Hans-HK",
+        "LocaleProfileOwner":  "zh-Hans"
+    },
+    {
+        "AcceptedName":  "zh-Hans-MO",
+        "LocaleProfileOwner":  "zh-Hans"
+    },
+    {
+        "AcceptedName":  "zh-Hant",
+        "LocaleProfileOwner":  "zh-Hant"
+    },
+    {
+        "AcceptedName":  "zh-HK",
+        "LocaleProfileOwner":  "zh-Hant"
+    },
+    {
+        "AcceptedName":  "zh-MO",
+        "LocaleProfileOwner":  "zh-Hant"
+    },
+    {
+        "AcceptedName":  "zh-SG",
+        "LocaleProfileOwner":  "zh-Hans"
+    },
+    {
+        "AcceptedName":  "zh-TW",
+        "LocaleProfileOwner":  "zh-Hant"
+    },
+    {
+        "AcceptedName":  "zu-ZA",
+        "LocaleProfileOwner":  "zu-ZA"
+    }
+]

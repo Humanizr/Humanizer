@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 using Xunit;
 
@@ -1702,7 +1703,7 @@ surfaces:
             .ToArray();
 
     [Fact]
-    public void AcceptedCultureCompatibilityIsTheMacOsLinuxWindowsUnionPlusEveryCanonicalRoot()
+    public void AcceptedCultureCompatibilityIsTheFrozenPlatformUnionPlusEveryCanonicalRoot()
     {
         var catalog = CreateCheckedInLocaleCatalog();
 
@@ -1804,6 +1805,99 @@ surfaces:
 
         Assert.Equal(expected, actual);
         Assert.NotEqual(expected, substitutedHash);
+    }
+
+    [Fact]
+    public void AcceptedCultureCompatibilityMatchesCommittedPlatformLedgers()
+    {
+        var repositoryRoot = FindRepositoryRoot();
+        var macOsPath = Path.Combine(
+            repositoryRoot,
+            "tests",
+            "Humanizer.SourceGenerators.Tests",
+            "TestData",
+            "AcceptedCultures",
+            "macos.json");
+        var windowsPath = Path.Combine(
+            repositoryRoot,
+            "tests",
+            "Humanizer.SourceGenerators.Tests",
+            "TestData",
+            "AcceptedCultures",
+            "windows-nls.json");
+        Assert.Equal(
+            "6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33",
+            GetSha256(macOsPath)); // DevSkim: ignore DS173237
+        Assert.Equal(
+            "21c7919a1d5534622c31b10f74e998fb70dbb8952a541c13e3ba9da9d20fa19c",
+            GetSha256(windowsPath)); // DevSkim: ignore DS173237
+
+        var expectedOwners = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase);
+        AddAcceptedCultureLedger(expectedOwners, macOsPath, expectedCount: 554);
+        AddAcceptedCultureLedger(expectedOwners, windowsPath, expectedCount: 480);
+        // .NET's compatibility alias walks to pa, while Humanizer's script-owned
+        // locale profiles deliberately route the legacy Aran spelling to pa-Arab.
+        expectedOwners["pa-Aran-PK"] = "pa-Arab";
+        foreach (var path in Directory.EnumerateFiles(
+                     Path.Combine(repositoryRoot, "src", "Humanizer", "Locales"),
+                     "*.yml"))
+        {
+            var localeCode = Path.GetFileNameWithoutExtension(path);
+            expectedOwners.TryAdd(localeCode, localeCode);
+        }
+
+        var actual = CreateCheckedInLocaleCatalog().AcceptedCultures
+            .OrderBy(static culture => culture.Name, StringComparer.Ordinal)
+            .Select(static culture =>
+                $"{culture.Name}\t{culture.LocaleProfileOwner}")
+            .ToArray();
+        var expected = expectedOwners
+            .OrderBy(static row => row.Key, StringComparer.Ordinal)
+            .Select(static row => $"{row.Key}\t{row.Value}")
+            .ToArray();
+
+        Assert.Equal(579, expected.Length);
+        Assert.Equal(expected, actual);
+    }
+
+    static void AddAcceptedCultureLedger(
+        Dictionary<string, string> owners,
+        string path,
+        int expectedCount)
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(path));
+        Assert.Equal(expectedCount, document.RootElement.GetArrayLength());
+        foreach (var row in document.RootElement.EnumerateArray())
+        {
+            var name = row.GetProperty("AcceptedName").GetString()!;
+            var owner = row.GetProperty("LocaleProfileOwner").GetString()!;
+            if (owners.TryGetValue(name, out var previousOwner))
+            {
+                Assert.Equal(previousOwner, owner);
+            }
+            else
+            {
+                owners.Add(name, owner);
+            }
+        }
+    }
+
+    static string GetSha256(string path) =>
+        Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)))
+            .ToLowerInvariant();
+
+    static string FindRepositoryRoot()
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (directory is not null &&
+               !File.Exists(Path.Combine(directory.FullName, "Humanizer.slnx")))
+        {
+            directory = directory.Parent;
+        }
+
+        return directory?.FullName ?? throw new DirectoryNotFoundException(
+            "Could not locate the Humanizer repository root.");
     }
 
     [Fact]

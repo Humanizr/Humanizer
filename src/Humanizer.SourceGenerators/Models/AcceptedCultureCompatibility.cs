@@ -6,13 +6,15 @@ public sealed partial class HumanizerSourceGenerator
 {
     internal static class AcceptedCultureCompatibility
     {
-        // Frozen input: union of the 554-name macOS/ICU ledger
-        // (SHA-256 6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33),
-        // the 504-name Iris/Linux ICU ledger
-        // (SHA-256 f7afdeb2418a62c95d1ffb71d33fbee28c10a0c059f4a1422617c3d8a7d2a686),
-        // and the 480-name Windows NLS/net48 ledger
-        // (SHA-256 f9f8ae4548a61feebc1d38b1f89ae454d4f8bf3aff2affb393406d9826ec9620),
-        // plus every canonical YAML root.
+        // Frozen input: union of the committed 554-name macOS/ICU ledger
+        // (SHA-256 6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33)
+        // and normalized 480-name Windows NLS/net48 ledger
+        // (SHA-256 21c7919a1d5534622c31b10f74e998fb70dbb8952a541c13e3ba9da9d20fa19c;
+        // source CRLF acquisition SHA-256
+        // f9f8ae4548a61feebc1d38b1f89ae454d4f8bf3aff2affb393406d9826ec9620),
+        // plus every canonical YAML root. The normalized ledgers and their
+        // platform freeze tool are checked in under the source-generator test
+        // data and tools directories so this table can be independently rebuilt.
         static readonly (string Owner, string Names)[] Groups =
         [
             ("af", "af,af-NA,af-ZA"),
