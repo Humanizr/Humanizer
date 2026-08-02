@@ -89,13 +89,9 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
                 continue;
             }
 
-            // Teen tokens are parsed recursively so the suffix lookup stays independent from the
-            // locale's exact teen lexemes.
-            if (token.StartsWith(profile.TeenPrefix, StringComparison.Ordinal) &&
-                token.Length > profile.TeenPrefix.Length &&
-                TryParseCardinal(token[profile.TeenPrefix.Length..], out var teenUnit))
+            if (TryParseTeenToken(token, out var teenValue))
             {
-                current = checked(current + checked(profile.TeenBaseValue + teenUnit));
+                current = checked(current + teenValue);
                 continue;
             }
 
@@ -127,6 +123,38 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
         }
 
         value = checked(total + current);
+        return true;
+    }
+
+    /// <summary>
+    /// Consumes consecutive teen prefixes without growing the call stack, then resolves the
+    /// remaining cardinal or linked token.
+    /// </summary>
+    bool TryParseTeenToken(string token, out long value)
+    {
+        var remainder = token.AsSpan();
+        long prefixCount = 0;
+
+        while (remainder.StartsWith(profile.TeenPrefix, StringComparison.Ordinal) &&
+               remainder.Length > profile.TeenPrefix.Length)
+        {
+            prefixCount++;
+            remainder = remainder[profile.TeenPrefix.Length..];
+        }
+
+        if (prefixCount == 0)
+        {
+            value = default;
+            return false;
+        }
+
+        if (!TryParseCardinal(remainder.ToString(), out var terminalValue))
+        {
+            value = default;
+            return false;
+        }
+
+        value = checked(checked(prefixCount * profile.TeenBaseValue) + terminalValue);
         return true;
     }
 
@@ -184,7 +212,9 @@ sealed class LinkingAffixWordsToNumberProfile(
     /// <summary>
     /// Gets the prefix that marks a teen stem.
     /// </summary>
-    public string TeenPrefix { get; } = teenPrefix;
+    public string TeenPrefix { get; } = string.IsNullOrEmpty(teenPrefix)
+        ? throw new ArgumentException("Teen prefix cannot be empty.", nameof(teenPrefix))
+        : teenPrefix;
     /// <summary>
     /// Gets the base value added when a teen prefix is matched.
     /// </summary>

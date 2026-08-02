@@ -1597,6 +1597,47 @@ public class WordsToNumberTests_Filipino
         Assert.Equal(expectedNumber, parsedNumber);
     }
 
+    [Fact]
+    public void TryToNumber_ConsumesRepeatedTeenPrefixesWithoutRecursiveWork()
+    {
+        Assert.Equal(21, "labinglabingisa".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(20, "labinglabing".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(11, "labingisang".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(10, "labingat".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(-21, "minus labinglabingisa".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(21.1m, "labinglabingisa tuldok isa".ToDecimalNumber(CultureInfo.CurrentCulture));
+
+        const int prefixCount = 4096;
+        var words = string.Concat(Enumerable.Repeat("labing", prefixCount)) + "isa";
+        "labingisa".TryToNumber(out _, CultureInfo.CurrentCulture);
+
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+        Assert.True(words.TryToNumber(out var parsed, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+        Assert.Equal(prefixCount * 10 + 1, parsed);
+        Assert.Null(unrecognizedWord);
+        Assert.True(allocated < 1_000_000, $"Linking-affix parsing allocated {allocated:N0} bytes.");
+
+        var malformed = string.Concat(Enumerable.Repeat("labing", 256)) + "mystery";
+        Assert.False(malformed.TryToNumber(out parsed, CultureInfo.CurrentCulture, out unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal(malformed, unrecognizedWord);
+    }
+
+    [Fact]
+    public void LinkingAffixProfileRejectsEmptyTeenPrefix()
+    {
+        var exception = Assert.Throws<ArgumentException>(() => new LinkingAffixWordsToNumberProfile(
+            new Dictionary<string, long>().ToFrozenDictionary(),
+            string.Empty,
+            10,
+            [],
+            [],
+            []));
+
+        Assert.Equal("teenPrefix", exception.ParamName);
+    }
 }
 
 [UseCulture("id-ID")]
