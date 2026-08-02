@@ -1637,6 +1637,19 @@ public class CoverageGapTests
     }
 
     [Fact]
+    public void PhraseClockNotationConverterUsesAuthoredMinuteWordForZero()
+    {
+        var profile = CreateClockProfile(
+            hourMode: PhraseClockHourMode.H12,
+            hourOneWord: "one",
+            min0: "{hour} {minutes}",
+            minuteWordsMap: ["zero"]);
+        var converter = new PhraseClockNotationConverter(profile);
+
+        Assert.Equal("one zero", converter.Convert(new TimeOnly(1, 0), ClockNotationRounding.None));
+    }
+
+    [Fact]
     public void PhraseClockNotationConverterCoversMalformedTemplatesAndFallbackBranches()
     {
         var invalidMode = new PhraseClockNotationConverter(CreateClockProfile(

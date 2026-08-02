@@ -156,15 +156,15 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile, CultureIn
             return minutes.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        if (minutes == 0)
-        {
-            return "";
-        }
-
         // Check the explicit minute-words map first (e.g., Filipino Spanish-derived clock numbers).
         if (profile.MinuteWordsMap.Length > minutes && profile.MinuteWordsMap[minutes].Length > 0)
         {
             return profile.MinuteWordsMap[minutes];
+        }
+
+        if (minutes == 0)
+        {
+            return "";
         }
 
         var words = profile.MinuteGender switch
