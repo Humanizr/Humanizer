@@ -5,6 +5,8 @@ namespace Humanizer;
 /// </summary>
 internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
+    const int MaximumParseDepth = 128;
+
     readonly PrefixedTensScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
@@ -78,8 +80,19 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(string word, out long value)
     {
-        if (string.IsNullOrEmpty(word))
+        var remainingWork = (long)word.Length * 32L;
+        return TryParseCardinal(word, 0, ref remainingWork, out value);
+    }
+
+    bool TryParseCardinal(string word, int depth, ref long remainingWork, out long value)
+    {
+        if (string.IsNullOrEmpty(word) || depth >= MaximumParseDepth || remainingWork-- <= 0)
         {
+            if (!string.IsNullOrEmpty(word))
+            {
+                remainingWork = -1;
+            }
+
             value = default;
             return false;
         }
@@ -104,13 +117,25 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             var right = word[(index + scale.Token.Length)..];
             var factor = 1L;
 
-            if (!string.IsNullOrEmpty(left) && !TryParseCardinal(left, out factor))
+            if (!string.IsNullOrEmpty(left) && !TryParseCardinal(left, depth + 1, ref remainingWork, out factor))
             {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
                 continue;
             }
 
-            if (!TryParseOptional(right, out var remainder))
+            if (!TryParseOptional(right, depth + 1, ref remainingWork, out var remainder))
             {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
                 continue;
             }
 
@@ -124,11 +149,17 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         foreach (var rule in profile.PrefixedTens)
         {
             if (word.StartsWith(rule.Prefix, StringComparison.Ordinal) &&
-                TryParseCardinal(word[rule.Prefix.Length..], out var suffixValue) &&
+                TryParseCardinal(word[rule.Prefix.Length..], depth + 1, ref remainingWork, out var suffixValue) &&
                 suffixValue is >= 1 and <= 9)
             {
                 value = rule.BaseValue + suffixValue;
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                return false;
             }
         }
 
@@ -148,10 +179,16 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                 return true;
             }
 
-            if (TryParseCardinal(remainder, out var unitValue) && unitValue is >= 1 and <= 9)
+            if (TryParseCardinal(remainder, depth + 1, ref remainingWork, out var unitValue) && unitValue is >= 1 and <= 9)
             {
                 value = tens.Value + unitValue;
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                return false;
             }
         }
 
@@ -165,7 +202,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// <param name="word">The remainder to parse.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string word, out long value)
+    bool TryParseOptional(string word, int depth, ref long remainingWork, out long value)
     {
         if (string.IsNullOrEmpty(word))
         {
@@ -173,7 +210,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             return true;
         }
 
-        return TryParseCardinal(word, out value);
+        return TryParseCardinal(word, depth, ref remainingWork, out value);
     }
 
     /// <summary>
