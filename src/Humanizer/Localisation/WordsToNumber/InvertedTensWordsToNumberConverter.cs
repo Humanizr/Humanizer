@@ -11,6 +11,8 @@ namespace Humanizer;
 /// </remarks>
 internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
+    const int MaximumParseDepth = 128;
+
     readonly InvertedTensWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
@@ -94,6 +96,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
             return TryParseCompact(words, out value, out unrecognizedWord);
         }
 
+        var remainingWork = (long)words.Length * 32L;
         long total = 0;
         long current = 0;
         unrecognizedWord = null;
@@ -107,7 +110,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
                 continue;
             }
 
-            if (!TryParseCompact(token, out var tokenValue, out unrecognizedWord))
+            if (!TryParseCompactCore(token, 0, ref remainingWork, out var tokenValue, out unrecognizedWord))
             {
                 value = default;
                 return false;
@@ -141,6 +144,20 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// <returns><c>true</c> if the token was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCompact(string word, out long value, out string? unrecognizedWord)
     {
+        var remainingWork = (long)word.Length * 32L;
+        return TryParseCompactCore(word, 0, ref remainingWork, out value, out unrecognizedWord);
+    }
+
+    bool TryParseCompactCore(string word, int depth, ref long remainingWork, out long value, out string? unrecognizedWord)
+    {
+        if (depth >= MaximumParseDepth || remainingWork-- <= 0)
+        {
+            remainingWork = -1;
+            value = default;
+            unrecognizedWord = word;
+            return false;
+        }
+
         if (profile.CardinalMap.TryGetValue(word, out value) ||
             profile.OrdinalMap.TryGetValue(word, out value))
         {
@@ -148,9 +165,14 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
             return true;
         }
 
-        if (TryParseOrdinalStem(word, out value, out unrecognizedWord))
+        if (TryParseOrdinalStem(word, depth, ref remainingWork, out value, out unrecognizedWord))
         {
             return true;
+        }
+
+        if (remainingWork < 0)
+        {
+            return false;
         }
 
         // Direct lexical matches must win before structural splitting. If the scale or compact-ten
@@ -169,9 +191,27 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
             long factor = 1;
 
             if (!string.IsNullOrEmpty(left) &&
-                !TryParseCompact(left, out factor, out _) ||
-                !TryParseOptional(right, out var remainder, out _))
+                !TryParseCompactCore(left, depth + 1, ref remainingWork, out factor, out _))
             {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    unrecognizedWord = word;
+                    return false;
+                }
+
+                continue;
+            }
+
+            if (!TryParseOptional(right, depth + 1, ref remainingWork, out var remainder, out _))
+            {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    unrecognizedWord = word;
+                    return false;
+                }
+
                 continue;
             }
 
@@ -193,9 +233,16 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
         {
             var collapsed = word.Replace(" ", string.Empty);
             if (!ReferenceEquals(word, collapsed) &&
-                TryParseCompact(collapsed, out value, out unrecognizedWord))
+                TryParseCompactCore(collapsed, depth + 1, ref remainingWork, out value, out unrecognizedWord))
             {
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                unrecognizedWord = word;
+                return false;
             }
         }
 
@@ -211,7 +258,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the stem that could not be parsed.</param>
     /// <returns><c>true</c> if an ordinal suffix was recognized and the stem parsed; otherwise, <c>false</c>.</returns>
-    bool TryParseOrdinalStem(string word, out long value, out string? unrecognizedWord)
+    bool TryParseOrdinalStem(string word, int depth, ref long remainingWork, out long value, out string? unrecognizedWord)
     {
         foreach (var suffix in profile.OrdinalSuffixes)
         {
@@ -220,7 +267,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
                 continue;
             }
 
-            return TryParseCompact(word[..^suffix.Length], out value, out unrecognizedWord);
+            return TryParseCompactCore(word[..^suffix.Length], depth + 1, ref remainingWork, out value, out unrecognizedWord);
         }
 
         value = default;
@@ -235,7 +282,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the fragment that could not be parsed.</param>
     /// <returns><c>true</c> if the fragment was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string word, out long value, out string? unrecognizedWord)
+    bool TryParseOptional(string word, int depth, ref long remainingWork, out long value, out string? unrecognizedWord)
     {
         if (string.IsNullOrEmpty(word))
         {
@@ -244,7 +291,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
             return true;
         }
 
-        return TryParseCompact(word, out value, out unrecognizedWord);
+        return TryParseCompactCore(word, depth, ref remainingWork, out value, out unrecognizedWord);
     }
 
     /// <summary>

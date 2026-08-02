@@ -75,4 +75,36 @@ public class SomaliNumberToWordsTests
     {
         Assert.Equal(expected, words.ToNumber(So));
     }
+
+    [Fact]
+    public void WordsToNumber_BoundsRecursiveInvertedTensParsing()
+    {
+        var legitimateWords = string.Concat(Enumerable.Repeat("kun", 64));
+        Assert.Equal(64000, legitimateWords.ToNumber(So));
+        Assert.Equal(20, "labaatan".ToNumber(So));
+        Assert.Equal(2, "labaad".ToNumber(So));
+        Assert.Equal(20.1m, "labaatan dhibic kow".ToDecimalNumber(So));
+        Assert.Equal(21, "einundzwanzig".ToNumber(new("de")));
+
+        var scaleWords = string.Concat(Enumerable.Repeat("kun", 256));
+        AssertRejected(scaleWords);
+        AssertRejected($"laga jaray {scaleWords}");
+        AssertRejected("laba" + string.Concat(Enumerable.Repeat("aad", 256)));
+
+        Assert.False($"{scaleWords} dhibic kow".TryToDecimalNumber(out var parsedDecimal, So, out var unrecognizedWord));
+        Assert.Equal(0, parsedDecimal);
+        Assert.NotNull(unrecognizedWord);
+
+        void AssertRejected(string words)
+        {
+            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+            Assert.False(words.TryToNumber(out var parsed, So, out var unrecognizedWord));
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+            Assert.Equal(0, parsed);
+            Assert.NotNull(unrecognizedWord);
+            Assert.True(allocated < 8_000_000, $"Inverted-tens rejection allocated {allocated:N0} bytes.");
+            Assert.Throws<ArgumentException>(() => words.ToNumber(So));
+        }
+    }
 }
