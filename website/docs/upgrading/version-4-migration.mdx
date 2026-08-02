@@ -324,18 +324,18 @@ Existing byte APIs change at large unit and value-object boundaries:
 | --- | --- | --- |
 | `ByteSize.FromBytes(1_000_000_000_000_000).ToString()` | `909.49 TB` | `1 PB` |
 | `byteRate.ToString()` for 400 bytes over 1 second | `Humanizer.ByteRate` | `400 B/s` |
-| Equality of 400 bytes/10 seconds and 800 bytes/20 seconds | unequal references | equal normalized rates with equal hash codes |
+| Equality of 400 bytes/10 seconds and 800 bytes/20 seconds | unequal references | equal normalized rates and hash codes for the same runtime type; base/derived instances remain distinct |
 | `Pick(byteRate)` with `Pick(object)` and `Pick(IComparable)` overloads | selects `Pick(object)` | selects `Pick(IComparable)` |
 
 | Migration detail | What to do |
 | --- | --- |
 | **Affected callers** | PB/EB-scale `ByteSize` display; code that logs, compares, hashes, or stores `ByteRate` values; and overload sets involving `object`, `IComparable`, `IComparable<ByteRate>`, or `IEquatable<ByteRate>`. |
 | **Before** | Automatic `ByteSize` formatting stops at TB; `ByteRate` inherits object text and reference identity and implements none of those interfaces. |
-| **After** | Automatic formatting selects PB/EB; `ByteRate` formats and compares normalized rates and implements comparison/equality interfaces. |
-| **Symptom** | Large-size text changes, distinct instances collapse to one value key, or identical recompiled source selects a more specific interface overload. |
-| **Minimal action** | Request an explicit TB format when contractual. Use an identity comparer or explicit cast only when identity or the old overload selection is deliberate. |
-| **Verify** | Cover TB/PB/EB boundaries, `ByteRate.ToString`, equivalent rates, dictionary/set behavior, and overload selection after recompilation. |
-| **Evidence** | Candidate [large-unit tests](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/Bytes/LargeDataUnitTests.cs#L32-L66), [comparison/equality tests](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/Bytes/ByteRateTests.cs#L149-L175), and the [`ByteRate` interface surface](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L6-L19); a focused stable/preview compile probe selects `object`/`IComparable` respectively. |
+| **After** | Automatic formatting selects PB/EB; same-runtime-type `ByteRate` instances compare by normalized rate, while base/derived comparisons remain type-sensitive. `ByteRate` implements comparison/equality interfaces. |
+| **Symptom** | Large-size text changes, distinct same-runtime-type instances collapse to one value key while base/derived instances remain separate, or identical recompiled source selects a more specific interface overload. |
+| **Minimal action** | Request an explicit TB format when contractual. Use an identity comparer when reference identity is deliberate, keep runtime types consistent when value equality is intended, or cast explicitly to preserve old overload selection. |
+| **Verify** | Cover TB/PB/EB boundaries, `ByteRate.ToString`, same-runtime-type and base/derived equivalent rates, dictionary/set behavior, and overload selection after recompilation. |
+| **Evidence** | Candidate [large-unit tests](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/Bytes/LargeDataUnitTests.cs#L32-L66), [comparison/equality tests](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/Bytes/ByteRateTests.cs#L149-L197), and the [`ByteRate` interface surface](https://github.com/Humanizr/Humanizer/blob/087cde3f5de637a2a8e6bbaacd7451a9f5f28e28/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L6-L19); a focused stable/preview compile probe selects `object`/`IComparable` respectively. |
 
 ### Rebaseline classic English inflection corrections
 

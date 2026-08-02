@@ -39,6 +39,8 @@ test('the v4 migration guide is pinned to live source and the latest main previe
   assert.match(guide, /Humanizr\/Humanizer\/pull\/1931/);
   assert.match(guide, /three billion/);
   assert.match(guide, /Pick\(IComparable\)/);
+  assert.match(guide, /base\/derived comparisons remain type-sensitive/);
+  assert.match(guide, /ByteRateTests\.cs#L149-L197/);
   assert.match(guide, /"everything0"\.Dehumanize\(\).*Everything 0.*Everything0/);
   assert.match(guide, /`bs` feminine ordinal words \| English fallback `second` \| Bosnian `druga`/);
   assert.match(guide, /blob\/v3\.0\.10\/src\/Humanizer\/Configuration\/NumberToWordsConverterRegistry\.cs/);
