@@ -1859,12 +1859,24 @@ public sealed partial class HumanizerSourceGenerator
                     index++;
                 }
 
-                var isLetter = category is UnicodeCategory.UppercaseLetter or
+                var pinnedLetter = false;
+                var pinnedMark = false;
+                if (category == UnicodeCategory.OtherNotAssigned)
+                {
+                    _ = global::Humanizer.InflectionUnicodeData.TryGetPinnedLetterOrMark(
+                        scalar,
+                        out pinnedLetter,
+                        out pinnedMark);
+                }
+
+                var isLetter = pinnedLetter ||
+                    category is UnicodeCategory.UppercaseLetter or
                     UnicodeCategory.LowercaseLetter or
                     UnicodeCategory.TitlecaseLetter or
                     UnicodeCategory.ModifierLetter or
                     UnicodeCategory.OtherLetter;
-                var isMark = category is UnicodeCategory.NonSpacingMark or
+                var isMark = pinnedMark ||
+                    category is UnicodeCategory.NonSpacingMark or
                     UnicodeCategory.SpacingCombiningMark or
                     UnicodeCategory.EnclosingMark;
                 if (!isLetter && !isMark)

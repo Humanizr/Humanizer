@@ -12,6 +12,11 @@ namespace Humanizer.SourceGenerators.Tests;
 
 public partial class HumanizerSourceGeneratorTests
 {
+    delegate bool TryGetPinnedLetterOrMark(
+        int scalar,
+        out bool isLetter,
+        out bool isMark);
+
     static readonly string[] InflectionRegistryTrackingNames =
         ["InflectionRegistrySource", "LocaleRegistrySource"];
 
@@ -1263,6 +1268,54 @@ public static class CompiledUnicodeComparerHarness
     }
 
     [Fact]
+    public void Unicode16LetterMarkClassifiersMatchForEveryCodePoint()
+    {
+        var runtimeClassifier = GetClassifier(typeof(Humanizer.Configurator).Assembly);
+        var generatorClassifier = GetClassifier(typeof(HumanizerSourceGenerator).Assembly);
+
+        Assert.True(generatorClassifier(0x1C89, out var isLetter, out var isMark));
+        Assert.True(isLetter);
+        Assert.False(isMark);
+        Assert.False(generatorClassifier(0x1C8B, out isLetter, out isMark));
+        Assert.False(isLetter);
+        Assert.False(isMark);
+
+        for (var scalar = 0; scalar < 0x110000; scalar++)
+        {
+            var generatorAssigned = generatorClassifier(
+                scalar,
+                out var generatorLetter,
+                out var generatorMark);
+            var runtimeAssigned = runtimeClassifier(
+                scalar,
+                out var runtimeLetter,
+                out var runtimeMark);
+            if (generatorAssigned != runtimeAssigned ||
+                generatorLetter != runtimeLetter ||
+                generatorMark != runtimeMark)
+            {
+                throw new Xunit.Sdk.XunitException(
+                    $"Letter/mark mismatch at U+{scalar:X}: " +
+                    $"generator {generatorAssigned}/{generatorLetter}/{generatorMark}, " +
+                    $"runtime {runtimeAssigned}/{runtimeLetter}/{runtimeMark}.");
+            }
+        }
+
+        static TryGetPinnedLetterOrMark GetClassifier(Assembly assembly)
+        {
+            var data = assembly.GetType("Humanizer.InflectionUnicodeData");
+            Assert.NotNull(data);
+            var classifier = data!
+                .GetMethod(
+                    "TryGetPinnedLetterOrMark",
+                    BindingFlags.NonPublic | BindingFlags.Static)?
+                .CreateDelegate<TryGetPinnedLetterOrMark>();
+            Assert.NotNull(classifier);
+            return classifier!;
+        }
+    }
+
+    [Fact]
     public void EqualPriorityPrefixRulesEmitLongestMatchFirst()
     {
         var runResult = RunGeneratorIsolated(
@@ -2072,6 +2125,40 @@ surfaces:
         var locale = CompleteInflectionFixtureFor("zz").Replace(
             "'cat'",
             $"'{form}'",
+            StringComparison.Ordinal);
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(
+                    "declared scripts",
+                    StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Theory]
+    [InlineData("\u1C89")]
+    [InlineData("\u1C8A")]
+    public void Unicode16CyrillicLettersAreAcceptedOnOlderGeneratorHosts(
+        string form)
+    {
+        var locale = CompleteInflectionFixtureFor("zz", "Cyrl").Replace(
+            "'а'",
+            $"'{form}'",
+            StringComparison.Ordinal);
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Empty(runResult.Diagnostics);
+    }
+
+    [Fact]
+    public void Unicode16AdjacentUnassignedScalarRemainsRejected()
+    {
+        var locale = CompleteInflectionFixtureFor("zz", "Cyrl").Replace(
+            "'а'",
+            "'\u1C8B'",
             StringComparison.Ordinal);
         var runResult = RunGeneratorIsolated(
             new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
