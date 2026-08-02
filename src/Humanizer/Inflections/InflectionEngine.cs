@@ -69,8 +69,12 @@ readonly struct InflectionQuantity
     public bool HasValue => kind != InflectionQuantityKind.None;
 
     public bool IsFinite =>
-        kind != InflectionQuantityKind.Double ||
-        double.IsFinite(doubleValue);
+        kind switch
+        {
+            InflectionQuantityKind.Operands => operands.IsSupported,
+            InflectionQuantityKind.Double => double.IsFinite(doubleValue),
+            _ => true
+        };
 
     public bool IsExactNumericSingleton =>
         kind switch
@@ -716,16 +720,6 @@ sealed class InflectionBundle
         double quantity)
     {
         var inflectionQuantity = new InflectionQuantity(quantity);
-        if (!double.IsFinite(quantity))
-        {
-            return Inflect(
-                input,
-                direction,
-                allowProductive,
-                category: null,
-                in inflectionQuantity);
-        }
-
         if (CardinalRule == CardinalPluralRuleKind.Other)
         {
             return Inflect(
@@ -736,15 +730,16 @@ sealed class InflectionBundle
                 in inflectionQuantity);
         }
 
-        if (quantity > (double)decimal.MinValue &&
-            quantity < (double)decimal.MaxValue)
+        if (!CardinalPluralRules.TrySelect(
+                CardinalRule,
+                quantity,
+                out var selectedCategory))
         {
-            var decimalQuantity = (decimal)quantity;
             return Inflect(
                 input,
                 direction,
                 allowProductive,
-                CardinalPluralRules.Select(CardinalRule, decimalQuantity),
+                category: null,
                 in inflectionQuantity);
         }
 
@@ -752,7 +747,7 @@ sealed class InflectionBundle
             input,
             direction,
             allowProductive,
-            category: null,
+            selectedCategory,
             in inflectionQuantity);
     }
 
@@ -763,6 +758,11 @@ sealed class InflectionBundle
         CardinalPluralCategory? category,
         in InflectionQuantity quantity)
     {
+        if (quantity.HasValue && !quantity.IsFinite)
+        {
+            return new(InflectionStatus.Unsupported, input);
+        }
+
         if (Capability == InflectionCapability.Invariant)
         {
             return new(InflectionStatus.Invariant, input);

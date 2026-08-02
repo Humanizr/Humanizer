@@ -453,6 +453,73 @@ public class LocalizedInflectionEngineTests
         Assert.Same(input, result.Value);
     }
 
+    public static TheoryData<double, string> ExactDoubleCategoryCases =>
+        new()
+        {
+            { BitConverter.Int64BitsToDouble(0x2A1A165700694830), "one" },
+            { double.Epsilon, "other" },
+            { 1.0000000000000002d, "few" },
+            { double.MaxValue, "other" }
+        };
+
+    [Theory]
+    [MemberData(nameof(ExactDoubleCategoryCases))]
+    public void FiniteDoubleUsesExactOperandsForBundleCategory(
+        double quantity,
+        string expected)
+    {
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.SouthSlavic,
+            InflectionCasing.Exact,
+            ["Latn"],
+            [],
+            [
+                new(
+                    "zz.unit",
+                    "unit",
+                    "other",
+                    ["unit"],
+                    ["other"],
+                    [
+                        new(CardinalPluralCategory.One, "one", ["one"]),
+                        new(CardinalPluralCategory.Few, "few", ["few"]),
+                        new(CardinalPluralCategory.Other, "other", ["other"])
+                    ])
+            ],
+            []);
+
+        var result = bundle.Inflect(
+            "unit",
+            InflectionDirection.Forward,
+            allowProductive: true,
+            quantity);
+
+        Assert.Equal(InflectionStatus.Exact, result.Status);
+        Assert.Equal(expected, result.Value);
+    }
+
+    [Theory]
+    [InlineData(double.NaN)]
+    [InlineData(double.PositiveInfinity)]
+    [InlineData(double.NegativeInfinity)]
+    public void UnsupportedOperandsFailClosedWithExplicitCategory(double quantity)
+    {
+        var input = new string("unit".ToCharArray());
+        var operands = CardinalPluralOperands.Create(quantity);
+
+        var result = ExactNumericSingletonBundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            CardinalPluralCategory.Other,
+            operands);
+
+        Assert.False(operands.IsSupported);
+        Assert.Equal(InflectionStatus.Unsupported, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
     [Fact]
     public void ExactNumericSingletonDoesNotChangeUnoptedOrProductiveSelection()
     {
