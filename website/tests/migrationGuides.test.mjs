@@ -38,6 +38,13 @@ test('the v4 migration guide is pinned to the audited live preview', async () =>
   assert.match(guide, /Pick\(IComparable\)/);
   assert.match(guide, /"everything0"\.Dehumanize\(\).*Everything 0.*Everything0/);
   assert.match(guide, /`bs` feminine ordinal words \| English fallback `second` \| Bosnian `druga`/);
+  assert.match(guide, /blob\/v3\.0\.10\/src\/Humanizer\/Configuration\/NumberToWordsConverterRegistry\.cs/);
+  assert.match(guide, /Localisation\/bs\/BosnianLocaleParityTests\.cs/);
+  assert.match(guide, /Localisation\/hr\/CroatianGenderedOrdinalTests\.cs/);
+  assert.match(guide, /Localisation\/sl\/SlovenianGenderedOrdinalTests\.cs/);
+  assert.match(guide, /Localisation\/sr\/SerbianGenderedOrdinalTests\.cs/);
+  assert.match(guide, /Localisation\/sr-Latn\/SerbianLatinGenderedOrdinalTests\.cs/);
+  assert.match(guide, /Humanizr\/Humanizer\/pull\/1829/);
   assert.doesNotMatch(guide, /42b876dd85a882e3ebee377d36be388b2fbb0b34/);
   assert.doesNotMatch(guide, /`a Great Movie` \| `A Great Movie`/);
   assert.doesNotMatch(guide, /`1\.00k` \| `1k`/);
