@@ -4,7 +4,7 @@ namespace Humanizer.SourceGenerators;
 
 public sealed partial class HumanizerSourceGenerator
 {
-    static class AcceptedCultureCompatibility
+    internal static class AcceptedCultureCompatibility
     {
         // Frozen input: union of the 554-name macOS/ICU ledger
         // (SHA-256 6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33),
@@ -236,6 +236,7 @@ public sealed partial class HumanizerSourceGenerator
         public static ImmutableArray<AcceptedCultureInput> Create(
             ImmutableArray<ResolvedLocaleDefinition> locales)
         {
+            ValidateUniqueNames(Groups);
             var localeCodes = locales
                 .Select(static locale => locale.LocaleCode)
                 .ToImmutableHashSet(StringComparer.Ordinal);
@@ -268,6 +269,7 @@ public sealed partial class HumanizerSourceGenerator
 
         static ImmutableDictionary<string, string> CreateEffectiveScripts()
         {
+            ValidateUniqueNames(Groups);
             var scripts = ImmutableDictionary.CreateBuilder<string, string>(
                 StringComparer.OrdinalIgnoreCase);
             foreach (var (owner, names) in Groups)
@@ -287,6 +289,26 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             return scripts.ToImmutable();
+        }
+
+        internal static void ValidateUniqueNames(
+            IEnumerable<(string Owner, string Names)> groups)
+        {
+            var ownersByName = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase);
+            foreach (var (owner, names) in groups)
+            {
+                foreach (var name in names.Split(','))
+                {
+                    if (ownersByName.TryGetValue(name, out var previousOwner))
+                    {
+                        throw new InvalidOperationException(
+                            $"Frozen accepted-culture name '{name}' is listed more than once by owners '{previousOwner}' and '{owner}'.");
+                    }
+
+                    ownersByName.Add(name, owner);
+                }
+            }
         }
 
         static bool TryGetExplicitScript(string name, out string script)

@@ -1719,7 +1719,7 @@ sealed class InflectionBundle
 
             var leftIndex = 0;
             var rightIndex = 0;
-            while (leftIndex < Length)
+            while (leftIndex < Length && rightIndex < other.Length)
             {
                 if (FoldSimpleCase(ReadScalar(ref leftIndex)) !=
                     FoldSimpleCase(other.ReadScalar(ref rightIndex)))
@@ -1728,7 +1728,7 @@ sealed class InflectionBundle
                 }
             }
 
-            return rightIndex == other.Length;
+            return leftIndex == Length && rightIndex == other.Length;
         }
 
         public bool Equals(
@@ -1755,7 +1755,7 @@ sealed class InflectionBundle
 
             var leftIndex = 0;
             var rightIndex = 0;
-            while (leftIndex < Length)
+            while (leftIndex < Length && rightIndex < other.Length)
             {
                 if (FoldSimpleCase(ReadScalar(ref leftIndex)) !=
                     FoldSimpleCase(
@@ -1768,7 +1768,7 @@ sealed class InflectionBundle
                 }
             }
 
-            return rightIndex == other.Length;
+            return leftIndex == Length && rightIndex == other.Length;
         }
 
         public int CompareTo(

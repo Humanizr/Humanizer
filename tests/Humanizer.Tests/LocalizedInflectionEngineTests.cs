@@ -187,6 +187,32 @@ public class LocalizedInflectionEngineTests
     }
 
     [Fact]
+    public void ReverseCandidateComparisonHandlesEqualUtf16LengthsWithDifferentScalarCounts()
+    {
+        var bundle = RuleBundle(new InflectionRule(
+            "zz.forward.s",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: string.Empty,
+            precedingNot: [],
+            dictionaryPlural: "{stem}s",
+            display: [],
+            excludedSurfaces: [char.ConvertFromUtf32(0x10400)],
+            reverseEnabled: true,
+            requiresExistingLexeme: false));
+
+        var result = bundle.Inflect(
+            "abs",
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Productive, result.Status);
+        Assert.Equal("ab", result.Value);
+    }
+
+    [Fact]
     public void ProductiveForwardRuleCannotEscapeItsScriptScope()
     {
         var bundle = DualScriptRuleBundle(new InflectionRule(
@@ -724,6 +750,8 @@ public class LocalizedInflectionEngineTests
         new()
         {
             { BitConverter.Int64BitsToDouble(0x2A1A165700694830), "one" },
+            { BitConverter.Int64BitsToDouble(0x0410000000000000), "few" },
+            { BitConverter.Int64BitsToDouble(0x3E60000000000000), "other" },
             { double.Epsilon, "other" },
             { 1.0000000000000002d, "few" },
             { double.MaxValue, "other" }

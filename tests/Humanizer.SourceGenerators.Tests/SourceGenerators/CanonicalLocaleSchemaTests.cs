@@ -1807,6 +1807,21 @@ surfaces:
     }
 
     [Fact]
+    public void AcceptedCultureCompatibilityRejectsCaseInsensitiveDuplicateNames()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            HumanizerSourceGenerator.AcceptedCultureCompatibility.ValidateUniqueNames(
+            [
+                ("first", "aa,shared"),
+                ("second", "bb,SHARED")
+            ]));
+
+        Assert.Contains("SHARED", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("first", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("second", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void AuthoredInflectionReplacesInheritedBundleAtomically()
     {
         var catalog = CreateCatalog(

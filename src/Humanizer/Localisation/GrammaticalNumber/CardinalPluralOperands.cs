@@ -9,10 +9,8 @@ namespace Humanizer;
 /// </summary>
 readonly struct CardinalPluralOperands
 {
-    static readonly bool UsesShortestRoundTripFormat =
-        BitConverter.Int64BitsToDouble(0x2A1A165700694830)
-            .ToString("R", CultureInfo.InvariantCulture) ==
-        "7.109025719833441E-106";
+    internal const int InverseRyuPowerCount = 292;
+    internal const int DirectRyuPowerCount = 326;
     static readonly BigInteger[] PowersOfTen = CreatePowersOfTen();
 
     CardinalPluralOperands(BigInteger absoluteDigits, int scale)
@@ -86,26 +84,11 @@ readonly struct CardinalPluralOperands
 
         value = Math.Abs(value);
 
-        CardinalPluralOperands result;
         if (value == 0)
-        {
-            result = new(BigInteger.Zero, 0);
-        }
-        else if (UsesShortestRoundTripFormat)
-        {
-            ParseRoundTrip(
-                value.ToString("R", CultureInfo.InvariantCulture),
-                out var digits,
-                out var decimalExponent);
-            result = Create(digits, decimalExponent);
-        }
-        else
-        {
-            GetLegacyShortestRoundTrip(value, out var legacyDigits, out var legacyExponent);
-            result = Create(legacyDigits, legacyExponent);
-        }
+            return new(BigInteger.Zero, 0);
 
-        return result;
+        GetShortestRoundTrip(value, out var digits, out var decimalExponent);
+        return Create(digits, decimalExponent);
     }
 
     static CardinalPluralOperands Create(ulong digits, int decimalExponent) =>
@@ -113,30 +96,7 @@ readonly struct CardinalPluralOperands
             ? new(new BigInteger(digits), -decimalExponent)
             : new(new BigInteger(digits) * PowerOfTen(decimalExponent), 0);
 
-    static void ParseRoundTrip(
-        string roundTrip,
-        out ulong digits,
-        out int decimalExponent)
-    {
-        var exponentMarker = roundTrip.IndexOf('E');
-        var significandEnd = exponentMarker < 0 ? roundTrip.Length : exponentMarker;
-        var exponent = exponentMarker < 0
-            ? 0
-            : ParseExponent(roundTrip, exponentMarker + 1);
-        var decimalPoint = roundTrip.IndexOf('.');
-        var scale = decimalPoint < 0 ? 0 : significandEnd - decimalPoint - 1;
-        digits = 0;
-        for (var index = 0; index < significandEnd; index++)
-        {
-            var character = roundTrip[index];
-            if (character != '.')
-                digits = digits * 10 + (uint)(character - '0');
-        }
-
-        decimalExponent = exponent - scale;
-    }
-
-    internal static void GetLegacyShortestRoundTrip(
+    internal static void GetShortestRoundTrip(
         double value,
         out ulong digits,
         out int decimalExponent)
@@ -147,6 +107,18 @@ readonly struct CardinalPluralOperands
             (uint)((bits >> 52) & 0x7FF),
             out digits,
             out decimalExponent);
+    }
+
+    internal static (ulong Low, ulong High) GetInverseRyuPower(int index) =>
+        GetRyuPower(RyuPowerCache.Tables.Inverse, index);
+
+    internal static (ulong Low, ulong High) GetDirectRyuPower(int index) =>
+        GetRyuPower(RyuPowerCache.Tables.Direct, index);
+
+    static (ulong Low, ulong High) GetRyuPower(ulong[] table, int index)
+    {
+        var offset = checked(index * 2);
+        return (table[offset], table[offset + 1]);
     }
 
     // Portions of this file are adapted from Ryu.
@@ -491,7 +463,7 @@ readonly struct CardinalPluralOperands
         ];
 
         const int blockSize = 26;
-        var inverse = new ulong[292 * 2];
+        var inverse = new ulong[InverseRyuPowerCount * 2];
         for (var index = 0; index < inverse.Length / 2; index++)
         {
             var block = (index + blockSize - 1) / blockSize;
@@ -523,7 +495,7 @@ readonly struct CardinalPluralOperands
             }
         }
 
-        var direct = new ulong[326 * 2];
+        var direct = new ulong[DirectRyuPowerCount * 2];
         for (var index = 0; index < direct.Length / 2; index++)
         {
             var block = index / blockSize;
@@ -590,22 +562,6 @@ readonly struct CardinalPluralOperands
             powers[index] = powers[index - 1] * powers[index - 1];
 
         return powers;
-    }
-
-    static int ParseExponent(string value, int start)
-    {
-        var sign = 1;
-        if (value[start] == '+' || value[start] == '-')
-        {
-            if (value[start++] == '-')
-                sign = -1;
-        }
-
-        var exponent = 0;
-        for (var index = start; index < value.Length; index++)
-            exponent = exponent * 10 + (value[index] - '0');
-
-        return exponent * sign;
     }
 
     sealed class RyuPowerTables(ulong[] inverse, ulong[] direct)

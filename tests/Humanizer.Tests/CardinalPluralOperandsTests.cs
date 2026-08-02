@@ -170,6 +170,151 @@ public class CardinalPluralOperandsTests
     }
 
     [Theory]
+    [InlineData(
+        0x0410000000000000,
+        "41045368012983762",
+        -305,
+        305,
+        305,
+        (int)CardinalPluralCategory.One,
+        (int)CardinalPluralCategory.Few)]
+    [InlineData(
+        0x3E60000000000000,
+        "29802322387695312",
+        -24,
+        24,
+        24,
+        (int)CardinalPluralCategory.One,
+        (int)CardinalPluralCategory.Other)]
+    public void Create_KnownRuntimeFormattingDivergences_UseDeterministicRyuOperands(
+        long bits,
+        string expectedDigitsText,
+        int expectedDecimalExponent,
+        int expectedV,
+        int expectedW,
+        int expectedFilipino,
+        int expectedSouthSlavic)
+    {
+        var value = BitConverter.Int64BitsToDouble(bits);
+
+        CardinalPluralOperands.GetShortestRoundTrip(
+            value,
+            out var deterministicDigits,
+            out var deterministicDecimalExponent);
+        var operands = CardinalPluralOperands.Create(value);
+        var filipinoSelected = CardinalPluralRules.TrySelect(
+            CardinalPluralRuleKind.Filipino,
+            value,
+            out var filipino);
+        var southSlavicSelected = CardinalPluralRules.TrySelect(
+            CardinalPluralRuleKind.SouthSlavic,
+            value,
+            out var southSlavic);
+
+        var expectedDigits = ulong.Parse(
+            expectedDigitsText,
+            CultureInfo.InvariantCulture);
+        Assert.Equal(expectedDigits, deterministicDigits);
+        Assert.Equal(expectedDecimalExponent, deterministicDecimalExponent);
+        Assert.Equal(new BigInteger(expectedDigits), operands.AbsoluteDigits);
+        Assert.Equal(expectedV, operands.V);
+        Assert.Equal(expectedW, operands.W);
+        Assert.True(filipinoSelected);
+        Assert.Equal((CardinalPluralCategory)expectedFilipino, filipino);
+        Assert.True(southSlavicSelected);
+        Assert.Equal((CardinalPluralCategory)expectedSouthSlavic, southSlavic);
+    }
+
+    [Fact]
+    public void ReconstructedRyuPowerTablesMatchIndependentBigIntegerDefinitions()
+    {
+        for (var index = 0; index < CardinalPluralOperands.InverseRyuPowerCount; index++)
+        {
+            var actual = CombineRyuPower(
+                CardinalPluralOperands.GetInverseRyuPower(index));
+            var powerOfFive = BigInteger.Pow(5, index);
+            var bitLength = GetBitLength(powerOfFive);
+            var expected =
+                (BigInteger.One << (bitLength - 1 + 125)) /
+                powerOfFive +
+                BigInteger.One;
+
+            Assert.Equal(expected, actual);
+        }
+
+        for (var index = 0; index < CardinalPluralOperands.DirectRyuPowerCount; index++)
+        {
+            var actual = CombineRyuPower(
+                CardinalPluralOperands.GetDirectRyuPower(index));
+            var powerOfFive = BigInteger.Pow(5, index);
+            var shift = GetBitLength(powerOfFive) - 125;
+            var expected = shift < 0
+                ? powerOfFive << -shift
+                : powerOfFive >> shift;
+
+            Assert.Equal(expected, actual);
+        }
+    }
+
+#if NET8_0
+    [Fact]
+    public void DeterministicRyuMatchesIndependentNet8RuntimeAcrossAdversarialSweep()
+    {
+        ulong[] mantissas =
+        [
+            0,
+            1,
+            0x0007FFFFFFFFFFFF,
+            0x0008000000000000,
+            0x000FFFFFFFFFFFFE,
+            0x000FFFFFFFFFFFFF
+        ];
+        for (var exponent = 0; exponent < 0x7FF; exponent++)
+        {
+            foreach (var mantissa in mantissas)
+            {
+                var bits = (ulong)exponent << 52 | mantissa;
+                if (bits != 0)
+                    AssertDeterministicRyuMatchesRuntime(bits);
+            }
+        }
+
+        var state = 0x9E3779B97F4A7C15UL;
+        for (var index = 0; index < 65_536; index++)
+        {
+            state = state * 6364136223846793005 + 1442695040888963407;
+            var bits = state & 0x7FFFFFFFFFFFFFFF;
+            if ((bits & 0x7FF0000000000000) == 0x7FF0000000000000)
+                bits ^= 0x0010000000000000;
+            if (bits != 0)
+                AssertDeterministicRyuMatchesRuntime(bits);
+        }
+    }
+
+    static void AssertDeterministicRyuMatchesRuntime(ulong bits)
+    {
+        var value = BitConverter.Int64BitsToDouble(unchecked((long)bits));
+
+        CardinalPluralOperands.GetShortestRoundTrip(
+            value,
+            out var deterministicDigits,
+            out var deterministicExponent);
+        ParseRuntimeRoundTrip(
+            value.ToString("R", CultureInfo.InvariantCulture),
+            out var runtimeDigits,
+            out var runtimeExponent);
+        while (runtimeDigits % 10 == 0)
+        {
+            runtimeDigits /= 10;
+            runtimeExponent++;
+        }
+
+        Assert.Equal(runtimeDigits, deterministicDigits);
+        Assert.Equal(runtimeExponent, deterministicExponent);
+    }
+#endif
+
+    [Theory]
     [InlineData(1L, "5", -324)]
     [InlineData(3L, "15", -324)]
     [InlineData(0x0010000000000000L, "22250738585072014", -324)]
@@ -177,14 +322,14 @@ public class CardinalPluralOperandsTests
     [InlineData(0x4000000000000000L, "2", 0)]
     [InlineData(0x2A1A165700694830L, "7109025719833441", -121)]
     [InlineData(0x7FEFFFFFFFFFFFFFL, "17976931348623157", 292)]
-    public void LegacyShortestRoundTrip_MatchesReferenceAndModernRuntime(
+    public void ShortestRoundTrip_MatchesReferenceAndModernRuntime(
         long bits,
         string expectedDigitsText,
         int expectedDecimalExponent)
     {
         var value = BitConverter.Int64BitsToDouble(bits);
 
-        CardinalPluralOperands.GetLegacyShortestRoundTrip(
+        CardinalPluralOperands.GetShortestRoundTrip(
             value,
             out var actualDigits,
             out var actualDecimalExponent);
@@ -347,4 +492,20 @@ public class CardinalPluralOperandsTests
         decimalExponent = exponent - scale;
     }
 #endif
+
+    static BigInteger CombineRyuPower((ulong Low, ulong High) value) =>
+        (BigInteger)value.High << 64 |
+        value.Low;
+
+    static int GetBitLength(BigInteger value)
+    {
+        var result = 0;
+        while (value != 0)
+        {
+            value >>= 1;
+            result++;
+        }
+
+        return result;
+    }
 }
