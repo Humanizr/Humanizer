@@ -422,11 +422,11 @@ parent-chain fallback.
 | --- | --- |
 | **Affected callers** | Applications that used `Configurator.IsCultureSupported` to accept any child of a supported neutral culture, or that relied on an unlisted parent fallback in a built-in registry. |
 | **Before** | The support check and built-in registries walk the requested culture's named parent chain. |
-| **After** | The exact culture name must exist in the generated accepted-culture inventory; an accepted name can map to a neutral profile without a runtime parent walk. |
+| **After** | The exact culture name must exist in the [generated accepted-culture inventory](../languages/supported-cultures.mdx#accepted-culture-names); an accepted name can map to a neutral profile without a runtime parent walk. |
 | **Symptom** | `IsCultureSupported` returns `false`, or a built-in registry uses its default, for a previously unlisted child culture. |
 | **Minimal action** | Check every culture name the application accepts. Use a listed accepted name, request an explicit mapping when the regional culture is valid, or choose the application's fallback deliberately. |
 | **Verify** | Compare a known accepted regional name such as `fr-FR` with an unlisted child name, and confirm caller-created registries still follow their registered parent chain. |
-| **Evidence** | The generated [exact-name resolver](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs) and its [accepted-culture regression tests](https://github.com/Humanizr/Humanizer/blob/main/tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.CanonicalSchema.cs). |
+| **Evidence** | The [generated accepted-culture inventory](../languages/supported-cultures.mdx#accepted-culture-names), [exact-name resolver](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs), and [accepted-culture regression tests](https://github.com/Humanizr/Humanizer/blob/main/tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.CanonicalSchema.cs). |
 
 ### Rebaseline localized exact strings
 

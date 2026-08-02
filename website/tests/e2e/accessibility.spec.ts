@@ -101,9 +101,25 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await page.emulateMedia({colorScheme});
       await page.goto('/docs/next/languages/supported-cultures/');
 
-      const cultures = page.getByRole('list', {name: 'Supported cultures'});
-      await expect(cultures).toBeVisible();
-      await expect(cultures.getByText('en', {exact: true})).toBeVisible();
+      const roots = page.getByRole('list', {name: 'Locale profile roots'});
+      await expect(roots).toBeVisible();
+      await expect(roots.getByText('en', {exact: true})).toBeVisible();
+
+      const acceptedNames = page.getByRole('list', {
+        name: 'Accepted culture names',
+      });
+      await expect(acceptedNames).toBeVisible();
+      await expect(acceptedNames.getByText('fr-FR', {exact: true})).toBeVisible();
+
+      const description =
+        'Humanizer 4 supports 579 exact culture names through 102 generated locale profile roots.';
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+        'content',
+        description,
+      );
+      await expect(
+        page.locator('meta[property="og:description"]'),
+      ).toHaveAttribute('content', description);
 
       await expectNoSeriousAccessibilityViolations(page);
     });
