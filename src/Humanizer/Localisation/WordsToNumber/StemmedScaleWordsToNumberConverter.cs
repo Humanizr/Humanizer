@@ -5,6 +5,8 @@ namespace Humanizer;
 /// </summary>
 internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConverter
 {
+    const int MaximumParseDepth = 128;
+
     readonly StemmedScaleWordsToNumberProfile profile;
     readonly FrozenDictionary<string, long> tokenValues;
     readonly TokenizedStemmedScaleWord[] tokenizedValues;
@@ -62,6 +64,11 @@ internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConve
             return true;
         }
 
+        return TryParseCardinal(source, negative, out parsedValue, out unrecognizedWord);
+    }
+
+    bool TryParseCardinal(string source, bool negative, out long parsedValue, out string? unrecognizedWord)
+    {
         if (tokenValues.TryGetValue(source, out var exactValue))
         {
             parsedValue = negative ? -exactValue : exactValue;
@@ -94,7 +101,7 @@ internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConve
             }
 
             var cardinal = source[..^suffix.Length].Trim();
-            if (cardinal.Length != 0 && TryConvert(cardinal, out value, out _))
+            if (cardinal.Length != 0 && TryParseCardinal(cardinal, false, out value, out _))
             {
                 return true;
             }
@@ -197,18 +204,35 @@ internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConve
         return false;
     }
 
-    bool TryParseTokenSequence(string[] sourceTokens, out ulong value, out string? unrecognizedWord) =>
-        TryParseTokenSequence(sourceTokens, 0, sourceTokens.Length, out value, out unrecognizedWord);
+    bool TryParseTokenSequence(string[] sourceTokens, out ulong value, out string? unrecognizedWord)
+    {
+        var remainingWork = sourceTokens.LongLength * 32L;
+        return TryParseTokenSequence(sourceTokens, 0, sourceTokens.Length, 0, ref remainingWork, out value, out unrecognizedWord);
+    }
 
     bool TryParseTokenSequence(
         string[] sourceTokens,
         int startIndex,
         int endIndex,
+        int depth,
+        ref long remainingWork,
         out ulong value,
         out string? unrecognizedWord)
     {
+        if (depth >= MaximumParseDepth || remainingWork-- <= 0)
+        {
+            remainingWork = -1;
+            return FailTokenSequence(sourceTokens, startIndex, endIndex, out value, out unrecognizedWord);
+        }
+
         for (var index = endIndex - 1; index >= startIndex; index--)
         {
+            if (remainingWork-- <= 0)
+            {
+                remainingWork = -1;
+                return FailTokenSequence(sourceTokens, startIndex, endIndex, out value, out unrecognizedWord);
+            }
+
             if (!TryMatchFallbackScale(sourceTokens, index, endIndex, out var scaleValue, out var scaleTokens))
             {
                 continue;
@@ -216,16 +240,48 @@ internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConve
 
             var count = 1UL;
             if (index != startIndex &&
-                !TryParseTokenSequence(sourceTokens, startIndex, index, out count, out _))
+                !TryParseTokenSequence(
+                    sourceTokens,
+                    startIndex,
+                    index,
+                    depth + 1,
+                    ref remainingWork,
+                    out count,
+                    out var countUnrecognizedWord))
             {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    unrecognizedWord = countUnrecognizedWord;
+                    return false;
+                }
+
                 continue;
             }
 
             var remainder = 0UL;
             var remainderStart = index + scaleTokens;
             if (remainderStart < endIndex &&
-                (!TryParseTokenSequence(sourceTokens, remainderStart, endIndex, out remainder, out _) ||
-                 remainder >= scaleValue))
+                !TryParseTokenSequence(
+                    sourceTokens,
+                    remainderStart,
+                    endIndex,
+                    depth + 1,
+                    ref remainingWork,
+                    out remainder,
+                    out var remainderUnrecognizedWord))
+            {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    unrecognizedWord = remainderUnrecognizedWord;
+                    return false;
+                }
+
+                continue;
+            }
+
+            if (remainder >= scaleValue)
             {
                 continue;
             }
@@ -236,22 +292,33 @@ internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConve
             }
             catch (OverflowException)
             {
-                value = default;
-                unrecognizedWord = string.Join(" ", sourceTokens.Skip(startIndex).Take(endIndex - startIndex));
-                return false;
+                return FailTokenSequence(sourceTokens, startIndex, endIndex, out value, out unrecognizedWord);
             }
 
             unrecognizedWord = null;
             return true;
         }
 
-        return TryParseAdditiveRange(sourceTokens, startIndex, endIndex, out value, out unrecognizedWord);
+        return TryParseAdditiveRange(sourceTokens, startIndex, endIndex, ref remainingWork, out value, out unrecognizedWord);
+    }
+
+    static bool FailTokenSequence(
+        string[] sourceTokens,
+        int startIndex,
+        int endIndex,
+        out ulong value,
+        out string? unrecognizedWord)
+    {
+        value = default;
+        unrecognizedWord = startIndex < endIndex ? sourceTokens[startIndex] : string.Empty;
+        return false;
     }
 
     bool TryParseAdditiveRange(
         string[] sourceTokens,
         int startIndex,
         int endIndex,
+        ref long remainingWork,
         out ulong value,
         out string? unrecognizedWord)
     {
@@ -259,6 +326,12 @@ internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConve
 
         for (var index = startIndex; index < endIndex;)
         {
+            if (remainingWork-- <= 0)
+            {
+                remainingWork = -1;
+                return FailTokenSequence(sourceTokens, startIndex, endIndex, out value, out unrecognizedWord);
+            }
+
             if (!TryMatchToken(sourceTokens, index, endIndex, out var tokenValue, out var consumed))
             {
                 value = default;
