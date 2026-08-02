@@ -70,7 +70,7 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 `decimals` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
-The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits are included\. If null, all available precision is preserved and the flag has no effect\.
+The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits from 0 through 15 are included\. If null, all available precision is preserved and the flag has no effect\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -115,7 +115,7 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 `decimals` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
-The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits are included\. If null, all available precision is preserved and the flag has no effect\.
+The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits from 0 through 15 are included\. If null, all available precision is preserved and the flag has no effect\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -160,7 +160,7 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 `decimals` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
-The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits are included\. If null, all available precision is preserved and the flag has no effect\.
+The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits from 0 through 15 are included\. If null, all available precision is preserved and the flag has no effect\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  

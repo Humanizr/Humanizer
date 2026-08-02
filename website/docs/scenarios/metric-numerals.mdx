@@ -44,7 +44,7 @@ emits an SI prefix name, and parses a symbol:
   When the locale has no standalone term for that power of 1000, it keeps the
   invariant SI symbol instead of falling back to an English word.
 - `KeepTrailingZeros` includes exactly the number of fractional digits requested
-  by `decimals`.
+  by `decimals`, which must be from 0 through 15 when the flag is active.
 
 Without `KeepTrailingZeros`, the nullable `decimals` argument is the maximum
 number of fractional digits: rounding applies at that limit and trailing zeros

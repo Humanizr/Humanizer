@@ -34,8 +34,16 @@ public static class MetricNumeralExtensions
     static readonly double BigLimit = Math.Pow(10, Limit);
     static readonly double SmallLimit = Math.Pow(10, -Limit);
 
-    static bool ShouldKeepTrailingZeros(MetricNumeralFormats? formats, int? decimals) =>
-        decimals.HasValue && formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.KeepTrailingZeros);
+    static bool ShouldKeepTrailingZeros(MetricNumeralFormats? formats, int? decimals)
+    {
+        if (!decimals.HasValue || !formats.HasValue || !formats.Value.HasFlag(MetricNumeralFormats.KeepTrailingZeros))
+            return false;
+
+        if (decimals is < 0 or > 15)
+            throw new ArgumentOutOfRangeException(nameof(decimals), decimals, "Fixed metric precision must be between 0 and 15.");
+
+        return true;
+    }
 
     static string FormatLongWithTrailingZeros(long input, int decimals, NumberFormatInfo nfi) =>
         decimals > 0
@@ -145,7 +153,7 @@ public static class MetricNumeralExtensions
     /// </remarks>
     /// <param name="input">Number to convert to a Metric representation.</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
-    /// <param name="decimals">The maximum number of fractional digits to include. When <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used, exactly this many fractional digits are included. If null, all available precision is preserved and the flag has no effect.</param>
+    /// <param name="decimals">The maximum number of fractional digits to include. When <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used, exactly this many fractional digits from 0 through 15 are included. If null, all available precision is preserved and the flag has no effect.</param>
     /// <example>
     /// <code>
     /// 1000.ToMetric() => "1k"
@@ -154,6 +162,7 @@ public static class MetricNumeralExtensions
     /// </code>
     /// </example>
     /// <returns>A valid Metric representation</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="decimals"/> is outside the range 0 through 15 when <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used.</exception>
     public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null)
     {
         if (!formats.HasValue && !decimals.HasValue)
@@ -201,7 +210,7 @@ public static class MetricNumeralExtensions
     /// </remarks>
     /// <param name="input">Number to convert to a Metric representation.</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
-    /// <param name="decimals">The maximum number of fractional digits to include. When <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used, exactly this many fractional digits are included. If null, all available precision is preserved and the flag has no effect.</param>
+    /// <param name="decimals">The maximum number of fractional digits to include. When <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used, exactly this many fractional digits from 0 through 15 are included. If null, all available precision is preserved and the flag has no effect.</param>
     /// <example>
     /// <code>
     /// 1000.ToMetric() => "1k"
@@ -210,6 +219,7 @@ public static class MetricNumeralExtensions
     /// </code>
     /// </example>
     /// <returns>A valid Metric representation</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="decimals"/> is outside the range 0 through 15 when <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used.</exception>
     public static string ToMetric(this long input, MetricNumeralFormats? formats = null, int? decimals = null)
     {
         if (input.Equals(0))
@@ -236,7 +246,7 @@ public static class MetricNumeralExtensions
     /// </remarks>
     /// <param name="input">Number to convert to a Metric representation.</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
-    /// <param name="decimals">The maximum number of fractional digits to include. When <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used, exactly this many fractional digits are included. If null, all available precision is preserved and the flag has no effect.</param>
+    /// <param name="decimals">The maximum number of fractional digits to include. When <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used, exactly this many fractional digits from 0 through 15 are included. If null, all available precision is preserved and the flag has no effect.</param>
     /// <example>
     /// <code>
     /// 1000d.ToMetric() => "1k"
@@ -245,6 +255,7 @@ public static class MetricNumeralExtensions
     /// </code>
     /// </example>
     /// <returns>A valid Metric representation</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="decimals"/> is outside the range 0 through 15 when <see cref="MetricNumeralFormats.KeepTrailingZeros"/> is used.</exception>
     public static string ToMetric(this double input, MetricNumeralFormats? formats = null, int? decimals = null)
     {
         if (input.Equals(0))
