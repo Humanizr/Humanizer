@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 
@@ -181,7 +182,7 @@ public sealed partial class HumanizerSourceGenerator
                         break;
 
                     case "clock":
-                        features["timeOnlyToClockNotation"] = surfaceMapping;
+                        features["timeOnlyToClockNotation"] = NormalizeClockSurface(document.LocaleCode, surfaceMapping);
                         break;
 
                     case "compass":
@@ -247,6 +248,114 @@ public sealed partial class HumanizerSourceGenerator
 
                 ValidateNumberFormattingBlock(localeCode, fmtMapping);
                 features["numberFormatting"] = fmtMapping;
+            }
+        }
+
+        static SimpleYamlMapping NormalizeClockSurface(string localeCode, SimpleYamlMapping clockSurface)
+        {
+            if (clockSurface.DuplicateKeys.Contains("minuteWordsMap"))
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.surfaces.clock.minuteWordsMap' defines duplicate entries; choose either the dense or sparse form.");
+            }
+
+            if (!clockSurface.TryGetValue("minuteWordsMap", out var minuteWordsMap))
+            {
+                return clockSurface;
+            }
+
+            const string path = "surfaces.clock.minuteWordsMap";
+            SimpleYamlValue normalizedMinuteWordsMap = minuteWordsMap switch
+            {
+                SimpleYamlSequence sequence => NormalizeMinuteWordsSequence(localeCode, path, sequence),
+                SimpleYamlMapping mapping => NormalizeMinuteWordsMapping(localeCode, path, mapping),
+                _ => throw new InvalidOperationException(
+                    $"Locale '{localeCode}.{path}' must be a sequence or sparse numeric mapping.")
+            };
+
+            var normalizedClockSurface = clockSurface.Values.ToBuilder();
+            normalizedClockSurface["minuteWordsMap"] = normalizedMinuteWordsMap;
+            return new SimpleYamlMapping(normalizedClockSurface.ToImmutable());
+        }
+
+        static SimpleYamlMapping NormalizeMinuteWordsSequence(
+            string localeCode,
+            string path,
+            SimpleYamlSequence sequence)
+        {
+            if (sequence.Items.Length > 60)
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.{path}' must contain at most 60 entries for minute slots 0 through 59.");
+            }
+
+            var normalizedValues = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
+            for (var index = 0; index < sequence.Items.Length; index++)
+            {
+                ValidateMinuteWordValue(localeCode, path, index.ToString(CultureInfo.InvariantCulture), sequence.Items[index], allowEmpty: true);
+                normalizedValues[index.ToString(CultureInfo.InvariantCulture)] = sequence.Items[index];
+            }
+
+            return new SimpleYamlMapping(normalizedValues.ToImmutable());
+        }
+
+        static SimpleYamlMapping NormalizeMinuteWordsMapping(
+            string localeCode,
+            string path,
+            SimpleYamlMapping mapping)
+        {
+            if (!mapping.DuplicateKeys.IsDefaultOrEmpty)
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.{path}' defines duplicate key '{mapping.DuplicateKeys[0]}'.");
+            }
+
+            var normalizedValues = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
+            foreach (var entry in mapping.Values)
+            {
+                if (!int.TryParse(entry.Key, NumberStyles.Integer, CultureInfo.InvariantCulture, out var minute))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.{path}' requires integer keys. Invalid key '{entry.Key}'.");
+                }
+
+                if (minute is < 0 or > 59)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.{path}' keys must be between 0 and 59. Invalid key '{entry.Key}'.");
+                }
+
+                var canonicalKey = minute.ToString(CultureInfo.InvariantCulture);
+                if (normalizedValues.ContainsKey(canonicalKey))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.{path}' defines duplicate numeric minute slot {minute}.");
+                }
+
+                ValidateMinuteWordValue(localeCode, path, entry.Key, entry.Value, allowEmpty: false);
+                normalizedValues[canonicalKey] = entry.Value;
+            }
+
+            return new SimpleYamlMapping(normalizedValues.ToImmutable());
+        }
+
+        static void ValidateMinuteWordValue(
+            string localeCode,
+            string path,
+            string key,
+            SimpleYamlValue value,
+            bool allowEmpty)
+        {
+            if (value is not SimpleYamlScalar scalar || !scalar.IsString)
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.{path}.{key}' must be a string.");
+            }
+
+            if (!allowEmpty && string.IsNullOrEmpty(scalar.Value))
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.{path}.{key}' must be a non-empty string. Omit unused sparse slots instead.");
             }
         }
 

@@ -732,7 +732,7 @@ public sealed partial class HumanizerSourceGenerator
 
         static void WriteScalar(Utf8JsonWriter writer, SimpleYamlScalar scalar)
         {
-            if (scalar.IsQuoted)
+            if (scalar.IsString)
             {
                 writer.WriteStringValue(scalar.Value);
                 return;
@@ -870,6 +870,11 @@ public sealed partial class HumanizerSourceGenerator
     {
         public string Value { get; } = value;
         public bool IsQuoted { get; } = isQuoted;
+        public bool IsString =>
+            IsQuoted ||
+            !string.Equals(Value, "null", StringComparison.Ordinal) &&
+            !bool.TryParse(Value, out _) &&
+            !long.TryParse(Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out _);
     }
 
     internal sealed class SimpleYamlSequence(ImmutableArray<SimpleYamlValue> items) : SimpleYamlValue
@@ -877,9 +882,12 @@ public sealed partial class HumanizerSourceGenerator
         public ImmutableArray<SimpleYamlValue> Items { get; } = items;
     }
 
-    internal sealed class SimpleYamlMapping(ImmutableDictionary<string, HumanizerSourceGenerator.SimpleYamlValue> values) : SimpleYamlValue
+    internal sealed class SimpleYamlMapping(
+        ImmutableDictionary<string, HumanizerSourceGenerator.SimpleYamlValue> values,
+        ImmutableArray<string> duplicateKeys = default) : SimpleYamlValue
     {
         public ImmutableDictionary<string, SimpleYamlValue> Values { get; } = values;
+        public ImmutableArray<string> DuplicateKeys { get; } = duplicateKeys.IsDefault ? [] : duplicateKeys;
 
         public bool TryGetValue(string key, out SimpleYamlValue value) =>
             Values.TryGetValue(key, out value!);
@@ -1049,20 +1057,23 @@ public sealed partial class HumanizerSourceGenerator
             int lineNumber)
         {
             var values = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-            ParseMappingEntry(values, firstEntry, indent, lineNumber, lines, ref index);
-            ParseMappingContinuation(values, lines, ref index, indent);
-            return new SimpleYamlMapping(values.ToImmutable());
+            var duplicateKeys = ImmutableArray.CreateBuilder<string>();
+            ParseMappingEntry(values, duplicateKeys, firstEntry, indent, lineNumber, lines, ref index);
+            ParseMappingContinuation(values, duplicateKeys, lines, ref index, indent);
+            return new SimpleYamlMapping(values.ToImmutable(), duplicateKeys.ToImmutable());
         }
 
         static SimpleYamlMapping ParseMapping(IReadOnlyList<LineInfo> lines, ref int index, int indent)
         {
             var values = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-            ParseMappingContinuation(values, lines, ref index, indent);
-            return new SimpleYamlMapping(values.ToImmutable());
+            var duplicateKeys = ImmutableArray.CreateBuilder<string>();
+            ParseMappingContinuation(values, duplicateKeys, lines, ref index, indent);
+            return new SimpleYamlMapping(values.ToImmutable(), duplicateKeys.ToImmutable());
         }
 
         static void ParseMappingContinuation(
             ImmutableDictionary<string, SimpleYamlValue>.Builder values,
+            ImmutableArray<string>.Builder duplicateKeys,
             IReadOnlyList<LineInfo> lines,
             ref int index,
             int indent)
@@ -1085,12 +1096,13 @@ public sealed partial class HumanizerSourceGenerator
                     break;
                 }
 
-                ParseMappingEntry(values, line.Content, indent, line.LineNumber, lines, ref index);
+                ParseMappingEntry(values, duplicateKeys, line.Content, indent, line.LineNumber, lines, ref index);
             }
         }
 
         static void ParseMappingEntry(
             ImmutableDictionary<string, SimpleYamlValue>.Builder values,
+            ImmutableArray<string>.Builder duplicateKeys,
             string content,
             int indent,
             int lineNumber,
@@ -1112,6 +1124,9 @@ public sealed partial class HumanizerSourceGenerator
 
             var remainder = content.Substring(separator + 1).TrimStart();
             index++;
+
+            if (values.ContainsKey(key))
+                duplicateKeys.Add(key);
 
             if (remainder.Length == 0)
             {

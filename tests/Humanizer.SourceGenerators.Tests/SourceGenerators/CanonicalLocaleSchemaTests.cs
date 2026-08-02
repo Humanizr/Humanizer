@@ -8,6 +8,172 @@ namespace Humanizer.SourceGenerators.Tests;
 
 public class CanonicalLocaleSchemaTests
 {
+    [Theory]
+    [InlineData("-1", "between 0 and 59")]
+    [InlineData("60", "between 0 and 59")]
+    [InlineData("one", "integer keys")]
+    public void ClockMinuteWordsMapRejectsInvalidSparseKeys(string key, string expectedMessage)
+    {
+        var catalog = CreateCatalog(
+            ("zz", $"""
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      {key}: 'minute'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
+    }
+
+    [Theory]
+    [InlineData("1", "1")]
+    [InlineData("1", "01")]
+    public void ClockMinuteWordsMapRejectsDuplicateSparseKeys(string firstKey, string secondKey)
+    {
+        var catalog = CreateCatalog(
+            ("zz", $"""
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      {firstKey}: 'one'
+      {secondKey}: 'another one'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("duplicate", StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public void ClockMinuteWordsMapRejectsDenseAndSparseBlockNodesTogether()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      - ''
+      - 'one'
+    minuteWordsMap:
+      1: 'one'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("duplicate", StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Theory]
+    [InlineData("''", "non-empty string")]
+    [InlineData("1", "must be a string")]
+    [InlineData("true", "must be a string")]
+    public void ClockMinuteWordsMapRejectsInvalidSparseValues(string value, string expectedMessage)
+    {
+        var catalog = CreateCatalog(
+            ("zz", $"""
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      1: {value}
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ClockMinuteWordsMapRejectsNestedSparseValues()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      1:
+        value: 'one'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("must be a string", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ClockMinuteWordsMapRejectsScalarNode()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap: 'one'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("sequence or sparse numeric mapping", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ClockMinuteWordsMapRejectsDenseSequencesLongerThanSixtySlots()
+    {
+        var minuteWords = string.Join('\n', Enumerable.Repeat("      - ''", 61));
+        var catalog = CreateCatalog(
+            ("zz", $"""
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+{minuteWords}
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("at most 60 entries", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ClockMinuteWordsMapRejectsNonStringDenseValues()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    minuteWordsMap:
+      - ''
+      - 1
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("must be a string", StringComparison.Ordinal));
+    }
+
     [Fact]
     public void CanonicalSchemaRequiresLocaleAndSurfacesAndRejectsLegacyTopLevelKeys()
     {
