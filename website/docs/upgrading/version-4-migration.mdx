@@ -17,11 +17,13 @@ belong in What's New, and the complete change history belongs in the
 
 :::caution Release candidate boundary
 
-This guide was audited against commit
-[`42b876dd85a882e3ebee377d36be388b2fbb0b34`](https://github.com/Humanizr/Humanizer/commit/42b876dd85a882e3ebee377d36be388b2fbb0b34).
-Humanizer 4 does not yet have a final tag. Replace `<humanizer-4-version>` below
-with the candidate you are testing, and repeat this audit against the final tag
-before release.
+Humanizer 4 is not a stable release: no v4 tag, GitHub Release, or public NuGet
+package exists. This guide was audited against live-main commit
+[`146d74c025b80fa615bd8660f3c4c4949f61ac56`](https://github.com/Humanizr/Humanizer/commit/146d74c025b80fa615bd8660f3c4c4949f61ac56)
+and its signed `4.0.0-preview.50` package from Azure build
+[`130158`](https://dev.azure.com/dotnet/Humanizer/_build/results?buildId=130158).
+Replace `<humanizer-4-version>` below with the candidate you are testing, and
+repeat this audit against the final tag before release.
 
 Remaining release work can still change the public surface. Reconcile this
 guide against the final public API and package diff after that work lands.
@@ -36,8 +38,8 @@ Work through the complete guide if any of these apply:
   `Humanizer.Core.<locale>` package;
 - an `int` receives the result of `ToNumber`, `TryToNumber`, or
   `IWordsToNumberConverter`;
-- source code calls `Resources` or `ResourceKeys`, or a formatter subclass
-  overrides the protected resource-key hooks on `DefaultFormatter`;
+- a formatter subclass overrides the protected resource-key hooks on
+  `DefaultFormatter`;
 - calls omit `CultureInfo` while `CurrentCulture` and `CurrentUICulture` can
   differ;
 - tests, persisted labels, URLs, identifiers, or serialized output depend on
@@ -90,7 +92,7 @@ also contains the Roslyn 3.8, 4.8, and 4.14 analyzer variants.
 | **Symptom** | Leaving old references in place can select both the 3.x and 4.x graphs, retaining stale runtime or analyzer assets and producing restore or build conflicts. |
 | **Minimal action** | Remove every old core/locale reference and version pin. Add one Humanizer 4 reference and regenerate restore outputs. |
 | **Verify** | Run `dotnet list <project> package --include-transitive`; the result must contain `Humanizer` at one version and no `Humanizer.Core*` package. Inspect `obj/project.assets.json` when central package management or lock files hide the source. |
-| **Evidence** | The [`3.0.10` metapackage specification](https://github.com/Humanizr/Humanizer/blob/v3.0.10/NuSpecs/Humanizer.nuspec) and the [Humanizer 4 pack inputs](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/Humanizer.csproj). |
+| **Evidence** | The [`3.0.10` metapackage specification](https://github.com/Humanizr/Humanizer/blob/v3.0.10/NuSpecs/Humanizer.nuspec) and the [Humanizer 4 pack inputs](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/Humanizer.csproj). |
 
 For `netstandard2.0` and `net48`, the candidate raises its
 `System.Collections.Immutable` dependency from `9.0.10` to `10.0.10`;
@@ -110,7 +112,7 @@ candidate assembly has version `4.0.0.0`, compared with `3.0.0.0` in Humanizer
 | **Symptom** | Assembly-load, missing-type, or missing-member failures can occur before application code reaches the changed call site. |
 | **Minimal action** | Rebuild every Humanizer-consuming binary against the selected candidate; do not carry forward a 3.x binding redirect as the migration. |
 | **Verify** | Inspect the final output and dependency manifest, then load and exercise each plugin or extension on every deployment target. No `Humanizer` 3.x assembly may remain. |
-| **Evidence** | Assembly metadata from the published [`3.0.10` package](https://www.nuget.org/packages/Humanizer.Core/3.0.10) and the package built from the candidate [version configuration](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/version.json#L1-L9). |
+| **Evidence** | Assembly metadata from the published [`3.0.10` package](https://www.nuget.org/packages/Humanizer.Core/3.0.10) and the package built from the candidate [version configuration](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/version.json#L1-L9). |
 
 ## Target frameworks and toolchain
 
@@ -156,6 +158,11 @@ bool parsed = words.TryToNumber(out long result, culture);
 int legacyValue = checked((int)words.ToNumber(culture));
 ```
 
+The widened contract also changes an existing overflow result: the phrase
+`three billion` wrapped to `-1294967296` in `3.0.10`; Humanizer 4 returns
+`3000000000`. Treat that as an intentional behavior change even when source
+already used `var`.
+
 | Migration detail | What to do |
 | --- | --- |
 | **Affected callers** | Explicit `int` assignments, `out int` declarations, method return values, generic constraints, mocks, and custom `IWordsToNumberConverter` implementations. |
@@ -164,23 +171,13 @@ int legacyValue = checked((int)words.ToNumber(culture));
 | **Symptom** | Typical compiler failures are `CS0029`, `CS0266`, `CS1503`, `CS0535`, or `CS0738`. |
 | **Minimal action** | Use `long` or `var`. Keep `int` only at an application boundary and narrow with `checked((int)...)`. Update custom converter signatures and their overflow handling. |
 | **Verify** | Test zero, negative values, `int.MaxValue`, `int.MaxValue + 1L`, and the largest phrase the application accepts. Confirm a checked 32-bit boundary throws instead of wrapping. |
-| **Evidence** | The `3.0.10` [`int` API](https://github.com/Humanizr/Humanizer/blob/v3.0.10/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L384-L388) and the candidate [`long` API](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L598-L602). |
+| **Evidence** | The `3.0.10` [`int` API](https://github.com/Humanizr/Humanizer/blob/v3.0.10/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L384-L388) and the candidate [`long` API](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L598-L602). |
 
-### Replace resource-key APIs and formatter resource hooks
+### Update custom formatter resource hooks
 
-`Resources`, `ResourceKeys`, and the protected string-keyed `Format` and
-`GetResourceKey` hooks on `DefaultFormatter` are removed. Use the typed public
-operation that owns the output. For example, replace resource-key lookup for a
-time-unit symbol with `ToSymbol`:
-
-```csharp
-// 3.0.10
-var key = ResourceKeys.TimeUnitSymbol.GetResourceKey(TimeUnit.Day);
-var symbol = Resources.GetResource(key, culture);
-
-// Humanizer 4
-var symbol = TimeUnit.Day.ToSymbol(culture);
-```
+The protected string-keyed `Format` and `GetResourceKey` hooks on
+`DefaultFormatter` are removed. Move custom behavior to the typed interface
+that owns the output.
 
 For application-wide customization, implement the typed interface such as
 `IFormatter`, `ICollectionFormatter`, `INumberToWordsConverter`, or
@@ -192,17 +189,17 @@ Configurator.Formatters.Register("en-custom", customFormatter);
 
 | Migration detail | What to do |
 | --- | --- |
-| **Affected callers** | Direct resource access, reflection over resource keys, and `DefaultFormatter` subclasses that override the removed protected methods. |
-| **Before** | Public resource names and string-key hooks expose Humanizer's storage layout. |
-| **After** | Typed extension methods and formatter/converter interfaces are the public contract; locale data is generated into the assembly. |
-| **Symptom** | `CS0103` or `CS0246` for resource types, `CS0115` for removed overrides, or custom output no longer being reached. |
-| **Minimal action** | Call the typed Humanizer operation. Move custom behavior to the narrowest typed interface and register it before the registry is first resolved. |
-| **Verify** | Exercise every replaced operation with the intended culture. For registered formatters, test application startup and the first Humanizer call because registries freeze on first resolution. |
-| **Evidence** | The `3.0.10` [formatter hooks](https://github.com/Humanizr/Humanizer/blob/v3.0.10/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L218-L230) and [resource types](https://github.com/Humanizr/Humanizer/blob/v3.0.10/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L1839-L1860), compared with the candidate's [typed formatter surface](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L347-L361). |
+| **Affected callers** | `DefaultFormatter` subclasses that override the removed protected methods. |
+| **Before** | Four protected virtual string-key hooks can customize resource-backed output. |
+| **After** | Typed formatter and converter interfaces own customization. |
+| **Symptom** | `CS0115`, or a precompiled subclass loads but its old override is no longer reached. |
+| **Minimal action** | Move custom behavior to the narrowest typed interface and register it before the registry is first resolved. |
+| **Verify** | Exercise application startup and the first call through every replaced custom formatter path. |
+| **Evidence** | The `3.0.10` [formatter hooks](https://github.com/Humanizr/Humanizer/blob/v3.0.10/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L218-L230), compared with the candidate's [typed formatter surface](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L347-L361). |
 
-The audited public API baselines show no other removal or signature replacement
-between `3.0.10` and this candidate. Additive Humanizer 4 APIs are intentionally
-not listed here.
+Beyond the incidental resource plumbing noted near the end, the audited public
+API baselines show no other removal or signature replacement between `3.0.10`
+and this candidate. Additive Humanizer 4 APIs are intentionally not listed here.
 
 ## Behavioral changes
 
@@ -218,18 +215,17 @@ title-case, and culture-dependent casing behavior:
 | `"customer name 1".Pascalize()` | `CustomerName 1` | `CustomerName1` |
 | `"some.text.here".Pascalize()` | `Some.text.here` | `SomeTextHere` |
 | `"__customer_name".Camelize()` | `customerName` | `__customerName` |
-| `"a great movie".Transform(To.TitleCase)` | `a Great Movie` | `A Great Movie` |
 | `"IstanbulInput".Underscore()` under `tr-TR` | `ıstanbul_ınput` | `istanbul_input` |
 
 | Migration detail | What to do |
 | --- | --- |
 | **Affected callers** | Exact-output assertions and code that uses Humanizer output as identifiers, URLs, cache keys, database keys, or persisted labels. |
-| **Before** | Ampersands are dropped, some separators survive identifier conversion, a leading article remains lowercase, and identifier casing follows the ambient culture. |
-| **After** | Ampersands are tokens, spaces and dots are identifier boundaries, the first title word is capitalized, and identifier casing is culture-invariant. |
+| **Before** | Ampersands are dropped, some separators survive identifier conversion, and identifier casing follows the ambient culture. |
+| **After** | Ampersands are tokens, spaces and dots are identifier boundaries, and identifier casing is culture-invariant. |
 | **Symptom** | Snapshot failures, changed generated identifiers, or a lookup miss against a previously persisted Humanizer-derived value. |
 | **Minimal action** | Rebaseline display-only output. For durable identifiers, preserve the old value in application code or run an explicit data migration instead of silently regenerating keys. |
 | **Verify** | Compare representative punctuation, numeric suffixes, acronyms, and Turkish/Azeri casing under every operation the application uses. |
-| **Evidence** | Candidate tests for [ampersands](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/StringHumanizeTests.cs#L130-L151) and [identifier transformations](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/InflectorTests.cs#L186-L336). |
+| **Evidence** | Candidate tests for [ampersands](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/StringHumanizeTests.cs#L130-L151) and [identifier transformations](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/InflectorTests.cs#L186-L336). |
 
 ### Preserve authored enum metadata casing
 
@@ -251,7 +247,7 @@ combination.
 | **Symptom** | Capitalization changes in labels and exact-output tests without a compile error. |
 | **Minimal action** | Put the final desired casing in the metadata. Call `ApplyCase` explicitly afterward only when blanket recasing is an application requirement. |
 | **Verify** | Cover metadata-backed, name-derived, and mixed flags values for every requested casing. |
-| **Evidence** | The candidate [enum metadata tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/EnumHumanizeTests.cs#L6-L19) and [mixed-flags test](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/BitFieldEnumHumanizeTests.cs#L19-L38); `3.0.10` [unconditionally applies casing](https://github.com/Humanizr/Humanizer/blob/v3.0.10/src/Humanizer/EnumHumanizeExtensions.cs#L88-L94). |
+| **Evidence** | The candidate [enum metadata tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/EnumHumanizeTests.cs#L6-L19) and [mixed-flags test](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/BitFieldEnumHumanizeTests.cs#L19-L38); `3.0.10` [unconditionally applies casing](https://github.com/Humanizr/Humanizer/blob/v3.0.10/src/Humanizer/EnumHumanizeExtensions.cs#L88-L94). |
 
 ### Recheck relative date output
 
@@ -272,7 +268,7 @@ Existing date operations intentionally change their text:
 | **Symptom** | Text changes without a compiler error. |
 | **Minimal action** | Rebaseline display strings. If business logic depends on the text, replace that logic with date arithmetic before upgrading. |
 | **Verify** | Cover equal dates, cross-year adjacent dates, 6/7 and 27/28 days, and 89/90/91 and 729/730/731 days in each used culture. |
-| **Evidence** | Candidate [same-date tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/DateOnlyHumanizeTests.cs#L7-L45), [precision-boundary tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/DateTimeHumanizePrecisionStrategyTests.cs#L99-L136), and the [week-selection algorithm](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/DateTimeHumanizeStrategy/DateTimeHumanizeAlgorithms.cs#L202-L224). |
+| **Evidence** | Candidate [same-date tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/DateOnlyHumanizeTests.cs#L7-L45), [precision-boundary tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/DateTimeHumanizePrecisionStrategyTests.cs#L99-L136), and the [week-selection algorithm](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/DateTimeHumanizeStrategy/DateTimeHumanizeAlgorithms.cs#L202-L224). |
 
 ### Recheck month and year `TimeSpan` decomposition
 
@@ -293,7 +289,7 @@ days.
 | **Symptom** | A week component appears in output that previously contained only months and days. |
 | **Minimal action** | Rebaseline display text. Format the remainder in application code only when a days-only contract is required. |
 | **Verify** | Cover spans around 30, 60, 365, and 366 days with the application's actual `precision`, `maxUnit`, and `minUnit`. |
-| **Evidence** | Candidate [month/year decomposition tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/TimeSpanHumanizeTests.cs#L19-L58) and the [decomposition implementation](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/TimeSpanHumanizeExtensions.cs#L815-L858). |
+| **Evidence** | Candidate [month/year decomposition tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/TimeSpanHumanizeTests.cs#L19-L58) and the [decomposition implementation](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/TimeSpanHumanizeExtensions.cs#L815-L858). |
 
 ### Treat metric decimals as a maximum
 
@@ -305,7 +301,6 @@ the result to the next metric unit.
 | Call | `3.0.10` | Humanizer 4 candidate |
 | --- | --- | --- |
 | `123L.ToMetric(decimals: 3)` | `123.000` | `123` |
-| `1000d.ToMetric(decimals: 2)` | `1.00k` | `1k` |
 | `999.9d.ToMetric(decimals: 0)` | `1000` | `1k` |
 
 | Migration detail | What to do |
@@ -316,7 +311,7 @@ the result to the next metric unit.
 | **Symptom** | Trailing zeroes disappear or the metric prefix changes near a rounding boundary. |
 | **Minimal action** | Add `MetricNumeralFormats.KeepTrailingZeros` for fixed-width display. Accept promoted units or apply an explicit application format when the unit itself is contractual. |
 | **Verify** | Test integral values, fractional values, and values immediately below and above every used metric boundary. |
-| **Evidence** | Candidate [format flag](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/MetricNumeralFormats.cs#L35-L45) and [rounding tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/MetricNumeralTests.cs#L454-L497). |
+| **Evidence** | Candidate [format flag](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/MetricNumeralFormats.cs#L35-L45) and [rounding tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/MetricNumeralTests.cs#L454-L497). |
 
 ### Recheck byte-size and byte-rate values
 
@@ -327,16 +322,17 @@ Existing byte APIs change at large unit and value-object boundaries:
 | `ByteSize.FromBytes(1_000_000_000_000_000).ToString()` | `909.49 TB` | `1 PB` |
 | `byteRate.ToString()` for 400 bytes over 1 second | `Humanizer.ByteRate` | `400 B/s` |
 | Equality of 400 bytes/10 seconds and 800 bytes/20 seconds | unequal references | equal normalized rates with equal hash codes |
+| `Pick(byteRate)` with `Pick(object)` and `Pick(IComparable)` overloads | selects `Pick(object)` | selects `Pick(IComparable)` |
 
 | Migration detail | What to do |
 | --- | --- |
-| **Affected callers** | PB/EB-scale `ByteSize` display and code that logs, compares, hashes, or stores `ByteRate` values in sets or dictionaries. |
-| **Before** | Automatic `ByteSize` formatting stops at TB; `ByteRate` inherits object text and reference identity. |
-| **After** | Automatic formatting selects PB/EB where appropriate; `ByteRate` formats a humanized rate and compares normalized bytes per second. |
-| **Symptom** | Large-size text changes, logs become human-readable, or distinct `ByteRate` instances collapse to one value key. |
-| **Minimal action** | Request an explicit TB format when that unit is contractual. Use reference comparison or an identity comparer only when object identity, rather than rate value, is required. |
-| **Verify** | Cover TB/PB/EB boundaries, `ByteRate.ToString`, equivalent rates with different intervals, and dictionary/set behavior. |
-| **Evidence** | Candidate [large-unit tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Bytes/LargeDataUnitTests.cs#L32-L66) and [byte-rate value tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Bytes/ByteRateTests.cs#L57-L92). |
+| **Affected callers** | PB/EB-scale `ByteSize` display; code that logs, compares, hashes, or stores `ByteRate` values; and overload sets involving `object`, `IComparable`, `IComparable<ByteRate>`, or `IEquatable<ByteRate>`. |
+| **Before** | Automatic `ByteSize` formatting stops at TB; `ByteRate` inherits object text and reference identity and implements none of those interfaces. |
+| **After** | Automatic formatting selects PB/EB; `ByteRate` formats and compares normalized rates and implements comparison/equality interfaces. |
+| **Symptom** | Large-size text changes, distinct instances collapse to one value key, or identical recompiled source selects a more specific interface overload. |
+| **Minimal action** | Request an explicit TB format when contractual. Use an identity comparer or explicit cast only when identity or the old overload selection is deliberate. |
+| **Verify** | Cover TB/PB/EB boundaries, `ByteRate.ToString`, equivalent rates, dictionary/set behavior, and overload selection after recompilation. |
+| **Evidence** | Candidate [large-unit tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Bytes/LargeDataUnitTests.cs#L32-L66) and [byte-rate value tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Bytes/ByteRateTests.cs#L57-L92). |
 
 ### Rebaseline classic English inflection corrections
 
@@ -360,7 +356,7 @@ inflection surface covered by #1892.
 | **Symptom** | Exact English word forms change without a compile error. |
 | **Minimal action** | Accept and rebaseline corrected display output, or register an application-specific vocabulary rule during startup when domain language requires another form. |
 | **Verify** | Exercise the application's uncountables, all-caps words, `-ves`, `-axes`, and unrelated `-men` inputs through all three existing APIs. |
-| **Evidence** | Candidate [vocabulary rules](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/Inflections/Vocabularies.cs#L48-L129) and [regression tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/InflectorTests.cs#L35-L164). |
+| **Evidence** | Candidate [vocabulary rules](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/Inflections/Vocabularies.cs#L48-L129) and [regression tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/InflectorTests.cs#L35-L164). |
 
 ## Localization and culture changes
 
@@ -390,7 +386,7 @@ var words = 1.ToWords();
 | **Symptom** | Localized output changes language or number formatting even though the call site is unchanged. |
 | **Minimal action** | Pass `CultureInfo` at the call site when output language is part of the contract. Otherwise align both ambient cultures at the request or job boundary. |
 | **Verify** | Set the two ambient cultures to different values and exercise registry-backed numbers, ordinals, relative dates, durations, collections, and clock notation. Separately verify headings and localized metric scale words against `CurrentUICulture`. |
-| **Evidence** | The candidate's [registry resolution tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/LocaliserRegistryTests.cs#L16-L59). |
+| **Evidence** | The candidate's [registry resolution tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaliserRegistryTests.cs#L16-L59). |
 
 ### Keep same-name custom cultures distinct
 
@@ -406,7 +402,7 @@ formats no longer reuse whichever formatter was resolved first.
 | **Symptom** | Output begins honoring the second instance's custom signs, separators, or date formatting instead of reusing the first instance's formatter. |
 | **Minimal action** | Remove cache-priming workarounds. Reuse a single culture instance only when shared formatting is actually intended. |
 | **Verify** | Resolve two same-name culture instances with visibly different number-format properties and confirm that each produces its own output. |
-| **Evidence** | The candidate [registry cache](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/Configuration/LocaliserRegistry.cs#L15-L41) and [same-name culture test](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/LocaliserRegistryTests.cs#L48-L78). |
+| **Evidence** | The candidate [registry cache](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/Configuration/LocaliserRegistry.cs#L15-L41) and [same-name culture test](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaliserRegistryTests.cs#L48-L78). |
 
 ### Rebaseline localized exact strings
 
@@ -425,19 +421,19 @@ fallback Oxford-comma form `one, two, and three` to the authored British form
 | **Symptom** | Corrected wording, punctuation, number scales, grammatical forms, or supported operations change exact output without a compile failure. |
 | **Minimal action** | Inventory the cultures and operations the application actually uses, compare output side by side, and obtain language review before accepting persisted or user-facing changes. |
 | **Verify** | For each used culture, cover relative dates, durations, collections, numbers and ordinals, parsing, data units, compass output, and clock notation as applicable. |
-| **Evidence** | The candidate's [exact locale-output matrix](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/LocaleFormatterExactTheoryData.cs) and [British collection regression](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/en-GB/EnglishUnitedKingdomCollectionHumanizeTests.cs). |
+| **Evidence** | The candidate's [exact locale-output matrix](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaleFormatterExactTheoryData.cs) and [British collection regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/en-GB/EnglishUnitedKingdomCollectionHumanizeTests.cs). |
 
 The audited exact-output changes include these representative existing
 operations:
 
 | Culture and affected callers | `3.0.10` | Humanizer 4 candidate | Verification and evidence |
 | --- | --- | --- | --- |
-| `en-GB` collection humanization | `one, two, and three` | `one, two and three` | Check three-or-more-item collections. [Regression](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/en-GB/EnglishUnitedKingdomCollectionHumanizeTests.cs) |
-| `pt` and `pt-BR` number-to-words after a scale and exact hundred | `quinze mil duzentos` | `quinze mil e duzentos` | Check `15_200` and analogous scale boundaries. [Regression](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/pt-BR/NumberToWordsTests.cs#L6-L25) |
-| `pl` durations, relative dates, and data units with compound paucal counts | `22 minut`; `za 22 minut`; `22 bajtów` | `22 minuty`; `za 22 minuty`; `22 bajty` | Check 12–14 and 21–25. [Regression](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/pl/PolishPaucalTests.cs#L9-L54) |
-| `el` feminine number-to-words | `εννιακόσια`; `χίλια εννιακόσια` | `εννιακόσιες`; `χίλια εννιακόσιες` | Check feminine 900 and 1900. [Regression](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/el/GreekNumberToWordsTests.cs#L8-L26) |
-| `ru` east/west intercardinal headings | forms such as `востоко-северо-восток` and `западо-юго-запад` | `восток-северо-восток` and `запад-юго-запад` | Check all four affected headings. [Locale data](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/src/Humanizer/Locales/ru.yml#L1891-L1910) |
-| `bs`, `hr`, `sl`, `sr`, and `sr-Latn` feminine ordinal words | numeric fallback such as `1` | authored word such as `prva` | Check several genders and compound values. [Coverage](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs#L1458-L1515) |
+| `en-GB` collection humanization | `one, two, and three` | `one, two and three` | Check three-or-more-item collections. [Regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/en-GB/EnglishUnitedKingdomCollectionHumanizeTests.cs) |
+| `pt` and `pt-BR` number-to-words after a scale and exact hundred | `quinze mil duzentos` | `quinze mil e duzentos` | Check `15_200` and analogous scale boundaries. [Regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/pt-BR/NumberToWordsTests.cs#L6-L25) |
+| `pl` durations, relative dates, and data units with compound paucal counts | `22 minut`; `za 22 minut`; `22 bajtów` | `22 minuty`; `za 22 minuty`; `22 bajty` | Check 12–14 and 21–25. [Regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/pl/PolishPaucalTests.cs#L9-L54) |
+| `el` feminine number-to-words | `εννιακόσια`; `χίλια εννιακόσια` | `εννιακόσιες`; `χίλια εννιακόσιες` | Check feminine 900 and 1900. [Regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/el/GreekNumberToWordsTests.cs#L8-L26) |
+| `ru` east/west intercardinal headings | forms such as `востоко-северо-восток` and `западо-юго-запад` | `восток-северо-восток` and `запад-юго-запад` | Check all four affected headings. [Locale data](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/Locales/ru.yml#L1891-L1910) |
+| `bs`, `hr`, `sl`, `sr`, and `sr-Latn` feminine ordinal words | numeric fallback such as `1` | authored word such as `prva` | Check several genders and compound values. [Coverage](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs#L1458-L1515) |
 
 Do not infer localized-inflection behavior from the current candidate. The
 final #1892 API, resolver, generated data, and package diff must be audited and
@@ -478,22 +474,33 @@ dotnet test <solution>
 - Every target framework and CI build host restores and compiles.
 - Custom `IWordsToNumberConverter` implementations expose `long` members.
 - Any intentional 32-bit narrowing is checked and boundary-tested.
-- No source references `Resources`, `ResourceKeys`, or the removed
-  `DefaultFormatter` resource-key hooks.
+- No custom formatter overrides the removed `DefaultFormatter` resource-key
+  hooks.
 - Analyzer loading emits no `CS8032` or `AD0001`.
 - Identifier, title, enum, date, duration, metric, byte, and classic-inflection
   output was reviewed.
-- `ByteRate` equality and hashing were reviewed anywhere values are used as
-  keys.
+- `ByteRate` equality, hashing, implemented interfaces, and overload selection
+  were reviewed.
 - `CurrentCulture` and `CurrentUICulture` were tested separately.
 - Same-name custom `CultureInfo` instances were tested separately when used.
 - Every used culture and applicable localized operation has reviewed output.
+
+:::note Incidental resource implementation surface
+
+`Resources` and `ResourceKeys` were public resource plumbing, not an intended
+application contract. Humanizer 4 removes those types and the old manifest and
+satellite resources. For completeness, direct callers or reflection can get
+`CS0103`, `CS0246`, or `TypeLoadException`; replace them with the typed operation
+that owns the output, such as `TimeUnit.ToSymbol`. See the
+[`3.0.10` resource metadata](https://github.com/Humanizr/Humanizer/blob/v3.0.10/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L1839-L1860).
+
+:::
 
 ## Related guides and API
 
 - [What's new in Humanizer 4](../whats-new/index.mdx)
 - [Full GitHub release history](https://github.com/Humanizr/Humanizer/releases)
-- [Compare `v3.0.10` with the audited candidate](https://github.com/Humanizr/Humanizer/compare/v3.0.10...42b876dd85a882e3ebee377d36be388b2fbb0b34)
+- [Compare `v3.0.10` with the audited candidate](https://github.com/Humanizr/Humanizer/compare/v3.0.10...146d74c025b80fa615bd8660f3c4c4949f61ac56)
 - [Plan an upgrade](./index.mdx)
 - [Package selection](../start/package-selection.md)
 - [Selected-version API reference](../api/index.md)

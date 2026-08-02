@@ -9,101 +9,159 @@ example: illustrative
 
 # Migrate from 2.14.1 to Humanizer 3
 
-## Orientation
+Use this guide to move from the final stable Humanizer 2 release, `2.14.1`, to
+`3.0.10`. Start from a clean 2.14.1 build, make the package and namespace
+changes, rebuild every Humanizer-consuming assembly, and review each exact
+output contract your application uses.
 
-Start from a clean build on `2.14.1`. Update the package, apply the namespace
-migration, repair the remaining compiler errors by category, and rebuild every
-assembly that references Humanizer. Target `3.0.10` for the completed migration;
-the `3.0.1` and `3.0.8` boundaries explain why intermediate workarounds may
-exist.
+Humanizer 3 first shipped as stable `3.0.1`; there was no stable `3.0.0`.
+Target `3.0.10`, because later 3.x patches restored APIs and fixed analyzer and
+fallback-package defects present in early 3.x builds.
 
-### 1. Check framework and restore tooling
+## Upgrade checklist
 
-Humanizer 3 package assets are `netstandard2.0`, `net48`, `net8.0`, and
-`net10.0`; the 2.x `netstandard1.0` and `net6.0` assets are gone. A `net6.0` or
-`net7.0` consumer therefore resolves the `netstandard2.0` asset.
-
-The `Humanizer` metapackage's locale dependency parsing requires NuGet tooling
-from .NET SDK `9.0.200` or later. If an older restore host cannot be upgraded,
-reference the exact-version `Humanizer.Core` package and the locale packages
-you need.
+1. Record every direct and transitive `Humanizer*` package reference, target
+   framework, centrally pinned dependency, and restore SDK.
+2. Upgrade restore tooling to .NET SDK `9.0.200` or later when using the
+   aggregate `Humanizer` metapackage.
+3. Replace obsolete locale package IDs and retarget unsupported frameworks.
+4. Install `3.0.10`, run the `HUMANIZER001` namespace code fix, and rebuild all
+   callers.
+5. Repair the remaining API and extensibility errors from the matrix below.
+6. Compare exact output for every used operation and culture, especially when
+   Humanizer text is persisted or used as an identifier.
 
 ### 2. Consolidate namespaces
 
-Humanizer 3 moves public types from sub-namespaces such as `Humanizer.Bytes`,
-`Humanizer.Configuration`, and `Humanizer.Localisation` into `Humanizer`.
-Install `Humanizer` `3.0.10`, then use
-[`HUMANIZER001`](../analyzer/index.mdx) to replace old using directives and
-qualified names.
+Run `HUMANIZER001` to replace the old `Humanizer.*` subnamespace imports and
+qualified names, then rebuild every caller. The first matrix row covers the
+reflection, serialization, and precompiled-binary cases that need manual work.
 
-### 3. Replace removed APIs
+## Package, API, and metadata breaks
 
-| 2.x use | Humanizer 3 remediation |
+The only exact shared assembly target is `netstandard2.0`.
+
+| Version | `Humanizer.Core` assets |
 | --- | --- |
-| `"{0}".FormatWith(...)` | Use `string.Format(...)`. |
-| Boolean `ToMetric` overloads | Pass `MetricNumeralFormats`. |
-| `EnglishArticles` | Replace the enum-dependent logic in the application. |
-| `Configurator.EnumDescriptionPropertyLocator` | Call `Configurator.UseEnumDescriptionPropertyLocator(...)` during startup, before enum humanization. |
-| `Resources` or `ResourceKeys` | These remain in stable Humanizer 3 releases through `3.0.10`; their removal is a future `main/preview` migration boundary. |
-| String-keyed `DefaultFormatter` hooks | Use typed `IFormatter`/`DefaultFormatter` members. |
+| `2.14.1` | `netstandard1.0`, `netstandard2.0`, `net6.0` |
+| `3.0.10` | `netstandard2.0`, `net48`, `net8.0`, `net10.0` |
 
-The string `ToQuantity(int, ...)` overloads were absent in early Humanizer 3
-and restored in `3.0.6`. Do not rewrite a working 2.x call merely because it
-fails against `3.0.1`; target `3.0.10`.
+Assembly identity changes from `Humanizer, Version=2.14.0.0` to
+`Humanizer, Version=3.0.0.0`; the public key token remains
+`979442b78dfc278e`.
 
-### 4. Update signatures and extensibility
+| Affected caller or surface | Before in `2.14.1` | After in `3.0.10` and symptom | Migration and verification | Evidence |
+| --- | --- | --- | --- | --- |
+| Imports, qualified names, precompiled callers, reflection, or persisted type names under `Humanizer.Bytes`, `.Configuration`, `.DateTimeHumanizeStrategy`, `.Inflections`, and `.Localisation` | Types use subnamespace identities such as `Humanizer.Bytes.ByteSize`. | Types move to `Humanizer`; source gets `CS0234`, old binaries can throw `TypeLoadException`, and persisted type names stop resolving. | Run `HUMANIZER001`, update reflection/serialization maps, rebuild every caller, and exercise plugin loading. | [PR #1351](https://github.com/Humanizr/Humanizer/pull/1351) |
+| `StringExtensions.FormatWith` callers | `"{0:N2}".FormatWith(culture, value)` compiles. | The type and overloads are removed: `CS1061` or binary type-load failure. | Use `string.Format(culture, format, args)` and rebuild. | [PR #1395](https://github.com/Humanizr/Humanizer/pull/1395) |
+| Boolean `ToMetric` overload callers | `ToMetric(value, hasSpace, useSymbol, decimals)` exists. | The overloads are removed; named calls can get `CS1739`. | Use `MetricNumeralFormats.WithSpace` and, when needed, `UseName`; test boundary output. | [PR #1389](https://github.com/Humanizr/Humanizer/pull/1389) |
+| Code referencing `EnglishArticles` | Public enum values `A`, `An`, and `The` exist. | The enum is removed: `CS0103`, missing-type reflection, or binary failure. | Replace enum-dependent application logic with an application-owned representation. | [PR #1443](https://github.com/Humanizr/Humanizer/pull/1443) |
+| `Configurator.EnumDescriptionPropertyLocator` callers | A public settable property can be assigned after earlier calls. | The property is no longer public. `UseEnumDescriptionPropertyLocator` throws if the locator was already resolved. | Register the locator once during startup, before affected enum humanization; test startup plus the first call. | [PR #1434](https://github.com/Humanizr/Humanizer/pull/1434) |
+| Boxed `Enum` callers and generic enum wrappers | `Humanize(this Enum)` exists; `DehumanizeTo<T>` has weaker constraints. | Humanize is generic and both paths require `where T : struct, Enum`; callers get `CS0453` or `CS0314`. | Preserve the concrete enum type, add the enum constraint, or use the runtime-`Type` dehumanize overload. | [PR #1409](https://github.com/Humanizr/Humanizer/pull/1409) |
+| Custom `IFormatter` implementations and `DefaultFormatter` subclasses | No age member; the protected number hook is `Format(string, int, bool)`. | `IFormatter` requires `TimeSpanHumanize_Age()` and the hook adds `TimeUnit`; callers get `CS0535` or `CS0115`. | Implement the age member and update overrides to accept `TimeUnit`; compile and exercise each custom formatter. | [PR #1068](https://github.com/Humanizr/Humanizer/pull/1068) |
+| `new DefaultFormatter(null)` | The null literal selects the only string constructor. | A `CultureInfo` constructor creates `CS0121` overload ambiguity. | Pass a non-null culture/code, or cast deliberately after reviewing the null contract. | [PR #1468](https://github.com/Humanizr/Humanizer/pull/1468) |
+| Reflection serializers that invoke nonpublic setters on `ByteSize` or `ByteRate` | `ByteSize` properties and `ByteRate.Size`/`Interval` have private setters in metadata. | The properties are getter-only; `GetSetMethod(true)` returns null. | Use public constructors/factories or a serializer converter; test round trips. | [PR #1340](https://github.com/Humanizr/Humanizer/pull/1340) |
+| Nullable-enabled, warnings-as-errors callers | Public metadata is nullable-oblivious; `string?.Humanize()` compiles without a nullable warning. | Published nullable annotations make the same source fail `CS8604`. | Prove non-null at the call boundary and align override annotations; do not suppress without an invariant. | [PR #1437](https://github.com/Humanizr/Humanizer/pull/1437) |
+| `netstandard1.0` projects | A compile/runtime asset exists. | Restore can succeed without a Humanizer compile asset; compilation then fails `CS0246`. | Retarget to `netstandard2.0` or a supported runtime TFM and inspect `project.assets.json`. | [PR #1322](https://github.com/Humanizr/Humanizer/pull/1322) |
+| `net6.0`/`net7.0` callers of Humanizer `DateOnly`/`TimeOnly` APIs | The dedicated net6 asset exposes `DateOnly.Humanize`, `TimeOnly.Humanize`, `DateOnly.ToOrdinalWords`, and `TimeOnly.ToClockNotation`. | The netstandard2.0 fallback cannot expose those BCL types; identical source gets `CS1929`/`CS1061`. | Retarget to `net8.0+` or replace the unavailable calls; compile the exact target framework. | [TFM removal](https://github.com/Humanizr/Humanizer/commit/fc96ab8345ce71bfc130c9432927d0e9aee0139b) |
+| Other net6/net7 callers with warnings as errors | The dedicated net6 asset has no dependency support warning. | The netstandard2.0 fallback brings Immutable 9.0.10, whose target warns that net6 is unsupported; warnings-as-errors fails. | Prefer net8+. Suppress `SuppressTfmSupportBuildWarnings` only after testing the unsupported combination. | [PR #1408](https://github.com/Humanizr/Humanizer/pull/1408) |
+| netstandard2.0/net48 projects pinning dependencies below the v3 floor | Humanizer 2 has no minimum for Immutable, Annotations, or Memory. | V3 requires `System.Collections.Immutable >= 9.0.10`, `System.ComponentModel.Annotations >= 5.0.0`, and `System.Memory >= 4.6.3`; lower pins get `NU1605`. | Remove or raise the pins and inspect the restored graph on each TFM. | [3.0.10 nuspec](https://github.com/Humanizr/Humanizer/blob/v3.0.10/NuSpecs/Humanizer.Core.nuspec#L16-L27) |
+| Aggregate `Humanizer` restores on older NuGet clients | SDK 8.0.419 restores 2.14.1. | The same SDK fails 3.0.10 with `NU1202` for `Humanizer.Core.fil`; current tooling succeeds. | Use SDK 9.0.200+ or reference exact `Humanizer.Core` plus only needed locale packages. | [NuGet.Client #6124](https://github.com/NuGet/NuGet.Client/pull/6124#issuecomment-3391090183) |
+| Direct locale package references | IDs include `Humanizer.Core.bn-BD`, `.fi-FI`, `.ko-KR`, `.ms-MY`, `.nb-NO`, `.th-TH`, and `Humanizer.Core.fr-BE`. | No 3.0.10 exists under those IDs; restore gets `NU1102`. | Use `.bn`, `.fi`, `.ko`, `.ms`, `.nb`, `.th`; use `.fr` and verify `fr-BE` fallback. | [PR #1591](https://github.com/Humanizr/Humanizer/pull/1591) |
 
-Enum humanization now uses `where T : struct, Enum`. Code that stores a value as
-the base `Enum` type must preserve or recover its concrete enum type before
-calling `Humanize`. Generic `DehumanizeTo<T>` callers need the same enum
-constraint.
+## Core behavior and exception breaks
 
-Custom `IFormatter` implementations must implement `TimeSpanHumanize_Age()`.
-Subclasses of `DefaultFormatter` must replace removed string resource-key hooks
-with typed formatter overrides.
+These are output or control-flow changes. They matter only to callers that use
+the affected operation, but they are breaking when text is asserted, persisted,
+parsed, or used as a key.
 
-### 5. Validate behavior and packages
+| Affected caller or surface | `2.14.1` → `3.0.10` example or symptom | Migration and verification | Evidence |
+| --- | --- | --- | --- |
+| `Pascalize`/`Camelize` identifiers | `customer-first-name` changes from `Customer-first-name`/`customer-first-name` to `CustomerFirstName`/`customerFirstName`; digit-segment handling also changes. | Version legacy persisted-name transforms or migrate stored names deliberately; recompile serializers and schema generators. | [PR #1299](https://github.com/Humanizr/Humanizer/pull/1299) |
+| `Dehumanize` on spaced hyphens or whitespace | `customer - first - name`: `CustomerFirstName` → `Customer First Name`; three spaces: empty → three spaces. | Trim/normalize first or retain a legacy key converter; plain `customer-first-name` is unchanged. | [PR #1633](https://github.com/Humanizr/Humanizer/pull/1633) |
+| `Titleize` with no recognized letters | `"@@"` and `"?"`: empty → original punctuation. `Humanize` remains empty in both versions. | Rebaseline or apply an explicit application validation rule. | [PR #1611](https://github.com/Humanizr/Humanizer/pull/1611) |
+| `Humanize(LetterCasing.Sentence)` with punctuation | `I and no one else` → `I, and no one else`; semicolons are also retained. | Rebaseline or strip punctuation explicitly where the old result is contractual. | [PR #1185](https://github.com/Humanizr/Humanizer/pull/1185) |
+| English `ToQuantity(-1)` | `-1 cases`/`-1 hours` → `-1 case`/`-1 hour`; `-2` and `-0.5` remain plural. | Rebaseline the exact `-1` case. | [PR #1548](https://github.com/Humanizr/Humanizer/pull/1548) |
+| Cross-year `DateOnly.Humanize` | 2022-03-01 relative to 2024-03-01: `yesterday` → `2 years ago`; 2025-03-01: `tomorrow` → `one year from now`. | Rebaseline; use date arithmetic rather than prose for business logic. | [PR #1228](https://github.com/Humanizr/Humanizer/pull/1228) |
+| English inflection of `s`/`S` | Empty/exception-prone singularization and unchanged plural become `s`/`S` singular and `ss`/`Ss` plural. | Rebaseline or register a domain rule. | [PR #1178](https://github.com/Humanizr/Humanizer/pull/1178) |
+| English `Pluralize("was")` | `was` → `were`. | Rebaseline or register an explicit irregular rule. | [PR #1244](https://github.com/Humanizr/Humanizer/pull/1244) |
+| English vocabulary for `apparatus`, `pliers`, `lens`, `chassis`, `debris` | Incorrect generic forms become corrected forms such as `apparatus`, `pliers`, `lenses`, `chassis`, and `debris`. | Rebaseline and add domain-specific vocabulary only where needed. | [PR #1356](https://github.com/Humanizr/Humanizer/pull/1356) |
+| English article prefix/suffix round trip | `The General Theory of Relativity` round-trips as `Theory of Relativity The General` → the original phrase. | Update ordering and snapshot expectations. | [PR #1421](https://github.com/Humanizr/Humanizer/pull/1421) |
+| `ToMetric` at a rounded threshold | `999500d` with zero decimals: `1000k` → `1M`. | Rebaseline every used metric boundary. | [PR #1570](https://github.com/Humanizr/Humanizer/pull/1570) |
+| Registry mutation after first resolution | A later formatter/converter registration was accepted → throws `InvalidOperationException` after the registry freezes. | Register every customization during startup, before the first resolution; test startup ordering. | [PR #1635](https://github.com/Humanizr/Humanizer/pull/1635) |
+| Multiple custom `CultureInfo` instances sharing a name | Each instance could retain a distinct format → v3 caches by culture name, so later instances reuse the first formatter. | Reuse one culture instance or avoid same-name divergent formats; probe both instances. | [PR #1637](https://github.com/Humanizr/Humanizer/pull/1637) |
+| `ByteSize.TryParse` with an out-of-range bit count | A huge bit value is accepted/clamped → parsing returns `false` and zero. | Treat the invalid input as a parse failure and update error handling. | [PR #1595](https://github.com/Humanizr/Humanizer/pull/1595) |
 
-Test `Titleize`, `Pascalize`, `Dehumanize`, enum humanization, quantities, and
-localized output. Humanizer 3 treats hyphens as `Pascalize` delimiters and
-preserves no-letter strings in `Humanize`/`Titleize`. Locale package IDs also
-normalize several region-specific IDs: `bn-BD`, `fi-FI`, `ko-KR`, `ms-MY`,
-`nb-NO`, and `th-TH` become language-only IDs; `fr-BE` has no direct metapackage
-replacement.
+## Localized output breaks
 
-The source evidence is the
-[2.14.1 to 3.0.1 tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.14.1...v3.0.1)
-and [breaking-change report #1656](https://github.com/Humanizr/Humanizer/issues/1656).
+Run culture-specific golden tests for every operation you use. The verified
+corpus compared 53 cultures and 105 calls per version; newly activated locales
+are additive and are not listed as breaks.
+
+| Affected output | `2.14.1` → `3.0.10` example | Evidence |
+| --- | --- | --- |
+| Bulgarian durations | One day `един ден` → `1 ден`; word forms become localized and gendered. | [PR #1460](https://github.com/Humanizr/Humanizer/pull/1460) |
+| Russian and Ukrainian durations | `один день` → `1 день`, with related word-form corrections. | [PR #1445](https://github.com/Humanizr/Humanizer/pull/1445), [PR #1449](https://github.com/Humanizr/Humanizer/pull/1449) |
+| Japanese year duration | `1 年間の` → `1 年`. | [PR #1082](https://github.com/Humanizr/Humanizer/pull/1082) |
+| Portuguese relative time | `3 horas atrás` → `há 3 horas`; `em 3 horas` → `daqui a 3 horas`. | [PR #1498](https://github.com/Humanizr/Humanizer/pull/1498) |
+| Chinese “now” | `今天` → `现在` for simplified Chinese and `現在` for traditional Chinese. | [PR #1239](https://github.com/Humanizr/Humanizer/pull/1239) |
+| Finnish relative time and durations | English fallback such as `tomorrow` → Finnish such as `huomenna`. | [PR #1300](https://github.com/Humanizr/Humanizer/pull/1300) |
+| Italian word-form durations | `one day` → `un giorno`. | [PR #1428](https://github.com/Humanizr/Humanizer/pull/1428) |
+| Hungarian duration and number output | Fallback/word output becomes Hungarian and some non-word units become numeric. | [PR #1501](https://github.com/Humanizr/Humanizer/pull/1501) |
+| Croatian missing relative-time key | `+3 days` throws `ArgumentException` → returns `3 days from now` via the neutral fallback. | [PR #1426](https://github.com/Humanizr/Humanizer/pull/1426) |
+| Arabic negative numbers | `ناقص واحد` → `سالب واحد`. | [PR #1539](https://github.com/Humanizr/Humanizer/pull/1539) |
+| Bulgarian number words | `един` → `едно`; `хиляда` → `една хиляда`. | [PR #1460](https://github.com/Humanizr/Humanizer/pull/1460) |
+| German number words | `ein` → `eins`; `einhundertein` → `einhunderteins`. | [PR #1536](https://github.com/Humanizr/Humanizer/pull/1536) |
+| Croatian number words | `- jedan` → `minus jedan`; `devetdeset` → `devedeset`. | [PR #1250](https://github.com/Humanizr/Humanizer/pull/1250) |
+| Russian/Ukrainian negative numbers below 1000 | A partial `минус` becomes a complete phrase such as `минус один`. | [PR #1461](https://github.com/Humanizr/Humanizer/pull/1461) |
+| Vietnamese negative numbers | `IndexOutOfRangeException` → valid Vietnamese output beginning `trừ`. | [PR #1569](https://github.com/Humanizr/Humanizer/pull/1569) |
 
 ## Example
 
-This illustrative migration replaces both an old namespace and a removed
-helper:
-
 ```csharp
-// Humanizer 2
+// Humanizer 2.14.1
 using Humanizer.Configuration;
 var text = "{0:N2}".FormatWith(culture, value);
 
-// Humanizer 3
+// Humanizer 3.0.10
 using Humanizer;
 var text = string.Format(culture, "{0:N2}", value);
 ```
 
-## Pitfall
+## Pitfalls
 
-Do not suppress `HUMANIZER001` across the solution before running its code fix.
-The diagnostic covers only namespace consolidation. Once those mechanical
-changes are applied, the remaining compiler errors point to real API,
-constraint, or package changes.
+- Do not suppress `HUMANIZER001` before running its code fix. It covers the
+  namespace move only; remaining compiler errors are real API changes.
+- Do not infer a break from an early 3.x prerelease or patch. `ToQuantity(int)`
+  and the first-word title-case behavior are present/correct in `3.0.10`.
+- Do not treat all net6 consumption as broken. General callers can select the
+  netstandard2.0 asset; the DateOnly/TimeOnly surface and dependency warning are
+  the verified net6/net7 boundaries.
+- Enum dehumanization remains case-insensitive despite contradictory 3.x XML
+  wording.
 
-## Version notes
+## Verification
 
-This migration guide is frozen in the Humanizer `3.0.10` documentation snapshot.
+```console
+dotnet restore <solution> --force-evaluate
+dotnet list <project> package --include-transitive
+dotnet build <solution>
+dotnet test <solution>
+```
 
-`3.0.1` is the first supported stable Humanizer 3 snapshot. Continue through
-`3.0.8` and `3.0.10`: those releases restore APIs and correct analyzer loading
-and fallback packaging. The migration is not complete at `3.0.1`.
+Inspect `obj/project.assets.json` for every target framework. Exercise plugins,
+custom formatters, serializers, registry startup order, persisted identifiers,
+and each culture-specific exact-output contract before release.
+
+:::note Incidental resource implementation surface
+
+`Resources` and `ResourceKeys` remain in stable Humanizer 3 releases through `3.0.10`,
+but they were resource plumbing rather than an intended application contract.
+For completeness, some plural-form keys disappear and some retained values
+change; direct callers can therefore get `ArgumentException` or different text.
+Move such code to formatter APIs. See [PR #1427](https://github.com/Humanizr/Humanizer/pull/1427).
+
+:::
 
 ## Related guides and API
 
@@ -111,3 +169,7 @@ and fallback packaging. The migration is not complete at `3.0.1`.
 - [Humanizer 3 patch line](./version-3-patch-line.mdx)
 - [Analyzer migration and CI](../analyzer/index.mdx)
 - [Selected-version API reference](../api/index.md)
+- [Breaking-change report #1656](https://github.com/Humanizr/Humanizer/issues/1656)
+- [Compare `v2.14.1` with `v3.0.1`](https://github.com/Humanizr/Humanizer/compare/v2.14.1...v3.0.1)
+
+This page is frozen in the Humanizer `3.0.10` documentation snapshot.
