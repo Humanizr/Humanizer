@@ -8,7 +8,7 @@ Here is a checklist you should tick through before submitting a pull request:
  - [ ] Xml documentation is added/updated for the addition/change
  - [ ] Your PR is (re)based on top of the latest commits from the `main` branch (more info below)
  - [ ] Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
- - [ ] Issue communication is current per `AGENTS.md`, or N/A: `<issue comment/evidence>`
+ - [ ] For issue-driven work, public issue communication includes a comment URL and current reproduction/resolution evidence; use N/A only when no related issue exists
  - [ ] Readme is updated if you change an existing feature or add a new one
  - [ ] Run the applicable validation from `AGENTS.md`; documentation changes include the documentation gates
 
