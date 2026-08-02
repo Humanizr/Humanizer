@@ -12,7 +12,15 @@ Fallback: use equivalent `gh pr view`, review-thread GraphQL count, and `gh pr c
 
 ## Merge gate
 
-Squash only when: open, non-draft; review acceptable; 0 unresolved non-outdated threads; checks green; mergeable/clean; validated head equals PR head; babysit clean.
+Apply the repository-wide terminal pull request gate in `AGENTS.md`, including
+its `needs-human` pause semantics.
+
+For locale batches, the pull request body additionally records the exact-pair
+locale, schema, generator, and runtime matrices with no partial or English
+fallback. Central status cannot advance to `ready-to-merge` until the
+repository-wide gate and locale evidence pass.
+
+Locale batches use squash merge.
 
 ## Wake child agent only for deltas
 

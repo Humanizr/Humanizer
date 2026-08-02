@@ -55,3 +55,12 @@ These instructions apply to the entire repository.
 - Keep changes focused with clear commit messages.
 - Follow repository PR template expectations: summarize changes, list tests run, and reference related issues (e.g., `fixes #123`) when applicable.
 - Ensure the codebase remains backward-compatible unless intentionally introducing a documented breaking change.
+
+## Terminal Pull Request Gate
+- Every agent-managed pull request must be ready, never draft. Before merging a new or existing pull request, reconcile its body with the current template: remove stale draft instructions and add the Terminal evidence section.
+- After the final push, authenticate and record the exact `{baseSha, headSha}` pair in the pull request body. Run the actual `agent-utilities:thermo-nuclear-review` and `agent-utilities:thermo-nuclear-code-quality-review` skills against that pair. Fix every real finding and push the replacement head.
+- Confirm the head is current and mergeable. Run every applicable test, format, build, package, documentation, browser, security, and platform gate. Resolve actionable review threads; mark any remaining item `needs-human` and pause the merge. Require terminal hosted CI and ruleset checks to be green.
+- Run the actual `compound-engineering:ce-babysit-pr` skill against the exact pair through the current-head reviewer lifecycle, CI, base movement, and a quiet settle, and record its terminal clean evidence. If either SHA changes, invalidate prior evidence and rerun both Thermos reviews, every applicable check, and babysitting against the replacement pair.
+- Security changes also require Codex Security proof-of-concept or attack-path closure. Documentation or UI changes require rendered desktop and mobile checks in light and dark modes, accessibility and link checks, and version-snapshot validation. Localization or source-generator changes require every applicable locale, schema, generator, and runtime matrix with no partial or English fallback.
+- Merge only the exact approved head. Then verify the merge on the default branch, the changed behavior, and any applicable security dashboard; safely remove worktrees and branches and archive completed tasks.
+- Thermos is a merge-director evidence gate recorded in each pull request body using the template, not a GitHub required status. The active repository ruleset separately enforces hosted CI, CodeQL, DevSkim, and code-quality checks.
