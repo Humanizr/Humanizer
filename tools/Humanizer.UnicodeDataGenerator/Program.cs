@@ -17,11 +17,11 @@ var repositoryRoot = FindRepositoryRoot(Directory.GetCurrentDirectory());
 var inputDirectory = Path.GetFullPath(args[0]);
 var inputs = new Dictionary<string, string>(StringComparer.Ordinal)
 {
-    ["UnicodeData.txt"] = "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f",
-    ["CaseFolding.txt"] = "6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb",
-    ["Scripts.txt"] = "9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039",
-    ["ScriptExtensions.txt"] = "049117ce26b9769fe2749b06eef51a50a89faef4a97764dd2d81daa715980700",
-    ["DerivedNormalizationProps.txt"] = "4d4c03892dea9146d674b686e495df2d55a28d071ac474041d73518f887abddc"
+    ["UnicodeData.txt"] = "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f", // DevSkim: ignore DS173237
+    ["CaseFolding.txt"] = "6f1f9c588eb4a5c718d9e8f93b782685e5c7fec872cf05e8e6878053599e09bb", // DevSkim: ignore DS173237
+    ["Scripts.txt"] = "9e88f0a677df47311106340be8ede2ecdacd9c1c931831218d2be6d5508e0039", // DevSkim: ignore DS173237
+    ["ScriptExtensions.txt"] = "049117ce26b9769fe2749b06eef51a50a89faef4a97764dd2d81daa715980700", // DevSkim: ignore DS173237
+    ["DerivedNormalizationProps.txt"] = "4d4c03892dea9146d674b686e495df2d55a28d071ac474041d73518f887abddc" // DevSkim: ignore DS173237
 };
 
 foreach (var input in inputs)
@@ -279,7 +279,7 @@ static string GenerateLetterMarkBlock(string?[] categories, string hash)
         ranges.Count,
         998,
         base64,
-        "dc113e9cd9168a99f4232c34ad07d1c7cf9cf704bccdaf719235a12fdd068e81");
+        "dc113e9cd9168a99f4232c34ad07d1c7cf9cf704bccdaf719235a12fdd068e81"); // DevSkim: ignore DS173237
     var builder = new StringBuilder();
     builder.AppendLine($"    // Unicode 16.0.0 letter and mark categories, compressed into {ranges.Count:N0} ranges.");
     builder.AppendLine("    // UnicodeData.txt SHA-256:");
@@ -331,8 +331,8 @@ static string GenerateMappingBlock(
     var base64 = Convert.ToBase64String(bytes.ToArray());
     var expected = identifier switch
     {
-        "SimpleCaseFold" => (697, 1_484, "72486c276e049596d85cabcc3403a594412070c77dbb7ae7bff4e881d3742013"),
-        "SimpleUppercase" => (690, 1_477, "c79db3da3d65ceaefddf07c370ccdc69f470769fb3933889be9d8841b836d085"),
+        "SimpleCaseFold" => (697, 1_484, "72486c276e049596d85cabcc3403a594412070c77dbb7ae7bff4e881d3742013"), // DevSkim: ignore DS173237
+        "SimpleUppercase" => (690, 1_477, "c79db3da3d65ceaefddf07c370ccdc69f470769fb3933889be9d8841b836d085"), // DevSkim: ignore DS173237
         _ => throw new InvalidOperationException($"Unknown generated mapping '{identifier}'.")
     };
     AssertGenerated(
@@ -397,7 +397,7 @@ static string GenerateCaseCategoryBlock(string?[] categories, string hash)
         ranges.Count,
         1_323,
         base64,
-        "c24753dc47d8a13f90c8c0e7b87e0d1c17c81438248acfdfa58ae8b9f601cfb2");
+        "c24753dc47d8a13f90c8c0e7b87e0d1c17c81438248acfdfa58ae8b9f601cfb2"); // DevSkim: ignore DS173237
     var builder = new StringBuilder();
     builder.AppendLine("    // Unicode 16.0.0 lowercase, uppercase, and titlecase categories, compressed");
     builder.AppendLine($"    // into {ranges.Count:N0} ranges. UnicodeData.txt SHA-256:");
@@ -486,7 +486,7 @@ static string GenerateScriptBlock(
         ranges.Count,
         534,
         RemoveWhitespace(generatedRows.ToString()),
-        "096be4d227f52d120e203d57c3c77c39433b719f6b688c063455726cc0168857");
+        "096be4d227f52d120e203d57c3c77c39433b719f6b688c063455726cc0168857"); // DevSkim: ignore DS173237
     builder.Append(generatedRows);
     builder.Append("    ];");
     return builder.ToString();
@@ -527,7 +527,7 @@ static string GenerateNfcQuickCheckBlock(string path, string hash)
         ranges.Count,
         119,
         RemoveWhitespace(generatedRows.ToString()),
-        "8678af01da9fcd0759eae1795136f8487a185b902fc2ac5f8a8c5d2033d7bccb");
+        "8678af01da9fcd0759eae1795136f8487a185b902fc2ac5f8a8c5d2033d7bccb"); // DevSkim: ignore DS173237
     builder.Append(generatedRows);
     builder.Append("    ];");
     return builder.ToString();

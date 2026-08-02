@@ -1826,11 +1826,11 @@ surfaces:
             "AcceptedCultures",
             "windows-nls.json");
         Assert.Equal(
-            "6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33",
-            GetSha256(macOsPath)); // DevSkim: ignore DS173237
+            "6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33", // DevSkim: ignore DS173237
+            GetSha256(macOsPath));
         Assert.Equal(
-            "21c7919a1d5534622c31b10f74e998fb70dbb8952a541c13e3ba9da9d20fa19c",
-            GetSha256(windowsPath)); // DevSkim: ignore DS173237
+            "21c7919a1d5534622c31b10f74e998fb70dbb8952a541c13e3ba9da9d20fa19c", // DevSkim: ignore DS173237
+            GetSha256(windowsPath));
 
         var expectedOwners = new Dictionary<string, string>(
             StringComparer.OrdinalIgnoreCase);
