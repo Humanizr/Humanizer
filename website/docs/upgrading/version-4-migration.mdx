@@ -213,19 +213,20 @@ title-case, and culture-dependent casing behavior:
 | `"Research&Development".Humanize()` | `Research development` | `Research & development` |
 | `"thisIs3.5mmLong".Titleize()` | `This Is 3 5mm Long` | `This Is 3.5mm Long` |
 | `"customer name 1".Pascalize()` | `CustomerName 1` | `CustomerName1` |
+| `"everything0".Dehumanize()` | `Everything 0` | `Everything0` |
 | `"some.text.here".Pascalize()` | `Some.text.here` | `SomeTextHere` |
 | `"__customer_name".Camelize()` | `customerName` | `__customerName` |
 | `"IstanbulInput".Underscore()` under `tr-TR` | `ıstanbul_ınput` | `istanbul_input` |
 
 | Migration detail | What to do |
 | --- | --- |
-| **Affected callers** | Exact-output assertions and code that uses Humanizer output as identifiers, URLs, cache keys, database keys, or persisted labels. |
-| **Before** | Ampersands are dropped, some separators survive identifier conversion, and identifier casing follows the ambient culture. |
-| **After** | Ampersands are tokens, spaces and dots are identifier boundaries, and identifier casing is culture-invariant. |
+| **Affected callers** | Exact-output assertions and code that uses `Humanize`, `Titleize`, `Pascalize`, `Camelize`, `Dehumanize`, or `Underscore` output as identifiers, URLs, cache keys, database keys, or persisted labels. |
+| **Before** | Ampersands are dropped, some separators survive identifier conversion, `Dehumanize` can insert a space before a trailing digit, and identifier casing follows the ambient culture. |
+| **After** | Ampersands are tokens, spaces and dots are identifier boundaries, `Dehumanize` keeps the digit attached, and identifier casing is culture-invariant. |
 | **Symptom** | Snapshot failures, changed generated identifiers, or a lookup miss against a previously persisted Humanizer-derived value. |
 | **Minimal action** | Rebaseline display-only output. For durable identifiers, preserve the old value in application code or run an explicit data migration instead of silently regenerating keys. |
-| **Verify** | Compare representative punctuation, numeric suffixes, acronyms, and Turkish/Azeri casing under every operation the application uses. |
-| **Evidence** | Candidate tests for [ampersands](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/StringHumanizeTests.cs#L130-L151) and [identifier transformations](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/InflectorTests.cs#L186-L336). |
+| **Verify** | Compare representative punctuation, numeric suffixes including `Dehumanize`, acronyms, and Turkish/Azeri casing under every operation the application uses. |
+| **Evidence** | Candidate tests for [ampersands](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/StringHumanizeTests.cs#L130-L151), [identifier transformations](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/InflectorTests.cs#L186-L336), and the [Pascalize path used by Dehumanize](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/StringDehumanizeExtensions.cs#L32-L45). |
 
 ### Preserve authored enum metadata casing
 
@@ -268,7 +269,7 @@ Existing date operations intentionally change their text:
 | **Symptom** | Text changes without a compiler error. |
 | **Minimal action** | Rebaseline display strings. If business logic depends on the text, replace that logic with date arithmetic before upgrading. |
 | **Verify** | Cover equal dates, cross-year adjacent dates, 6/7 and 27/28 days, and 89/90/91 and 729/730/731 days in each used culture. |
-| **Evidence** | Candidate [same-date tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/DateOnlyHumanizeTests.cs#L7-L45), [precision-boundary tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/DateTimeHumanizePrecisionStrategyTests.cs#L99-L136), and the [week-selection algorithm](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/DateTimeHumanizeStrategy/DateTimeHumanizeAlgorithms.cs#L202-L224). |
+| **Evidence** | Candidate [same-date tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/DateOnlyHumanizeTests.cs#L7-L45), [precision-boundary tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/DateTimeHumanizePrecisionStrategyTests.cs#L99-L136), and the [week-selection algorithm](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/DateTimeHumanizeStrategy/DateTimeHumanizeAlgorithms.cs#L231-L239). |
 
 ### Recheck month and year `TimeSpan` decomposition
 
@@ -332,7 +333,7 @@ Existing byte APIs change at large unit and value-object boundaries:
 | **Symptom** | Large-size text changes, distinct instances collapse to one value key, or identical recompiled source selects a more specific interface overload. |
 | **Minimal action** | Request an explicit TB format when contractual. Use an identity comparer or explicit cast only when identity or the old overload selection is deliberate. |
 | **Verify** | Cover TB/PB/EB boundaries, `ByteRate.ToString`, equivalent rates, dictionary/set behavior, and overload selection after recompilation. |
-| **Evidence** | Candidate [large-unit tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Bytes/LargeDataUnitTests.cs#L32-L66) and [byte-rate value tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Bytes/ByteRateTests.cs#L57-L92). |
+| **Evidence** | Candidate [large-unit tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Bytes/LargeDataUnitTests.cs#L32-L66), [comparison/equality tests](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Bytes/ByteRateTests.cs#L149-L175), and the [`ByteRate` interface surface](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet8_0.verified.txt#L6-L19); a focused stable/preview compile probe selects `object`/`IComparable` respectively. |
 
 ### Rebaseline classic English inflection corrections
 
@@ -433,7 +434,8 @@ operations:
 | `pl` durations, relative dates, and data units with compound paucal counts | `22 minut`; `za 22 minut`; `22 bajtów` | `22 minuty`; `za 22 minuty`; `22 bajty` | Check 12–14 and 21–25. [Regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/pl/PolishPaucalTests.cs#L9-L54) |
 | `el` feminine number-to-words | `εννιακόσια`; `χίλια εννιακόσια` | `εννιακόσιες`; `χίλια εννιακόσιες` | Check feminine 900 and 1900. [Regression](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/el/GreekNumberToWordsTests.cs#L8-L26) |
 | `ru` east/west intercardinal headings | forms such as `востоко-северо-восток` and `западо-юго-запад` | `восток-северо-восток` and `запад-юго-запад` | Check all four affected headings. [Locale data](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/src/Humanizer/Locales/ru.yml#L1891-L1910) |
-| `bs`, `hr`, `sl`, `sr`, and `sr-Latn` feminine ordinal words | numeric fallback such as `1` | authored word such as `prva` | Check several genders and compound values. [Coverage](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs#L1458-L1515) |
+| `bs` feminine ordinal words | English fallback `second` | Bosnian `druga` | Check several genders and compound values. [Coverage](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs#L1458-L1470) |
+| `hr`, `sl`, `sr`, and `sr-Latn` feminine ordinal words | numeric fallback such as `1` | authored word such as `prva` | Check several genders and compound values. [Coverage](https://github.com/Humanizr/Humanizer/blob/146d74c025b80fa615bd8660f3c4c4949f61ac56/tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs#L1471-L1515) |
 
 Do not infer localized-inflection behavior from the current candidate. The
 final #1892 API, resolver, generated data, and package diff must be audited and

@@ -12,12 +12,16 @@ test('the 3.0.10 snapshot carries the verified 2.14.1 migration matrix', async (
   ]);
 
   assert.equal(snapshot, overlay);
+  assert.match(snapshot, /^## Consolidate namespaces \{#2-consolidate-namespaces\}$/m);
+  assert.match(snapshot, /\| Affected caller or surface \| Break and migration from `2\.14\.1` to `3\.0\.10` \| Evidence \|/);
   assert.match(snapshot, /new DefaultFormatter\(null\)/);
   assert.match(snapshot, /GetSetMethod\(true\)/);
-  assert.match(snapshot, /string\?\.Humanize\(\)/);
+  assert.match(snapshot, /string\? value; value\.Humanize\(\)/);
   assert.match(snapshot, /DateOnly\.ToOrdinalWords/);
   assert.match(snapshot, /System\.Collections\.Immutable >= 9\.0\.10/);
   assert.match(snapshot, /Humanizer\.Core\.fr-BE/);
+  assert.match(snapshot, /Humanizer\.Core\.fil-PH/);
+  assert.match(snapshot, /"everything0"\.Dehumanize\(\).*Everything0.*Everything 0/);
   assert.match(snapshot, /Registry mutation after first resolution/);
   assert.match(snapshot, /Vietnamese negative numbers/);
   assert.match(sidebar, /upgrading\/version-3-migration/);
@@ -32,6 +36,8 @@ test('the v4 migration guide is pinned to the audited live preview', async () =>
   assert.match(guide, /buildId=130158/);
   assert.match(guide, /three billion/);
   assert.match(guide, /Pick\(IComparable\)/);
+  assert.match(guide, /"everything0"\.Dehumanize\(\).*Everything 0.*Everything0/);
+  assert.match(guide, /`bs` feminine ordinal words \| English fallback `second` \| Bosnian `druga`/);
   assert.doesNotMatch(guide, /42b876dd85a882e3ebee377d36be388b2fbb0b34/);
   assert.doesNotMatch(guide, /`a Great Movie` \| `A Great Movie`/);
   assert.doesNotMatch(guide, /`1\.00k` \| `1k`/);
