@@ -457,7 +457,9 @@ public sealed partial class HumanizerSourceGenerator
                     builder.AppendLine("),");
                 }
 
-                builder.AppendLine("                    ]),");
+                builder.Append("                    ], InflectionCountability.");
+                builder.Append(ToEnumName(lexeme.Countability));
+                builder.AppendLine("),");
             }
 
             builder.AppendLine("            ],");
@@ -541,6 +543,8 @@ public sealed partial class HumanizerSourceGenerator
                 builder.Append("(InflectionUnicodeScripts)");
                 builder.Append(GetScriptMask(rule.Scripts).ToString(CultureInfo.InvariantCulture));
                 builder.Append('u');
+                builder.Append(", (InflectionCountability)");
+                builder.Append(GetCountabilityMask(rule.Countabilities).ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("),");
             }
 
@@ -1239,6 +1243,7 @@ public sealed partial class HumanizerSourceGenerator
 
                 lexemes.Add(new(
                     id,
+                    countability,
                     sense,
                     singular,
                     dictionaryPlural,
@@ -1542,6 +1547,7 @@ public sealed partial class HumanizerSourceGenerator
                     id,
                     direction,
                     priority,
+                    countabilities,
                     prefix,
                     suffix,
                     precedingNot,
@@ -1898,6 +1904,25 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             return (uint)mask;
+        }
+
+        static byte GetCountabilityMask(ImmutableArray<string> countabilities)
+        {
+            byte mask = 0;
+            foreach (var countability in countabilities)
+            {
+                mask |= countability switch
+                {
+                    "count" => 1 << 0,
+                    "mass" => 1 << 1,
+                    "collective" => 1 << 2,
+                    "plural-only" => 1 << 3,
+                    _ => throw new InvalidOperationException(
+                        $"Unsupported inflection countability '{countability}'.")
+                };
+            }
+
+            return mask;
         }
 
         static GeneratorUnicodeScripts GetScript(string script) =>
@@ -3015,12 +3040,14 @@ public sealed partial class HumanizerSourceGenerator
 
     sealed class InflectionLexemeInput(
         string id,
+        string countability,
         string? sense,
         InflectionFormInput singular,
         InflectionFormInput dictionaryPlural,
         ImmutableDictionary<string, InflectionFormInput> display)
     {
         public string Id { get; } = id;
+        public string Countability { get; } = countability;
         public string? Sense { get; } = sense;
         public InflectionFormInput Singular { get; } = singular;
         public InflectionFormInput DictionaryPlural { get; } = dictionaryPlural;
@@ -3039,6 +3066,7 @@ public sealed partial class HumanizerSourceGenerator
         string id,
         string direction,
         int priority,
+        ImmutableArray<string> countabilities,
         string prefix,
         string suffix,
         ImmutableArray<string> precedingNot,
@@ -3053,6 +3081,7 @@ public sealed partial class HumanizerSourceGenerator
         public string Id { get; } = id;
         public string Direction { get; } = direction;
         public int Priority { get; } = priority;
+        public ImmutableArray<string> Countabilities { get; } = countabilities;
         public string Prefix { get; } = prefix;
         public string Suffix { get; } = suffix;
         public ImmutableArray<string> PrecedingNot { get; } = precedingNot;

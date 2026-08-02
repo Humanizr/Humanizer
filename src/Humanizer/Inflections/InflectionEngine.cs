@@ -35,6 +35,17 @@ enum InflectionQuantitySelector
     ExactNumericSingleton
 }
 
+[Flags]
+enum InflectionCountability : byte
+{
+    None = 0,
+    Count = 1 << 0,
+    Mass = 1 << 1,
+    Collective = 1 << 2,
+    PluralOnly = 1 << 3,
+    All = Count | Mass | Collective | PluralOnly
+}
+
 readonly struct InflectionQuantity
 {
     readonly CardinalPluralOperands operands;
@@ -116,7 +127,8 @@ sealed class InflectionLexeme(
     string dictionaryPlural,
     string[] acceptedSingular,
     string[] acceptedDictionaryPlural,
-    InflectionDisplayForm[] display)
+    InflectionDisplayForm[] display,
+    InflectionCountability countability = InflectionCountability.Count)
 {
     public string Id { get; } = id;
     public string Singular { get; } = singular;
@@ -124,6 +136,7 @@ sealed class InflectionLexeme(
     public string[] AcceptedSingular { get; } = acceptedSingular;
     public string[] AcceptedDictionaryPlural { get; } = acceptedDictionaryPlural;
     public InflectionDisplayForm[] Display { get; } = display;
+    public InflectionCountability Countability { get; } = countability;
 
     public bool TryGetDisplay(
         CardinalPluralCategory category,
@@ -155,12 +168,14 @@ readonly struct InflectionLexemeRecord(
     string id,
     int singularEntryIndex,
     int dictionaryPluralEntryIndex,
-    InflectionLexemeDisplay[] display)
+    InflectionLexemeDisplay[] display,
+    InflectionCountability countability)
 {
     public string Id { get; } = id;
     public int SingularEntryIndex { get; } = singularEntryIndex;
     public int DictionaryPluralEntryIndex { get; } = dictionaryPluralEntryIndex;
     public InflectionLexemeDisplay[] Display { get; } = display;
+    public InflectionCountability Countability { get; } = countability;
 
     public bool TryGetDisplay(
         CardinalPluralCategory category,
@@ -288,7 +303,8 @@ readonly struct InflectionRule
         string dictionaryPlural,
         bool reverseEnabled,
         bool requiresExistingLexeme,
-        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All,
+        InflectionCountability countabilities = InflectionCountability.All)
         : this(
             id,
             direction,
@@ -302,7 +318,8 @@ readonly struct InflectionRule
             excludedLexemes: Array.Empty<ushort>(),
             reverseEnabled,
             requiresExistingLexeme,
-            scripts)
+            scripts,
+            countabilities)
     {
     }
 
@@ -318,7 +335,8 @@ readonly struct InflectionRule
         string[] excludedSurfaces,
         bool reverseEnabled,
         bool requiresExistingLexeme,
-        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All,
+        InflectionCountability countabilities = InflectionCountability.All)
         : this(
             id,
             direction,
@@ -332,7 +350,8 @@ readonly struct InflectionRule
             excludedLexemes: Array.Empty<ushort>(),
             reverseEnabled,
             requiresExistingLexeme,
-            scripts)
+            scripts,
+            countabilities)
     {
     }
 
@@ -349,7 +368,8 @@ readonly struct InflectionRule
         ushort[] excludedLexemes,
         bool reverseEnabled,
         bool requiresExistingLexeme,
-        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All,
+        InflectionCountability countabilities = InflectionCountability.All)
         : this(
             id,
             direction,
@@ -363,7 +383,8 @@ readonly struct InflectionRule
             new InflectionEntryIndexes(excludedLexemes),
             reverseEnabled,
             requiresExistingLexeme,
-            scripts)
+            scripts,
+            countabilities)
     {
     }
 
@@ -380,7 +401,8 @@ readonly struct InflectionRule
         int[] excludedLexemes,
         bool reverseEnabled,
         bool requiresExistingLexeme,
-        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All,
+        InflectionCountability countabilities = InflectionCountability.All)
         : this(
             id,
             direction,
@@ -394,7 +416,8 @@ readonly struct InflectionRule
             new InflectionEntryIndexes(excludedLexemes),
             reverseEnabled,
             requiresExistingLexeme,
-            scripts)
+            scripts,
+            countabilities)
     {
     }
 
@@ -411,7 +434,8 @@ readonly struct InflectionRule
         InflectionEntryIndexes excludedLexemes,
         bool reverseEnabled,
         bool requiresExistingLexeme,
-        InflectionUnicodeScripts scripts)
+        InflectionUnicodeScripts scripts,
+        InflectionCountability countabilities)
     {
         Id = id;
         Direction = direction;
@@ -426,6 +450,7 @@ readonly struct InflectionRule
         ReverseEnabled = reverseEnabled;
         RequiresExistingLexeme = requiresExistingLexeme;
         Scripts = scripts;
+        Countabilities = countabilities;
     }
 
     public string Id { get; }
@@ -441,9 +466,15 @@ readonly struct InflectionRule
     public bool ReverseEnabled { get; }
     public bool RequiresExistingLexeme { get; }
     public InflectionUnicodeScripts Scripts { get; }
+    public InflectionCountability Countabilities { get; }
 
     public bool SupportsScripts(InflectionUnicodeScripts detectedScripts) =>
         (Scripts & detectedScripts) != InflectionUnicodeScripts.None;
+
+    public bool SupportsCountability(InflectionCountability countability) =>
+        countability == InflectionCountability.None
+            ? Countabilities == InflectionCountability.All
+            : (Countabilities & countability) != InflectionCountability.None;
 
     public bool TryGetTemplate(
         CardinalPluralCategory? category,
@@ -880,12 +911,19 @@ sealed class InflectionBundle
                 detectedScripts);
         }
 
+        var countability = TryFindAcceptedSingular(
+                normalized,
+                comparison,
+                out var lexemeIndex)
+            ? lexemes[lexemeIndex].Countability
+            : InflectionCountability.None;
         InflectionRule? selectedRule = null;
         string? selectedStem = null;
         foreach (var rule in rules)
         {
             if (rule.Direction == InflectionDirection.Forward &&
                 rule.SupportsScripts(detectedScripts) &&
+                rule.SupportsCountability(countability) &&
                 !Contains(rule.ExcludedSurfaces, normalized, comparison) &&
                 TryGetStem(rule, normalized, comparison, out var stem))
             {
@@ -1439,17 +1477,39 @@ sealed class InflectionBundle
         ReverseCandidate candidate,
         StringComparison comparison)
     {
-        if (!rule.RequiresExistingLexeme && rule.ExcludedLexemes.Length == 0)
+        if (!rule.RequiresExistingLexeme &&
+            rule.ExcludedLexemes.Length == 0 &&
+            rule.Countabilities == InflectionCountability.All)
         {
             return true;
         }
 
-        return TryFindAcceptedSingular(
+        if (TryFindAcceptedSingular(
                 candidate,
                 comparison,
-                out var lexemeIndex) &&
-            !rule.ExcludedLexemes.Contains(lexemeIndex);
+                out var lexemeIndex))
+        {
+            return !rule.ExcludedLexemes.Contains(lexemeIndex) &&
+                rule.SupportsCountability(lexemes[lexemeIndex].Countability);
+        }
+
+        return !rule.RequiresExistingLexeme &&
+            rule.ExcludedLexemes.Length == 0 &&
+            rule.SupportsCountability(InflectionCountability.None);
     }
+
+    bool TryFindAcceptedSingular(
+        string candidate,
+        StringComparison comparisonType,
+        out int lexemeIndex) =>
+        TryFindAcceptedSingular(
+            new ReverseCandidate(
+                candidate,
+                candidate.Length,
+                prefix: string.Empty,
+                suffix: string.Empty),
+            comparisonType,
+            out lexemeIndex);
 
     bool TryFindAcceptedSingular(
         ReverseCandidate candidate,
@@ -2296,7 +2356,8 @@ Ir6bBYDOAvJAwCC6A+ABglqQLeB0wDraCZAYugiAEJRN0Ca+QbDbK98D
                     .Select(display => new InflectionLexemeDisplay(
                         display.Category,
                         entryIndexBySurface[display.Preferred]))
-                    .ToArray());
+                    .ToArray(),
+                lexeme.Countability);
         }
 
         var allIndexes = Enumerable.Range(0, entries.Count).ToArray();

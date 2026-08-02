@@ -2166,6 +2166,213 @@ public class LocalizedInflectionEngineTests
         }
     }
 
+    [Theory]
+    [InlineData(false, (int)InflectionCountability.Count, (int)InflectionStatus.Unknown)]
+    [InlineData(false, (int)InflectionCountability.Mass, (int)InflectionStatus.Productive)]
+    [InlineData(true, (int)InflectionCountability.Count, (int)InflectionStatus.Unknown)]
+    [InlineData(true, (int)InflectionCountability.Mass, (int)InflectionStatus.Productive)]
+    public void ProductiveReversePathsHonorKnownLexemeCountability(
+        bool reverseEnabledForward,
+        int countabilities,
+        int expectedStatus)
+    {
+        var rule = reverseEnabledForward
+            ? new InflectionRule(
+                "zz.forward.s",
+                InflectionDirection.Forward,
+                100,
+                prefix: string.Empty,
+                suffix: "s",
+                precedingNot: [],
+                dictionaryPlural: "{stem}ss",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: true,
+                requiresExistingLexeme: true,
+                countabilities: (InflectionCountability)countabilities)
+            : new InflectionRule(
+                "zz.reverse.s",
+                InflectionDirection.Reverse,
+                100,
+                prefix: string.Empty,
+                suffix: "s",
+                precedingNot: [],
+                dictionaryPlural: "{stem}",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: false,
+                requiresExistingLexeme: true,
+                countabilities: (InflectionCountability)countabilities);
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.LowerTitleUpper,
+            ["Latn"],
+            [],
+            [Lexeme("zz.news", "news", "news", InflectionCountability.Mass)],
+            [rule]);
+        var input = new string("newss".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal((InflectionStatus)expectedStatus, result.Status);
+        if (result.Status == InflectionStatus.Productive)
+        {
+            Assert.Equal("news", result.Value);
+        }
+        else
+        {
+            Assert.Same(input, result.Value);
+        }
+    }
+
+    [Theory]
+    [InlineData(false, (int)InflectionCountability.Count, (int)InflectionStatus.Unknown)]
+    [InlineData(false, (int)InflectionCountability.All, (int)InflectionStatus.Productive)]
+    [InlineData(true, (int)InflectionCountability.Count, (int)InflectionStatus.Unknown)]
+    [InlineData(true, (int)InflectionCountability.All, (int)InflectionStatus.Productive)]
+    public void ProductiveReversePathsFailClosedForUnknownCountability(
+        bool reverseEnabledForward,
+        int countabilities,
+        int expectedStatus)
+    {
+        var rule = reverseEnabledForward
+            ? new InflectionRule(
+                "zz.forward.consonant-y",
+                InflectionDirection.Forward,
+                100,
+                prefix: string.Empty,
+                suffix: "y",
+                precedingNot: [],
+                dictionaryPlural: "{stem}ies",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: true,
+                requiresExistingLexeme: false,
+                countabilities: (InflectionCountability)countabilities)
+            : new InflectionRule(
+                "zz.reverse.consonant-y",
+                InflectionDirection.Reverse,
+                100,
+                prefix: string.Empty,
+                suffix: "ies",
+                precedingNot: [],
+                dictionaryPlural: "{stem}y",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: false,
+                requiresExistingLexeme: false,
+                countabilities: (InflectionCountability)countabilities);
+        var bundle = RuleBundle(rule);
+        var input = new string("cities".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal((InflectionStatus)expectedStatus, result.Status);
+        if (result.Status == InflectionStatus.Productive)
+        {
+            Assert.Equal("city", result.Value);
+        }
+        else
+        {
+            Assert.Same(input, result.Value);
+        }
+    }
+
+    [Theory]
+    [InlineData((int)InflectionCountability.Count, (int)InflectionStatus.Unknown)]
+    [InlineData((int)InflectionCountability.All, (int)InflectionStatus.Productive)]
+    public void ProductiveForwardRulesFailClosedForUnknownCountability(
+        int countabilities,
+        int expectedStatus)
+    {
+        var bundle = RuleBundle(new(
+            "zz.forward.consonant-y",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "y",
+            precedingNot: [],
+            dictionaryPlural: "{stem}ies",
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: false,
+            requiresExistingLexeme: false,
+            countabilities: (InflectionCountability)countabilities));
+        var input = new string("city".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal((InflectionStatus)expectedStatus, result.Status);
+        if (result.Status == InflectionStatus.Productive)
+        {
+            Assert.Equal("cities", result.Value);
+        }
+        else
+        {
+            Assert.Same(input, result.Value);
+        }
+    }
+
+    [Fact]
+    public void WarmUnknownCountabilityRuleNoMatchDoesNotAllocate()
+    {
+        const int warmupIterations = 10_000;
+        const int iterations = 1000;
+        var bundle = RuleBundle(new(
+            "zz.forward.consonant-y",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "y",
+            precedingNot: [],
+            dictionaryPlural: "{stem}ies",
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: false,
+            requiresExistingLexeme: false,
+            countabilities: InflectionCountability.Count));
+        var input = new string("city".ToCharArray());
+        for (var index = 0; index < warmupIterations; index++)
+        {
+            _ = bundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                category: null);
+        }
+
+        var before = GC.GetAllocatedBytesForCurrentThread();
+        InflectionResult result = default;
+        for (var index = 0; index < iterations; index++)
+        {
+            result = bundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                category: null);
+        }
+
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+        GC.KeepAlive(result.Value);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+        Assert.Equal(0, allocated);
+    }
+
     [Fact]
     public void ForeignScriptCombiningMarkIsRejected()
     {
@@ -2294,7 +2501,11 @@ public class LocalizedInflectionEngineTests
         Assert.Same(fallback, registry.ResolveForCulture(new CultureInfo("en-US")));
     }
 
-    static InflectionLexeme Lexeme(string id, string singular, string plural) =>
+    static InflectionLexeme Lexeme(
+        string id,
+        string singular,
+        string plural,
+        InflectionCountability countability = InflectionCountability.Count) =>
         new(
             id,
             singular,
@@ -2304,7 +2515,8 @@ public class LocalizedInflectionEngineTests
             [
                 new(CardinalPluralCategory.One, singular, [singular]),
                 new(CardinalPluralCategory.Other, plural, [plural])
-            ]);
+            ],
+            countability);
 
     static InflectionBundle RuleBundle(InflectionRule rule) =>
         new(

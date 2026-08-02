@@ -716,6 +716,8 @@ surfaces:
         Assert.Contains("\"zz.forward.consonant-y\"", owner, StringComparison.Ordinal);
         Assert.Contains("\"{stem}ies\"", owner, StringComparison.Ordinal);
         Assert.Contains("InflectionLexemeEntry", owner, StringComparison.Ordinal);
+        Assert.Contains("InflectionCountability.Count", owner, StringComparison.Ordinal);
+        Assert.Contains("(InflectionCountability)1", owner, StringComparison.Ordinal);
         Assert.Contains("new ushort[]", owner, StringComparison.Ordinal);
         Assert.DoesNotContain("InflectionExactEntry", owner, StringComparison.Ordinal);
         Assert.DoesNotContain("accepted-singular", owner, StringComparison.Ordinal);
@@ -748,6 +750,25 @@ surfaces:
         Assert.Empty(runResult.Diagnostics);
         Assert.Contains(
             "// sense: plant",
+            GetGeneratedSource(runResult, "GeneratedInflection_zz.g.cs"),
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void LexemeCountabilityIsRepresentedInTheGeneratedOwner()
+    {
+        var locale = CompleteInflectionFixture(eligible: 100, irregular: 100, covered: 95)
+            .Replace(
+                "        countability: 'count'",
+                "        countability: 'mass'",
+                StringComparison.Ordinal);
+
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Empty(runResult.Diagnostics);
+        Assert.Contains(
+            "InflectionCountability.Mass",
             GetGeneratedSource(runResult, "GeneratedInflection_zz.g.cs"),
             StringComparison.Ordinal);
     }
@@ -1653,6 +1674,23 @@ surfaces:
     }
 
     [Fact]
+    public void RuleScopeCountabilitiesAreEmittedAsACompactMask()
+    {
+        var locale = ProductiveInflectionFixture().Replace(
+            "            - 'count'",
+            "            - 'count'\n            - 'mass'",
+            StringComparison.Ordinal);
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Empty(runResult.Diagnostics);
+        Assert.Contains(
+            "(InflectionCountability)3",
+            GetGeneratedSource(runResult, "GeneratedInflection_zz.g.cs"),
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void DirectionEvidenceMustCiteAnAuthoredSource()
     {
         var locale = ProductiveInflectionFixture().Replace(
@@ -2107,7 +2145,7 @@ surfaces:
         Assert.Empty(runResult.Diagnostics);
         var owner = GetGeneratedSource(runResult, "GeneratedInflection_zz.g.cs");
         Assert.Contains(
-            "true, false, (InflectionUnicodeScripts)65536u)",
+            "true, false, (InflectionUnicodeScripts)65536u, (InflectionCountability)1)",
             owner,
             StringComparison.Ordinal);
     }
