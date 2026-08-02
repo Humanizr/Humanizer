@@ -28,5 +28,6 @@
   <Project Path="tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn414.csproj" />
   <Project Path="tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj" />
   <Project Path="tests/Humanizer.Tests/Humanizer.Tests.csproj" />
+  <Project Path="tools/Humanizer.UnicodeDataGenerator/Humanizer.UnicodeDataGenerator.csproj" />
   <Project Path="tools/docs/language-coverage/Humanizer.Docs.LanguageCoverage.csproj" />
 </Solution>
