@@ -54,6 +54,7 @@ These instructions apply to the entire repository.
 ## Pull Request Guidelines
 - Keep changes focused with clear commit messages.
 - Follow repository PR template expectations: summarize changes, list tests run, and reference related issues (e.g., `fixes #123`) when applicable.
+- For issue-driven work, especially reports from external contributors, communicate politely in the public issue: thank or acknowledge the reporter once reproduction is confirmed; link the fixing pull request; distinguish reproduced, fixed, merged, and released states; keep promised sibling or applicability follow-ups current; and post a final resolution without claiming release before publication. Do not add noisy pre-reproduction updates or disclose security-sensitive details.
 - Ensure the codebase remains backward-compatible unless intentionally introducing a documented breaking change.
 
 ## Terminal Pull Request Gate
