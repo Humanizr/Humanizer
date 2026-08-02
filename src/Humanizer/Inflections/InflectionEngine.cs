@@ -244,6 +244,40 @@ readonly struct InflectionRuleDisplay(
     public string Template { get; } = template;
 }
 
+[Flags]
+enum InflectionUnicodeScripts : uint
+{
+    None = 0,
+    Arab = 1 << 0,
+    Armn = 1 << 1,
+    Beng = 1 << 2,
+    Cyrl = 1 << 3,
+    Deva = 1 << 4,
+    Geor = 1 << 5,
+    Grek = 1 << 6,
+    Gujr = 1 << 7,
+    Guru = 1 << 8,
+    Hani = 1 << 9,
+    Hebr = 1 << 10,
+    Jpan = 1 << 11,
+    Khmr = 1 << 12,
+    Knda = 1 << 13,
+    Kore = 1 << 14,
+    Laoo = 1 << 15,
+    Latn = 1 << 16,
+    Mlym = 1 << 17,
+    Mymr = 1 << 18,
+    Orya = 1 << 19,
+    Taml = 1 << 20,
+    Telu = 1 << 21,
+    Thai = 1 << 22,
+    Ethi = 1 << 23,
+    Mong = 1 << 24,
+    Sinh = 1 << 25,
+    Han = Hani | Jpan | Kore,
+    All = 0x03FFFFFF
+}
+
 readonly struct InflectionRule
 {
     public InflectionRule(
@@ -253,7 +287,8 @@ readonly struct InflectionRule
         string suffix,
         string dictionaryPlural,
         bool reverseEnabled,
-        bool requiresExistingLexeme)
+        bool requiresExistingLexeme,
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
         : this(
             id,
             direction,
@@ -266,7 +301,8 @@ readonly struct InflectionRule
             excludedSurfaces: [],
             excludedLexemes: Array.Empty<ushort>(),
             reverseEnabled,
-            requiresExistingLexeme)
+            requiresExistingLexeme,
+            scripts)
     {
     }
 
@@ -281,7 +317,8 @@ readonly struct InflectionRule
         InflectionRuleDisplay[] display,
         string[] excludedSurfaces,
         bool reverseEnabled,
-        bool requiresExistingLexeme)
+        bool requiresExistingLexeme,
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
         : this(
             id,
             direction,
@@ -294,7 +331,8 @@ readonly struct InflectionRule
             excludedSurfaces,
             excludedLexemes: Array.Empty<ushort>(),
             reverseEnabled,
-            requiresExistingLexeme)
+            requiresExistingLexeme,
+            scripts)
     {
     }
 
@@ -310,7 +348,8 @@ readonly struct InflectionRule
         string[] excludedSurfaces,
         ushort[] excludedLexemes,
         bool reverseEnabled,
-        bool requiresExistingLexeme)
+        bool requiresExistingLexeme,
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
         : this(
             id,
             direction,
@@ -323,7 +362,8 @@ readonly struct InflectionRule
             excludedSurfaces,
             new InflectionEntryIndexes(excludedLexemes),
             reverseEnabled,
-            requiresExistingLexeme)
+            requiresExistingLexeme,
+            scripts)
     {
     }
 
@@ -339,7 +379,8 @@ readonly struct InflectionRule
         string[] excludedSurfaces,
         int[] excludedLexemes,
         bool reverseEnabled,
-        bool requiresExistingLexeme)
+        bool requiresExistingLexeme,
+        InflectionUnicodeScripts scripts = InflectionUnicodeScripts.All)
         : this(
             id,
             direction,
@@ -352,7 +393,8 @@ readonly struct InflectionRule
             excludedSurfaces,
             new InflectionEntryIndexes(excludedLexemes),
             reverseEnabled,
-            requiresExistingLexeme)
+            requiresExistingLexeme,
+            scripts)
     {
     }
 
@@ -368,7 +410,8 @@ readonly struct InflectionRule
         string[] excludedSurfaces,
         InflectionEntryIndexes excludedLexemes,
         bool reverseEnabled,
-        bool requiresExistingLexeme)
+        bool requiresExistingLexeme,
+        InflectionUnicodeScripts scripts)
     {
         Id = id;
         Direction = direction;
@@ -382,6 +425,7 @@ readonly struct InflectionRule
         ExcludedLexemes = excludedLexemes;
         ReverseEnabled = reverseEnabled;
         RequiresExistingLexeme = requiresExistingLexeme;
+        Scripts = scripts;
     }
 
     public string Id { get; }
@@ -396,6 +440,10 @@ readonly struct InflectionRule
     public InflectionEntryIndexes ExcludedLexemes { get; }
     public bool ReverseEnabled { get; }
     public bool RequiresExistingLexeme { get; }
+    public InflectionUnicodeScripts Scripts { get; }
+
+    public bool SupportsScripts(InflectionUnicodeScripts detectedScripts) =>
+        (Scripts & detectedScripts) != InflectionUnicodeScripts.None;
 
     public bool TryGetTemplate(
         CardinalPluralCategory? category,
@@ -808,7 +856,7 @@ sealed class InflectionBundle
             return new(InflectionStatus.Unsupported, input);
         }
 
-        if (!IsEligibleToken(normalized))
+        if (!IsEligibleToken(normalized, out var detectedScripts))
         {
             return new(InflectionStatus.Unsupported, input);
         }
@@ -828,7 +876,8 @@ sealed class InflectionBundle
                 normalized,
                 category,
                 projection,
-                comparison);
+                comparison,
+                detectedScripts);
         }
 
         InflectionRule? selectedRule = null;
@@ -836,6 +885,7 @@ sealed class InflectionBundle
         foreach (var rule in rules)
         {
             if (rule.Direction == InflectionDirection.Forward &&
+                rule.SupportsScripts(detectedScripts) &&
                 !Contains(rule.ExcludedSurfaces, normalized, comparison) &&
                 TryGetStem(rule, normalized, comparison, out var stem))
             {
@@ -884,7 +934,8 @@ sealed class InflectionBundle
         string normalized,
         CardinalPluralCategory? category,
         CaseProjection projection,
-        StringComparison comparison)
+        StringComparison comparison,
+        InflectionUnicodeScripts detectedScripts)
     {
         string? directCandidate = null;
         var reverseCandidate = default(ReverseCandidate);
@@ -892,6 +943,7 @@ sealed class InflectionBundle
         foreach (var rule in rules)
         {
             if (rule.Direction == InflectionDirection.Reverse &&
+                rule.SupportsScripts(detectedScripts) &&
                 !Contains(rule.ExcludedSurfaces, normalized, comparison) &&
                 TryGetStem(rule, normalized, comparison, out var stem))
             {
@@ -914,6 +966,7 @@ sealed class InflectionBundle
 
             if (rule.Direction == InflectionDirection.Forward &&
                 rule.ReverseEnabled &&
+                rule.SupportsScripts(detectedScripts) &&
                 TryCreateReverseCandidate(
                     rule,
                     normalized,
@@ -1180,33 +1233,46 @@ sealed class InflectionBundle
             : CaseProjection.Mixed;
     }
 
-    bool IsEligibleToken(string value)
+    bool IsEligibleToken(
+        string value,
+        out InflectionUnicodeScripts detectedScripts)
     {
         var comparison = casing == InflectionCasing.LowerTitleUpper
             ? StringComparison.OrdinalIgnoreCase
             : StringComparison.Ordinal;
         if (Contains(skipSimpleWords, value, comparison))
         {
+            detectedScripts = InflectionUnicodeScripts.None;
             return false;
         }
 
-        return IsScriptEligible(value, allowNonLetters: false);
+        return TryGetDetectedScripts(
+            value,
+            allowNonLetters: false,
+            out detectedScripts);
     }
 
     bool IsScriptEligible(string value, bool allowNonLetters)
+        => TryGetDetectedScripts(value, allowNonLetters, out _);
+
+    bool TryGetDetectedScripts(
+        string value,
+        bool allowNonLetters,
+        out InflectionUnicodeScripts detectedScripts)
     {
         var allowedScripts = InflectionUnicodeScripts.None;
         foreach (var script in scripts)
         {
             if (!TryGetScript(script, out var scriptValue))
             {
+                detectedScripts = InflectionUnicodeScripts.None;
                 return false;
             }
 
             allowedScripts |= scriptValue;
         }
 
-        var detectedScripts = allowedScripts;
+        detectedScripts = allowedScripts;
         var hasLetter = false;
         for (var index = 0; index < value.Length; index++)
         {
@@ -1244,12 +1310,14 @@ sealed class InflectionBundle
                     continue;
                 }
 
+                detectedScripts = InflectionUnicodeScripts.None;
                 return false;
             }
 
             var scalarScripts = GetScripts(scalar);
             if ((scalarScripts & allowedScripts) == InflectionUnicodeScripts.None)
             {
+                detectedScripts = InflectionUnicodeScripts.None;
                 return false;
             }
 
@@ -2860,40 +2928,6 @@ Ir6bBYDOAvJAwCC6A+ABglqQLeB0wDraCZAYugiAEJRN0Ca+QbDbK98D
         new(0x31350, 0x323AF, InflectionUnicodeScripts.Hani | InflectionUnicodeScripts.Jpan | InflectionUnicodeScripts.Kore),
         new(0xE0100, 0xE01EF, InflectionUnicodeScripts.All),
     ];
-
-    [Flags]
-    enum InflectionUnicodeScripts : uint
-    {
-        None = 0,
-        Arab = 1 << 0,
-        Armn = 1 << 1,
-        Beng = 1 << 2,
-        Cyrl = 1 << 3,
-        Deva = 1 << 4,
-        Geor = 1 << 5,
-        Grek = 1 << 6,
-        Gujr = 1 << 7,
-        Guru = 1 << 8,
-        Hani = 1 << 9,
-        Hebr = 1 << 10,
-        Jpan = 1 << 11,
-        Khmr = 1 << 12,
-        Knda = 1 << 13,
-        Kore = 1 << 14,
-        Laoo = 1 << 15,
-        Latn = 1 << 16,
-        Mlym = 1 << 17,
-        Mymr = 1 << 18,
-        Orya = 1 << 19,
-        Taml = 1 << 20,
-        Telu = 1 << 21,
-        Thai = 1 << 22,
-        Ethi = 1 << 23,
-        Mong = 1 << 24,
-        Sinh = 1 << 25,
-        Han = Hani | Jpan | Kore,
-        All = 0x03FFFFFF
-    }
 
     readonly struct InflectionUnicodeScriptRange(
         int first,

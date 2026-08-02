@@ -537,6 +537,10 @@ public sealed partial class HumanizerSourceGenerator
                 builder.Append(rule.ReverseEnabled ? "true" : "false");
                 builder.Append(", ");
                 builder.Append(rule.RequiresExistingLexeme ? "true" : "false");
+                builder.Append(", ");
+                builder.Append("(InflectionUnicodeScripts)");
+                builder.Append(GetScriptMask(rule.Scripts).ToString(CultureInfo.InvariantCulture));
+                builder.Append('u');
                 builder.AppendLine("),");
             }
 
@@ -1379,14 +1383,14 @@ public sealed partial class HumanizerSourceGenerator
                 var prefix = NormalizeAuthoredText(
                     match.GetScalar("prefix") ?? string.Empty,
                     casing,
-                    ownerScripts,
+                    ruleScripts,
                     $"rule '{id}' prefix",
                     allowStemPlaceholder: false,
                     allowNonLetters: false);
                 var suffix = NormalizeAuthoredText(
                     match.GetScalar("suffix") ?? string.Empty,
                     casing,
-                    ownerScripts,
+                    ruleScripts,
                     $"rule '{id}' suffix",
                     allowStemPlaceholder: false,
                     allowNonLetters: false);
@@ -1399,7 +1403,7 @@ public sealed partial class HumanizerSourceGenerator
                 var precedingNot = NormalizeGuards(
                     GetOptionalStrings(match, "precedingNot", "preceding-not"),
                     casing,
-                    ownerScripts,
+                    ruleScripts,
                     $"rule '{id}' precedingNot");
                 var output = GetRequiredMapping(rule, "output", $"Inflection rule '{id}' must define output");
                 ValidateProperties(
@@ -1413,7 +1417,7 @@ public sealed partial class HumanizerSourceGenerator
                         "dictionary-plural",
                         $"Inflection rule '{id}' must define dictionaryPlural output"),
                     casing,
-                    ownerScripts,
+                    ruleScripts,
                     $"rule '{id}' dictionaryPlural output",
                     allowStemPlaceholder: true,
                     allowNonLetters: false);
@@ -1431,7 +1435,7 @@ public sealed partial class HumanizerSourceGenerator
                             category,
                             $"Inflection rule '{id}' must define display output '{category}'"),
                         casing,
-                        ownerScripts,
+                        ruleScripts,
                         $"rule '{id}' display output '{category}'",
                         allowStemPlaceholder: true,
                         allowNonLetters: false);
@@ -1457,7 +1461,7 @@ public sealed partial class HumanizerSourceGenerator
                                 category,
                                 $"Inflection rule '{id}' must define display output '{category}'"),
                             casing,
-                            ownerScripts,
+                            ruleScripts,
                             $"rule '{id}' display output '{category}'",
                             allowStemPlaceholder: true,
                             allowNonLetters: false);
@@ -1483,7 +1487,7 @@ public sealed partial class HumanizerSourceGenerator
                     : NormalizeGuards(
                         GetOptionalStrings(hostileExclusions, "surfaces"),
                         casing,
-                        ownerScripts,
+                        ruleScripts,
                         $"rule '{id}' hostile exclusions");
                 var excludedLexemes = hostileExclusions is null
                     ? ImmutableArray<string>.Empty
@@ -1550,7 +1554,8 @@ public sealed partial class HumanizerSourceGenerator
                         reverse,
                         "requiresExistingLexeme",
                         "requires-existing-lexeme",
-                        defaultValue: true)));
+                        defaultValue: true),
+                    ruleScripts));
             }
 
             var conflict = rules
@@ -1826,11 +1831,7 @@ public sealed partial class HumanizerSourceGenerator
             ImmutableArray<string> ownerScripts,
             bool allowNonLetters)
         {
-            var allowedScripts = GeneratorUnicodeScripts.None;
-            foreach (var script in ownerScripts)
-            {
-                allowedScripts |= GetScript(script);
-            }
+            var allowedScripts = (GeneratorUnicodeScripts)GetScriptMask(ownerScripts);
 
             var detectedScripts = allowedScripts;
             var hasLetter = false;
@@ -1886,6 +1887,17 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             return hasLetter;
+        }
+
+        static uint GetScriptMask(ImmutableArray<string> scripts)
+        {
+            var mask = GeneratorUnicodeScripts.None;
+            foreach (var script in scripts)
+            {
+                mask |= GetScript(script);
+            }
+
+            return (uint)mask;
         }
 
         static GeneratorUnicodeScripts GetScript(string script) =>
@@ -3035,7 +3047,8 @@ public sealed partial class HumanizerSourceGenerator
         ImmutableArray<string> excludedSurfaces,
         ImmutableArray<string> excludedLexemes,
         bool reverseEnabled,
-        bool requiresExistingLexeme)
+        bool requiresExistingLexeme,
+        ImmutableArray<string> scripts)
     {
         public string Id { get; } = id;
         public string Direction { get; } = direction;
@@ -3049,6 +3062,7 @@ public sealed partial class HumanizerSourceGenerator
         public ImmutableArray<string> ExcludedLexemes { get; } = excludedLexemes;
         public bool ReverseEnabled { get; } = reverseEnabled;
         public bool RequiresExistingLexeme { get; } = requiresExistingLexeme;
+        public ImmutableArray<string> Scripts { get; } = scripts;
     }
 
     sealed class InflectionLexemeTableInput(

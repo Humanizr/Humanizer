@@ -186,6 +186,273 @@ public class LocalizedInflectionEngineTests
         Assert.Same(input, result.Value);
     }
 
+    [Fact]
+    public void ProductiveForwardRuleCannotEscapeItsScriptScope()
+    {
+        var bundle = DualScriptRuleBundle(new InflectionRule(
+            "zz.forward.nominal-latin-only",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "а",
+            precedingNot: [],
+            dictionaryPlural: "{stem}ы",
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: true,
+            requiresExistingLexeme: false,
+            scripts: InflectionUnicodeScripts.Latn));
+        var input = new string("машина".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void ProductiveReversePathsCannotEscapeTheirScriptScope(bool reverseEnabledForward)
+    {
+        var rule = reverseEnabledForward
+            ? new InflectionRule(
+                "zz.forward.nominal-latin-only",
+                InflectionDirection.Forward,
+                100,
+                prefix: string.Empty,
+                suffix: "а",
+                precedingNot: [],
+                dictionaryPlural: "{stem}ы",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: true,
+                requiresExistingLexeme: false,
+                scripts: InflectionUnicodeScripts.Latn)
+            : new InflectionRule(
+                "zz.reverse.nominal-latin-only",
+                InflectionDirection.Reverse,
+                100,
+                prefix: string.Empty,
+                suffix: "ы",
+                precedingNot: [],
+                dictionaryPlural: "{stem}а",
+                display: [],
+                excludedSurfaces: [],
+                reverseEnabled: false,
+                requiresExistingLexeme: false,
+                scripts: InflectionUnicodeScripts.Latn);
+        var bundle = DualScriptRuleBundle(rule);
+        var input = new string("машины".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void ExactLookupPrecedesProductiveRuleScriptScope()
+    {
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.Exact,
+            ["Latn", "Cyrl"],
+            [],
+            [Lexeme("zz.car", "машина", "машины")],
+            [
+                new(
+                    "zz.forward.nominal-latin-only",
+                    InflectionDirection.Forward,
+                    100,
+                    "y",
+                    "{stem}ies",
+                    reverseEnabled: true,
+                    requiresExistingLexeme: false,
+                    scripts: InflectionUnicodeScripts.Latn)
+            ]);
+
+        var result = bundle.Inflect(
+            "машина",
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Exact, result.Status);
+        Assert.Equal("машины", result.Value);
+    }
+
+    [Fact]
+    public void SharedHanScalarCanMatchMultipleFamilyScopesAndRemainAmbiguous()
+    {
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.Exact,
+            ["Hani", "Jpan", "Kore"],
+            [],
+            [],
+            [
+                new(
+                    "zz.forward.hani",
+                    InflectionDirection.Forward,
+                    100,
+                    prefix: "中",
+                    suffix: string.Empty,
+                    precedingNot: [],
+                    dictionaryPlural: "{stem}甲",
+                    display: [],
+                    excludedSurfaces: [],
+                    reverseEnabled: false,
+                    requiresExistingLexeme: false,
+                    scripts: InflectionUnicodeScripts.Hani),
+                new(
+                    "zz.forward.jpan",
+                    InflectionDirection.Forward,
+                    100,
+                    prefix: "中",
+                    suffix: string.Empty,
+                    precedingNot: [],
+                    dictionaryPlural: "{stem}乙",
+                    display: [],
+                    excludedSurfaces: [],
+                    reverseEnabled: false,
+                    requiresExistingLexeme: false,
+                    scripts: InflectionUnicodeScripts.Jpan)
+            ]);
+        var input = new string("中文".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Ambiguous, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void KanaNarrowsSharedOwnerToJapaneseRuleScope()
+    {
+        var bundle = new InflectionBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.Exact,
+            ["Hani", "Jpan", "Kore"],
+            [],
+            [],
+            [
+                new(
+                    "zz.forward.hani",
+                    InflectionDirection.Forward,
+                    100,
+                    prefix: "あ",
+                    suffix: string.Empty,
+                    precedingNot: [],
+                    dictionaryPlural: "{stem}{stem}",
+                    display: [],
+                    excludedSurfaces: [],
+                    reverseEnabled: false,
+                    requiresExistingLexeme: false,
+                    scripts: InflectionUnicodeScripts.Hani)
+            ]);
+        var input = new string("あい".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void OwnerScriptUnionDoesNotPermitMixedScriptProductiveInput()
+    {
+        var bundle = DualScriptRuleBundle(new InflectionRule(
+            "zz.forward.nominal",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "а",
+            precedingNot: [],
+            dictionaryPlural: "{stem}ы",
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: false,
+            requiresExistingLexeme: false,
+            scripts: InflectionUnicodeScripts.Cyrl));
+        var input = new string("мaшина".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Unsupported, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void WarmWrongRuleScriptNoMatchDoesNotAllocate()
+    {
+        const int warmupIterations = 10_000;
+        const int iterations = 1000;
+        var bundle = DualScriptRuleBundle(new InflectionRule(
+            "zz.forward.nominal-latin-only",
+            InflectionDirection.Forward,
+            100,
+            prefix: string.Empty,
+            suffix: "а",
+            precedingNot: [],
+            dictionaryPlural: "{stem}ы",
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: true,
+            requiresExistingLexeme: false,
+            scripts: InflectionUnicodeScripts.Latn));
+        var input = new string("машина".ToCharArray());
+        for (var index = 0; index < warmupIterations; index++)
+        {
+            _ = bundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                category: null);
+        }
+
+        var before = GC.GetAllocatedBytesForCurrentThread();
+        InflectionResult result = default;
+        for (var index = 0; index < iterations; index++)
+        {
+            result = bundle.Inflect(
+                input,
+                InflectionDirection.Forward,
+                allowProductive: true,
+                category: null);
+        }
+
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+        GC.KeepAlive(result.Value);
+
+        Assert.Equal(InflectionStatus.Unknown, result.Status);
+        Assert.Same(input, result.Value);
+        Assert.Equal(0, allocated);
+    }
+
     [Theory]
     [InlineData("city", (int)InflectionDirection.Forward, "cities")]
     [InlineData("cities", (int)InflectionDirection.Reverse, "city")]
@@ -1920,6 +2187,16 @@ public class LocalizedInflectionEngineTests
             CardinalPluralRuleKind.Other,
             InflectionCasing.LowerTitleUpper,
             ["Latn"],
+            [],
+            [],
+            [rule]);
+
+    static InflectionBundle DualScriptRuleBundle(InflectionRule rule) =>
+        new(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.Exact,
+            ["Latn", "Cyrl"],
             [],
             [],
             [rule]);

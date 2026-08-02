@@ -2068,6 +2068,50 @@ surfaces:
                     StringComparison.OrdinalIgnoreCase));
     }
 
+    [Theory]
+    [InlineData("suffix: 'y'", "suffix: 'ы'")]
+    [InlineData("            - 'a'", "            - 'а'")]
+    [InlineData("dictionary-plural: '{stem}ies'", "dictionary-plural: '{stem}ы'")]
+    [InlineData("one: '{stem}y'", "one: '{stem}ы'")]
+    [InlineData("other: '{stem}ies'", "other: '{stem}ы'")]
+    [InlineData("            - 'day'", "            - 'день'")]
+    public void ProductiveRuleLiteralsMustUseOnlyRuleScriptsWhenOwnerSupportsMore(
+        string original,
+        string replacement)
+    {
+        var locale = ProductiveInflectionFixture()
+            .Replace(
+                "    scripts:\n      - 'Latn'\n    casing:",
+                "    scripts:\n      - 'Latn'\n      - 'Cyrl'\n    casing:",
+                StringComparison.Ordinal)
+            .Replace(original, replacement, StringComparison.Ordinal);
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(
+                    "declared scripts",
+                    StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public void ProductiveRuleEmitsItsCompactScriptMask()
+    {
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText(
+                "src/Humanizer/Locales/zz.yml",
+                ProductiveInflectionFixture()));
+
+        Assert.Empty(runResult.Diagnostics);
+        var owner = GetGeneratedSource(runResult, "GeneratedInflection_zz.g.cs");
+        Assert.Contains(
+            "true, false, (InflectionUnicodeScripts)65536u)",
+            owner,
+            StringComparison.Ordinal);
+    }
+
     [Fact]
     public void LowerTitleUpperRuleLiteralsAreNormalizedBeforeEmission()
     {

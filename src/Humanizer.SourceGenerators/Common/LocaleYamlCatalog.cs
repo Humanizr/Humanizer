@@ -884,7 +884,8 @@ public sealed partial class HumanizerSourceGenerator
         /// <summary>
         /// Merges a child locale feature with its inherited parent feature during generation.
         /// Mappings merge recursively, while scalars and sequences replace the inherited value.
-        /// Authored duration-case surfaces replace the inherited discriminated union entirely.
+        /// Authored duration-case and inflection surfaces replace their inherited discriminated
+        /// unions entirely.
         /// If a child mapping switches to a different <c>engine</c>, the child mapping replaces
         /// the parent mapping entirely so fields from the old engine cannot leak into the new one.
         /// </summary>
