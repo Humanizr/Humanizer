@@ -1832,14 +1832,14 @@ public class CoverageGapTests
         Assert.True(suffix.TryConvert("42", out parsed));
         Assert.Equal(42, parsed);
         Assert.Equal(7, suffix.Convert("two five"));
-        object?[] suffixOptionalArguments = [string.Empty, 1L];
+        object?[] suffixOptionalArguments = [string.Empty, 0, 1000L, 1L];
         Assert.True(InvokePrivate<bool>(
             typeof(SuffixScaleWordsToNumberConverter),
             suffix,
             "TryParseOptional",
-            [typeof(string), typeof(long).MakeByRefType()],
+            [typeof(string), typeof(int), typeof(long).MakeByRefType(), typeof(long).MakeByRefType()],
             suffixOptionalArguments));
-        Assert.Equal(0L, suffixOptionalArguments[1]);
+        Assert.Equal(0L, suffixOptionalArguments[3]);
 
         var eastAsian = new EastAsianPositionalWordsToNumberConverter(EastAsianSingleCharacterProfile);
         Assert.True(eastAsian.TryConvert("十", out parsed));

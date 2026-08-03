@@ -725,6 +725,68 @@ public class WordsToNumberTests_Finnish
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
     }
+
+    [Fact(Timeout = 30_000)]
+    public void TryToNumber_BoundsSuffixScaleWork()
+    {
+        var legitimateWords = string.Concat(Enumerable.Repeat("tuhat", 130));
+        Assert.Equal(130_000, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_000.1m, $"{legitimateWords} pilkku yksi".ToDecimalNumber(CultureInfo.CurrentCulture));
+
+        var scaleWords = string.Concat(Enumerable.Repeat("tuhat", 100_000));
+        AssertParsedBounded(scaleWords, 100_000_000);
+        var pluralScaleWords = string.Concat(Enumerable.Repeat("kaksituhatta", 50_000));
+        AssertParsedBounded(pluralScaleWords, 100_000_000);
+        AssertParsedBounded($"{pluralScaleWords}yksi", 100_000_001);
+        AssertParsedBounded($"{pluralScaleWords}tuhatta", 100_001_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("sata", 125_000)), 12_500_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("kaksisataa", 50_000)), 10_000_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("tuhatsata", 60_000)), 66_000_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("kaksituhattatuhat", 40_000)), 120_000_000);
+        AssertParsedBounded($"miinus {scaleWords}", -100_000_000);
+        AssertParsedBounded(string.Join("-", Enumerable.Repeat("tuhat", 50_000)), 50_000_000);
+        AssertParsedBounded($"{scaleWords}yksi", 100_000_001);
+        Assert.Equal(1_129_001, $"{legitimateWords}tuhattayksi".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(131_000, $"{legitimateWords}tuhatta".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_000_000_000, $"{legitimateWords}miljoonaa".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_002_000_000, $"{legitimateWords}kaksimiljoonaa".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_000_000_001, $"{legitimateWords}miljoonaayksi".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_200, $"{legitimateWords}kaksisataa".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_021, $"{legitimateWords}kaksikymmentayksi".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(130_011, $"{legitimateWords}yksitoista".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(1_000_001, "tuhattuhattayksi".ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(1_000_000_000_001, "miljoonamiljoonaayksi".ToNumber(CultureInfo.CurrentCulture));
+
+        Assert.Equal(100_000_000.1m, $"{scaleWords} pilkku yksi".ToDecimalNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(9_000_000_000_000_000_000, string.Concat(Enumerable.Repeat("triljoona", 9)).ToNumber(CultureInfo.CurrentCulture));
+        AssertRejected(string.Concat(Enumerable.Repeat("triljoona", 10)));
+        AssertRejected(string.Concat(Enumerable.Repeat("tuhatta", 130)));
+        AssertRejected($"{scaleWords}mysteeri");
+
+        void AssertParsedBounded(string words, long expected)
+        {
+            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+            Assert.True(words.TryToNumber(out var parsed, CultureInfo.CurrentCulture, out var unrecognizedWord), unrecognizedWord);
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+            Assert.Equal(expected, parsed);
+            Assert.Null(unrecognizedWord);
+            Assert.True(allocated < 8_000_000, $"Suffix-scale parsing allocated {allocated:N0} bytes.");
+            Assert.Equal(expected, words.ToNumber(CultureInfo.CurrentCulture));
+        }
+
+        void AssertRejected(string words)
+        {
+            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+            Assert.False(words.TryToNumber(out var parsed, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+            Assert.Equal(0, parsed);
+            Assert.NotNull(unrecognizedWord);
+            Assert.True(allocated < 8_000_000, $"Suffix-scale rejection allocated {allocated:N0} bytes.");
+            Assert.Throws<ArgumentException>(() => words.ToNumber(CultureInfo.CurrentCulture));
+        }
+    }
 }
 
 [UseCulture("af")]
