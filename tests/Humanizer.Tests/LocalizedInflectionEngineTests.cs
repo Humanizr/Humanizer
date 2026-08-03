@@ -2,6 +2,37 @@ public partial class LocalizedInflectionEngineTests
 {
     static readonly string[] LatinScript = ["Latn"];
 
+    static InflectionBundle CreateSharedHanBundle(params InflectionRule[] rules) =>
+        CreateBundle(
+            "zz",
+            CardinalPluralRuleKind.Other,
+            InflectionCasing.Exact,
+            ["Hani", "Jpan"],
+            [],
+            [],
+            rules);
+
+    static InflectionRule SharedHanRule(
+        string id,
+        InflectionDirection direction,
+        int priority,
+        string dictionaryPlural,
+        bool reverseEnabled,
+        InflectionUnicodeScripts scripts) =>
+        new(
+            id,
+            direction,
+            priority,
+            prefix: "中",
+            suffix: string.Empty,
+            precedingNot: [],
+            dictionaryPlural: dictionaryPlural,
+            display: [],
+            excludedSurfaces: [],
+            reverseEnabled: reverseEnabled,
+            requiresExistingLexeme: false,
+            scripts: scripts);
+
     static readonly InflectionBundle Bundle = CreateBundle(
         "zz",
         CardinalPluralRuleKind.EnglishLike,
@@ -391,6 +422,144 @@ public partial class LocalizedInflectionEngineTests
 
         Assert.Equal(InflectionStatus.Ambiguous, result.Status);
         Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void SharedHanScalarDoesNotUsePriorityToResolveForwardFamilyScope()
+    {
+        var bundle = CreateSharedHanBundle(
+            SharedHanRule(
+                "zz.forward.hani",
+                InflectionDirection.Forward,
+                200,
+                "{stem}甲",
+                reverseEnabled: false,
+                scripts: InflectionUnicodeScripts.Hani),
+            SharedHanRule(
+                "zz.forward.jpan",
+                InflectionDirection.Forward,
+                100,
+                "{stem}乙",
+                reverseEnabled: false,
+                scripts: InflectionUnicodeScripts.Jpan));
+        var input = new string("中文".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Ambiguous, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void SharedHanScalarDoesNotUsePriorityToResolveDirectReverseFamilyScope()
+    {
+        var bundle = CreateSharedHanBundle(
+            SharedHanRule(
+                "zz.reverse.hani",
+                InflectionDirection.Reverse,
+                200,
+                "{stem}甲",
+                reverseEnabled: false,
+                scripts: InflectionUnicodeScripts.Hani),
+            SharedHanRule(
+                "zz.reverse.jpan",
+                InflectionDirection.Reverse,
+                100,
+                "{stem}乙",
+                reverseEnabled: false,
+                scripts: InflectionUnicodeScripts.Jpan));
+        var input = new string("中文".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Ambiguous, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void SharedHanScalarDoesNotUsePriorityToResolveReverseEnabledFamilyScope()
+    {
+        var bundle = CreateSharedHanBundle(
+            SharedHanRule(
+                "zz.forward.hani",
+                InflectionDirection.Forward,
+                200,
+                "{stem}們",
+                reverseEnabled: true,
+                scripts: InflectionUnicodeScripts.Hani),
+            SharedHanRule(
+                "zz.forward.jpan",
+                InflectionDirection.Forward,
+                100,
+                "{stem}們",
+                reverseEnabled: true,
+                scripts: InflectionUnicodeScripts.Jpan));
+        var input = new string("文們".ToCharArray());
+
+        var result = bundle.Inflect(
+            input,
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal(InflectionStatus.Ambiguous, result.Status);
+        Assert.Same(input, result.Value);
+    }
+
+    [Fact]
+    public void SharedHanScalarAllowsRulesThatCoverEveryPossibleFamily()
+    {
+        const InflectionUnicodeScripts sharedHanScripts =
+            InflectionUnicodeScripts.Hani | InflectionUnicodeScripts.Jpan;
+        var forwardBundle = CreateSharedHanBundle(SharedHanRule(
+            "zz.forward.shared",
+            InflectionDirection.Forward,
+            200,
+            "{stem}甲",
+            reverseEnabled: false,
+            scripts: sharedHanScripts));
+        var directReverseBundle = CreateSharedHanBundle(SharedHanRule(
+            "zz.reverse.shared",
+            InflectionDirection.Reverse,
+            200,
+            "{stem}甲",
+            reverseEnabled: false,
+            scripts: sharedHanScripts));
+        var reverseEnabledBundle = CreateSharedHanBundle(SharedHanRule(
+            "zz.forward.shared",
+            InflectionDirection.Forward,
+            200,
+            "{stem}們",
+            reverseEnabled: true,
+            scripts: sharedHanScripts));
+
+        var forward = forwardBundle.Inflect(
+            "中文",
+            InflectionDirection.Forward,
+            allowProductive: true,
+            category: null);
+        var directReverse = directReverseBundle.Inflect(
+            "中文",
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+        var reverseEnabled = reverseEnabledBundle.Inflect(
+            "文們",
+            InflectionDirection.Reverse,
+            allowProductive: true,
+            category: null);
+
+        Assert.Equal((InflectionStatus.Productive, "文甲"), (forward.Status, forward.Value));
+        Assert.Equal((InflectionStatus.Productive, "文甲"), (directReverse.Status, directReverse.Value));
+        Assert.Equal((InflectionStatus.Productive, "中文"), (reverseEnabled.Status, reverseEnabled.Value));
     }
 
     [Fact]
