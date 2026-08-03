@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IDateTimeHumanizeStrategy'
+sidebar_label: 'Humanizer.IDateTimeHumanizeStrategy'
+description: 'API reference for Humanizer.IDateTimeHumanizeStrategy.'
+---
 ## IDateTimeHumanizeStrategy Interface
 
 Implement this interface to create a new strategy for DateTime\.Humanize and hook it in the Configurator\.DateTimeHumanizeStrategy
@@ -9,18 +14,20 @@ public interface IDateTimeHumanizeStrategy
 Derived  
 ↳ [DefaultDateTimeHumanizeStrategy](Humanizer.DefaultDateTimeHumanizeStrategy.md 'Humanizer\.DefaultDateTimeHumanizeStrategy')  
 ↳ [PrecisionDateTimeHumanizeStrategy](Humanizer.PrecisionDateTimeHumanizeStrategy.md 'Humanizer\.PrecisionDateTimeHumanizeStrategy')
+- *Methods*
+  - **[Humanize\(DateTime, DateTime, CultureInfo\)](Humanizer.IDateTimeHumanizeStrategy.md#Humanizer.IDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo) 'Humanizer\.IDateTimeHumanizeStrategy\.Humanize\(System\.DateTime, System\.DateTime, System\.Globalization\.CultureInfo\)')**
 ### Methods
 
 <a name='Humanizer.IDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo)'></a>
 
-## IDateTimeHumanizeStrategy\.Humanize\(DateTime, DateTime, CultureInfo\) Method
+#### IDateTimeHumanizeStrategy\.Humanize\(DateTime, DateTime, CultureInfo\) Method
 
 Calculates the distance of time in words between two provided dates used for DateTime\.Humanize
 
 ```csharp
 string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo? culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo).input'></a>
 
@@ -34,5 +41,5 @@ string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Gl
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

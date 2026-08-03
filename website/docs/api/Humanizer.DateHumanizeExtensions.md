@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.DateHumanizeExtensions'
+sidebar_label: 'Humanizer.DateHumanizeExtensions'
+description: 'API reference for Humanizer.DateHumanizeExtensions.'
+---
 ## DateHumanizeExtensions Class
 
 Humanizes DateTime into human readable sentence
@@ -7,18 +12,27 @@ public static class DateHumanizeExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DateHumanizeExtensions
+- *Methods*
+  - **[Humanize\(this DateOnly, Nullable&lt;DateOnly&gt;, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateOnly,System.Nullable_System.DateOnly_,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.DateOnly, System\.Nullable\<System\.DateOnly\>, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this DateTime, Nullable&lt;bool&gt;, Nullable&lt;DateTime&gt;, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateTime,System.Nullable_bool_,System.Nullable_System.DateTime_,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.DateTime, System\.Nullable\<bool\>, System\.Nullable\<System\.DateTime\>, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this DateTimeOffset, Nullable&lt;DateTimeOffset&gt;, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateTimeOffset,System.Nullable_System.DateTimeOffset_,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.DateTimeOffset, System\.Nullable\<System\.DateTimeOffset\>, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this Nullable&lt;DateOnly&gt;, Nullable&lt;DateOnly&gt;, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateOnly_,System.Nullable_System.DateOnly_,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.Nullable\<System\.DateOnly\>, System\.Nullable\<System\.DateOnly\>, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this Nullable&lt;DateTime&gt;, Nullable&lt;bool&gt;, Nullable&lt;DateTime&gt;, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateTime_,System.Nullable_bool_,System.Nullable_System.DateTime_,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.Nullable\<System\.DateTime\>, System\.Nullable\<bool\>, System\.Nullable\<System\.DateTime\>, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this Nullable&lt;DateTimeOffset&gt;, Nullable&lt;DateTimeOffset&gt;, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateTimeOffset_,System.Nullable_System.DateTimeOffset_,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.Nullable\<System\.DateTimeOffset\>, System\.Nullable\<System\.DateTimeOffset\>, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this Nullable&lt;TimeOnly&gt;, Nullable&lt;TimeOnly&gt;, bool, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.TimeOnly_,System.Nullable_System.TimeOnly_,bool,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.Nullable\<System\.TimeOnly\>, System\.Nullable\<System\.TimeOnly\>, bool, System\.Globalization\.CultureInfo\)')**
+  - **[Humanize\(this TimeOnly, Nullable&lt;TimeOnly&gt;, bool, CultureInfo\)](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHumanizeExtensions.Humanize(thisSystem.TimeOnly,System.Nullable_System.TimeOnly_,bool,System.Globalization.CultureInfo) 'Humanizer\.DateHumanizeExtensions\.Humanize\(this System\.TimeOnly, System\.Nullable\<System\.TimeOnly\>, bool, System\.Globalization\.CultureInfo\)')**
 ### Methods
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateOnly,System.Nullable_System.DateOnly_,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this DateOnly, Nullable\<DateOnly\>, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this DateOnly, Nullable\<DateOnly\>, CultureInfo\) Method
 
 Turns the current or provided date into a human readable sentence
 
 ```csharp
 public static string Humanize(this System.DateOnly input, System.Nullable<System.DateOnly> dateToCompareAgainst=null, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateOnly,System.Nullable_System.DateOnly_,System.Globalization.CultureInfo).input'></a>
 
@@ -38,20 +52,20 @@ Date to compare the input against\. If null, current date is used as base
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateTime,System.Nullable_bool_,System.Nullable_System.DateTime_,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this DateTime, Nullable\<bool\>, Nullable\<DateTime\>, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this DateTime, Nullable\<bool\>, Nullable\<DateTime\>, CultureInfo\) Method
 
 Turns the current or provided date into a human readable sentence
 
 ```csharp
 public static string Humanize(this System.DateTime input, System.Nullable<bool> utcDate=null, System.Nullable<System.DateTime> dateToCompareAgainst=null, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateTime,System.Nullable_bool_,System.Nullable_System.DateTime_,System.Globalization.CultureInfo).input'></a>
 
@@ -77,20 +91,20 @@ Date to compare the input against\. If null, current date is used as base
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateTimeOffset,System.Nullable_System.DateTimeOffset_,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this DateTimeOffset, Nullable\<DateTimeOffset\>, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this DateTimeOffset, Nullable\<DateTimeOffset\>, CultureInfo\) Method
 
 Turns the current or provided date into a human readable sentence
 
 ```csharp
 public static string Humanize(this System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst=null, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.DateTimeOffset,System.Nullable_System.DateTimeOffset_,System.Globalization.CultureInfo).input'></a>
 
@@ -110,20 +124,20 @@ Date to compare the input against\. If null, current date is used as base
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateOnly_,System.Nullable_System.DateOnly_,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this Nullable\<DateOnly\>, Nullable\<DateOnly\>, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this Nullable\<DateOnly\>, Nullable\<DateOnly\>, CultureInfo\) Method
 
 Turns the current or provided date into a human readable sentence, overload for the nullable DateTime, returning 'never' in case null
 
 ```csharp
 public static string Humanize(this System.Nullable<System.DateOnly> input, System.Nullable<System.DateOnly> dateToCompareAgainst=null, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateOnly_,System.Nullable_System.DateOnly_,System.Globalization.CultureInfo).input'></a>
 
@@ -143,20 +157,20 @@ Date to compare the input against\. If null, current date is used as base
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateTime_,System.Nullable_bool_,System.Nullable_System.DateTime_,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this Nullable\<DateTime\>, Nullable\<bool\>, Nullable\<DateTime\>, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this Nullable\<DateTime\>, Nullable\<bool\>, Nullable\<DateTime\>, CultureInfo\) Method
 
 Turns the current or provided date into a human readable sentence, overload for the nullable DateTime, returning 'never' in case null
 
 ```csharp
 public static string Humanize(this System.Nullable<System.DateTime> input, System.Nullable<bool> utcDate=null, System.Nullable<System.DateTime> dateToCompareAgainst=null, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateTime_,System.Nullable_bool_,System.Nullable_System.DateTime_,System.Globalization.CultureInfo).input'></a>
 
@@ -182,20 +196,20 @@ Date to compare the input against\. If null, current date is used as base
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateTimeOffset_,System.Nullable_System.DateTimeOffset_,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this Nullable\<DateTimeOffset\>, Nullable\<DateTimeOffset\>, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this Nullable\<DateTimeOffset\>, Nullable\<DateTimeOffset\>, CultureInfo\) Method
 
 Turns the current or provided date into a human readable sentence, overload for the nullable DateTimeOffset, returning 'never' in case null
 
 ```csharp
 public static string Humanize(this System.Nullable<System.DateTimeOffset> input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst=null, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.DateTimeOffset_,System.Nullable_System.DateTimeOffset_,System.Globalization.CultureInfo).input'></a>
 
@@ -215,20 +229,20 @@ Date to compare the input against\. If null, current date is used as base
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.TimeOnly_,System.Nullable_System.TimeOnly_,bool,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this Nullable\<TimeOnly\>, Nullable\<TimeOnly\>, bool, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this Nullable\<TimeOnly\>, Nullable\<TimeOnly\>, bool, CultureInfo\) Method
 
 Turns the current or provided time into a human readable sentence, overload for the nullable TimeOnly, returning 'never' in case null
 
 ```csharp
 public static string Humanize(this System.Nullable<System.TimeOnly> input, System.Nullable<System.TimeOnly> timeToCompareAgainst=null, bool useUtc=true, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.Nullable_System.TimeOnly_,System.Nullable_System.TimeOnly_,bool,System.Globalization.CultureInfo).input'></a>
 
@@ -254,20 +268,20 @@ If [timeToCompareAgainst](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHuma
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.TimeOnly,System.Nullable_System.TimeOnly_,bool,System.Globalization.CultureInfo)'></a>
 
-## DateHumanizeExtensions\.Humanize\(this TimeOnly, Nullable\<TimeOnly\>, bool, CultureInfo\) Method
+#### DateHumanizeExtensions\.Humanize\(this TimeOnly, Nullable\<TimeOnly\>, bool, CultureInfo\) Method
 
 Turns the current or provided time into a human readable sentence
 
 ```csharp
 public static string Humanize(this System.TimeOnly input, System.Nullable<System.TimeOnly> timeToCompareAgainst=null, bool useUtc=true, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DateHumanizeExtensions.Humanize(thisSystem.TimeOnly,System.Nullable_System.TimeOnly_,bool,System.Globalization.CultureInfo).input'></a>
 
@@ -293,6 +307,6 @@ If [timeToCompareAgainst](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHuma
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 distance of time in words

@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.TupleizeExtensions'
+sidebar_label: 'Humanizer.TupleizeExtensions'
+description: 'API reference for Humanizer.TupleizeExtensions.'
+---
 ## TupleizeExtensions Class
 
 Convert int to named tuple strings \(1 \-\> 'single', 2\-\> 'double' etc\.\)\.
@@ -8,18 +13,20 @@ public static class TupleizeExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → TupleizeExtensions
+- *Methods*
+  - **[Tupleize\(this int\)](Humanizer.TupleizeExtensions.md#Humanizer.TupleizeExtensions.Tupleize(thisint) 'Humanizer\.TupleizeExtensions\.Tupleize\(this int\)')**
 ### Methods
 
 <a name='Humanizer.TupleizeExtensions.Tupleize(thisint)'></a>
 
-## TupleizeExtensions\.Tupleize\(this int\) Method
+#### TupleizeExtensions\.Tupleize\(this int\) Method
 
 Converts an integer to its corresponding tuple name \(e\.g\., 'single', 'double', 'triple'\)\.
 
 ```csharp
 public static string Tupleize(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TupleizeExtensions.Tupleize(thisint).input'></a>
 
@@ -27,7 +34,7 @@ public static string Tupleize(this int input);
 
 The integer value to convert to a tuple name\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A string representing the tuple name:
 \- 1 returns "single"
@@ -44,7 +51,7 @@ A string representing the tuple name:
 \- 1000 returns "milluple"
 \- Any other value returns "\{value\}\-tuple" \(e\.g\., "42\-tuple"\)
 
-### Example
+##### Example
 
 ```csharp
 1.Tupleize() => "single"
@@ -56,6 +63,6 @@ A string representing the tuple name:
 (-5).Tupleize() => "-5-tuple"
 ```
 
-### Remarks
+##### Remarks
 Only values 1\-10, 100, and 1000 have specific named tuples\. All other values return 
 a generic n\-tuple format\. Negative values and zero will return in the format "\{value\}\-tuple"\.

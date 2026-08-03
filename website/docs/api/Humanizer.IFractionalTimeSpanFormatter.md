@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IFractionalTimeSpanFormatter'
+sidebar_label: 'Humanizer.IFractionalTimeSpanFormatter'
+description: 'API reference for Humanizer.IFractionalTimeSpanFormatter.'
+---
 ## IFractionalTimeSpanFormatter Interface
 
 Extends a formatter with support for fractional\-second duration values\.
@@ -5,18 +10,20 @@ Extends a formatter with support for fractional\-second duration values\.
 ```csharp
 public interface IFractionalTimeSpanFormatter
 ```
+- *Methods*
+  - **[TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\)](Humanizer.IFractionalTimeSpanFormatter.md#Humanizer.IFractionalTimeSpanFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool) 'Humanizer\.IFractionalTimeSpanFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\)')**
 ### Methods
 
 <a name='Humanizer.IFractionalTimeSpanFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool)'></a>
 
-## IFractionalTimeSpanFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\) Method
+#### IFractionalTimeSpanFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\) Method
 
 Returns the localized representation of a seconds value\.
 
 ```csharp
 string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IFractionalTimeSpanFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool).seconds'></a>
 
@@ -30,6 +37,6 @@ The non\-negative seconds value to format\.
 
 Whether the seconds unit is rendered as a symbol\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized seconds value\.

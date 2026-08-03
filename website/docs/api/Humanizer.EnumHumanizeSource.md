@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.EnumHumanizeSource'
+sidebar_label: 'Humanizer.EnumHumanizeSource'
+description: 'API reference for Humanizer.EnumHumanizeSource.'
+---
 ## EnumHumanizeSource Enum
 
 Specifies the source used to humanize an enum value\.
@@ -5,6 +10,12 @@ Specifies the source used to humanize an enum value\.
 ```csharp
 public enum EnumHumanizeSource
 ```
+- *Fields*
+  - **[Default](Humanizer.EnumHumanizeSource.md#Humanizer.EnumHumanizeSource.Default 'Humanizer\.EnumHumanizeSource\.Default')**
+  - **[DisplayDescription](Humanizer.EnumHumanizeSource.md#Humanizer.EnumHumanizeSource.DisplayDescription 'Humanizer\.EnumHumanizeSource\.DisplayDescription')**
+  - **[DisplayName](Humanizer.EnumHumanizeSource.md#Humanizer.EnumHumanizeSource.DisplayName 'Humanizer\.EnumHumanizeSource\.DisplayName')**
+  - **[DisplayShortName](Humanizer.EnumHumanizeSource.md#Humanizer.EnumHumanizeSource.DisplayShortName 'Humanizer\.EnumHumanizeSource\.DisplayShortName')**
+  - **[EnumName](Humanizer.EnumHumanizeSource.md#Humanizer.EnumHumanizeSource.EnumName 'Humanizer\.EnumHumanizeSource\.EnumName')**
 ### Fields
 
 <a name='Humanizer.EnumHumanizeSource.Default'></a>

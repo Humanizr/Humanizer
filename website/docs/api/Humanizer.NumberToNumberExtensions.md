@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.NumberToNumberExtensions'
+sidebar_label: 'Humanizer.NumberToNumberExtensions'
+description: 'API reference for Humanizer.NumberToNumberExtensions.'
+---
 ## NumberToNumberExtensions Class
 
 Number to Number extensions
@@ -7,18 +12,44 @@ public static class NumberToNumberExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → NumberToNumberExtensions
+- *Methods*
+  - **[Billions\(this double\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Billions(thisdouble) 'Humanizer\.NumberToNumberExtensions\.Billions\(this double\)')**
+  - **[Billions\(this int\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Billions(thisint) 'Humanizer\.NumberToNumberExtensions\.Billions\(this int\)')**
+  - **[Billions\(this long\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Billions(thislong) 'Humanizer\.NumberToNumberExtensions\.Billions\(this long\)')**
+  - **[Billions\(this uint\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Billions(thisuint) 'Humanizer\.NumberToNumberExtensions\.Billions\(this uint\)')**
+  - **[Billions\(this ulong\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Billions(thisulong) 'Humanizer\.NumberToNumberExtensions\.Billions\(this ulong\)')**
+  - **[Hundreds\(this double\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Hundreds(thisdouble) 'Humanizer\.NumberToNumberExtensions\.Hundreds\(this double\)')**
+  - **[Hundreds\(this int\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Hundreds(thisint) 'Humanizer\.NumberToNumberExtensions\.Hundreds\(this int\)')**
+  - **[Hundreds\(this long\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Hundreds(thislong) 'Humanizer\.NumberToNumberExtensions\.Hundreds\(this long\)')**
+  - **[Hundreds\(this uint\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Hundreds(thisuint) 'Humanizer\.NumberToNumberExtensions\.Hundreds\(this uint\)')**
+  - **[Hundreds\(this ulong\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Hundreds(thisulong) 'Humanizer\.NumberToNumberExtensions\.Hundreds\(this ulong\)')**
+  - **[Millions\(this double\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Millions(thisdouble) 'Humanizer\.NumberToNumberExtensions\.Millions\(this double\)')**
+  - **[Millions\(this int\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Millions(thisint) 'Humanizer\.NumberToNumberExtensions\.Millions\(this int\)')**
+  - **[Millions\(this long\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Millions(thislong) 'Humanizer\.NumberToNumberExtensions\.Millions\(this long\)')**
+  - **[Millions\(this uint\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Millions(thisuint) 'Humanizer\.NumberToNumberExtensions\.Millions\(this uint\)')**
+  - **[Millions\(this ulong\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Millions(thisulong) 'Humanizer\.NumberToNumberExtensions\.Millions\(this ulong\)')**
+  - **[Tens\(this double\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Tens(thisdouble) 'Humanizer\.NumberToNumberExtensions\.Tens\(this double\)')**
+  - **[Tens\(this int\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Tens(thisint) 'Humanizer\.NumberToNumberExtensions\.Tens\(this int\)')**
+  - **[Tens\(this long\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Tens(thislong) 'Humanizer\.NumberToNumberExtensions\.Tens\(this long\)')**
+  - **[Tens\(this uint\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Tens(thisuint) 'Humanizer\.NumberToNumberExtensions\.Tens\(this uint\)')**
+  - **[Tens\(this ulong\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Tens(thisulong) 'Humanizer\.NumberToNumberExtensions\.Tens\(this ulong\)')**
+  - **[Thousands\(this double\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Thousands(thisdouble) 'Humanizer\.NumberToNumberExtensions\.Thousands\(this double\)')**
+  - **[Thousands\(this int\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Thousands(thisint) 'Humanizer\.NumberToNumberExtensions\.Thousands\(this int\)')**
+  - **[Thousands\(this long\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Thousands(thislong) 'Humanizer\.NumberToNumberExtensions\.Thousands\(this long\)')**
+  - **[Thousands\(this uint\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Thousands(thisuint) 'Humanizer\.NumberToNumberExtensions\.Thousands\(this uint\)')**
+  - **[Thousands\(this ulong\)](Humanizer.NumberToNumberExtensions.md#Humanizer.NumberToNumberExtensions.Thousands(thisulong) 'Humanizer\.NumberToNumberExtensions\.Thousands\(this ulong\)')**
 ### Methods
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisdouble)'></a>
 
-## NumberToNumberExtensions\.Billions\(this double\) Method
+#### NumberToNumberExtensions\.Billions\(this double\) Method
 
 Multiplies a double by 1,000,000,000 \(one billion in short scale\), providing a more readable way to express billions in code\.
 
 ```csharp
 public static double Billions(this double input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisdouble).input'></a>
 
@@ -26,29 +57,29 @@ public static double Billions(this double input);
 
 The double value to multiply by 1,000,000,000\.
 
-#### Returns
+##### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The input value multiplied by 1,000,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 1.0.Billions() => 1000000000.0
 ```
 
-### Remarks
+##### Remarks
 Uses the short scale definition where 1 billion = 1,000,000,000 \(10^9\)\.
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisint)'></a>
 
-## NumberToNumberExtensions\.Billions\(this int\) Method
+#### NumberToNumberExtensions\.Billions\(this int\) Method
 
 Multiplies an integer by 1,000,000,000 \(one billion in short scale\), providing a more readable way to express billions in code\.
 
 ```csharp
 public static int Billions(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisint).input'></a>
 
@@ -56,30 +87,30 @@ public static int Billions(this int input);
 
 The integer value to multiply by 1,000,000,000\.
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The input value multiplied by 1,000,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 1.Billions() => 1000000000
 2.Billions() => 2000000000
 ```
 
-### Remarks
+##### Remarks
 Uses the short scale definition where 1 billion = 1,000,000,000 \(10^9\)\.
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thislong)'></a>
 
-## NumberToNumberExtensions\.Billions\(this long\) Method
+#### NumberToNumberExtensions\.Billions\(this long\) Method
 
 Multiplies a long integer by 1,000,000,000 \(one billion in short scale\), providing a more readable way to express billions in code\.
 
 ```csharp
 public static long Billions(this long input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thislong).input'></a>
 
@@ -87,29 +118,29 @@ public static long Billions(this long input);
 
 The long integer value to multiply by 1,000,000,000\.
 
-#### Returns
+##### Returns
 [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')  
 The input value multiplied by 1,000,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 1L.Billions() => 1000000000L
 ```
 
-### Remarks
+##### Remarks
 Uses the short scale definition where 1 billion = 1,000,000,000 \(10^9\)\.
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisuint)'></a>
 
-## NumberToNumberExtensions\.Billions\(this uint\) Method
+#### NumberToNumberExtensions\.Billions\(this uint\) Method
 
 Multiplies an unsigned integer by 1,000,000,000 \(one billion in short scale\), providing a more readable way to express billions in code\.
 
 ```csharp
 public static uint Billions(this uint input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisuint).input'></a>
 
@@ -117,29 +148,29 @@ public static uint Billions(this uint input);
 
 The unsigned integer value to multiply by 1,000,000,000\.
 
-#### Returns
+##### Returns
 [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')  
 The input value multiplied by 1,000,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 1U.Billions() => 1000000000U
 ```
 
-### Remarks
+##### Remarks
 Uses the short scale definition where 1 billion = 1,000,000,000 \(10^9\)\.
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisulong)'></a>
 
-## NumberToNumberExtensions\.Billions\(this ulong\) Method
+#### NumberToNumberExtensions\.Billions\(this ulong\) Method
 
 Multiplies an unsigned long integer by 1,000,000,000 \(one billion in short scale\), providing a more readable way to express billions in code\.
 
 ```csharp
 public static ulong Billions(this ulong input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Billions(thisulong).input'></a>
 
@@ -147,29 +178,29 @@ public static ulong Billions(this ulong input);
 
 The unsigned long integer value to multiply by 1,000,000,000\.
 
-#### Returns
+##### Returns
 [System\.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64 'System\.UInt64')  
 The input value multiplied by 1,000,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 1UL.Billions() => 1000000000UL
 ```
 
-### Remarks
+##### Remarks
 Uses the short scale definition where 1 billion = 1,000,000,000 \(10^9\)\.
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisdouble)'></a>
 
-## NumberToNumberExtensions\.Hundreds\(this double\) Method
+#### NumberToNumberExtensions\.Hundreds\(this double\) Method
 
 Multiplies a double by 100, providing a more readable way to express hundreds in code\.
 
 ```csharp
 public static double Hundreds(this double input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisdouble).input'></a>
 
@@ -177,11 +208,11 @@ public static double Hundreds(this double input);
 
 The double value to multiply by 100\.
 
-#### Returns
+##### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The input value multiplied by 100\.
 
-### Example
+##### Example
 
 ```csharp
 4.0.Hundreds() => 400.0
@@ -189,14 +220,14 @@ The input value multiplied by 100\.
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisint)'></a>
 
-## NumberToNumberExtensions\.Hundreds\(this int\) Method
+#### NumberToNumberExtensions\.Hundreds\(this int\) Method
 
 Multiplies an integer by 100, providing a more readable way to express hundreds in code\.
 
 ```csharp
 public static int Hundreds(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisint).input'></a>
 
@@ -204,11 +235,11 @@ public static int Hundreds(this int input);
 
 The integer value to multiply by 100\.
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The input value multiplied by 100\.
 
-### Example
+##### Example
 
 ```csharp
 4.Hundreds() => 400
@@ -217,14 +248,14 @@ The input value multiplied by 100\.
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thislong)'></a>
 
-## NumberToNumberExtensions\.Hundreds\(this long\) Method
+#### NumberToNumberExtensions\.Hundreds\(this long\) Method
 
 Multiplies a long integer by 100, providing a more readable way to express hundreds in code\.
 
 ```csharp
 public static long Hundreds(this long input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thislong).input'></a>
 
@@ -232,11 +263,11 @@ public static long Hundreds(this long input);
 
 The long integer value to multiply by 100\.
 
-#### Returns
+##### Returns
 [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')  
 The input value multiplied by 100\.
 
-### Example
+##### Example
 
 ```csharp
 4L.Hundreds() => 400L
@@ -244,14 +275,14 @@ The input value multiplied by 100\.
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisuint)'></a>
 
-## NumberToNumberExtensions\.Hundreds\(this uint\) Method
+#### NumberToNumberExtensions\.Hundreds\(this uint\) Method
 
 Multiplies an unsigned integer by 100, providing a more readable way to express hundreds in code\.
 
 ```csharp
 public static uint Hundreds(this uint input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisuint).input'></a>
 
@@ -259,11 +290,11 @@ public static uint Hundreds(this uint input);
 
 The unsigned integer value to multiply by 100\.
 
-#### Returns
+##### Returns
 [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')  
 The input value multiplied by 100\.
 
-### Example
+##### Example
 
 ```csharp
 4U.Hundreds() => 400U
@@ -271,14 +302,14 @@ The input value multiplied by 100\.
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisulong)'></a>
 
-## NumberToNumberExtensions\.Hundreds\(this ulong\) Method
+#### NumberToNumberExtensions\.Hundreds\(this ulong\) Method
 
 Multiplies an unsigned long integer by 100, providing a more readable way to express hundreds in code\.
 
 ```csharp
 public static ulong Hundreds(this ulong input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Hundreds(thisulong).input'></a>
 
@@ -286,11 +317,11 @@ public static ulong Hundreds(this ulong input);
 
 The unsigned long integer value to multiply by 100\.
 
-#### Returns
+##### Returns
 [System\.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64 'System\.UInt64')  
 The input value multiplied by 100\.
 
-### Example
+##### Example
 
 ```csharp
 4UL.Hundreds() => 400UL
@@ -298,14 +329,14 @@ The input value multiplied by 100\.
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisdouble)'></a>
 
-## NumberToNumberExtensions\.Millions\(this double\) Method
+#### NumberToNumberExtensions\.Millions\(this double\) Method
 
 Multiplies a double by 1,000,000, providing a more readable way to express millions in code\.
 
 ```csharp
 public static double Millions(this double input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisdouble).input'></a>
 
@@ -313,11 +344,11 @@ public static double Millions(this double input);
 
 The double value to multiply by 1,000,000\.
 
-#### Returns
+##### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The input value multiplied by 1,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 2.0.Millions() => 2000000.0
@@ -325,14 +356,14 @@ The input value multiplied by 1,000,000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisint)'></a>
 
-## NumberToNumberExtensions\.Millions\(this int\) Method
+#### NumberToNumberExtensions\.Millions\(this int\) Method
 
 Multiplies an integer by 1,000,000, providing a more readable way to express millions in code\.
 
 ```csharp
 public static int Millions(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisint).input'></a>
 
@@ -340,11 +371,11 @@ public static int Millions(this int input);
 
 The integer value to multiply by 1,000,000\.
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The input value multiplied by 1,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 2.Millions() => 2000000
@@ -353,14 +384,14 @@ The input value multiplied by 1,000,000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thislong)'></a>
 
-## NumberToNumberExtensions\.Millions\(this long\) Method
+#### NumberToNumberExtensions\.Millions\(this long\) Method
 
 Multiplies a long integer by 1,000,000, providing a more readable way to express millions in code\.
 
 ```csharp
 public static long Millions(this long input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thislong).input'></a>
 
@@ -368,11 +399,11 @@ public static long Millions(this long input);
 
 The long integer value to multiply by 1,000,000\.
 
-#### Returns
+##### Returns
 [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')  
 The input value multiplied by 1,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 2L.Millions() => 2000000L
@@ -380,14 +411,14 @@ The input value multiplied by 1,000,000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisuint)'></a>
 
-## NumberToNumberExtensions\.Millions\(this uint\) Method
+#### NumberToNumberExtensions\.Millions\(this uint\) Method
 
 Multiplies an unsigned integer by 1,000,000, providing a more readable way to express millions in code\.
 
 ```csharp
 public static uint Millions(this uint input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisuint).input'></a>
 
@@ -395,11 +426,11 @@ public static uint Millions(this uint input);
 
 The unsigned integer value to multiply by 1,000,000\.
 
-#### Returns
+##### Returns
 [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')  
 The input value multiplied by 1,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 2U.Millions() => 2000000U
@@ -407,14 +438,14 @@ The input value multiplied by 1,000,000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisulong)'></a>
 
-## NumberToNumberExtensions\.Millions\(this ulong\) Method
+#### NumberToNumberExtensions\.Millions\(this ulong\) Method
 
 Multiplies an unsigned long integer by 1,000,000, providing a more readable way to express millions in code\.
 
 ```csharp
 public static ulong Millions(this ulong input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Millions(thisulong).input'></a>
 
@@ -422,11 +453,11 @@ public static ulong Millions(this ulong input);
 
 The unsigned long integer value to multiply by 1,000,000\.
 
-#### Returns
+##### Returns
 [System\.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64 'System\.UInt64')  
 The input value multiplied by 1,000,000\.
 
-### Example
+##### Example
 
 ```csharp
 2UL.Millions() => 2000000UL
@@ -434,14 +465,14 @@ The input value multiplied by 1,000,000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisdouble)'></a>
 
-## NumberToNumberExtensions\.Tens\(this double\) Method
+#### NumberToNumberExtensions\.Tens\(this double\) Method
 
 Multiplies a double by 10, providing a more readable way to express multiples of ten in code\.
 
 ```csharp
 public static double Tens(this double input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisdouble).input'></a>
 
@@ -449,11 +480,11 @@ public static double Tens(this double input);
 
 The double value to multiply by 10\.
 
-#### Returns
+##### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The input value multiplied by 10\.
 
-### Example
+##### Example
 
 ```csharp
 5.5.Tens() => 55.0
@@ -461,14 +492,14 @@ The input value multiplied by 10\.
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisint)'></a>
 
-## NumberToNumberExtensions\.Tens\(this int\) Method
+#### NumberToNumberExtensions\.Tens\(this int\) Method
 
 Multiplies an integer by 10, providing a more readable way to express multiples of ten in code\.
 
 ```csharp
 public static int Tens(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisint).input'></a>
 
@@ -476,11 +507,11 @@ public static int Tens(this int input);
 
 The integer value to multiply by 10\.
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The input value multiplied by 10\.
 
-### Example
+##### Example
 
 ```csharp
 5.Tens() => 50
@@ -490,14 +521,14 @@ The input value multiplied by 10\.
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thislong)'></a>
 
-## NumberToNumberExtensions\.Tens\(this long\) Method
+#### NumberToNumberExtensions\.Tens\(this long\) Method
 
 Multiplies a long integer by 10, providing a more readable way to express multiples of ten in code\.
 
 ```csharp
 public static long Tens(this long input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thislong).input'></a>
 
@@ -505,11 +536,11 @@ public static long Tens(this long input);
 
 The long integer value to multiply by 10\.
 
-#### Returns
+##### Returns
 [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')  
 The input value multiplied by 10\.
 
-### Example
+##### Example
 
 ```csharp
 5L.Tens() => 50L
@@ -517,14 +548,14 @@ The input value multiplied by 10\.
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisuint)'></a>
 
-## NumberToNumberExtensions\.Tens\(this uint\) Method
+#### NumberToNumberExtensions\.Tens\(this uint\) Method
 
 Multiplies an unsigned integer by 10, providing a more readable way to express multiples of ten in code\.
 
 ```csharp
 public static uint Tens(this uint input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisuint).input'></a>
 
@@ -532,11 +563,11 @@ public static uint Tens(this uint input);
 
 The unsigned integer value to multiply by 10\.
 
-#### Returns
+##### Returns
 [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')  
 The input value multiplied by 10\.
 
-### Example
+##### Example
 
 ```csharp
 5U.Tens() => 50U
@@ -544,14 +575,14 @@ The input value multiplied by 10\.
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisulong)'></a>
 
-## NumberToNumberExtensions\.Tens\(this ulong\) Method
+#### NumberToNumberExtensions\.Tens\(this ulong\) Method
 
 Multiplies an unsigned long integer by 10, providing a more readable way to express multiples of ten in code\.
 
 ```csharp
 public static ulong Tens(this ulong input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Tens(thisulong).input'></a>
 
@@ -559,11 +590,11 @@ public static ulong Tens(this ulong input);
 
 The unsigned long integer value to multiply by 10\.
 
-#### Returns
+##### Returns
 [System\.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64 'System\.UInt64')  
 The input value multiplied by 10\.
 
-### Example
+##### Example
 
 ```csharp
 5UL.Tens() => 50UL
@@ -571,14 +602,14 @@ The input value multiplied by 10\.
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisdouble)'></a>
 
-## NumberToNumberExtensions\.Thousands\(this double\) Method
+#### NumberToNumberExtensions\.Thousands\(this double\) Method
 
 Multiplies a double by 1000, providing a more readable way to express thousands in code\.
 
 ```csharp
 public static double Thousands(this double input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisdouble).input'></a>
 
@@ -586,11 +617,11 @@ public static double Thousands(this double input);
 
 The double value to multiply by 1000\.
 
-#### Returns
+##### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The input value multiplied by 1000\.
 
-### Example
+##### Example
 
 ```csharp
 3.0.Thousands() => 3000.0
@@ -598,14 +629,14 @@ The input value multiplied by 1000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisint)'></a>
 
-## NumberToNumberExtensions\.Thousands\(this int\) Method
+#### NumberToNumberExtensions\.Thousands\(this int\) Method
 
 Multiplies an integer by 1000, providing a more readable way to express thousands in code\.
 
 ```csharp
 public static int Thousands(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisint).input'></a>
 
@@ -613,11 +644,11 @@ public static int Thousands(this int input);
 
 The integer value to multiply by 1000\.
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The input value multiplied by 1000\.
 
-### Example
+##### Example
 
 ```csharp
 3.Thousands() => 3000
@@ -626,14 +657,14 @@ The input value multiplied by 1000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thislong)'></a>
 
-## NumberToNumberExtensions\.Thousands\(this long\) Method
+#### NumberToNumberExtensions\.Thousands\(this long\) Method
 
 Multiplies a long integer by 1000, providing a more readable way to express thousands in code\.
 
 ```csharp
 public static long Thousands(this long input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thislong).input'></a>
 
@@ -641,11 +672,11 @@ public static long Thousands(this long input);
 
 The long integer value to multiply by 1000\.
 
-#### Returns
+##### Returns
 [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')  
 The input value multiplied by 1000\.
 
-### Example
+##### Example
 
 ```csharp
 3L.Thousands() => 3000L
@@ -653,14 +684,14 @@ The input value multiplied by 1000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisuint)'></a>
 
-## NumberToNumberExtensions\.Thousands\(this uint\) Method
+#### NumberToNumberExtensions\.Thousands\(this uint\) Method
 
 Multiplies an unsigned integer by 1000, providing a more readable way to express thousands in code\.
 
 ```csharp
 public static uint Thousands(this uint input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisuint).input'></a>
 
@@ -668,11 +699,11 @@ public static uint Thousands(this uint input);
 
 The unsigned integer value to multiply by 1000\.
 
-#### Returns
+##### Returns
 [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')  
 The input value multiplied by 1000\.
 
-### Example
+##### Example
 
 ```csharp
 3U.Thousands() => 3000U
@@ -680,14 +711,14 @@ The input value multiplied by 1000\.
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisulong)'></a>
 
-## NumberToNumberExtensions\.Thousands\(this ulong\) Method
+#### NumberToNumberExtensions\.Thousands\(this ulong\) Method
 
 Multiplies an unsigned long integer by 1000, providing a more readable way to express thousands in code\.
 
 ```csharp
 public static ulong Thousands(this ulong input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToNumberExtensions.Thousands(thisulong).input'></a>
 
@@ -695,11 +726,11 @@ public static ulong Thousands(this ulong input);
 
 The unsigned long integer value to multiply by 1000\.
 
-#### Returns
+##### Returns
 [System\.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64 'System\.UInt64')  
 The input value multiplied by 1000\.
 
-### Example
+##### Example
 
 ```csharp
 3UL.Thousands() => 3000UL

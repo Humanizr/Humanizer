@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IOrdinalizer'
+sidebar_label: 'Humanizer.IOrdinalizer'
+description: 'API reference for Humanizer.IOrdinalizer.'
+---
 ## IOrdinalizer Interface
 
 Localizes the ordinal form of a number\.
@@ -8,18 +13,23 @@ public interface IOrdinalizer
 
 Derived  
 ↳ [ILongOrdinalizer](Humanizer.ILongOrdinalizer.md 'Humanizer\.ILongOrdinalizer')
+- *Methods*
+  - **[Convert\(int, string\)](Humanizer.IOrdinalizer.md#Humanizer.IOrdinalizer.Convert(int,string) 'Humanizer\.IOrdinalizer\.Convert\(int, string\)')**
+  - **[Convert\(int, string, GrammaticalGender\)](Humanizer.IOrdinalizer.md#Humanizer.IOrdinalizer.Convert(int,string,Humanizer.GrammaticalGender) 'Humanizer\.IOrdinalizer\.Convert\(int, string, Humanizer\.GrammaticalGender\)')**
+  - **[Convert\(int, string, GrammaticalGender, WordForm\)](Humanizer.IOrdinalizer.md#Humanizer.IOrdinalizer.Convert(int,string,Humanizer.GrammaticalGender,Humanizer.WordForm) 'Humanizer\.IOrdinalizer\.Convert\(int, string, Humanizer\.GrammaticalGender, Humanizer\.WordForm\)')**
+  - **[Convert\(int, string, WordForm\)](Humanizer.IOrdinalizer.md#Humanizer.IOrdinalizer.Convert(int,string,Humanizer.WordForm) 'Humanizer\.IOrdinalizer\.Convert\(int, string, Humanizer\.WordForm\)')**
 ### Methods
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string)'></a>
 
-## IOrdinalizer\.Convert\(int, string\) Method
+#### IOrdinalizer\.Convert\(int, string\) Method
 
 Ordinalizes the number using the default grammatical form\.
 
 ```csharp
 string Convert(int number, string numberString);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string).number'></a>
 
@@ -33,20 +43,20 @@ The numeric value being ordinalized\.
 
 The cardinal representation of the number\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The ordinalized text\.
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string,Humanizer.GrammaticalGender)'></a>
 
-## IOrdinalizer\.Convert\(int, string, GrammaticalGender\) Method
+#### IOrdinalizer\.Convert\(int, string, GrammaticalGender\) Method
 
 Ordinalizes the number using the provided grammatical gender\.
 
 ```csharp
 string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string,Humanizer.GrammaticalGender).number'></a>
 
@@ -66,20 +76,20 @@ The cardinal representation of the number\.
 
 The grammatical gender to use when the locale requires one\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The ordinalized text\.
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string,Humanizer.GrammaticalGender,Humanizer.WordForm)'></a>
 
-## IOrdinalizer\.Convert\(int, string, GrammaticalGender, WordForm\) Method
+#### IOrdinalizer\.Convert\(int, string, GrammaticalGender, WordForm\) Method
 
 Ordinalizes the number using the provided grammatical gender and word form\.
 
 ```csharp
 string Convert(int number, string numberString, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string,Humanizer.GrammaticalGender,Humanizer.WordForm).number'></a>
 
@@ -105,20 +115,20 @@ The grammatical gender to use when the locale requires one\.
 
 The word form to use when the locale distinguishes abbreviations from full words\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The ordinalized text\.
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string,Humanizer.WordForm)'></a>
 
-## IOrdinalizer\.Convert\(int, string, WordForm\) Method
+#### IOrdinalizer\.Convert\(int, string, WordForm\) Method
 
 Ordinalizes the number using a locale\-specific word form\.
 
 ```csharp
 string Convert(int number, string numberString, Humanizer.WordForm wordForm);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string,Humanizer.WordForm).number'></a>
 
@@ -138,6 +148,6 @@ The cardinal representation of the number\.
 
 The word form to use when the locale distinguishes abbreviations from full words\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The ordinalized text\.

@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IndianScaleStyle'
+sidebar_label: 'Humanizer.IndianScaleStyle'
+description: 'API reference for Humanizer.IndianScaleStyle.'
+---
 ## IndianScaleStyle Enum
 
 Selects the large\-number vocabulary used by [ToIndianWords\(this long, IndianScaleStyle\)](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle) 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this long, Humanizer\.IndianScaleStyle\)')\.
@@ -5,6 +10,9 @@ Selects the large\-number vocabulary used by [ToIndianWords\(this long, IndianSc
 ```csharp
 public enum IndianScaleStyle
 ```
+- *Fields*
+  - **[CroreBased](Humanizer.IndianScaleStyle.md#Humanizer.IndianScaleStyle.CroreBased 'Humanizer\.IndianScaleStyle\.CroreBased')**
+  - **[NamedScales](Humanizer.IndianScaleStyle.md#Humanizer.IndianScaleStyle.NamedScales 'Humanizer\.IndianScaleStyle\.NamedScales')**
 ### Fields
 
 <a name='Humanizer.IndianScaleStyle.NamedScales'></a>

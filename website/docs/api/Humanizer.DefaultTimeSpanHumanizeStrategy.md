@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.DefaultTimeSpanHumanizeStrategy'
+sidebar_label: 'Humanizer.DefaultTimeSpanHumanizeStrategy'
+description: 'API reference for Humanizer.DefaultTimeSpanHumanizeStrategy.'
+---
 ## DefaultTimeSpanHumanizeStrategy Class
 
 The default strategy for converting [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') values into human\-readable text\.
@@ -9,18 +14,36 @@ public class DefaultTimeSpanHumanizeStrategy : Humanizer.IGrammaticalCaseTimeSpa
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultTimeSpanHumanizeStrategy
 
 Implements [IGrammaticalCaseTimeSpanHumanizeStrategy](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy'), [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy')
+- *Constructors*
+  - **[DefaultTimeSpanHumanizeStrategy\(\)](Humanizer.DefaultTimeSpanHumanizeStrategy.md#Humanizer.DefaultTimeSpanHumanizeStrategy.DefaultTimeSpanHumanizeStrategy())**
+- *Methods*
+  - **[Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\)](Humanizer.DefaultTimeSpanHumanizeStrategy.md#Humanizer.DefaultTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool) 'Humanizer\.DefaultTimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, bool\)')**
+  - **[HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\)](Humanizer.DefaultTimeSpanHumanizeStrategy.md#Humanizer.DefaultTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool) 'Humanizer\.DefaultTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string, int, System\.MidpointRounding, bool\)')**
+- *Explicit Interface Implementations*
+  - **[Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\)](Humanizer.DefaultTimeSpanHumanizeStrategy.md#Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase) 'Humanizer\.DefaultTimeSpanHumanizeStrategy\.Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, Humanizer\.GrammaticalCase\)')**
+### Constructors
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.DefaultTimeSpanHumanizeStrategy()'></a>
+
+#### DefaultTimeSpanHumanizeStrategy\(\) Constructor
+
+Initializes a new instance of the DefaultTimeSpanHumanizeStrategy class.
+
+```csharp
+public DefaultTimeSpanHumanizeStrategy();
+```
 ### Methods
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool)'></a>
 
-## DefaultTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\) Method
+#### DefaultTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\) Method
 
 Converts a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into human\-readable text\.
 
 ```csharp
 public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool).timeSpan'></a>
 
@@ -78,20 +101,20 @@ Whether time units are rendered as symbols\.
 
 Implements [Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\)](Humanizer.ITimeSpanHumanizeStrategy.md#Humanizer.ITimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool) 'Humanizer\.ITimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, bool\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span\.
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool)'></a>
 
-## DefaultTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\) Method
+#### DefaultTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\) Method
 
 Converts a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into human\-readable text with seconds as the minimum unit\.
 
 ```csharp
 public virtual string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool).timeSpan'></a>
 
@@ -147,19 +170,19 @@ The midpoint rounding mode\.
 
 Whether time units are rendered as symbols\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span\.
 ### Explicit Interface Implementations
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase)'></a>
 
-## Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\) Method
+#### Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\) Method
 
 ```csharp
 string Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toSymbols, Humanizer.GrammaticalCase grammaticalCase);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).timeSpan'></a>
 

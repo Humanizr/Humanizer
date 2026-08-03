@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.PrepositionsExtensions'
+sidebar_label: 'Humanizer.PrepositionsExtensions'
+description: 'API reference for Humanizer.PrepositionsExtensions.'
+---
 ## PrepositionsExtensions Class
 
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime') extensions related to spatial or temporal relations
@@ -7,11 +12,16 @@ public static class PrepositionsExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → PrepositionsExtensions
+- *Methods*
+  - **[At\(this DateTime, int, int, int, int\)](Humanizer.PrepositionsExtensions.md#Humanizer.PrepositionsExtensions.At(thisSystem.DateTime,int,int,int,int) 'Humanizer\.PrepositionsExtensions\.At\(this System\.DateTime, int, int, int, int\)')**
+  - **[AtMidnight\(this DateTime\)](Humanizer.PrepositionsExtensions.md#Humanizer.PrepositionsExtensions.AtMidnight(thisSystem.DateTime) 'Humanizer\.PrepositionsExtensions\.AtMidnight\(this System\.DateTime\)')**
+  - **[AtNoon\(this DateTime\)](Humanizer.PrepositionsExtensions.md#Humanizer.PrepositionsExtensions.AtNoon(thisSystem.DateTime) 'Humanizer\.PrepositionsExtensions\.AtNoon\(this System\.DateTime\)')**
+  - **[In\(this DateTime, int\)](Humanizer.PrepositionsExtensions.md#Humanizer.PrepositionsExtensions.In(thisSystem.DateTime,int) 'Humanizer\.PrepositionsExtensions\.In\(this System\.DateTime, int\)')**
 ### Methods
 
 <a name='Humanizer.PrepositionsExtensions.At(thisSystem.DateTime,int,int,int,int)'></a>
 
-## PrepositionsExtensions\.At\(this DateTime, int, int, int, int\) Method
+#### PrepositionsExtensions\.At\(this DateTime, int, int, int, int\) Method
 
 Returns a new [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime') with the specified hour and, optionally
 provided minutes, seconds, and milliseconds\.
@@ -19,7 +29,7 @@ provided minutes, seconds, and milliseconds\.
 ```csharp
 public static System.DateTime At(this System.DateTime date, int hour, int min=0, int second=0, int millisecond=0);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.PrepositionsExtensions.At(thisSystem.DateTime,int,int,int,int).date'></a>
 
@@ -41,55 +51,55 @@ public static System.DateTime At(this System.DateTime date, int hour, int min=0,
 
 `millisecond` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.PrepositionsExtensions.AtMidnight(thisSystem.DateTime)'></a>
 
-## PrepositionsExtensions\.AtMidnight\(this DateTime\) Method
+#### PrepositionsExtensions\.AtMidnight\(this DateTime\) Method
 
 Returns a new instance of DateTime based on the provided date where the time is set to midnight
 
 ```csharp
 public static System.DateTime AtMidnight(this System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.PrepositionsExtensions.AtMidnight(thisSystem.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.PrepositionsExtensions.AtNoon(thisSystem.DateTime)'></a>
 
-## PrepositionsExtensions\.AtNoon\(this DateTime\) Method
+#### PrepositionsExtensions\.AtNoon\(this DateTime\) Method
 
 Returns a new instance of DateTime based on the provided date where the time is set to noon
 
 ```csharp
 public static System.DateTime AtNoon(this System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.PrepositionsExtensions.AtNoon(thisSystem.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.PrepositionsExtensions.In(thisSystem.DateTime,int)'></a>
 
-## PrepositionsExtensions\.In\(this DateTime, int\) Method
+#### PrepositionsExtensions\.In\(this DateTime, int\) Method
 
 Returns a new instance of DateTime based on the provided date where the year is set to the provided year
 
 ```csharp
 public static System.DateTime In(this System.DateTime date, int year);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.PrepositionsExtensions.In(thisSystem.DateTime,int).date'></a>
 
@@ -99,5 +109,5 @@ public static System.DateTime In(this System.DateTime date, int year);
 
 `year` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')

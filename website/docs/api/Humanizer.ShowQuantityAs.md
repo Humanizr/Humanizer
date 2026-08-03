@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ShowQuantityAs'
+sidebar_label: 'Humanizer.ShowQuantityAs'
+description: 'API reference for Humanizer.ShowQuantityAs.'
+---
 ## ShowQuantityAs Enum
 
 Enumerates the ways of displaying a quantity value when converting
@@ -6,6 +11,10 @@ a word to a quantity string\.
 ```csharp
 public enum ShowQuantityAs
 ```
+- *Fields*
+  - **[None](Humanizer.ShowQuantityAs.md#Humanizer.ShowQuantityAs.None 'Humanizer\.ShowQuantityAs\.None')**
+  - **[Numeric](Humanizer.ShowQuantityAs.md#Humanizer.ShowQuantityAs.Numeric 'Humanizer\.ShowQuantityAs\.Numeric')**
+  - **[Words](Humanizer.ShowQuantityAs.md#Humanizer.ShowQuantityAs.Words 'Humanizer\.ShowQuantityAs\.Words')**
 ### Fields
 
 <a name='Humanizer.ShowQuantityAs.None'></a>

@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.GrammaticalGender'
+sidebar_label: 'Humanizer.GrammaticalGender'
+description: 'API reference for Humanizer.GrammaticalGender.'
+---
 ## GrammaticalGender Enum
 
 Options for specifying the desired grammatical gender for the output words
@@ -5,6 +10,10 @@ Options for specifying the desired grammatical gender for the output words
 ```csharp
 public enum GrammaticalGender
 ```
+- *Fields*
+  - **[Feminine](Humanizer.GrammaticalGender.md#Humanizer.GrammaticalGender.Feminine 'Humanizer\.GrammaticalGender\.Feminine')**
+  - **[Masculine](Humanizer.GrammaticalGender.md#Humanizer.GrammaticalGender.Masculine 'Humanizer\.GrammaticalGender\.Masculine')**
+  - **[Neuter](Humanizer.GrammaticalGender.md#Humanizer.GrammaticalGender.Neuter 'Humanizer\.GrammaticalGender\.Neuter')**
 ### Fields
 
 <a name='Humanizer.GrammaticalGender.Masculine'></a>

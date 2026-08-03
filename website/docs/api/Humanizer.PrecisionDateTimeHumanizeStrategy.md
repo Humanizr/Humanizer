@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.PrecisionDateTimeHumanizeStrategy'
+sidebar_label: 'Humanizer.PrecisionDateTimeHumanizeStrategy'
+description: 'API reference for Humanizer.PrecisionDateTimeHumanizeStrategy.'
+---
 ## PrecisionDateTimeHumanizeStrategy Class
 
 Precision\-based calculator for distance between two times
@@ -12,18 +17,22 @@ Implements [IDateTimeHumanizeStrategy](Humanizer.IDateTimeHumanizeStrategy.md 'H
 
 ### Remarks
 Constructs a precision\-based calculator for distance of time with default precision 0\.75\.
+- *Constructors*
+  - **[PrecisionDateTimeHumanizeStrategy\(double\)](Humanizer.PrecisionDateTimeHumanizeStrategy.md#Humanizer.PrecisionDateTimeHumanizeStrategy.PrecisionDateTimeHumanizeStrategy(double) 'Humanizer\.PrecisionDateTimeHumanizeStrategy\.PrecisionDateTimeHumanizeStrategy\(double\)')**
+- *Methods*
+  - **[Humanize\(DateTime, DateTime, CultureInfo\)](Humanizer.PrecisionDateTimeHumanizeStrategy.md#Humanizer.PrecisionDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo) 'Humanizer\.PrecisionDateTimeHumanizeStrategy\.Humanize\(System\.DateTime, System\.DateTime, System\.Globalization\.CultureInfo\)')**
 ### Constructors
 
 <a name='Humanizer.PrecisionDateTimeHumanizeStrategy.PrecisionDateTimeHumanizeStrategy(double)'></a>
 
-## PrecisionDateTimeHumanizeStrategy\(double\) Constructor
+#### PrecisionDateTimeHumanizeStrategy\(double\) Constructor
 
 Precision\-based calculator for distance between two times
 
 ```csharp
 public PrecisionDateTimeHumanizeStrategy(double precision=0.75);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.PrecisionDateTimeHumanizeStrategy.PrecisionDateTimeHumanizeStrategy(double).precision'></a>
 
@@ -31,20 +40,20 @@ public PrecisionDateTimeHumanizeStrategy(double precision=0.75);
 
 precision of approximation, if not provided  0\.75 will be used as a default precision\.
 
-### Remarks
+##### Remarks
 Constructs a precision\-based calculator for distance of time with default precision 0\.75\.
 ### Methods
 
 <a name='Humanizer.PrecisionDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo)'></a>
 
-## PrecisionDateTimeHumanizeStrategy\.Humanize\(DateTime, DateTime, CultureInfo\) Method
+#### PrecisionDateTimeHumanizeStrategy\.Humanize\(DateTime, DateTime, CultureInfo\) Method
 
 Returns localized & humanized distance of time between two dates; given a specific precision\.
 
 ```csharp
 public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo? culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.PrecisionDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo).input'></a>
 
@@ -60,5 +69,5 @@ public string Humanize(System.DateTime input, System.DateTime comparisonBase, Sy
 
 Implements [Humanize\(DateTime, DateTime, CultureInfo\)](Humanizer.IDateTimeHumanizeStrategy.md#Humanizer.IDateTimeHumanizeStrategy.Humanize(System.DateTime,System.DateTime,System.Globalization.CultureInfo) 'Humanizer\.IDateTimeHumanizeStrategy\.Humanize\(System\.DateTime, System\.DateTime, System\.Globalization\.CultureInfo\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

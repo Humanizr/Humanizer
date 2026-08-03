@@ -7,6 +7,7 @@ const routes = [
   {name: 'how-to', path: '/docs/start/configuration/'},
   {name: 'upgrade', path: '/docs/upgrading/version-3-migration/'},
   {name: 'API', path: '/docs/api/Humanizer.StringHumanizeExtensions/'},
+  {name: 'API index', path: '/docs/next/api/'},
   {name: 'language', path: '/docs/languages/using-cultures/'},
   {
     name: 'version unavailable',
@@ -21,6 +22,7 @@ const routes = [
 
 const responsiveTableRoutes = [
   {name: 'homepage proof', path: '/'},
+  {name: 'API index', path: '/docs/next/api/'},
   {name: 'ordinary Markdown', path: '/docs/next/scenarios/'},
   {
     name: 'historical wide table',

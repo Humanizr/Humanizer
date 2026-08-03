@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy'
+sidebar_label: 'Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy'
+description: 'API reference for Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.'
+---
 ## IGrammaticalCaseTimeSpanHumanizeStrategy Interface
 
 Optionally extends a time\-span humanization strategy with grammatical\-case support\.
@@ -12,18 +17,20 @@ Derived
 ↳ [DefaultTimeSpanHumanizeStrategy](Humanizer.DefaultTimeSpanHumanizeStrategy.md 'Humanizer\.DefaultTimeSpanHumanizeStrategy')
 
 Implements [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy')
+- *Methods*
+  - **[Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\)](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md#Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase) 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, Humanizer\.GrammaticalCase\)')**
 ### Methods
 
 <a name='Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase)'></a>
 
-## IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\) Method
+#### IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\) Method
 
 Converts a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') using locale\-authored unit\-case phrases\.
 
 ```csharp
 string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toSymbols, Humanizer.GrammaticalCase grammaticalCase);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).timeSpan'></a>
 
@@ -79,11 +86,11 @@ Whether time units are rendered as symbols\.
 
 The grammatical case used to select each unit phrase\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A bare locale\-authored duration phrase whose count may be explicit or encoded by the unit form\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [grammaticalCase](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md#Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).grammaticalCase 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, Humanizer\.GrammaticalCase\)\.grammaticalCase') is outside its defined enum range\.

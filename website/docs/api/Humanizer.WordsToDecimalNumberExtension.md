@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.WordsToDecimalNumberExtension'
+sidebar_label: 'Humanizer.WordsToDecimalNumberExtension'
+description: 'API reference for Humanizer.WordsToDecimalNumberExtension.'
+---
 ## WordsToDecimalNumberExtension Class
 
 Converts localized decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\.
@@ -7,18 +12,22 @@ public static class WordsToDecimalNumberExtension
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → WordsToDecimalNumberExtension
+- *Methods*
+  - **[ToDecimalNumber\(this string, CultureInfo\)](Humanizer.WordsToDecimalNumberExtension.md#Humanizer.WordsToDecimalNumberExtension.ToDecimalNumber(thisstring,System.Globalization.CultureInfo) 'Humanizer\.WordsToDecimalNumberExtension\.ToDecimalNumber\(this string, System\.Globalization\.CultureInfo\)')**
+  - **[TryToDecimalNumber\(this string, decimal, CultureInfo\)](Humanizer.WordsToDecimalNumberExtension.md#Humanizer.WordsToDecimalNumberExtension.TryToDecimalNumber(thisstring,decimal,System.Globalization.CultureInfo) 'Humanizer\.WordsToDecimalNumberExtension\.TryToDecimalNumber\(this string, decimal, System\.Globalization\.CultureInfo\)')**
+  - **[TryToDecimalNumber\(this string, decimal, CultureInfo, string\)](Humanizer.WordsToDecimalNumberExtension.md#Humanizer.WordsToDecimalNumberExtension.TryToDecimalNumber(thisstring,decimal,System.Globalization.CultureInfo,string) 'Humanizer\.WordsToDecimalNumberExtension\.TryToDecimalNumber\(this string, decimal, System\.Globalization\.CultureInfo, string\)')**
 ### Methods
 
 <a name='Humanizer.WordsToDecimalNumberExtension.ToDecimalNumber(thisstring,System.Globalization.CultureInfo)'></a>
 
-## WordsToDecimalNumberExtension\.ToDecimalNumber\(this string, CultureInfo\) Method
+#### WordsToDecimalNumberExtension\.ToDecimalNumber\(this string, CultureInfo\) Method
 
 Converts localized decimal number words containing one locale\-specific decimal marker to a decimal value\.
 
 ```csharp
 public static decimal ToDecimalNumber(this string words, System.Globalization.CultureInfo culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.WordsToDecimalNumberExtension.ToDecimalNumber(thisstring,System.Globalization.CultureInfo).words'></a>
 
@@ -32,11 +41,11 @@ The decimal number words to convert\.
 
 The culture to use for parsing\.
 
-#### Returns
+##### Returns
 [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal')  
 The parsed decimal value, including its authored fractional scale\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 If [words](Humanizer.WordsToDecimalNumberExtension.md#Humanizer.WordsToDecimalNumberExtension.ToDecimalNumber(thisstring,System.Globalization.CultureInfo).words 'Humanizer\.WordsToDecimalNumberExtension\.ToDecimalNumber\(this string, System\.Globalization\.CultureInfo\)\.words') is `null`\.
@@ -47,7 +56,7 @@ If the phrase is malformed or outside the supported [System\.Decimal](https://le
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
 If [culture](Humanizer.WordsToDecimalNumberExtension.md#Humanizer.WordsToDecimalNumberExtension.ToDecimalNumber(thisstring,System.Globalization.CultureInfo).culture 'Humanizer\.WordsToDecimalNumberExtension\.ToDecimalNumber\(this string, System\.Globalization\.CultureInfo\)\.culture') is not supported\.
 
-### Remarks
+##### Remarks
 The integer part uses the selected culture's words\-to\-number grammar\. The fractional part
 requires one to 28 localized digit words\. A supported negative affix applies to the complete
 value\. The integer part may be omitted\. A decimal marker and at least one fractional digit
@@ -57,7 +66,7 @@ English scale phrases may exceed the [System\.Int64](https://learn.microsoft.com
 
 <a name='Humanizer.WordsToDecimalNumberExtension.TryToDecimalNumber(thisstring,decimal,System.Globalization.CultureInfo)'></a>
 
-## WordsToDecimalNumberExtension\.TryToDecimalNumber\(this string, decimal, CultureInfo\) Method
+#### WordsToDecimalNumberExtension\.TryToDecimalNumber\(this string, decimal, CultureInfo\) Method
 
 Attempts to convert localized decimal number words without throwing for malformed input,
 unsupported cultures, or values outside the supported [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') range\.
@@ -65,7 +74,7 @@ unsupported cultures, or values outside the supported [System\.Decimal](https://
 ```csharp
 public static bool TryToDecimalNumber(this string words, out decimal parsedNumber, System.Globalization.CultureInfo culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.WordsToDecimalNumberExtension.TryToDecimalNumber(thisstring,decimal,System.Globalization.CultureInfo).words'></a>
 
@@ -85,20 +94,20 @@ When this method returns, contains the parsed value if successful; otherwise, ze
 
 The culture to use for parsing\.
 
-#### Returns
+##### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 `true` if conversion succeeded; otherwise, `false`\.
 
 <a name='Humanizer.WordsToDecimalNumberExtension.TryToDecimalNumber(thisstring,decimal,System.Globalization.CultureInfo,string)'></a>
 
-## WordsToDecimalNumberExtension\.TryToDecimalNumber\(this string, decimal, CultureInfo, string\) Method
+#### WordsToDecimalNumberExtension\.TryToDecimalNumber\(this string, decimal, CultureInfo, string\) Method
 
 Attempts to convert localized decimal number words and reports the first unrecognized token\.
 
 ```csharp
 public static bool TryToDecimalNumber(this string words, out decimal parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.WordsToDecimalNumberExtension.TryToDecimalNumber(thisstring,decimal,System.Globalization.CultureInfo,string).words'></a>
 
@@ -124,6 +133,6 @@ The culture to use for parsing\.
 
 When conversion fails, the best\-effort unrecognized token or phrase\.
 
-#### Returns
+##### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 `true` if conversion succeeded; otherwise, `false`\.

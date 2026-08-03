@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.TimeSpanHumanizeExtensions'
+sidebar_label: 'Humanizer.TimeSpanHumanizeExtensions'
+description: 'API reference for Humanizer.TimeSpanHumanizeExtensions.'
+---
 ## TimeSpanHumanizeExtensions Class
 
 Humanizes TimeSpan into human readable form
@@ -7,18 +12,30 @@ public static class TimeSpanHumanizeExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → TimeSpanHumanizeExtensions
+- *Methods*
+  - **[Humanize\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool) 'Humanizer\.TimeSpanHumanizeExtensions\.Humanize\(this System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool\)')**
+  - **[Humanize\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string, bool\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool) 'Humanizer\.TimeSpanHumanizeExtensions\.Humanize\(this System\.TimeSpan, int, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool\)')**
+  - **[HumanizeToSymbols\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeToSymbols\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this System\.TimeSpan, int, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this System\.TimeSpan, int, bool, int, System\.MidpointRounding, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this System\.TimeSpan, int, int, System\.MidpointRounding, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, bool, CultureInfo, TimeUnit, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, CultureInfo, TimeUnit, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this System\.TimeSpan, int, bool, int, System\.MidpointRounding, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string\)')**
+  - **[HumanizeWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string) 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this System\.TimeSpan, int, int, System\.MidpointRounding, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string\)')**
+  - **[ToAge\(this TimeSpan, CultureInfo, TimeUnit, bool\)](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.ToAge(thisSystem.TimeSpan,System.Globalization.CultureInfo,Humanizer.TimeUnit,bool) 'Humanizer\.TimeSpanHumanizeExtensions\.ToAge\(this System\.TimeSpan, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, bool\)')**
 ### Methods
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool)'></a>
 
-## TimeSpanHumanizeExtensions\.Humanize\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool\) Method
+#### TimeSpanHumanizeExtensions\.Humanize\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool\) Method
 
 Turns a TimeSpan into a human readable form\. E\.g\. 1 day\.
 
 ```csharp
 public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ", bool toWords=false);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool).timeSpan'></a>
 
@@ -66,19 +83,19 @@ The separator to use when combining humanized time parts\. If null, the default 
 
 Uses words instead of numbers if true\. E\.g\. one day\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool)'></a>
 
-## TimeSpanHumanizeExtensions\.Humanize\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string, bool\) Method
+#### TimeSpanHumanizeExtensions\.Humanize\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string, bool\) Method
 
 Turns a TimeSpan into a human readable form\. E\.g\. 1 day\.
 
 ```csharp
 public static string Humanize(this System.TimeSpan timeSpan, int precision=1, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ", bool toWords=false);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool).timeSpan'></a>
 
@@ -120,19 +137,19 @@ The separator to use when combining humanized time parts\. If null, the default 
 
 Uses words instead of numbers if true\. E\.g\. one day\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human readable form using localized unit symbols\.
 
 ```csharp
 public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -176,19 +193,19 @@ The minimum unit of time to output\.
 
 The separator to use when combining humanized time parts\. If null, the default collection formatter for the current culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human readable form using localized unit symbols\.
 
 ```csharp
 public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision=1, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -226,19 +243,19 @@ The minimum unit of time to output\.
 
 The separator to use when combining humanized time parts\. If null, the default collection formatter for the current culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form using localized unit symbols and fractional seconds\.
 
 ```csharp
 public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -288,20 +305,20 @@ The maximum unit of time to output\.
 
 The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span, using seconds as its minimum unit\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form using localized unit symbols and fractional seconds\.
 
 ```csharp
 public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -345,13 +362,13 @@ The maximum unit of time to output\.
 
 The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span, using seconds as its minimum unit\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, bool, CultureInfo, TimeUnit, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, bool, CultureInfo, TimeUnit, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a bare duration using locale\-authored unit\-case phrases\.
 No preposition is added\.
@@ -359,7 +376,7 @@ No preposition is added\.
 ```csharp
 public static string HumanizeWithCase(this System.TimeSpan timeSpan, Humanizer.GrammaticalCase grammaticalCase, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -409,11 +426,11 @@ The minimum unit of time to output\.
 
 The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The locale\-authored unit\-case phrase\. The count may be written explicitly or encoded by the unit form\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [grammaticalCase](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).grammaticalCase 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)\.grammaticalCase') is not defined\.
@@ -423,7 +440,7 @@ The configured strategy, selected formatter, locale, or duration unit does not s
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, CultureInfo, TimeUnit, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, CultureInfo, TimeUnit, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a bare duration using locale\-authored unit\-case phrases\.
 No preposition is added\.
@@ -431,7 +448,7 @@ No preposition is added\.
 ```csharp
 public static string HumanizeWithCase(this System.TimeSpan timeSpan, Humanizer.GrammaticalCase grammaticalCase, int precision=1, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -475,11 +492,11 @@ The minimum unit of time to output\.
 
 The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The locale\-authored unit\-case phrase\. The count may be written explicitly or encoded by the unit form\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [grammaticalCase](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).grammaticalCase 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)\.grammaticalCase') is not defined\.
@@ -489,14 +506,14 @@ The configured strategy, selected formatter, locale, or duration unit does not s
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form with fractional seconds\.
 
 ```csharp
 public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -546,20 +563,20 @@ The maximum unit of time to output\.
 
 The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span, using seconds as its minimum unit\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
 
-## TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+#### TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
 
 Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form with fractional seconds\.
 
 ```csharp
 public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
 
@@ -603,20 +620,20 @@ The maximum unit of time to output\.
 
 The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span, using seconds as its minimum unit\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.ToAge(thisSystem.TimeSpan,System.Globalization.CultureInfo,Humanizer.TimeUnit,bool)'></a>
 
-## TimeSpanHumanizeExtensions\.ToAge\(this TimeSpan, CultureInfo, TimeUnit, bool\) Method
+#### TimeSpanHumanizeExtensions\.ToAge\(this TimeSpan, CultureInfo, TimeUnit, bool\) Method
 
 Turns a TimeSpan into an age expression, e\.g\. "40 years old"
 
 ```csharp
 public static string ToAge(this System.TimeSpan timeSpan, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Year, bool toWords=false);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.ToAge(thisSystem.TimeSpan,System.Globalization.CultureInfo,Humanizer.TimeUnit,bool).timeSpan'></a>
 
@@ -642,6 +659,6 @@ The maximum unit of time to output\. The default value is [Year](Humanizer.TimeU
 
 Uses words instead of numbers if true\. E\.g\. "forty years old"\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 Age expression in the given culture/language

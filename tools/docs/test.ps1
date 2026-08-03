@@ -9,6 +9,348 @@ $manifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 . (Join-Path $PSScriptRoot "snapshot-state.ps1")
 . (Join-Path $PSScriptRoot "api-approval.ps1")
 . (Join-Path $PSScriptRoot "nuget-package.ps1")
+. (Join-Path $PSScriptRoot "api-reference.ps1")
+
+function Assert-ApiReferenceArchitecture {
+    $verifyPath = Join-Path $PSScriptRoot "verify-api.ps1"
+    $verifyLines = [System.IO.File]::ReadAllLines($verifyPath)
+    $verifySource = $verifyLines -join "`n"
+    if ($verifyLines.Count -ge 1000) {
+        throw "verify-api.ps1 must remain a verifier/orchestrator below 1,000 lines."
+    }
+
+    $assemblyParses = [regex]::Matches(
+        $verifySource,
+        "\bGet-AssemblyApiMemberInventory\b"
+    ).Count
+    if ($assemblyParses -ne 1) {
+        throw "verify-api.ps1 must derive the assembly API inventory exactly once."
+    }
+
+    $pipelineCalls = [regex]::Matches(
+        $verifySource,
+        "\bInvoke-ApiReferenceGeneration\b"
+    ).Count
+    if ($pipelineCalls -ne 3) {
+        throw "verify-api.ps1 must use one shared API generation pipeline for its three outputs."
+    }
+
+    foreach ($stage in @(
+        "Add-ImplicitApiConstructors",
+        "Set-ApiMarkdownStructure",
+        "Set-ApiTypeMetadata",
+        "Assert-GeneratedApiMemberCompleteness",
+        "Assert-ApiHeadingOwnership"
+    )) {
+        if ($verifySource -match "(?m)^function $stage\b") {
+            throw "$stage belongs in the shared API reference module."
+        }
+    }
+}
+
+Assert-ApiReferenceArchitecture
+
+function New-ApiShapeInput {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][string]$Source,
+        [string[]]$CompilerOptions = @()
+    )
+
+    $dllPath = Join-Path $Root "$Name.dll"
+    $arguments = @{
+        Language = "CSharp"
+        OutputAssembly = $dllPath
+        TypeDefinition = $Source
+    }
+    if ($CompilerOptions.Count -gt 0) {
+        $arguments.CompilerOptions = $CompilerOptions
+    }
+    Add-Type @arguments
+    $xmlPath = Join-Path $Root "$Name.xml"
+    [System.IO.File]::WriteAllText(
+        $xmlPath,
+        "<doc><assembly><name>$Name</name></assembly><members /></doc>`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    return [PSCustomObject]@{
+        Dll = $dllPath
+        Xml = $xmlPath
+    }
+}
+
+function Assert-AssemblyApiShapes {
+    $fixtureRoot = Join-Path (
+        [System.IO.Path]::GetTempPath()
+    ) "humanizer-assembly-api-shapes-$([guid]::NewGuid().ToString('N'))"
+    New-Item -ItemType Directory -Path $fixtureRoot | Out-Null
+    try {
+        $apiInput = New-ApiShapeInput `
+            -Root $fixtureRoot `
+            -Name "Fixture" `
+            -Source @"
+namespace Fixture;
+
+public delegate string Formatter(string input);
+public delegate TResult Converter<in TInput, out TResult>(TInput value);
+
+public readonly struct Token
+{
+    public static explicit operator Token(string value) => default;
+    public static implicit operator string(Token value) => "";
+}
+
+public interface IContract
+{
+    string Name { get; }
+    string this[int index] { get; }
+    void Run();
+}
+
+public sealed class Implementation : IContract
+{
+    string IContract.Name => "";
+    string IContract.this[int index] => "";
+    void IContract.Run() { }
+}
+
+public interface IAccessShapes
+{
+    protected void ProtectedDefault() { }
+    void PublicDefault() { }
+    static abstract string Transform(int value);
+}
+
+public class Container
+{
+    protected class Hidden
+    {
+        public class Nested
+        {
+            public void Run() { }
+        }
+    }
+}
+"@
+        $inventory = Get-AssemblyApiMemberInventory `
+            -AssemblyPath $apiInput.Dll
+        $records = @{}
+        foreach ($record in $inventory.Records) {
+            $records[$record.Id] = $record
+        }
+        $expectedRecords = [ordered]@{
+            "T:Fixture.Formatter" = @("public", "Type", "Fixture.Formatter")
+            "T:Fixture.Converter``2" = @("public", "Type", "Fixture.Converter_TInput_TResult_")
+            "M:Fixture.Token.op_Explicit(System.String)~Fixture.Token" = @("public", "Operator", "Fixture.Token")
+            "M:Fixture.Token.op_Implicit(Fixture.Token)~System.String" = @("public", "Operator", "Fixture.Token")
+            "M:Fixture.IAccessShapes.ProtectedDefault" = @("protected", "Method", "Fixture.IAccessShapes")
+            "M:Fixture.IAccessShapes.PublicDefault" = @("public", "Method", "Fixture.IAccessShapes")
+            "M:Fixture.IAccessShapes.Transform(System.Int32)" = @("public", "Method", "Fixture.IAccessShapes")
+            "T:Fixture.Container.Hidden" = @("protected", "Type", "Fixture.Container.Hidden")
+            "T:Fixture.Container.Hidden.Nested" = @("protected", "Type", "Fixture.Container.Hidden.Nested")
+            "M:Fixture.Container.Hidden.Nested.Run" = @("protected", "Method", "Fixture.Container.Hidden.Nested")
+            "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
+            "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
+            "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")
+        }
+        foreach ($id in $expectedRecords.Keys) {
+            if (-not $records.ContainsKey($id)) {
+                throw "The assembly inventory omitted $id."
+            }
+            $expected = $expectedRecords[$id]
+            if ($records[$id].Access -ne $expected[0] -or
+                $records[$id].Kind -ne $expected[1] -or
+                $records[$id].PageName -ne $expected[2]) {
+                throw "The assembly inventory misclassified $id."
+            }
+        }
+
+        $apiOutput = Join-Path $fixtureRoot "api"
+        $publicOutput = Join-Path $fixtureRoot "public"
+        $apiLinks = Join-Path $fixtureRoot "api-links.txt"
+        $publicLinks = Join-Path $fixtureRoot "public-links.txt"
+        New-Item -ItemType Directory -Path $apiOutput | Out-Null
+        New-Item -ItemType Directory -Path $publicOutput | Out-Null
+        $configurationPath = Join-Path $PSScriptRoot "api-reference-v4.json"
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $apiInput `
+            -OutputPath $apiOutput `
+            -LinksPath $apiLinks `
+            -AssemblyInventory $inventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "assembly fixture" `
+            -ConfigurationFilePath $configurationPath
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $apiInput `
+            -OutputPath $publicOutput `
+            -LinksPath $publicLinks `
+            -AssemblyInventory $inventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "public assembly fixture" `
+            -ConfigurationFilePath $configurationPath `
+            -AccessModifiers "Public"
+        Assert-GeneratedApiLinks `
+            -OutputPath $apiOutput `
+            -LinksPath $apiLinks `
+            -VersionLabel "assembly fixture"
+        Assert-GeneratedApiLinks `
+            -OutputPath $publicOutput `
+            -LinksPath $publicLinks `
+            -VersionLabel "public assembly fixture"
+        Assert-ApiAccessCoverage `
+            -ApiLinksPath $apiLinks `
+            -PublicLinksPath $publicLinks `
+            -AssemblyInventory $inventory `
+            -VersionLabel "assembly fixture"
+
+        $formatterPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.Formatter.md"
+        )
+        $converterPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.Converter_TInput_TResult_.md"
+        )
+        $namespacePage = Get-Content -Raw (Join-Path $apiOutput "Fixture.md")
+        if (-not $formatterPage.StartsWith(
+                "---`ntitle: 'Fixture.Formatter'",
+                [System.StringComparison]::Ordinal
+            ) -or
+            $formatterPage -notmatch "(?m)^## Formatter Delegate$" -or
+            -not $converterPage.StartsWith(
+                "---`ntitle: 'Fixture.Converter<TInput,TResult>'",
+                [System.StringComparison]::Ordinal
+            ) -or
+            $converterPage -notmatch (
+                "(?m)^## Converter\\<TInput,TResult\\> Delegate$"
+            ) -or
+            -not $namespacePage.Contains(
+                "[Formatter](Fixture.Formatter.md",
+                [System.StringComparison]::Ordinal
+            ) -or
+            -not $namespacePage.Contains(
+                "[Converter&lt;TInput,TResult&gt;](Fixture.Converter_TInput_TResult_.md",
+                [System.StringComparison]::Ordinal
+            )) {
+            throw "The API generator did not canonicalize delegate type routes."
+        }
+
+        $publicIds = @(
+            Get-ApiLinkRecords -LinksPath $publicLinks |
+                ForEach-Object Id
+        )
+        foreach ($protectedId in @(
+            "M:Fixture.IAccessShapes.ProtectedDefault",
+            "T:Fixture.Container.Hidden",
+            "T:Fixture.Container.Hidden.Nested",
+            "M:Fixture.Container.Hidden.Nested.Run"
+        )) {
+            if ($protectedId -in $publicIds) {
+                throw "Public API generation included protected ID $protectedId."
+            }
+        }
+
+        $originalLinks = Get-Content -Raw $apiLinks
+        $mutatedLinks = $originalLinks.Replace(
+            "M:Fixture.IAccessShapes.PublicDefault|",
+            "M:Fixture.IAccessShapes.ReplacedDefault|",
+            [System.StringComparison]::Ordinal
+        )
+        if ($mutatedLinks -eq $originalLinks) {
+            throw "The exact-member fixture could not replace its method ID."
+        }
+        [System.IO.File]::WriteAllText(
+            $apiLinks,
+            $mutatedLinks,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+        $wrongIdFailed = $false
+        try {
+            Assert-GeneratedApiMemberCompleteness `
+                -ExpectedRecords (Select-AssemblyApiRecords $inventory) `
+                -LinksPath $apiLinks `
+                -VersionLabel "same-kind mutation"
+        } catch {
+            $wrongIdFailed = $_.Exception.Message -match (
+                "missing M:Fixture\.IAccessShapes\.PublicDefault"
+            ) -and $_.Exception.Message -match (
+                "unexpected M:Fixture\.IAccessShapes\.ReplacedDefault"
+            )
+        }
+        if (-not $wrongIdFailed) {
+            throw "A wrong same-kind API member ID unexpectedly passed."
+        }
+
+        $eventInput = New-ApiShapeInput `
+            -Root $fixtureRoot `
+            -Name "EventFixture" `
+            -Source @"
+namespace EventFixture;
+
+public interface IEvents
+{
+    event System.EventHandler Changed;
+}
+
+public sealed class Implementation : IEvents
+{
+    event System.EventHandler IEvents.Changed { add { } remove { } }
+}
+"@
+        $eventInventory = Get-AssemblyApiMemberInventory `
+            -AssemblyPath $eventInput.Dll
+        $eventOutput = Join-Path $fixtureRoot "event"
+        $eventLinks = Join-Path $fixtureRoot "event-links.txt"
+        New-Item -ItemType Directory -Path $eventOutput | Out-Null
+        $eventFailed = $false
+        try {
+            Invoke-ApiReferenceGeneration `
+                -ApiInput $eventInput `
+                -OutputPath $eventOutput `
+                -LinksPath $eventLinks `
+                -AssemblyInventory $eventInventory `
+                -RepositoryRoot $repoRoot `
+                -VersionLabel "explicit event fixture" `
+                -ConfigurationFilePath $configurationPath
+        } catch {
+            $eventFailed = $_.Exception.Message -match (
+                "missing E:EventFixture\.Implementation\.EventFixture#IEvents#Changed"
+            )
+        }
+        if (-not $eventFailed) {
+            throw "DefaultDocumentation's explicit-event blind spot did not fail closed."
+        }
+
+        $pointerInput = New-ApiShapeInput `
+            -Root $fixtureRoot `
+            -Name "PointerFixture" `
+            -CompilerOptions "/unsafe" `
+            -Source @"
+namespace PointerFixture;
+
+public static unsafe class PointerShape
+{
+    public static int Invoke(
+        delegate* unmanaged[Cdecl]<int, int> callback,
+        int value) => callback(value);
+}
+"@
+        $pointerFailed = $false
+        try {
+            Get-AssemblyApiMemberInventory -AssemblyPath $pointerInput.Dll
+        } catch {
+            $pointerFailed = $_.Exception.Message -match (
+                "function-pointer documentation IDs are not supported"
+            )
+        }
+        if (-not $pointerFailed) {
+            throw "An unsupported function-pointer API did not fail closed."
+        }
+    } finally {
+        Remove-Item $fixtureRoot -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
+Assert-AssemblyApiShapes
 
 function Assert-VersionedExampleDefaults {
     param(
@@ -328,48 +670,6 @@ try {
         throw "Verified package extraction was reused instead of recreated."
     }
 
-    $expectedExtras = @(
-        "Humanizer.ICulturedStringTransformer",
-        "Humanizer.Localisation.DataUnit",
-        "Humanizer.MetricNumeralFormats"
-    )
-    $invalidExtraSets = @(
-        [PSCustomObject]@{
-            Name = "missing declaration"
-            Actual = $expectedExtras
-            Expected = $expectedExtras[0..1]
-        },
-        [PSCustomObject]@{
-            Name = "unexpected generated type"
-            Actual = @($expectedExtras + "Humanizer.Unexpected")
-            Expected = $expectedExtras
-        },
-        [PSCustomObject]@{
-            Name = "duplicate exception"
-            Actual = $expectedExtras
-            Expected = @($expectedExtras + $expectedExtras[0])
-        },
-        [PSCustomObject]@{
-            Name = "now-approved unused exception"
-            Actual = $expectedExtras[0..1]
-            Expected = $expectedExtras
-        }
-    )
-    foreach ($case in $invalidExtraSets) {
-        $failed = $false
-        try {
-            Assert-GeneratedExtraTypes `
-                -VersionLabel "2.10.1" `
-                -Actual $case.Actual `
-                -Expected $case.Expected
-        } catch {
-            $failed = $true
-        }
-        if (-not $failed) {
-            throw "PublicAPI extra-type $($case.Name) unexpectedly passed."
-        }
-    }
-
     $memberCoverageRoot = Join-Path $tempRoot "api-member-coverage"
     Copy-Item `
         (Join-Path $repoRoot "website/docs/api") `
@@ -380,7 +680,6 @@ try {
     ) "Humanizer.DefaultFormatter.md"
     $memberLinksPath = Join-Path $tempRoot "api-member-links.txt"
     $publicLinksPath = Join-Path $tempRoot "public-api-links.txt"
-    $protectedApprovalPath = Join-Path $tempRoot "protected-api-approval.txt"
     [System.IO.File]::WriteAllText(
         $memberLinksPath,
         "./`nT:Humanizer.DefaultFormatter|Humanizer.DefaultFormatter.md|DefaultFormatter`nP:Humanizer.DefaultFormatter.Culture|Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.Culture|Culture`n",
@@ -391,27 +690,34 @@ try {
         "./`nT:Humanizer.DefaultFormatter|Humanizer.DefaultFormatter.md|DefaultFormatter`n",
         [System.Text.UTF8Encoding]::new($false)
     )
-    [System.IO.File]::WriteAllText(
-        $protectedApprovalPath,
-        "        protected System.Globalization.CultureInfo Culture { get; }`n",
-        [System.Text.UTF8Encoding]::new($false)
-    )
     Assert-GeneratedApiLinks `
         -OutputPath $memberCoverageRoot `
         -LinksPath $memberLinksPath `
         -VersionLabel "current baseline"
+    $memberCoverageInventory = [PSCustomObject]@{
+        Records = @(
+            [PSCustomObject]@{
+                Access = "public"
+                Id = "T:Humanizer.DefaultFormatter"
+            },
+            [PSCustomObject]@{
+                Access = "protected"
+                Id = "P:Humanizer.DefaultFormatter.Culture"
+            }
+        )
+    }
     Assert-ApiAccessCoverage `
         -ApiLinksPath $memberLinksPath `
         -PublicLinksPath $publicLinksPath `
-        -ApprovalPath $protectedApprovalPath `
+        -AssemblyInventory $memberCoverageInventory `
         -VersionLabel "current baseline"
     $publicOnlyFailed = $false
     try {
-        Assert-ApiAccessCoverage `
-            -ApiLinksPath $publicLinksPath `
-            -PublicLinksPath $publicLinksPath `
-            -ApprovalPath $protectedApprovalPath `
-            -VersionLabel "public-only"
+            Assert-ApiAccessCoverage `
+                -ApiLinksPath $publicLinksPath `
+                -PublicLinksPath $publicLinksPath `
+                -AssemblyInventory $memberCoverageInventory `
+                -VersionLabel "public-only"
     } catch {
         $publicOnlyFailed = $true
     }
@@ -940,6 +1246,61 @@ try {
         -ManifestPath $isolatedManifestPath `
         -WebsiteRoot $isolatedWebsiteRoot *> $null
 
+    $currentLanding = Get-Content -Raw (
+        Join-Path $isolatedCurrentApi "index.md"
+    )
+    if ($currentLanding -notmatch "(?m)^## Namespaces$" -or
+        -not $currentLanding.Contains(
+            "[StringHumanizeExtensions](Humanizer.StringHumanizeExtensions.md",
+            [System.StringComparison]::Ordinal
+        )) {
+        throw "Current Humanizer 4 API landing is missing its generated index."
+    }
+    $v4ReleaseRoot = Join-Path $tempRoot "v4-release-source"
+    $v4ReleaseRebuildRoot = Join-Path $tempRoot "v4-release-rebuild"
+    $v4ReleaseSource = Join-Path $v4ReleaseRoot "api"
+    $v4ReleaseRebuild = Join-Path $v4ReleaseRebuildRoot "api"
+    New-Item -ItemType Directory -Path $v4ReleaseRoot | Out-Null
+    New-Item -ItemType Directory -Path $v4ReleaseRebuildRoot | Out-Null
+    Copy-Item $isolatedCurrentApi $v4ReleaseSource -Recurse
+    Copy-Item $isolatedCurrentApi $v4ReleaseRebuild -Recurse
+    $v4ReleaseEntry = [PSCustomObject]@{
+        version = "4.0.0"
+        apiPackage = "Humanizer"
+        referenceTfm = "net10.0"
+        source = [PSCustomObject]@{
+            packageVersion = "4.0.0"
+        }
+    }
+    Add-ApiLanding -ApiRoot $v4ReleaseSource -Entry $v4ReleaseEntry
+    Add-ApiLanding -ApiRoot $v4ReleaseRebuild -Entry $v4ReleaseEntry
+    $v4ReleaseDigest = Get-SnapshotDirectoryDigest $v4ReleaseSource
+    if ($v4ReleaseDigest -ne
+        (Get-SnapshotDirectoryDigest $v4ReleaseRebuild)) {
+        throw "Humanizer 4 release API landing is not deterministic."
+    }
+    $v4ReleaseTarget = "versioned_docs/version-4.0.0"
+    Invoke-SnapshotTransaction `
+        -WebsiteRoot $isolatedWebsiteRoot `
+        -Changes @(
+            [PSCustomObject]@{
+                Target = $v4ReleaseTarget
+                Source = $v4ReleaseRoot
+            }
+        )
+    $v4InstalledApi = Join-Path (
+        Join-Path $isolatedWebsiteRoot $v4ReleaseTarget
+    ) "api"
+    if ((Get-SnapshotDirectoryDigest $v4InstalledApi) -ne
+        $v4ReleaseDigest -or
+        (Get-Content -Raw (Join-Path $v4InstalledApi "index.md")) -notmatch
+            "(?m)^## Namespaces$") {
+        throw "Humanizer 4 release round trip lost the generated API index."
+    }
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot $v4ReleaseTarget
+    ) -Recurse -Force
+
     $isolatedManifest = Get-Content -Raw $isolatedManifestPath |
         ConvertFrom-Json -Depth 20
     $isolatedCandidateEntries = @(
@@ -994,6 +1355,10 @@ try {
         $isolatedWebsiteRoot
     ) "versioned_sidebars/version-$candidateVersion-sidebars.json"
     $releaseSnapshotDigest = Get-SnapshotDirectoryDigest $releaseSnapshotPath
+    $releaseApiLandingPath = Join-Path $releaseSnapshotPath "api/index.md"
+    $releaseApiLandingHash = (
+        Get-FileHash $releaseApiLandingPath -Algorithm SHA256
+    ).Hash
     $releaseSidebarHash = (
         Get-FileHash $releaseSidebarPath -Algorithm SHA256
     ).Hash
@@ -1109,10 +1474,29 @@ try {
             )) -ne $releaseSnapshotDigest -or
             (Get-FileHash (
                 Join-Path $isolatedWebsiteRoot (
+                    "versioned_docs/version-$candidateVersion/api/index.md"
+                )
+            ) -Algorithm SHA256).Hash -ne $releaseApiLandingHash -or
+            (Get-FileHash (
+                Join-Path $isolatedWebsiteRoot (
                     "versioned_sidebars/version-$candidateVersion-sidebars.json"
                 )
             ) -Algorithm SHA256).Hash -ne $releaseSidebarHash) {
             throw "$Mode release round trip changed immutable $candidateVersion state."
+        }
+        $releasedApiLanding = Get-Content -Raw (
+            Join-Path $isolatedWebsiteRoot (
+                "versioned_docs/version-$candidateVersion/api/index.md"
+            )
+        )
+        $candidateMajor = [System.Management.Automation.SemanticVersion]::Parse(
+            $candidateVersion
+        ).Major
+        if (($candidateMajor -ge 4 -and
+                $releasedApiLanding -notmatch "(?m)^## Namespaces$") -or
+            ($candidateMajor -lt 4 -and
+                $releasedApiLanding -match "(?m)^## Namespaces$")) {
+            throw "$Mode release emitted the wrong API landing for $candidateVersion."
         }
         foreach ($priorVersion in $priorVersions) {
             $releasedPrior = @(

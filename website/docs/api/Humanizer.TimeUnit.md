@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.TimeUnit'
+sidebar_label: 'Humanizer.TimeUnit'
+description: 'API reference for Humanizer.TimeUnit.'
+---
 ## TimeUnit Enum
 
 Represents the time units supported by Humanizer's relative\-time and duration formatters\.
@@ -5,6 +10,15 @@ Represents the time units supported by Humanizer's relative\-time and duration f
 ```csharp
 public enum TimeUnit
 ```
+- *Fields*
+  - **[Day](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Day 'Humanizer\.TimeUnit\.Day')**
+  - **[Hour](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Hour 'Humanizer\.TimeUnit\.Hour')**
+  - **[Millisecond](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Millisecond 'Humanizer\.TimeUnit\.Millisecond')**
+  - **[Minute](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Minute 'Humanizer\.TimeUnit\.Minute')**
+  - **[Month](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Month 'Humanizer\.TimeUnit\.Month')**
+  - **[Second](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Second 'Humanizer\.TimeUnit\.Second')**
+  - **[Week](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Week 'Humanizer\.TimeUnit\.Week')**
+  - **[Year](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Year 'Humanizer\.TimeUnit\.Year')**
 ### Fields
 
 <a name='Humanizer.TimeUnit.Millisecond'></a>

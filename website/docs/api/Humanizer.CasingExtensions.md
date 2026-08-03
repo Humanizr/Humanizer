@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.CasingExtensions'
+sidebar_label: 'Humanizer.CasingExtensions'
+description: 'API reference for Humanizer.CasingExtensions.'
+---
 ## CasingExtensions Class
 
 ApplyCase method to allow changing the case of a sentence easily
@@ -7,18 +12,20 @@ public static class CasingExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → CasingExtensions
+- *Methods*
+  - **[ApplyCase\(this string, LetterCasing\)](Humanizer.CasingExtensions.md#Humanizer.CasingExtensions.ApplyCase(thisstring,Humanizer.LetterCasing) 'Humanizer\.CasingExtensions\.ApplyCase\(this string, Humanizer\.LetterCasing\)')**
 ### Methods
 
 <a name='Humanizer.CasingExtensions.ApplyCase(thisstring,Humanizer.LetterCasing)'></a>
 
-## CasingExtensions\.ApplyCase\(this string, LetterCasing\) Method
+#### CasingExtensions\.ApplyCase\(this string, LetterCasing\) Method
 
 Applies the specified letter casing transformation to the input string\.
 
 ```csharp
 public static string ApplyCase(this string input, Humanizer.LetterCasing casing);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.CasingExtensions.ApplyCase(thisstring,Humanizer.LetterCasing).input'></a>
 
@@ -32,7 +39,7 @@ The string to transform\. Must not be null\.
 
 The desired letter casing style to apply to the input string\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A new string with the specified casing applied\.
 \- [Title](Humanizer.LetterCasing.md#Humanizer.LetterCasing.Title 'Humanizer\.LetterCasing\.Title'): Each word is capitalized \(e\.g\., "Some String"\)
@@ -40,12 +47,12 @@ A new string with the specified casing applied\.
 \- [AllCaps](Humanizer.LetterCasing.md#Humanizer.LetterCasing.AllCaps 'Humanizer\.LetterCasing\.AllCaps'): All letters are uppercase \(e\.g\., "SOME STRING"\)
 \- [Sentence](Humanizer.LetterCasing.md#Humanizer.LetterCasing.Sentence 'Humanizer\.LetterCasing\.Sentence'): First character uppercased, remainder unchanged \(e\.g\., "Some string"\)
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 Thrown when an invalid [LetterCasing](Humanizer.LetterCasing.md 'Humanizer\.LetterCasing') value is provided\.
 
-### Example
+##### Example
 
 ```csharp
 "some string".ApplyCase(LetterCasing.Title) => "Some String"

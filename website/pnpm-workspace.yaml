@@ -4,6 +4,8 @@ minimumReleaseAge: 2880
 overrides:
   'serialize-javascript@<7.0.5': 7.0.5
   'uuid@<11.1.1': 11.1.1
+patchedDependencies:
+  '@cmfcmf/docusaurus-search-local@2.0.1': patches/@cmfcmf__docusaurus-search-local@2.0.1.patch
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - '@algolia/client-analytics@4.27.0'

@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ByteSizeUnitSystem'
+sidebar_label: 'Humanizer.ByteSizeUnitSystem'
+description: 'API reference for Humanizer.ByteSizeUnitSystem.'
+---
 ## ByteSizeUnitSystem Enum
 
 Selects the unit system used by explicit [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize') parsing and formatting APIs\.
@@ -5,6 +10,10 @@ Selects the unit system used by explicit [ByteSize](Humanizer.ByteSize.md 'Human
 ```csharp
 public enum ByteSizeUnitSystem
 ```
+- *Fields*
+  - **[BinaryIec](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.BinaryIec 'Humanizer\.ByteSizeUnitSystem\.BinaryIec')**
+  - **[DecimalSi](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.DecimalSi 'Humanizer\.ByteSizeUnitSystem\.DecimalSi')**
+  - **[Legacy](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.Legacy 'Humanizer\.ByteSizeUnitSystem\.Legacy')**
 ### Fields
 
 <a name='Humanizer.ByteSizeUnitSystem.Legacy'></a>

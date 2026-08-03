@@ -1,6 +1,6 @@
 ## Humanizer Namespace
 
-| Classes | |
+| Classes | Summary |
 | :--- | :--- |
 | [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate') | Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer |
 | [ByteSizeExtensions](Humanizer.ByteSizeExtensions.md 'Humanizer\.ByteSizeExtensions') | Provides extension methods for ByteSize |
@@ -101,11 +101,11 @@
 | [WordsToDecimalNumberExtension](Humanizer.WordsToDecimalNumberExtension.md 'Humanizer\.WordsToDecimalNumberExtension') | Converts localized decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\. |
 | [WordsToNumberExtension](Humanizer.WordsToNumberExtension.md 'Humanizer\.WordsToNumberExtension') | Converts localized number words back into numeric values\. Parsing is culture\-aware, honors locale inheritance, and supports the same natural high\-range forms that the locale authoring data exposes through `number.words` and `number.parse`\. |
 
-| Structs | |
+| Structs | Summary |
 | :--- | :--- |
 | [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize') | |
 
-| Interfaces | |
+| Interfaces | Summary |
 | :--- | :--- |
 | [ICollectionFormatter](Humanizer.ICollectionFormatter.md 'Humanizer\.ICollectionFormatter') | Formats collections into localized, human\-readable lists\. |
 | [ICulturedStringTransformer](Humanizer.ICulturedStringTransformer.md 'Humanizer\.ICulturedStringTransformer') | Can transform a string with the given culture |
@@ -130,7 +130,7 @@
 | [IWordsToDecimalNumberConverter](Humanizer.IWordsToDecimalNumberConverter.md 'Humanizer\.IWordsToDecimalNumberConverter') | Converts localized decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\. |
 | [IWordsToNumberConverter](Humanizer.IWordsToNumberConverter.md 'Humanizer\.IWordsToNumberConverter') | Converts localized number words into numeric values\. |
 
-| Enums | |
+| Enums | Summary |
 | :--- | :--- |
 | [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem') | Selects the unit system used by explicit [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize') parsing and formatting APIs\. |
 | [ClockNotationRounding](Humanizer.ClockNotationRounding.md 'Humanizer\.ClockNotationRounding') | Options for specifying readable clock notation |
