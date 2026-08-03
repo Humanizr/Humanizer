@@ -86,7 +86,7 @@ public class SomaliNumberToWordsTests
         Assert.Equal(20.1m, "labaatan dhibic kow".ToDecimalNumber(So));
         Assert.Equal(21, "einundzwanzig".ToNumber(new("de")));
 
-        var scaleWords = string.Concat(Enumerable.Repeat("kun", 256));
+        var scaleWords = string.Concat(Enumerable.Repeat("kun", 33_000));
         AssertRejected(scaleWords);
         AssertRejected($"laga jaray {scaleWords}");
         AssertRejected("laba" + string.Concat(Enumerable.Repeat("aad", 256)));
