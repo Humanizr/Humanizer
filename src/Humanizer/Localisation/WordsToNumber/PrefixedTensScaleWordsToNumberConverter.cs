@@ -105,6 +105,11 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
     {
+        if (TryGetValue(profile.CardinalMap, word, out value))
+        {
+            return true;
+        }
+
         if (word.IsEmpty || depth >= MaximumParseDepth || remainingWork-- <= 0)
         {
             if (!word.IsEmpty)
@@ -114,11 +119,6 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
 
             value = default;
             return false;
-        }
-
-        if (TryGetValue(profile.CardinalMap, word, out value))
-        {
-            return true;
         }
 
         // Scale decomposition must run before prefix/tens handling because many glued compounds

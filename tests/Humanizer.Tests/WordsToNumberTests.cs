@@ -865,9 +865,9 @@ public class WordsToNumberTests_Hungarian
     [Fact]
     public void TryToNumber_BoundsPrefixedScaleRecursion()
     {
-        var legitimateWords = string.Concat(Enumerable.Repeat("szaz", 64));
-        Assert.Equal(6400, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
-        Assert.Equal(6400.1m, $"{legitimateWords} egész egy".ToDecimalNumber(CultureInfo.CurrentCulture));
+        var legitimateWords = string.Concat(Enumerable.Repeat("szaz", 129));
+        Assert.Equal(12900, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(12900.1m, $"{legitimateWords} egész egy".ToDecimalNumber(CultureInfo.CurrentCulture));
 
         var scaleWords = string.Concat(Enumerable.Repeat("szaz", 32_000));
         AssertRejected(scaleWords);
