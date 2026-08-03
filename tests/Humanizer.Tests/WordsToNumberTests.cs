@@ -869,13 +869,13 @@ public class WordsToNumberTests_Hungarian
         Assert.Equal(6400, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
         Assert.Equal(6400.1m, $"{legitimateWords} egész egy".ToDecimalNumber(CultureInfo.CurrentCulture));
 
-        var scaleWords = string.Concat(Enumerable.Repeat("szaz", 256));
+        var scaleWords = string.Concat(Enumerable.Repeat("szaz", 32_000));
         AssertRejected(scaleWords);
-        AssertRejected(string.Join("-", Enumerable.Repeat("szaz", 256)));
-        AssertRejected(string.Concat(Enumerable.Repeat("trillio", 256)));
+        AssertRejected(string.Join("-", Enumerable.Repeat("szaz", 32_000)));
+        AssertRejected(string.Concat(Enumerable.Repeat("trillio", 10)));
         AssertRejected($"mínusz {scaleWords}");
-        AssertRejected(string.Concat(Enumerable.Repeat("tizen", 256)) + "egy");
-        AssertRejected(string.Concat(Enumerable.Repeat("harminc", 256)) + "egy");
+        AssertRejected(string.Concat(Enumerable.Repeat("tizen", 20_000)) + "egy");
+        AssertRejected(string.Concat(Enumerable.Repeat("harminc", 15_000)) + "egy");
         AssertRejected(string.Concat(Enumerable.Repeat("tizen", 256)) + "egyszaz");
 
         Assert.False($"{scaleWords} egész egy".TryToDecimalNumber(
