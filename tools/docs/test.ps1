@@ -424,6 +424,10 @@ public class Container
 public class AccessorLikeMethods
 {
     public void get_Value() { }
+    public void set_Value(int value) { }
+    public void add_Changed(System.Action value) { }
+    public void remove_Changed(System.Action value) { }
+    public void raise_Changed() { }
 }
 "@
         $inventory = Get-AssemblyApiMemberInventory `
@@ -450,6 +454,10 @@ public class AccessorLikeMethods
             "T:Fixture.Container.Hidden.Nested" = @("protected", "Type", "Fixture.Container.Hidden.Nested")
             "M:Fixture.Container.Hidden.Nested.Run" = @("protected", "Method", "Fixture.Container.Hidden.Nested")
             "M:Fixture.AccessorLikeMethods.get_Value" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.set_Value(System.Int32)" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.add_Changed(System.Action)" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.remove_Changed(System.Action)" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.raise_Changed" = @("public", "Method", "Fixture.AccessorLikeMethods")
             "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
             "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
             "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")

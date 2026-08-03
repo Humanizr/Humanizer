@@ -175,6 +175,7 @@ public static class ApiAccessReader
                 accessors.Adder,
                 accessors.Remover,
                 accessors.Raiser);
+            accessorHandles.UnionWith(accessors.Others);
             var declaredAccess = GetAccessorAccess(
                 reader,
                 explicitAccess,
@@ -210,6 +211,7 @@ public static class ApiAccessReader
                 accessorHandles,
                 accessors.Getter,
                 accessors.Setter);
+            accessorHandles.UnionWith(accessors.Others);
             var declaredAccess = GetAccessorAccess(
                 reader,
                 explicitAccess,
