@@ -11,6 +11,8 @@ namespace Humanizer;
 /// </remarks>
 internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
+    const int MaximumParseDepth = 128;
+
     readonly InvertedTensWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
@@ -94,6 +96,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
             return TryParseCompact(words, out value, out unrecognizedWord);
         }
 
+        var remainingWork = (long)words.Length * 32L;
         long total = 0;
         long current = 0;
         unrecognizedWord = null;
@@ -107,9 +110,10 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
                 continue;
             }
 
-            if (!TryParseCompact(token, out var tokenValue, out unrecognizedWord))
+            if (!TryParseCompactCore(token.AsSpan(), 0, ref remainingWork, out var tokenValue))
             {
                 value = default;
+                unrecognizedWord = token;
                 return false;
             }
 
@@ -141,16 +145,35 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// <returns><c>true</c> if the token was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCompact(string word, out long value, out string? unrecognizedWord)
     {
-        if (profile.CardinalMap.TryGetValue(word, out value) ||
-            profile.OrdinalMap.TryGetValue(word, out value))
+        var remainingWork = (long)word.Length * 32L;
+        var parsed = TryParseCompactCore(word.AsSpan(), 0, ref remainingWork, out value);
+        unrecognizedWord = parsed ? null : word;
+        return parsed;
+    }
+
+    bool TryParseCompactCore(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
+    {
+        if (depth >= MaximumParseDepth || remainingWork-- <= 0)
         {
-            unrecognizedWord = null;
+            remainingWork = -1;
+            value = default;
+            return false;
+        }
+
+        if (TryGetValue(profile.CardinalMap, word, out value) ||
+            TryGetValue(profile.OrdinalMap, word, out value))
+        {
             return true;
         }
 
-        if (TryParseOrdinalStem(word, out value, out unrecognizedWord))
+        if (TryParseOrdinalStem(word, depth, ref remainingWork, out value))
         {
             return true;
+        }
+
+        if (remainingWork < 0)
+        {
+            return false;
         }
 
         // Direct lexical matches must win before structural splitting. If the scale or compact-ten
@@ -158,31 +181,45 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
         // reinterpreted as composites and produce the wrong numeric value.
         foreach (var scale in profile.ScaleTokens)
         {
-            var index = word.IndexOf(scale, StringComparison.Ordinal);
+            var index = word.IndexOf(scale.AsSpan(), StringComparison.Ordinal);
             if (index < 0)
             {
                 continue;
             }
 
             var left = word[..index];
-            var right = StripLeadingIgnoredTokens(word[(index + scale.Length)..].Trim());
+            var right = StripLeadingIgnoredTokens(TrimSpaces(word[(index + scale.Length)..]));
             long factor = 1;
 
-            if (!string.IsNullOrEmpty(left) &&
-                !TryParseCompact(left, out factor, out _) ||
-                !TryParseOptional(right, out var remainder, out _))
+            if (!left.IsEmpty &&
+                !TryParseCompactCore(left, depth + 1, ref remainingWork, out factor))
             {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
+                continue;
+            }
+
+            if (!TryParseOptional(right, depth + 1, ref remainingWork, out var remainder))
+            {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
                 continue;
             }
 
             value = checked(checked(factor * profile.CardinalMap[scale]) + remainder);
-            unrecognizedWord = null;
             return true;
         }
 
         if (TryParseCompoundTens(word, out value))
         {
-            unrecognizedWord = null;
             return true;
         }
 
@@ -191,16 +228,20 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
         // failure token from the explicit token and scale branches above.
         if (word.Contains(' '))
         {
-            var collapsed = word.Replace(" ", string.Empty);
-            if (!ReferenceEquals(word, collapsed) &&
-                TryParseCompact(collapsed, out value, out unrecognizedWord))
+            var collapsed = word.ToString().Replace(" ", string.Empty);
+            if (TryParseCompactCore(collapsed.AsSpan(), depth + 1, ref remainingWork, out value))
             {
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                return false;
             }
         }
 
         value = default;
-        unrecognizedWord = word;
         return false;
     }
 
@@ -209,22 +250,20 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// </summary>
     /// <param name="word">The normalized token to inspect.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
-    /// <param name="unrecognizedWord">When parsing fails, the stem that could not be parsed.</param>
     /// <returns><c>true</c> if an ordinal suffix was recognized and the stem parsed; otherwise, <c>false</c>.</returns>
-    bool TryParseOrdinalStem(string word, out long value, out string? unrecognizedWord)
+    bool TryParseOrdinalStem(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
     {
         foreach (var suffix in profile.OrdinalSuffixes)
         {
-            if (!word.EndsWith(suffix, StringComparison.Ordinal) || word.Length == suffix.Length)
+            if (!word.EndsWith(suffix.AsSpan(), StringComparison.Ordinal) || word.Length == suffix.Length)
             {
                 continue;
             }
 
-            return TryParseCompact(word[..^suffix.Length], out value, out unrecognizedWord);
+            return TryParseCompactCore(word[..^suffix.Length], depth + 1, ref remainingWork, out value);
         }
 
         value = default;
-        unrecognizedWord = null;
         return false;
     }
 
@@ -233,18 +272,16 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// </summary>
     /// <param name="word">The normalized fragment to parse.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
-    /// <param name="unrecognizedWord">When parsing fails, the fragment that could not be parsed.</param>
     /// <returns><c>true</c> if the fragment was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string word, out long value, out string? unrecognizedWord)
+    bool TryParseOptional(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
     {
-        if (string.IsNullOrEmpty(word))
+        if (word.IsEmpty)
         {
             value = 0;
-            unrecognizedWord = null;
             return true;
         }
 
-        return TryParseCompact(word, out value, out unrecognizedWord);
+        return TryParseCompactCore(word, depth, ref remainingWork, out value);
     }
 
     /// <summary>
@@ -253,23 +290,26 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// <param name="word">The normalized compact token to parse.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the token matched a supported unit-plus-tens pattern; otherwise, <c>false</c>.</returns>
-    bool TryParseCompoundTens(string word, out long value)
+    bool TryParseCompoundTens(ReadOnlySpan<char> word, out long value)
     {
         foreach (var tensToken in profile.TensTokens)
         {
-            if (!word.EndsWith(tensToken.Word, StringComparison.Ordinal))
+            if (!word.EndsWith(tensToken.Word.AsSpan(), StringComparison.Ordinal))
             {
                 continue;
             }
 
             var prefix = word[..^tensToken.Word.Length];
-            if (!prefix.EndsWith(profile.TensLinker, StringComparison.Ordinal))
+            if (!prefix.EndsWith(profile.TensLinker.AsSpan(), StringComparison.Ordinal))
             {
                 continue;
             }
 
-            var unitPart = ApplyUnitPartReplacements(prefix[..^profile.TensLinker.Length]);
-            if (profile.UnitMap.TryGetValue(unitPart, out var unitValue) && unitValue is >= 1 and <= 9)
+            var unitPart = prefix[..^profile.TensLinker.Length];
+            var foundUnit = profile.UnitPartReplacements.Length == 0
+                ? TryGetValue(profile.UnitMap, unitPart, out var unitValue)
+                : profile.UnitMap.TryGetValue(ApplyUnitPartReplacements(unitPart.ToString()), out unitValue);
+            if (foundUnit && unitValue is >= 1 and <= 9)
             {
                 value = tensToken.Value + unitValue;
                 return true;
@@ -285,9 +325,9 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// </summary>
     /// <param name="words">The normalized remainder to trim.</param>
     /// <returns>The remainder without any configured leading ignored tokens.</returns>
-    string StripLeadingIgnoredTokens(string words)
+    ReadOnlySpan<char> StripLeadingIgnoredTokens(ReadOnlySpan<char> words)
     {
-        if (string.IsNullOrEmpty(words))
+        if (words.IsEmpty)
         {
             return words;
         }
@@ -301,24 +341,55 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
 
             foreach (var ignoredToken in profile.IgnoredTokens)
             {
-                var ignoredTokenWithSpace = ignoredToken + " ";
-                if (remaining.StartsWith(ignoredTokenWithSpace, StringComparison.Ordinal))
+                if (string.IsNullOrEmpty(ignoredToken) ||
+                    !remaining.StartsWith(ignoredToken.AsSpan(), StringComparison.Ordinal))
                 {
-                    remaining = remaining[ignoredTokenWithSpace.Length..].TrimStart();
-                    stripped = true;
-                    break;
+                    continue;
                 }
 
-                if (remaining.StartsWith(ignoredToken, StringComparison.Ordinal))
-                {
-                    remaining = remaining[ignoredToken.Length..].TrimStart();
-                    stripped = true;
-                    break;
-                }
+                remaining = TrimStartSpaces(remaining[ignoredToken.Length..]);
+                stripped = true;
+                break;
             }
         }
 
         return remaining;
+    }
+
+    static bool TryGetValue(FrozenDictionary<string, long> values, ReadOnlySpan<char> word, out long value)
+    {
+        foreach (var candidate in values)
+        {
+            if (word.Equals(candidate.Key.AsSpan(), StringComparison.Ordinal))
+            {
+                value = candidate.Value;
+                return true;
+            }
+        }
+
+        value = default;
+        return false;
+    }
+
+    static ReadOnlySpan<char> TrimSpaces(ReadOnlySpan<char> words)
+    {
+        var trimmed = TrimStartSpaces(words);
+        while (!trimmed.IsEmpty && trimmed[^1] == ' ')
+        {
+            trimmed = trimmed[..^1];
+        }
+
+        return trimmed;
+    }
+
+    static ReadOnlySpan<char> TrimStartSpaces(ReadOnlySpan<char> words)
+    {
+        while (!words.IsEmpty && words[0] == ' ')
+        {
+            words = words[1..];
+        }
+
+        return words;
     }
 
     /// <summary>

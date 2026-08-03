@@ -879,9 +879,13 @@ public class CoverageGapTests
         Assert.False(suffixOnly.Success);
         Assert.Equal("th", suffixOnly.UnrecognizedWord);
 
-        Assert.Equal(string.Empty, InvokePrivate<string>(typeof(InvertedTensWordsToNumberConverter), converter, "StripLeadingIgnoredTokens", string.Empty));
-        Assert.Equal("one", InvokePrivate<string>(typeof(InvertedTensWordsToNumberConverter), converter, "StripLeadingIgnoredTokens", "and of one"));
-        Assert.Equal("one", InvokePrivate<string>(typeof(InvertedTensWordsToNumberConverter), converter, "StripLeadingIgnoredTokens", "andone"));
+        var ignoredRemainder = InvokeInvertedTensTryParseCompact(converter, "twothousandand of one");
+        Assert.True(ignoredRemainder.Success);
+        Assert.Equal(2001, ignoredRemainder.Value);
+
+        var gluedIgnoredRemainder = InvokeInvertedTensTryParseCompact(converter, "twothousandandofone");
+        Assert.True(gluedIgnoredRemainder.Success);
+        Assert.Equal(2001, gluedIgnoredRemainder.Value);
     }
 
     [Theory]
