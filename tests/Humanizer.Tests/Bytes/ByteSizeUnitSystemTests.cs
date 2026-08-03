@@ -661,6 +661,38 @@ public class ByteSizeUnitSystemTests
             ByteSize.FromBytes(1).Format(unitSystem, format, CultureInfo.InvariantCulture));
 
     [Theory]
+    [InlineData(false, "kB")]
+    [InlineData(true, "kilobyte")]
+    public void RepeatedExplicitUnitTokensAllocateLinearly(bool fullWords, string expectedUnit)
+    {
+        var size = ByteSize.FromDecimalKilobytes(1);
+        _ = Format("kB");
+
+        var smallerAllocation = MeasureAllocation(1_000);
+        var largerAllocation = MeasureAllocation(2_000);
+
+        Assert.True(
+            largerAllocation < smallerAllocation * 3,
+            $"Expected near-linear allocation, but {smallerAllocation:N0} bytes grew to {largerAllocation:N0} bytes.");
+
+        long MeasureAllocation(int tokenCount)
+        {
+            var format = string.Concat(Enumerable.Repeat("kB", tokenCount));
+            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+            var result = Format(format);
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+            Assert.Equal($"1 {string.Concat(Enumerable.Repeat(expectedUnit, tokenCount))}", result);
+            return allocated;
+        }
+
+        string Format(string format) =>
+            fullWords
+                ? size.FormatFullWords(ByteSizeUnitSystem.DecimalSi, format, CultureInfo.InvariantCulture)
+                : size.Format(ByteSizeUnitSystem.DecimalSi, format, CultureInfo.InvariantCulture);
+    }
+
+    [Theory]
     [InlineData(ByteSizeUnitSystem.DecimalSi, -1000, "0.0 'MiB' kB;-0.0 'MiB' kB;0.0 'MiB' kB", "-1.0 MiB kB")]
     [InlineData(ByteSizeUnitSystem.BinaryIec, -1024, "0.0 'MB' KiB;-0.0 'MB' KiB;0.0 'MB' KiB", "-1.0 MB KiB")]
     public void SelectsOnlyActiveUnitTokensAcrossCustomFormatSections(
