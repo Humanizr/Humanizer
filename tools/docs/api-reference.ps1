@@ -36,20 +36,37 @@ sidebar_position: 2
 $provenance
 "@
     if (Test-UsesIndexedApiReference -Entry $Entry) {
-        $namespacePages = @(
-            Get-ChildItem $ApiRoot -Filter "*.md" -File |
-                Where-Object Name -ne "index.md" |
-                ForEach-Object {
-                    $content = Get-Content -Raw $_.FullName
-                    if ($content -match "(?m)^## (?<namespace>[^\r\n]+) Namespace\r?$") {
+        $namespacePages = [System.Collections.Generic.List[object]]::new()
+        Get-ChildItem $ApiRoot -Filter "*.md" -File |
+            Where-Object Name -ne "index.md" |
+            ForEach-Object {
+                $content = Get-Content -Raw $_.FullName
+                if ($content -match "(?m)^## (?<namespace>[^\r\n]+) Namespace\r?$") {
+                    $namespacePages.Add(
                         [PSCustomObject]@{
                             Content = $content
                             File = $_
                             Namespace = $Matches["namespace"]
                         }
-                    }
-                } |
-                Sort-Object Namespace, @{ Expression = { $_.File.Name } }
+                    )
+                }
+            }
+        $namespacePages.Sort(
+            [System.Comparison[object]] {
+                param($left, $right)
+
+                $comparison = [StringComparer]::Ordinal.Compare(
+                    [string]$left.Namespace,
+                    [string]$right.Namespace
+                )
+                if ($comparison -eq 0) {
+                    $comparison = [StringComparer]::Ordinal.Compare(
+                        [string]$left.File.Name,
+                        [string]$right.File.Name
+                    )
+                }
+                return $comparison
+            }
         )
         if ($namespacePages.Count -eq 0) {
             throw "The API generator did not emit a namespace index."
@@ -625,9 +642,10 @@ $($constructor.DeclaredAccess) $($constructor.DisplayName)();
         }
     }
     if ($newLinks.Count -gt 0) {
+        $newLinks.Sort([StringComparer]::Ordinal)
         [System.IO.File]::WriteAllText(
             $LinksPath,
-            "$(($links + @($newLinks | Sort-Object)) -join "`n")`n",
+            "$(($links + @($newLinks)) -join "`n")`n",
             [System.Text.UTF8Encoding]::new($false)
         )
     }

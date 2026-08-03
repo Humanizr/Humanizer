@@ -168,12 +168,141 @@ function Assert-ApiPageCollision {
     }
 }
 
+function Assert-ApiCultureDeterminism {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $apiInput = New-ApiShapeInput `
+        -Root $Root `
+        -Name "CultureFixture" `
+        -Source @"
+namespace Äther
+{
+    public class Api { }
+}
+
+namespace Zeta
+{
+    public class Api { }
+    public class Generic<T> { }
+}
+"@
+    $inventory = Get-AssemblyApiMemberInventory `
+        -AssemblyPath $apiInput.Dll
+    $entry = [PSCustomObject]@{
+        version = "current"
+        label = "4.0 preview"
+        referenceTfm = "net10.0"
+    }
+    $directoryManifests = @{}
+    $directoryDigests = @{}
+    $linksContents = @{}
+    $linksDigests = @{}
+    $landingContents = @{}
+    $originalCulture = [System.Globalization.CultureInfo]::CurrentCulture
+    $originalUiCulture = [System.Globalization.CultureInfo]::CurrentUICulture
+    try {
+        foreach ($cultureName in @("en-US", "sv-SE")) {
+            $outputRoot = Join-Path $Root "culture-$cultureName"
+            $linksPath = Join-Path $Root "culture-$cultureName-links.txt"
+            New-Item -ItemType Directory -Path $outputRoot | Out-Null
+            $culture = [System.Globalization.CultureInfo]::GetCultureInfo(
+                $cultureName
+            )
+            [System.Globalization.CultureInfo]::CurrentCulture = $culture
+            [System.Globalization.CultureInfo]::CurrentUICulture = $culture
+
+            Invoke-ApiReferenceGeneration `
+                -ApiInput $apiInput `
+                -OutputPath $outputRoot `
+                -LinksPath $linksPath `
+                -AssemblyInventory $inventory `
+                -RepositoryRoot $repoRoot `
+                -VersionLabel "$cultureName culture fixture" `
+                -ConfigurationFilePath (Join-Path $PSScriptRoot "api-reference-v4.json")
+            Add-ApiLanding -ApiRoot $outputRoot -Entry $entry
+
+            $relativePaths = [string[]]@(
+                Get-ChildItem $outputRoot -File -Recurse |
+                    ForEach-Object {
+                        [System.IO.Path]::GetRelativePath(
+                            $outputRoot,
+                            $_.FullName
+                        ).Replace("\", "/")
+                    }
+            )
+            [Array]::Sort($relativePaths, [StringComparer]::Ordinal)
+            $digestLines = foreach ($relativePath in $relativePaths) {
+                $path = Join-Path $outputRoot $relativePath
+                "$relativePath $((Get-FileHash $path -Algorithm SHA256).Hash)"
+            }
+            $manifest = $digestLines -join "`n"
+            $manifestBytes = [System.Text.Encoding]::UTF8.GetBytes($manifest)
+            $directoryManifests[$cultureName] = $manifest
+            $directoryDigests[$cultureName] = [Convert]::ToHexString(
+                [System.Security.Cryptography.SHA256]::HashData($manifestBytes)
+            )
+
+            $linksBytes = [System.IO.File]::ReadAllBytes($linksPath)
+            $linksContents[$cultureName] = [Convert]::ToBase64String($linksBytes)
+            $linksDigests[$cultureName] = [Convert]::ToHexString(
+                [System.Security.Cryptography.SHA256]::HashData($linksBytes)
+            )
+            $landingContents[$cultureName] = Get-Content -Raw (
+                Join-Path $outputRoot "index.md"
+            )
+        }
+    } finally {
+        [System.Globalization.CultureInfo]::CurrentCulture = $originalCulture
+        [System.Globalization.CultureInfo]::CurrentUICulture = $originalUiCulture
+    }
+
+    if ($directoryManifests["en-US"] -ne $directoryManifests["sv-SE"] -or
+        $directoryDigests["en-US"] -ne $directoryDigests["sv-SE"]) {
+        throw "Generated API files changed with the process culture."
+    }
+    if ($linksContents["en-US"] -ne $linksContents["sv-SE"] -or
+        $linksDigests["en-US"] -ne $linksDigests["sv-SE"]) {
+        throw "Generated API links changed with the process culture."
+    }
+
+    $landing = $landingContents["en-US"]
+    $zetaNamespace = $landing.IndexOf(
+        "### [Zeta Namespace]",
+        [System.StringComparison]::Ordinal
+    )
+    $aetherNamespace = $landing.IndexOf(
+        "### [Äther Namespace]",
+        [System.StringComparison]::Ordinal
+    )
+    if ($zetaNamespace -lt 0 -or $aetherNamespace -lt 0 -or
+        $zetaNamespace -gt $aetherNamespace) {
+        throw "Generated API namespaces are not in ordinal order."
+    }
+
+    $links = [System.Text.Encoding]::UTF8.GetString(
+        [Convert]::FromBase64String($linksContents["en-US"])
+    )
+    $zetaConstructor = $links.IndexOf(
+        "M:Zeta.Api.#ctor",
+        [System.StringComparison]::Ordinal
+    )
+    $aetherConstructor = $links.IndexOf(
+        "M:Äther.Api.#ctor",
+        [System.StringComparison]::Ordinal
+    )
+    if ($zetaConstructor -lt 0 -or $aetherConstructor -lt 0 -or
+        $zetaConstructor -gt $aetherConstructor) {
+        throw "Generated implicit-constructor links are not in ordinal order."
+    }
+}
+
 function Assert-AssemblyApiShapes {
     $fixtureRoot = Join-Path (
         [System.IO.Path]::GetTempPath()
     ) "humanizer-assembly-api-shapes-$([guid]::NewGuid().ToString('N'))"
     New-Item -ItemType Directory -Path $fixtureRoot | Out-Null
     try {
+        Assert-ApiCultureDeterminism -Root $fixtureRoot
         Assert-ApiPageCollision `
             -Root $fixtureRoot `
             -Name "CollisionFixture" `
