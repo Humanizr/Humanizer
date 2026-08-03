@@ -350,6 +350,23 @@ public class CardinalPluralOperandsTests
 #endif
     }
 
+    [Theory]
+    [InlineData(0L)]
+    [InlineData(long.MinValue)]
+    public void Create_DoubleZero_PreservesExactZeroOperands(long bits)
+    {
+        var value = BitConverter.Int64BitsToDouble(bits);
+        var operands = CardinalPluralOperands.Create(value);
+
+        Assert.True(operands.IsSupported);
+        Assert.Equal(BigInteger.Zero, operands.AbsoluteDigits);
+        Assert.Equal(BigInteger.Zero, operands.IntegerDigits);
+        Assert.Equal(BigInteger.Zero, operands.FractionDigits);
+        Assert.Equal(BigInteger.Zero, operands.FractionDigitsWithoutTrailingZeros);
+        Assert.Equal(0, operands.V);
+        Assert.Equal(0, operands.W);
+    }
+
     [Fact]
     public void Create_DoubleExtremes_PreserveExactShortestOperands()
     {

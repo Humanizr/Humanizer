@@ -84,7 +84,7 @@ readonly struct CardinalPluralOperands
 
         value = Math.Abs(value);
 
-        if (value == 0)
+        if (value is 0)
             return new(BigInteger.Zero, 0);
 
         GetShortestRoundTrip(value, out var digits, out var decimalExponent);
