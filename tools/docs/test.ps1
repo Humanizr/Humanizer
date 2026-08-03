@@ -222,6 +222,7 @@ public class same { }
         if ($checkedConversionId -notin @($checkedInventory.Records.Id)) {
             throw "The assembly inventory omitted the checked conversion return type."
         }
+        $originalCheckedXml = Get-Content -Raw $checkedInput.Xml
         $checkedOutput = Join-Path $fixtureRoot "checked"
         $checkedLinks = Join-Path $fixtureRoot "checked-links.txt"
         New-Item -ItemType Directory -Path $checkedOutput | Out-Null
@@ -237,6 +238,106 @@ public class same { }
             (Get-ApiLinkRecords -LinksPath $checkedLinks).Id
         )) {
             throw "Generated API links omitted the checked conversion return type."
+        }
+        $checkedPage = Get-Content -Raw (
+            Join-Path $checkedOutput "CheckedConversionFixture.CheckedToken.md"
+        )
+        if (-not $checkedPage.Contains(
+                "Converts an integer in a checked context",
+                [System.StringComparison]::Ordinal
+            )) {
+            throw "Generated API omitted the checked conversion summary."
+        }
+        if ((Get-Content -Raw $checkedInput.Xml) -ne $originalCheckedXml) {
+            throw "Checked conversion generation mutated the compiler XML."
+        }
+
+        $checkedConversionAlias = $checkedConversionId.Substring(
+            0,
+            $checkedConversionId.LastIndexOf("~")
+        )
+        $conflictingXml = Join-Path $fixtureRoot "checked-conflict.xml"
+        $conflictingDocument = [System.Xml.XmlDocument]::new()
+        $conflictingDocument.PreserveWhitespace = $true
+        $conflictingDocument.Load($checkedInput.Xml)
+        $canonicalNodes = @(
+            $conflictingDocument.SelectNodes('/doc/members/member') |
+                Where-Object {
+                    [string]::Equals(
+                        $_.GetAttribute("name"),
+                        $checkedConversionId,
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+        )
+        if ($canonicalNodes.Count -ne 1) {
+            throw "The checked conversion fixture has no unique canonical XML member."
+        }
+        $canonicalNode = $canonicalNodes[0]
+        $conflictingNode = $canonicalNode.CloneNode($true)
+        $conflictingNode.SetAttribute("name", $checkedConversionAlias)
+        $conflictingMembers = $conflictingDocument.SelectSingleNode('/doc/members')
+        [void]$conflictingMembers.AppendChild($conflictingNode)
+        [void]$conflictingMembers.AppendChild(
+            $conflictingDocument.CreateWhitespace("`n    ")
+        )
+        $conflictingDocument.Save($conflictingXml)
+        $conflictFailed = $false
+        try {
+            New-DefaultDocumentationApiInput `
+                -ApiInput ([PSCustomObject]@{
+                    Dll = $checkedInput.Dll
+                    Xml = $conflictingXml
+                }) `
+                -ExpectedRecords $checkedInventory.Records | Out-Null
+        } catch {
+            $conflictFailed = $_.Exception.Message.Contains(
+                "Checked conversion XML alias already exists: $checkedConversionAlias",
+                [System.StringComparison]::Ordinal
+            )
+        }
+        if (-not $conflictFailed) {
+            throw "A conflicting checked conversion XML alias did not fail closed."
+        }
+
+        $ambiguousFailed = $false
+        try {
+            New-DefaultDocumentationApiInput `
+                -ApiInput $checkedInput `
+                -ExpectedRecords @(
+                    [PSCustomObject]@{ Id = $checkedConversionId },
+                    [PSCustomObject]@{
+                        Id = "$checkedConversionAlias~System.Object"
+                    }
+                ) | Out-Null
+        } catch {
+            $ambiguousFailed = $_.Exception.Message.Contains(
+                "matched 2 assembly-derived IDs",
+                [System.StringComparison]::Ordinal
+            )
+        }
+        if (-not $ambiguousFailed) {
+            throw "An ambiguous checked conversion XML alias did not fail closed."
+        }
+
+        $uncheckedOutput = Join-Path $fixtureRoot "checked-without-config"
+        $uncheckedLinks = Join-Path $fixtureRoot "checked-without-config-links.txt"
+        New-Item -ItemType Directory -Path $uncheckedOutput | Out-Null
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $checkedInput `
+            -OutputPath $uncheckedOutput `
+            -LinksPath $uncheckedLinks `
+            -AssemblyInventory $checkedInventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "checked conversion fixture without configuration"
+        $uncheckedPage = Get-Content -Raw (
+            Join-Path $uncheckedOutput "CheckedConversionFixture.CheckedToken.md"
+        )
+        if (-not $uncheckedPage.Contains(
+                "Converts an integer in a checked context",
+                [System.StringComparison]::Ordinal
+            )) {
+            throw "Unconfigured API generation omitted the checked conversion summary."
         }
 
         $apiInput = New-ApiShapeInput `

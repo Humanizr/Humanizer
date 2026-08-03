@@ -84,6 +84,7 @@ $($namespaceSections -join "`n`n")
 function Invoke-DefaultDocumentationApi {
     param(
         [Parameter(Mandatory = $true)]$ApiInput,
+        [Parameter(Mandatory = $true)]$ExpectedRecords,
         [Parameter(Mandatory = $true)][string]$OutputPath,
         [Parameter(Mandatory = $true)][string]$LinksPath,
         [Parameter(Mandatory = $true)][string]$RepositoryRoot,
@@ -91,30 +92,158 @@ function Invoke-DefaultDocumentationApi {
         [string]$AccessModifiers = "Api"
     )
 
-    $arguments = @(
-        "tool", "run", "defaultdocumentation", "--",
-        "--AssemblyFilePath", $ApiInput.Dll,
-        "--DocumentationFilePath", $ApiInput.Xml,
-        "--OutputDirectoryPath", $OutputPath,
-        "--AssemblyPageName", "assembly",
-        "--GeneratedAccessModifiers", $AccessModifiers,
-        "--IncludeUndocumentedItems", "true",
-        "--GeneratedPages", "Namespaces,Types",
-        "--Sections", "Default",
-        "--LinksOutputFilePath", $LinksPath,
-        "--LinksBaseUrl", "./"
-    )
-    if ($ConfigurationFilePath) {
-        $arguments += @(
-            "--ConfigurationFilePath",
-            $ConfigurationFilePath
+    $defaultDocumentationInput = New-DefaultDocumentationApiInput `
+        -ApiInput $ApiInput `
+        -ExpectedRecords $ExpectedRecords
+    try {
+        $arguments = @(
+            "tool", "run", "defaultdocumentation", "--",
+            "--AssemblyFilePath", $defaultDocumentationInput.ApiInput.Dll,
+            "--DocumentationFilePath", $defaultDocumentationInput.ApiInput.Xml,
+            "--OutputDirectoryPath", $OutputPath,
+            "--AssemblyPageName", "assembly",
+            "--GeneratedAccessModifiers", $AccessModifiers,
+            "--IncludeUndocumentedItems", "true",
+            "--GeneratedPages", "Namespaces,Types",
+            "--Sections", "Default",
+            "--LinksOutputFilePath", $LinksPath,
+            "--LinksBaseUrl", "./"
         )
+        if ($ConfigurationFilePath) {
+            $arguments += @(
+                "--ConfigurationFilePath",
+                $ConfigurationFilePath
+            )
+        }
+        Invoke-DocsCheckedCommand `
+            -FilePath "dotnet" `
+            -ArgumentList $arguments `
+            -WorkingDirectory $RepositoryRoot
+    } finally {
+        if ($null -ne $defaultDocumentationInput.TemporaryXml) {
+            Remove-Item $defaultDocumentationInput.TemporaryXml -Force
+        }
+    }
+}
+
+function New-DefaultDocumentationApiInput {
+    param(
+        [Parameter(Mandatory = $true)]$ApiInput,
+        [Parameter(Mandatory = $true)]$ExpectedRecords
+    )
+
+    $checkedRecords = @(
+        $ExpectedRecords |
+            Where-Object Id -Match '^M:.+\.op_CheckedExplicit\(.*\)~.+$'
+    )
+    if ($checkedRecords.Count -eq 0) {
+        return [PSCustomObject]@{
+            ApiInput = $ApiInput
+            TemporaryXml = $null
+        }
     }
 
-    Invoke-DocsCheckedCommand `
-        -FilePath "dotnet" `
-        -ArgumentList $arguments `
-        -WorkingDirectory $RepositoryRoot
+    $document = [System.Xml.XmlDocument]::new()
+    $document.PreserveWhitespace = $true
+    $document.Load([System.IO.Path]::GetFullPath($ApiInput.Xml))
+    $members = $document.SelectSingleNode('/doc/members')
+    if ($null -eq $members) {
+        return [PSCustomObject]@{
+            ApiInput = $ApiInput
+            TemporaryXml = $null
+        }
+    }
+
+    $memberNodes = @($document.SelectNodes('/doc/members/member'))
+    $aliases = [System.Collections.Generic.HashSet[string]]::new(
+        [System.StringComparer]::Ordinal
+    )
+    $addedAlias = $false
+    foreach ($record in $checkedRecords) {
+        $separator = $record.Id.LastIndexOf("~")
+        $alias = $record.Id.Substring(0, $separator)
+        if (-not $aliases.Add($alias)) {
+            continue
+        }
+        $matches = @(
+            $checkedRecords |
+                Where-Object {
+                    $_.Id.StartsWith(
+                        "$alias~",
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+        )
+        if ($matches.Count -ne 1) {
+            throw (
+                "Checked conversion XML alias $alias matched " +
+                "$($matches.Count) assembly-derived IDs."
+            )
+        }
+
+        $canonicalId = $matches[0].Id
+        $aliasNodes = @(
+            $memberNodes |
+                Where-Object {
+                    [string]::Equals(
+                        $_.GetAttribute("name"),
+                        $alias,
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+        )
+        if ($aliasNodes.Count -gt 0) {
+            throw "Checked conversion XML alias already exists: $alias"
+        }
+        $canonicalNodes = @(
+            $memberNodes |
+                Where-Object {
+                    [string]::Equals(
+                        $_.GetAttribute("name"),
+                        $canonicalId,
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+        )
+        if ($canonicalNodes.Count -eq 0) {
+            continue
+        }
+        if ($canonicalNodes.Count -ne 1) {
+            throw "Checked conversion XML ID is duplicated: $canonicalId"
+        }
+
+        $aliasNode = $canonicalNodes[0].CloneNode($true)
+        $aliasNode.SetAttribute("name", $alias)
+        if ($members.LastChild.NodeType -notin @(
+                [System.Xml.XmlNodeType]::Whitespace,
+                [System.Xml.XmlNodeType]::SignificantWhitespace
+            )) {
+            [void]$members.AppendChild($document.CreateWhitespace("`n    "))
+        }
+        [void]$members.AppendChild($aliasNode)
+        [void]$members.AppendChild($document.CreateWhitespace("`n    "))
+        $memberNodes += $aliasNode
+        $addedAlias = $true
+    }
+
+    if (-not $addedAlias) {
+        return [PSCustomObject]@{
+            ApiInput = $ApiInput
+            TemporaryXml = $null
+        }
+    }
+
+    $temporaryXml = Join-Path (
+        [System.IO.Path]::GetTempPath()
+    ) "humanizer-defaultdocumentation-$([guid]::NewGuid().ToString('N')).xml"
+    $document.Save($temporaryXml)
+    return [PSCustomObject]@{
+        ApiInput = [PSCustomObject]@{
+            Dll = $ApiInput.Dll
+            Xml = $temporaryXml
+        }
+        TemporaryXml = $temporaryXml
+    }
 }
 
 function Initialize-ApiAccessReader {
@@ -721,8 +850,12 @@ function Invoke-ApiReferenceGeneration {
         [ValidateSet("Api", "Public")][string]$AccessModifiers = "Api"
     )
 
+    $expectedRecords = Select-AssemblyApiRecords `
+        -Inventory $AssemblyInventory `
+        -PublicOnly:($AccessModifiers -eq "Public")
     Invoke-DefaultDocumentationApi `
         -ApiInput $ApiInput `
+        -ExpectedRecords $expectedRecords `
         -OutputPath $OutputPath `
         -LinksPath $LinksPath `
         -RepositoryRoot $RepositoryRoot `
@@ -733,9 +866,6 @@ function Invoke-ApiReferenceGeneration {
     }
 
     $expectedTypes = Select-AssemblyApiTypes `
-        -Inventory $AssemblyInventory `
-        -PublicOnly:($AccessModifiers -eq "Public")
-    $expectedRecords = Select-AssemblyApiRecords `
         -Inventory $AssemblyInventory `
         -PublicOnly:($AccessModifiers -eq "Public")
     Set-ApiCanonicalTypeRoutes `
