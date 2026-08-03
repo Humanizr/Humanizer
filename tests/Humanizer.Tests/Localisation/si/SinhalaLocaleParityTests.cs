@@ -134,6 +134,71 @@ public class SinhalaLocaleParityTests
     }
 
     [Theory]
+    [InlineData(24)]
+    [InlineData(64)]
+    [InlineData(256)]
+    public void WordsToNumber_RejectsStemmedScaleInputsBeyondTheWorkBudget(int tokenCount)
+    {
+        var words = string.Join(" ", Enumerable.Repeat("සිය", tokenCount));
+        _ = "සියය".TryToNumber(out _, Si);
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+
+        Assert.False(words.TryToNumber(out var parsedNumber, Si, out var unrecognizedWord));
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal("සිය", unrecognizedWord);
+        Assert.True(allocated < 256_000, $"Stemmed-scale rejection allocated {allocated:N0} bytes.");
+
+        Assert.False($"{words} දශම එක".TryToDecimalNumber(out var parsedDecimal, Si, out unrecognizedWord));
+        Assert.Equal(0, parsedDecimal);
+        Assert.Equal("සිය", unrecognizedWord);
+    }
+
+    [Fact]
+    public void WordsToNumber_RejectsRepeatedOrdinalSuffixesWithoutRecursion()
+    {
+        var words = "එක" + string.Concat(Enumerable.Repeat("වැනි", 2_048));
+        _ = "එකවැනි".TryToNumber(out _, Si);
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+
+        Assert.False(words.TryToNumber(out var parsedNumber, Si, out var unrecognizedWord));
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal(words, unrecognizedWord);
+        Assert.True(allocated < 512_000, $"Repeated ordinal suffix rejection allocated {allocated:N0} bytes.");
+    }
+
+    [Fact]
+    public void WordsToNumber_PropagatesWorkBudgetFailureWithoutRebuildingRanges()
+    {
+        var words = string.Join(" ", Enumerable.Repeat("සිය", 4_096));
+        _ = "සියය".TryToNumber(out _, Si);
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+
+        Assert.False(words.TryToNumber(out var parsedNumber, Si, out var unrecognizedWord));
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal("සිය", unrecognizedWord);
+        Assert.True(allocated < 2_000_000, $"Work-budget propagation allocated {allocated:N0} bytes.");
+    }
+
+    [Fact]
+    public void WordsToNumber_ChargesSparseScaleScansToTheWorkBudget()
+    {
+        var words = string.Join(" ", Enumerable.Range(0, 16)
+            .SelectMany(_ => Enumerable.Repeat("x", 512).Prepend("සිය")));
+        _ = "සියය".TryToNumber(out _, Si);
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+        Assert.False(words.TryToNumber(out var parsedNumber, Si, out var unrecognizedWord));
+        stopwatch.Stop();
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal("x", unrecognizedWord);
+        Assert.True(stopwatch.Elapsed < TimeSpan.FromMilliseconds(500),
+            $"Sparse scale rejection took {stopwatch.Elapsed.TotalMilliseconds:N0} ms.");
+    }
+
+    [Theory]
     [InlineData(1, "1වැනි")]
     [InlineData(21, "21වැනි")]
     [InlineData(-1, "-1වැනි")]
