@@ -165,10 +165,16 @@ public static class ApiAccessReader
                 qualifiedDisplayName);
         }
 
+        var accessorHandles = new HashSet<MethodDefinitionHandle>();
         foreach (var eventHandle in type.GetEvents())
         {
             var eventDefinition = reader.GetEventDefinition(eventHandle);
             var accessors = eventDefinition.GetAccessors();
+            AddAccessorHandles(
+                accessorHandles,
+                accessors.Adder,
+                accessors.Remover,
+                accessors.Raiser);
             var declaredAccess = GetAccessorAccess(
                 reader,
                 explicitAccess,
@@ -200,6 +206,10 @@ public static class ApiAccessReader
         {
             var property = reader.GetPropertyDefinition(propertyHandle);
             var accessors = property.GetAccessors();
+            AddAccessorHandles(
+                accessorHandles,
+                accessors.Getter,
+                accessors.Setter);
             var declaredAccess = GetAccessorAccess(
                 reader,
                 explicitAccess,
@@ -243,7 +253,7 @@ public static class ApiAccessReader
                 continue;
 
             var name = reader.GetString(method.Name);
-            if (IsAccessor(name))
+            if (accessorHandles.Contains(methodHandle))
                 continue;
 
             var kind = name == ".ctor" || name == ".cctor"
@@ -479,17 +489,16 @@ public static class ApiAccessReader
         return result;
     }
 
-    static bool IsAccessor(string name) =>
-        name.StartsWith("get_", StringComparison.Ordinal) ||
-        name.StartsWith("set_", StringComparison.Ordinal) ||
-        name.StartsWith("add_", StringComparison.Ordinal) ||
-        name.StartsWith("remove_", StringComparison.Ordinal) ||
-        name.StartsWith("raise_", StringComparison.Ordinal) ||
-        name.Contains(".get_", StringComparison.Ordinal) ||
-        name.Contains(".set_", StringComparison.Ordinal) ||
-        name.Contains(".add_", StringComparison.Ordinal) ||
-        name.Contains(".remove_", StringComparison.Ordinal) ||
-        name.Contains(".raise_", StringComparison.Ordinal);
+    static void AddAccessorHandles(
+        HashSet<MethodDefinitionHandle> accessorHandles,
+        params MethodDefinitionHandle[] handles)
+    {
+        foreach (var handle in handles)
+        {
+            if (!handle.IsNil)
+                accessorHandles.Add(handle);
+        }
+    }
 
     static string GetTypeKind(MetadataReader reader, TypeDefinition type)
     {

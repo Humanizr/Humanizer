@@ -420,6 +420,11 @@ public class Container
         }
     }
 }
+
+public class AccessorLikeMethods
+{
+    public void get_Value() { }
+}
 "@
         $inventory = Get-AssemblyApiMemberInventory `
             -AssemblyPath $apiInput.Dll
@@ -444,6 +449,7 @@ public class Container
             "T:Fixture.Container.Hidden" = @("protected", "Type", "Fixture.Container.Hidden")
             "T:Fixture.Container.Hidden.Nested" = @("protected", "Type", "Fixture.Container.Hidden.Nested")
             "M:Fixture.Container.Hidden.Nested.Run" = @("protected", "Method", "Fixture.Container.Hidden.Nested")
+            "M:Fixture.AccessorLikeMethods.get_Value" = @("public", "Method", "Fixture.AccessorLikeMethods")
             "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
             "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
             "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")
