@@ -564,7 +564,7 @@ public class WordsToNumberTests_Swedish
         Assert.Equal(64000, legitimateWords.ToNumber(culture));
         Assert.Equal(64000.1m, $"{legitimateWords} komma {1.ToWords(culture)}".ToDecimalNumber(culture));
 
-        var words = string.Concat(Enumerable.Repeat(scale, 256));
+        var words = string.Concat(Enumerable.Repeat(scale, 20_000));
         var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
         Assert.False(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
         var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;

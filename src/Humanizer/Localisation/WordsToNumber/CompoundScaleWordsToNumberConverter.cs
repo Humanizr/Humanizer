@@ -87,11 +87,16 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(string words, out long value)
     {
+        if (profile.CardinalMap.TryGetValue(words, out value))
+        {
+            return true;
+        }
+
         var remainingWork = (long)words.Length * 32L;
-        return TryParseCardinal(words, 0, ref remainingWork, out value);
+        return TryParseCardinal(words.AsSpan(), 0, ref remainingWork, out value);
     }
 
-    bool TryParseCardinal(string words, int depth, ref long remainingWork, out long value)
+    bool TryParseCardinal(ReadOnlySpan<char> words, int depth, ref long remainingWork, out long value)
     {
         if (depth >= MaximumParseDepth || remainingWork-- <= 0)
         {
@@ -100,7 +105,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
             return false;
         }
 
-        if (profile.CardinalMap.TryGetValue(words, out value))
+        if (TryGetValue(profile.CardinalMap, words, out value))
         {
             return true;
         }
@@ -113,11 +118,23 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
             // Multi-token phrases are reduced left to right. Small tokens accumulate into the
             // current group, while scale tokens flush the current group into the total using the
             // locale's scale-multiplier semantics.
-            foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
+            while (!words.IsEmpty)
             {
-                var token = tokenSpan.ToString();
+                while (!words.IsEmpty && words[0] == ' ')
+                {
+                    words = words[1..];
+                }
 
-                if (token == profile.IgnoredToken)
+                if (words.IsEmpty)
+                {
+                    break;
+                }
+
+                var separatorIndex = words.IndexOf(' ');
+                var token = separatorIndex < 0 ? words : words[..separatorIndex];
+                words = separatorIndex < 0 ? [] : words[(separatorIndex + 1)..];
+
+                if (token.SequenceEqual(profile.IgnoredToken))
                 {
                     continue;
                 }
@@ -154,17 +171,17 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
         // left-to-right reduction.
         foreach (var scale in profile.LargeScales)
         {
-            var index = words.IndexOf(scale, StringComparison.Ordinal);
+            var index = words.IndexOf(scale.AsSpan(), StringComparison.Ordinal);
             if (index < 0)
             {
                 continue;
             }
 
-            var left = words[..index].Trim();
-            var right = words[(index + scale.Length)..].Trim();
+            var left = TrimSpaces(words[..index]);
+            var right = TrimSpaces(words[(index + scale.Length)..]);
             long factor = 1;
 
-            if (!string.IsNullOrEmpty(left) &&
+            if (!left.IsEmpty &&
                 !TryParseCardinal(left, depth + 1, ref remainingWork, out factor))
             {
                 if (remainingWork < 0)
@@ -196,13 +213,13 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
         // fallback cannot swallow unrelated larger cardinals.
         foreach (var tens in profile.Tens)
         {
-            if (!words.StartsWith(tens, StringComparison.Ordinal))
+            if (!words.StartsWith(tens.AsSpan(), StringComparison.Ordinal))
             {
                 continue;
             }
 
             var remainder = words[tens.Length..];
-            if (string.IsNullOrEmpty(remainder))
+            if (remainder.IsEmpty)
             {
                 value = profile.CardinalMap[tens];
                 return true;
@@ -231,9 +248,9 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// <param name="words">The remainder text following a scale token.</param>
     /// <param name="value">When this method returns, the parsed remainder value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string words, int depth, ref long remainingWork, out long value)
+    bool TryParseOptional(ReadOnlySpan<char> words, int depth, ref long remainingWork, out long value)
     {
-        if (string.IsNullOrEmpty(words))
+        if (words.IsEmpty)
         {
             value = 0;
             return true;
@@ -241,18 +258,50 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 
         if (!string.IsNullOrEmpty(profile.IgnoredToken))
         {
-            var ignoredTokenWithSpace = profile.IgnoredToken + " ";
-            if (words.StartsWith(ignoredTokenWithSpace, StringComparison.Ordinal))
+            var ignoredToken = profile.IgnoredToken.AsSpan();
+            if (words.StartsWith(ignoredToken, StringComparison.Ordinal) &&
+                words.Length > ignoredToken.Length &&
+                words[ignoredToken.Length] == ' ')
             {
-                words = words[ignoredTokenWithSpace.Length..];
+                words = words[(ignoredToken.Length + 1)..];
             }
-            else if (words.StartsWith(profile.IgnoredToken, StringComparison.Ordinal))
+            else if (words.StartsWith(ignoredToken, StringComparison.Ordinal))
             {
-                words = words[profile.IgnoredToken.Length..];
+                words = words[ignoredToken.Length..];
             }
         }
 
         return TryParseCardinal(words, depth, ref remainingWork, out value);
+    }
+
+    static bool TryGetValue(FrozenDictionary<string, long> values, ReadOnlySpan<char> word, out long value)
+    {
+        foreach (var candidate in values)
+        {
+            if (word.Equals(candidate.Key.AsSpan(), StringComparison.Ordinal))
+            {
+                value = candidate.Value;
+                return true;
+            }
+        }
+
+        value = default;
+        return false;
+    }
+
+    static ReadOnlySpan<char> TrimSpaces(ReadOnlySpan<char> words)
+    {
+        while (!words.IsEmpty && words[0] == ' ')
+        {
+            words = words[1..];
+        }
+
+        while (!words.IsEmpty && words[^1] == ' ')
+        {
+            words = words[..^1];
+        }
+
+        return words;
     }
 
     /// <summary>
