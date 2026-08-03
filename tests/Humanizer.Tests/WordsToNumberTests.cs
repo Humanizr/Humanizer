@@ -752,6 +752,9 @@ public class WordsToNumberTests_Finnish
     {
         var scaleWords = string.Concat(Enumerable.Repeat("tuhat", 100_000));
         AssertParsedBounded(scaleWords, 100_000_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("kaksituhatta", 200)), 400_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("tuhatsata", 200)), 220_000);
+        AssertRejectedBounded($"{scaleWords}mysteeri");
 
         void AssertParsedBounded(string words, long expected)
         {
@@ -764,6 +767,18 @@ public class WordsToNumberTests_Finnish
             Assert.Null(unrecognizedWord);
             // Normalization has a fixed per-character cost; this linear ceiling still rejects quadratic growth.
             Assert.True(allocated < allocationLimit, $"Suffix-scale parsing allocated {allocated:N0} bytes for {words.Length:N0} characters.");
+        }
+
+        void AssertRejectedBounded(string words)
+        {
+            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+            Assert.False(words.TryToNumber(out var parsed, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+            var allocationLimit = checked((long)words.Length * 64);
+
+            Assert.Equal(0, parsed);
+            Assert.NotNull(unrecognizedWord);
+            Assert.True(allocated < allocationLimit, $"Suffix-scale rejection allocated {allocated:N0} bytes for {words.Length:N0} characters.");
         }
     }
 
