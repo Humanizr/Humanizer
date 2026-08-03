@@ -397,6 +397,45 @@ function ConvertTo-ApiMarkdownTitle {
         Replace(">", "\>")
 }
 
+function Resolve-ApiCheckedConversionId {
+    param(
+        [Parameter(Mandatory = $true)][string]$Id,
+        [Parameter(Mandatory = $true)][AllowEmptyCollection()]$ExpectedRecords
+    )
+
+    $suffixedMatches = @(
+        $ExpectedRecords |
+            Where-Object {
+                $_.Id.StartsWith(
+                    "$Id~",
+                    [System.StringComparison]::Ordinal
+                ) -and $_.Kind -eq "Operator"
+            }
+    )
+    $ordinaryMatches = @(
+        $ExpectedRecords |
+            Where-Object {
+                [string]::Equals(
+                    $_.Id,
+                    $Id,
+                    [System.StringComparison]::Ordinal
+                ) -and $_.Kind -eq "Method"
+            }
+    )
+    $candidateCount = $suffixedMatches.Count + $ordinaryMatches.Count
+    if ($candidateCount -ne 1) {
+        throw (
+            "Generated checked conversion ID $Id matched " +
+            "$candidateCount assembly-derived IDs."
+        )
+    }
+
+    if ($suffixedMatches.Count -eq 1) {
+        return $suffixedMatches[0].Id
+    }
+    return $Id
+}
+
 function Set-ApiCanonicalTypeRoutes {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
@@ -415,23 +454,9 @@ function Set-ApiCanonicalTypeRoutes {
             throw "Generated a malformed API link: $($lines[$index])"
         }
         if ($parts[0] -match '^M:.+\.op_CheckedExplicit\(.*\)$') {
-            $expectedPrefix = "$($parts[0])~"
-            $matches = @(
-                $ExpectedRecords |
-                    Where-Object {
-                        $_.Id.StartsWith(
-                            $expectedPrefix,
-                            [System.StringComparison]::Ordinal
-                        )
-                    }
-            )
-            if ($matches.Count -ne 1) {
-                throw (
-                    "Generated checked conversion ID $($parts[0]) matched " +
-                    "$($matches.Count) assembly-derived IDs."
-                )
-            }
-            $parts[0] = $matches[0].Id
+            $parts[0] = Resolve-ApiCheckedConversionId `
+                -Id $parts[0] `
+                -ExpectedRecords $ExpectedRecords
         }
         $target = @($parts[1] -split "#", 2)
         if ($renames.ContainsKey($target[0])) {

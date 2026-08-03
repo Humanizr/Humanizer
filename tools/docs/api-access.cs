@@ -258,9 +258,12 @@ public static class ApiAccessReader
             if (accessorHandles.Contains(methodHandle))
                 continue;
 
+            var isOperator =
+                (method.Attributes & MethodAttributes.SpecialName) != 0 &&
+                name.StartsWith("op_", StringComparison.Ordinal);
             var kind = name == ".ctor" || name == ".cctor"
                 ? "Constructor"
-                : name.StartsWith("op_", StringComparison.Ordinal)
+                : isOperator
                     ? "Operator"
                     : "Method";
             var memberName = name switch
@@ -277,10 +280,10 @@ public static class ApiAccessReader
             var id = $"M:{typeId}.{memberName}";
             if (signature.ParameterTypes.Length > 0)
                 id += $"({string.Join(",", signature.ParameterTypes)})";
-            if (name is
-                "op_Implicit" or
-                "op_Explicit" or
-                "op_CheckedExplicit")
+            if (isOperator && name is
+                    "op_Implicit" or
+                    "op_Explicit" or
+                    "op_CheckedExplicit")
                 id += $"~{signature.ReturnType}";
 
             AddRecord(

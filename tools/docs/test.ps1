@@ -351,6 +351,87 @@ public class same { }
         if ($checkedConversionId -notin @($checkedInventory.Records.Id)) {
             throw "The assembly inventory omitted the checked conversion return type."
         }
+        $checkedConversionAlias = $checkedConversionId.Substring(
+            0,
+            $checkedConversionId.LastIndexOf("~")
+        )
+        $resolvedCheckedConversionId = Resolve-ApiCheckedConversionId `
+            -Id $checkedConversionAlias `
+            -ExpectedRecords $checkedInventory.Records
+        if ($resolvedCheckedConversionId -ne $checkedConversionId) {
+            throw "The checked conversion route did not resolve its canonical ID."
+        }
+        $ordinaryCheckedMethod = [PSCustomObject]@{
+            Id = $checkedConversionAlias
+            Kind = "Method"
+        }
+        if ((Resolve-ApiCheckedConversionId `
+                -Id $checkedConversionAlias `
+                -ExpectedRecords @($ordinaryCheckedMethod)) -ne
+            $checkedConversionAlias) {
+            throw "An ordinary checked-conversion-named method changed its ID."
+        }
+        $invalidCheckedRouteCases = @(
+            [PSCustomObject]@{
+                Records = @()
+                CandidateCount = 0
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    $ordinaryCheckedMethod,
+                    [PSCustomObject]@{
+                        Id = $checkedConversionId
+                        Kind = "Operator"
+                    }
+                )
+                CandidateCount = 2
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    [PSCustomObject]@{
+                        Id = $checkedConversionId
+                        Kind = "Operator"
+                    },
+                    [PSCustomObject]@{
+                        Id = "$checkedConversionAlias~System.Object"
+                        Kind = "Operator"
+                    }
+                )
+                CandidateCount = 2
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    $ordinaryCheckedMethod,
+                    $ordinaryCheckedMethod
+                )
+                CandidateCount = 2
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    [PSCustomObject]@{
+                        Id = $checkedConversionId
+                        Kind = "Method"
+                    }
+                )
+                CandidateCount = 0
+            }
+        )
+        foreach ($routeCase in $invalidCheckedRouteCases) {
+            $routeFailed = $false
+            try {
+                Resolve-ApiCheckedConversionId `
+                    -Id $checkedConversionAlias `
+                    -ExpectedRecords $routeCase.Records | Out-Null
+            } catch {
+                $routeFailed = $_.Exception.Message.Contains(
+                    "matched $($routeCase.CandidateCount) assembly-derived IDs",
+                    [System.StringComparison]::Ordinal
+                )
+            }
+            if (-not $routeFailed) {
+                throw "An invalid checked conversion route did not fail closed."
+            }
+        }
         $originalCheckedXml = Get-Content -Raw $checkedInput.Xml
         $checkedOutput = Join-Path $fixtureRoot "checked"
         $checkedLinks = Join-Path $fixtureRoot "checked-links.txt"
@@ -381,10 +462,6 @@ public class same { }
             throw "Checked conversion generation mutated the compiler XML."
         }
 
-        $checkedConversionAlias = $checkedConversionId.Substring(
-            0,
-            $checkedConversionId.LastIndexOf("~")
-        )
         $conflictingXml = Join-Path $fixtureRoot "checked-conflict.xml"
         $conflictingDocument = [System.Xml.XmlDocument]::new()
         $conflictingDocument.PreserveWhitespace = $true
@@ -558,6 +635,13 @@ public class AccessorLikeMethods
     public void remove_Changed(System.Action value) { }
     public void raise_Changed() { }
 }
+
+public static class ConversionLikeMethods
+{
+    public static string op_Implicit(int value) => "";
+    public static int op_Explicit(string value) => 0;
+    public static long op_CheckedExplicit(byte value) => 0;
+}
 "@
         $inventory = Get-AssemblyApiMemberInventory `
             -AssemblyPath $apiInput.Dll
@@ -587,6 +671,9 @@ public class AccessorLikeMethods
             "M:Fixture.AccessorLikeMethods.add_Changed(System.Action)" = @("public", "Method", "Fixture.AccessorLikeMethods")
             "M:Fixture.AccessorLikeMethods.remove_Changed(System.Action)" = @("public", "Method", "Fixture.AccessorLikeMethods")
             "M:Fixture.AccessorLikeMethods.raise_Changed" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)" = @("public", "Method", "Fixture.ConversionLikeMethods")
             "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
             "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
             "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")
@@ -650,6 +737,29 @@ public class AccessorLikeMethods
             -PublicLinksPath $publicLinks `
             -AssemblyInventory $inventory `
             -VersionLabel "assembly fixture"
+
+        $apiIds = @(
+            Get-ApiLinkRecords -LinksPath $apiLinks |
+                ForEach-Object Id
+        )
+        foreach ($ordinaryConversionNameId in @(
+            "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)",
+            "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)",
+            "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)"
+        )) {
+            if ($ordinaryConversionNameId -notin $apiIds -or
+                @($apiIds | Where-Object {
+                    $_.StartsWith(
+                        "$ordinaryConversionNameId~",
+                        [System.StringComparison]::Ordinal
+                    )
+                }).Count -ne 0) {
+                throw (
+                    "Ordinary conversion-named method did not retain ID " +
+                    "$ordinaryConversionNameId."
+                )
+            }
+        }
 
         $formatterPage = Get-Content -Raw (
             Join-Path $apiOutput "Fixture.Formatter.md"
