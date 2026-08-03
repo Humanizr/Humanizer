@@ -6,6 +6,34 @@ public class SerbianGenderedOrdinalTests
     static readonly CultureInfo Sr = new("sr");
 
     [Theory]
+    [InlineData(1, "једна")]
+    [InlineData(2, "две")]
+    [InlineData(21, "двадесет једна")]
+    [InlineData(22, "двадесет две")]
+    public void ToWords_ProducesSerbianFeminineCardinals(long number, string expected)
+    {
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine, Sr));
+        Assert.Equal(expected, number.ToWords(WordForm.Normal, GrammaticalGender.Feminine, Sr));
+    }
+
+#if NET6_0_OR_GREATER
+    [Theory]
+    [InlineData("sr", 1, "пет и један")]
+    [InlineData("sr", 2, "пет и два")]
+    [InlineData("sr", 21, "пет и двадесет један")]
+    [InlineData("sr", 22, "пет и двадесет два")]
+    [InlineData("sr-Cyrl-RS", 22, "пет и двадесет два")]
+    public void ToClockNotation_KeepsSerbianMasculineConvention(string cultureName, int minutes, string expected)
+    {
+        Assert.Equal(
+            expected,
+            new TimeOnly(5, minutes).ToClockNotation(
+                ClockNotationRounding.None,
+                new(cultureName)));
+    }
+#endif
+
+    [Theory]
     [InlineData(1, GrammaticalGender.Masculine, "1.")]
     [InlineData(2, GrammaticalGender.Masculine, "2.")]
     [InlineData(23, GrammaticalGender.Masculine, "23.")]

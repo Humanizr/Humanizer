@@ -6,6 +6,26 @@ public class SlovenianGenderedOrdinalTests
     static readonly CultureInfo Sl = new("sl");
 
     [Theory]
+    [InlineData(2, "dve")]
+    [InlineData(22, "dvaindvajset")]
+    public void ToWords_ProducesSlovenianFeminineCardinals(long number, string expected)
+    {
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine, Sl));
+        Assert.Equal(expected, number.ToWords(WordForm.Normal, GrammaticalGender.Feminine, Sl));
+    }
+
+    [Fact]
+    public void ToWords_InvertedCompoundScaleCount_IsGenderInvariant()
+    {
+        const long number = 22_000_000_000;
+        const string expected = "dvaindvajset milijard";
+
+        Assert.Equal(expected, number.ToWords(Sl));
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine, Sl));
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Neuter, Sl));
+    }
+
+    [Theory]
     [InlineData(1, GrammaticalGender.Masculine, "1.")]
     [InlineData(2, GrammaticalGender.Masculine, "2.")]
     [InlineData(23, GrammaticalGender.Masculine, "23.")]
@@ -50,4 +70,18 @@ public class SlovenianGenderedOrdinalTests
     [InlineData(22000000, GrammaticalGender.Masculine, "dvaindvajsetmilijonti")]
     public void ToOrdinalWords_ProducesSlovenianWords(int number, GrammaticalGender gender, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(gender, WordForm.Normal, Sl));
+
+#if NET6_0_OR_GREATER
+    [Theory]
+    [InlineData(2, 2, "dve dve")]
+    [InlineData(22, 22, "dvaindvajset dvaindvajset")]
+    public void ToClockNotation_UsesFeminineHourAndMinuteValues(int hours, int minutes, string expected) =>
+        Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation());
+
+    [Fact]
+    public void ToClockNotation_RegionalCultureUsesSlovenianProfile() =>
+        Assert.Equal(
+            "dve dve",
+            new TimeOnly(2, 2).ToClockNotation(ClockNotationRounding.None, new("sl-SI")));
+#endif
 }

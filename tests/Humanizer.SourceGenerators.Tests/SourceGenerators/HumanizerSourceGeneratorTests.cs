@@ -107,6 +107,23 @@ surfaces:
     }
 
     [Fact]
+    public void TimeOnlyClockNotationProfilesRouteSouthSlavicAgreementByLocale()
+    {
+        var source = GetGeneratedSource("TimeOnlyToClockNotationProfileCatalog.g.cs");
+        var bosnianProfile = ExtractCacheClassBody(source, "bs_cache");
+        var croatianProfile = ExtractCacheClassBody(source, "hr_cache");
+        var slovenianProfile = ExtractCacheClassBody(source, "sl_cache");
+        var serbianProfile = ExtractCacheClassBody(source, "sr_cache");
+        var serbianLatinProfile = ExtractCacheClassBody(source, "sr_Latn_cache");
+
+        Assert.Contains("PhraseClockHourMode.H24, GrammaticalGender.Masculine, GrammaticalGender.Feminine", bosnianProfile, StringComparison.Ordinal);
+        Assert.Contains("PhraseClockHourMode.H24, GrammaticalGender.Masculine, GrammaticalGender.Feminine", croatianProfile, StringComparison.Ordinal);
+        Assert.Contains("PhraseClockHourMode.H24, GrammaticalGender.Feminine, GrammaticalGender.Feminine", slovenianProfile, StringComparison.Ordinal);
+        Assert.Contains("PhraseClockHourMode.H12, GrammaticalGender.Masculine, GrammaticalGender.Masculine", serbianProfile, StringComparison.Ordinal);
+        Assert.Contains("PhraseClockHourMode.H12, GrammaticalGender.Masculine, GrammaticalGender.Masculine", serbianLatinProfile, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void TimeOnlyClockNotationProfilesEmitLatvianAndMalteseMinuteAgreement()
     {
         var source = GetGeneratedSource("TimeOnlyToClockNotationProfileCatalog.g.cs");

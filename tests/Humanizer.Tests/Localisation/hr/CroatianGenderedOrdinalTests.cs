@@ -6,6 +6,17 @@ public class CroatianGenderedOrdinalTests
     static readonly CultureInfo Hr = new("hr");
 
     [Theory]
+    [InlineData(1, "jedna")]
+    [InlineData(2, "dvije")]
+    [InlineData(21, "dvadeset jedna")]
+    [InlineData(22, "dvadeset dvije")]
+    public void ToWords_ProducesCroatianFeminineCardinals(long number, string expected)
+    {
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine, Hr));
+        Assert.Equal(expected, number.ToWords(WordForm.Normal, GrammaticalGender.Feminine, Hr));
+    }
+
+    [Theory]
     [InlineData(1, GrammaticalGender.Masculine, "1.")]
     [InlineData(2, GrammaticalGender.Masculine, "2.")]
     [InlineData(23, GrammaticalGender.Masculine, "23.")]

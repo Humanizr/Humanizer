@@ -4,7 +4,7 @@ namespace Humanizer;
 /// Renders South Slavic cardinal numbers with generated scale-form detection and gendered unit
 /// overrides.
 /// </summary>
-class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
+class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
     readonly SouthSlavicCardinalNumberToWordsProfile profile = profile;
 
@@ -14,7 +14,7 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     }
 
     /// <inheritdoc/>
-    public override string Convert(long input)
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
         var magnitude = GetAbsoluteValue(input);
         if (magnitude > profile.MaximumValue && !(input == long.MinValue && profile.AllowLongMin))
@@ -35,14 +35,10 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
             parts.Add(profile.MinusWord);
         }
 
-        AppendPositive(parts, remaining, GrammaticalGender.Masculine);
+        AppendPositive(parts, remaining, gender);
 
         return string.Join(" ", parts);
     }
-
-    /// <inheritdoc/>
-    public override string ConvertToOrdinal(int number) =>
-        ConvertToOrdinal(number, GrammaticalGender.Masculine);
 
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -240,13 +236,16 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
             return;
         }
 
-        parts.Add((number, gender) switch
+        parts.Add(GetUnit(number, gender));
+    }
+
+    string GetUnit(int number, GrammaticalGender gender) =>
+        (number, gender) switch
         {
             (1, GrammaticalGender.Feminine) => profile.FeminineOne,
             (2, GrammaticalGender.Feminine) => profile.FeminineTwo,
             _ => profile.UnitsMap[number]
-        });
-    }
+        };
 
     /// <summary>
     /// Chooses the correct scale form for the requested grammatical-number detector.

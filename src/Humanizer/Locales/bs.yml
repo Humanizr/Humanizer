@@ -1268,6 +1268,7 @@ surfaces:
     hourSuffixSingular: 'sat'
     hourSuffixPaucal: 'sata'
     hourSuffixPlural: 'sati'
+    minuteGender: 'feminine'
     minuteSuffixSingular: 'minuta'
     minuteSuffixPaucal: 'minute'
     minuteSuffixPlural: 'minuta'
