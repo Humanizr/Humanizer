@@ -305,7 +305,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
         {
             if (TryGetValue(profile.CardinalMap, remainder, out var terminal))
             {
-                return TryAdd(value, terminal, out value);
+                return TryAdd(value, terminal, ref remainingWork, out value);
             }
 
             if (TryConsumeBareScale(remainder, out var bareScale, out var bareLength, out var bareRank))
@@ -345,7 +345,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
                     }
 
                     valueBeforeLastAtom = value;
-                    if (!TryAdd(value, bareScale, out value))
+                    if (!TryAdd(value, bareScale, ref remainingWork, out value))
                     {
                         return false;
                     }
@@ -392,7 +392,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
                 }
 
                 valueBeforeLastAtom = value;
-                if (!TryAdd(value, suffixValue, out value))
+                if (!TryAdd(value, suffixValue, ref remainingWork, out value))
                 {
                     value = default;
                     return false;
@@ -416,7 +416,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
                 }
 
                 valueBeforeLastAtom = value;
-                if (!TryAdd(value, scale.Value, out value))
+                if (!TryAdd(value, scale.Value, ref remainingWork, out value))
                 {
                     return false;
                 }
@@ -438,7 +438,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
             if (remainder.StartsWith(profile.HundredSingularToken, StringComparison.Ordinal))
             {
                 valueBeforeLastAtom = value;
-                if (!TryAdd(value, 100, out value))
+                if (!TryAdd(value, 100, ref remainingWork, out value))
                 {
                     return false;
                 }

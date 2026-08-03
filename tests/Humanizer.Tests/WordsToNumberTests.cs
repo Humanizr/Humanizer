@@ -760,6 +760,7 @@ public class WordsToNumberTests_Finnish
         Assert.Equal(100_000_000.1m, $"{scaleWords} pilkku yksi".ToDecimalNumber(CultureInfo.CurrentCulture));
         Assert.Equal(9_000_000_000_000_000_000, string.Concat(Enumerable.Repeat("triljoona", 9)).ToNumber(CultureInfo.CurrentCulture));
         AssertRejected(string.Concat(Enumerable.Repeat("triljoona", 10)));
+        AssertRejected(string.Concat(Enumerable.Repeat("triljoona", 20)));
         AssertRejected(string.Concat(Enumerable.Repeat("tuhatta", 130)));
         AssertRejected($"{scaleWords}mysteeri");
 
