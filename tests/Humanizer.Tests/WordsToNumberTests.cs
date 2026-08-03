@@ -872,6 +872,8 @@ public class WordsToNumberTests_Hungarian
         var scaleWords = string.Concat(Enumerable.Repeat("szaz", 32_000));
         AssertParsedBounded(scaleWords, 3_200_000);
         AssertParsedBounded(string.Join("-", Enumerable.Repeat("szaz", 32_000)), 3_200_000);
+        AssertParsedBounded(string.Concat(Enumerable.Repeat("ketszaz", 32_000)), 6_400_000);
+        Assert.Equal(9_000_000_000_000_000_000, string.Concat(Enumerable.Repeat("trillio", 9)).ToNumber(CultureInfo.CurrentCulture));
         AssertRejected(string.Concat(Enumerable.Repeat("trillio", 10)));
         AssertParsedBounded($"mínusz {scaleWords}", -3_200_000);
         AssertRejected(string.Concat(Enumerable.Repeat("tizen", 20_000)) + "egy");

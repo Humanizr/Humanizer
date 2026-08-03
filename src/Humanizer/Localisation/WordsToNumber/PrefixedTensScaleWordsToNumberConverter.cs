@@ -133,35 +133,22 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                 continue;
             }
 
-            if (index == 0)
+            var scaleRemainder = word;
+            var scaledValue = 0L;
+            var branchIsValid = true;
+
+            while ((index = scaleRemainder.IndexOf(scaleToken, StringComparison.Ordinal)) >= 0)
             {
-                var leadingRemainder = word;
-                var repeatedScaleValue = 0L;
-
-                do
+                if (remainingWork-- <= 0)
                 {
-                    if (remainingWork-- <= 0)
-                    {
-                        remainingWork = -1;
-                        value = default;
-                        return false;
-                    }
-
-                    try
-                    {
-                        repeatedScaleValue = checked(repeatedScaleValue + scale.Value);
-                    }
-                    catch (OverflowException)
-                    {
-                        value = default;
-                        return false;
-                    }
-
-                    leadingRemainder = leadingRemainder[scaleToken.Length..];
+                    remainingWork = -1;
+                    value = default;
+                    return false;
                 }
-                while (leadingRemainder.StartsWith(scaleToken, StringComparison.Ordinal));
 
-                if (!TryParseOptional(leadingRemainder, depth + 1, ref remainingWork, out var suffix))
+                var factorWords = scaleRemainder[..index];
+                var factor = 1L;
+                if (!factorWords.IsEmpty && !TryParseCardinal(factorWords, depth + 1, ref remainingWork, out factor))
                 {
                     if (remainingWork < 0)
                     {
@@ -169,37 +156,29 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                         return false;
                     }
 
-                    continue;
+                    branchIsValid = false;
+                    break;
                 }
 
                 try
                 {
-                    value = checked(repeatedScaleValue + suffix);
-                    return true;
+                    scaledValue = checked(scaledValue + checked(factor * scale.Value));
                 }
                 catch (OverflowException)
                 {
                     value = default;
                     return false;
                 }
+
+                scaleRemainder = scaleRemainder[(index + scaleToken.Length)..];
             }
 
-            var left = word[..index];
-            var right = word[(index + scaleToken.Length)..];
-            var factor = 1L;
-
-            if (!left.IsEmpty && !TryParseCardinal(left, depth + 1, ref remainingWork, out factor))
+            if (!branchIsValid)
             {
-                if (remainingWork < 0)
-                {
-                    value = default;
-                    return false;
-                }
-
                 continue;
             }
 
-            if (!TryParseOptional(right, depth + 1, ref remainingWork, out var remainder))
+            if (!TryParseOptional(scaleRemainder, depth + 1, ref remainingWork, out var remainder))
             {
                 if (remainingWork < 0)
                 {
@@ -212,7 +191,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
 
             try
             {
-                value = checked(checked(factor * scale.Value) + remainder);
+                value = checked(scaledValue + remainder);
                 return true;
             }
             catch (OverflowException)
