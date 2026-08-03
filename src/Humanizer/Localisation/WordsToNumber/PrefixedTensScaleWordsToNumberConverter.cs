@@ -95,6 +95,14 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         return TryParseCardinal(word.AsSpan(), 0, ref remainingWork, out value);
     }
 
+    /// <summary>
+    /// Recursively parses a cardinal phrase while bounding stack depth and shared parsing work.
+    /// </summary>
+    /// <param name="word">The remaining phrase to parse.</param>
+    /// <param name="depth">The current recursion depth.</param>
+    /// <param name="remainingWork">The shared parse-tree budget; a negative value stops alternative branches.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
+    /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
     {
         if (word.IsEmpty || depth >= MaximumParseDepth || remainingWork-- <= 0)
@@ -222,6 +230,8 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// Parses an optional remainder after a scale or prefix token.
     /// </summary>
     /// <param name="word">The remainder to parse.</param>
+    /// <param name="depth">The current recursion depth.</param>
+    /// <param name="remainingWork">The shared parse-tree budget.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseOptional(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
