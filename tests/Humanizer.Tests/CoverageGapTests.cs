@@ -1789,31 +1789,12 @@ public class CoverageGapTests
         Assert.Equal(string.Empty, unrecognizedWord);
 
         var compound = new CompoundScaleWordsToNumberConverter(CompoundScaleProfile);
-        object?[] emptyOptionalArguments = [string.Empty, 1L];
-        Assert.True(InvokePrivate<bool>(
-            typeof(CompoundScaleWordsToNumberConverter),
-            compound,
-            "TryParseOptional",
-            [typeof(string), typeof(long).MakeByRefType()],
-            emptyOptionalArguments));
-        Assert.Equal(0L, emptyOptionalArguments[1]);
-
-        object?[] optionalArguments = ["and five", 0L];
-        Assert.True(InvokePrivate<bool>(
-            typeof(CompoundScaleWordsToNumberConverter),
-            compound,
-            "TryParseOptional",
-            [typeof(string), typeof(long).MakeByRefType()],
-            optionalArguments));
-        Assert.Equal(5L, optionalArguments[1]);
-        object?[] gluedIgnoredArguments = ["andfive", 0L];
-        Assert.True(InvokePrivate<bool>(
-            typeof(CompoundScaleWordsToNumberConverter),
-            compound,
-            "TryParseOptional",
-            [typeof(string), typeof(long).MakeByRefType()],
-            gluedIgnoredArguments));
-        Assert.Equal(5L, gluedIgnoredArguments[1]);
+        Assert.True(compound.TryConvert("onethousand", out parsed));
+        Assert.Equal(1000, parsed);
+        Assert.True(compound.TryConvert("onethousandandfive", out parsed));
+        Assert.Equal(1005, parsed);
+        Assert.True(compound.TryConvert("one thousand and five", out parsed));
+        Assert.Equal(1005, parsed);
 
         var linking = new LinkingAffixWordsToNumberConverter(LinkingAffixProfile);
         Assert.True(linking.TryConvert("minus two", out parsed));
