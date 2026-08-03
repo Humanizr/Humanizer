@@ -134,12 +134,31 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     {
         var remainder = token.AsSpan();
         var prefixCount = 0L;
+        var hasMappedTerminal = false;
+        var terminalValue = default(long);
 
         while (remainder.StartsWith(profile.TeenPrefix, StringComparison.Ordinal) &&
                remainder.Length > profile.TeenPrefix.Length)
         {
             prefixCount++;
             remainder = remainder[profile.TeenPrefix.Length..];
+
+            foreach (var cardinal in profile.CardinalMap)
+            {
+                if (remainder.Length != cardinal.Key.Length || !remainder.SequenceEqual(cardinal.Key.AsSpan()))
+                {
+                    continue;
+                }
+
+                terminalValue = cardinal.Value;
+                hasMappedTerminal = true;
+                break;
+            }
+
+            if (hasMappedTerminal)
+            {
+                break;
+            }
         }
 
         if (prefixCount == 0)
@@ -148,7 +167,7 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
             return false;
         }
 
-        if (!TryParseCardinal(remainder.ToString(), out var terminalValue))
+        if (!hasMappedTerminal && !TryParseCardinal(remainder.ToString(), out terminalValue))
         {
             value = default;
             return false;
