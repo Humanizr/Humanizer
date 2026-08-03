@@ -381,9 +381,7 @@ sealed partial class InflectionBundle
         StringComparison comparison,
         InflectionUnicodeScripts detectedScripts)
     {
-        InflectionRule? selectedDirectRule = null;
-        var selectedDirectCandidate = default(ReverseCandidate);
-        var selectedDirectRuleCoversDetectedScripts = false;
+        var selectedDirect = default(DirectReverseSelection);
         var reverseCandidate = default(ReverseCandidate);
         var reverseCandidateCoversDetectedScripts = false;
         var hasReverseCandidate = false;
@@ -410,9 +408,7 @@ sealed partial class InflectionBundle
                         rule,
                         directCandidate,
                         comparison,
-                        ref selectedDirectRule,
-                        ref selectedDirectCandidate,
-                        ref selectedDirectRuleCoversDetectedScripts,
+                        ref selectedDirect,
                         detectedScripts))
                 {
                     return new(InflectionStatus.Ambiguous, input);
@@ -442,28 +438,28 @@ sealed partial class InflectionBundle
             }
         }
 
-        if (selectedDirectRule is not null)
+        if (selectedDirect.Rule is not null)
         {
             if (hasReverseCandidate &&
-                !selectedDirectCandidate.Equals(reverseCandidate, comparison))
+                !selectedDirect.Candidate.Equals(reverseCandidate, comparison))
             {
                 return new(InflectionStatus.Ambiguous, input);
             }
 
             if (hasReverseCandidate)
             {
-                selectedDirectRuleCoversDetectedScripts |=
+                selectedDirect.CoversDetectedScripts |=
                     reverseCandidateCoversDetectedScripts;
             }
 
-            if (!selectedDirectRuleCoversDetectedScripts)
+            if (!selectedDirect.CoversDetectedScripts)
             {
                 return new(InflectionStatus.Ambiguous, input);
             }
 
             return Project(
                 input,
-                selectedDirectCandidate.Materialize(),
+                selectedDirect.Candidate.Materialize(),
                 projection,
                 InflectionStatus.Productive);
         }
@@ -486,27 +482,25 @@ sealed partial class InflectionBundle
         InflectionRule rule,
         ReverseCandidate candidate,
         StringComparison comparison,
-        ref InflectionRule? selectedRule,
-        ref ReverseCandidate selectedCandidate,
-        ref bool selectedRuleCoversDetectedScripts,
+        ref DirectReverseSelection selection,
         InflectionUnicodeScripts detectedScripts)
     {
-        if (selectedRule is null)
+        if (selection.Rule is null)
         {
-            selectedRule = rule;
-            selectedCandidate = candidate;
-            selectedRuleCoversDetectedScripts = CoversDetectedScripts(
+            selection.Rule = rule;
+            selection.Candidate = candidate;
+            selection.CoversDetectedScripts = CoversDetectedScripts(
                 rule.Scripts,
                 detectedScripts);
             return true;
         }
 
-        var rank = CompareRuleRank(rule, selectedRule.Value);
+        var rank = CompareRuleRank(rule, selection.Rule.Value);
         if (rank > 0)
         {
-            selectedRule = rule;
-            selectedCandidate = candidate;
-            selectedRuleCoversDetectedScripts = CoversDetectedScripts(
+            selection.Rule = rule;
+            selection.Candidate = candidate;
+            selection.CoversDetectedScripts = CoversDetectedScripts(
                 rule.Scripts,
                 detectedScripts);
             return true;
@@ -517,12 +511,12 @@ sealed partial class InflectionBundle
             return true;
         }
 
-        if (!selectedCandidate.Equals(candidate, comparison))
+        if (!selection.Candidate.Equals(candidate, comparison))
         {
             return false;
         }
 
-        selectedRuleCoversDetectedScripts |= CoversDetectedScripts(
+        selection.CoversDetectedScripts |= CoversDetectedScripts(
             rule.Scripts,
             detectedScripts);
         return true;
@@ -997,6 +991,13 @@ sealed partial class InflectionBundle
 
             return first;
         }
+    }
+
+    struct DirectReverseSelection
+    {
+        public InflectionRule? Rule;
+        public ReverseCandidate Candidate;
+        public bool CoversDetectedScripts;
     }
 
     static bool Contains(
