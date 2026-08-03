@@ -865,25 +865,37 @@ public class WordsToNumberTests_Hungarian
     [Fact]
     public void TryToNumber_BoundsPrefixedScaleRecursion()
     {
-        var legitimateWords = string.Concat(Enumerable.Repeat("szaz", 129));
-        Assert.Equal(12900, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
-        Assert.Equal(12900.1m, $"{legitimateWords} egész egy".ToDecimalNumber(CultureInfo.CurrentCulture));
+        var legitimateWords = string.Concat(Enumerable.Repeat("szaz", 130));
+        Assert.Equal(13000, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(13000.1m, $"{legitimateWords} egész egy".ToDecimalNumber(CultureInfo.CurrentCulture));
 
         var scaleWords = string.Concat(Enumerable.Repeat("szaz", 32_000));
-        AssertRejected(scaleWords);
-        AssertRejected(string.Join("-", Enumerable.Repeat("szaz", 32_000)));
+        AssertParsedBounded(scaleWords, 3_200_000);
+        AssertParsedBounded(string.Join("-", Enumerable.Repeat("szaz", 32_000)), 3_200_000);
         AssertRejected(string.Concat(Enumerable.Repeat("trillio", 10)));
-        AssertRejected($"mínusz {scaleWords}");
+        AssertParsedBounded($"mínusz {scaleWords}", -3_200_000);
         AssertRejected(string.Concat(Enumerable.Repeat("tizen", 20_000)) + "egy");
         AssertRejected(string.Concat(Enumerable.Repeat("harminc", 15_000)) + "egy");
         AssertRejected(string.Concat(Enumerable.Repeat("tizen", 256)) + "egyszaz");
 
-        Assert.False($"{scaleWords} egész egy".TryToDecimalNumber(
+        Assert.True($"{scaleWords} egész egy".TryToDecimalNumber(
             out var parsedDecimal,
             CultureInfo.CurrentCulture,
             out var unrecognizedWord));
-        Assert.Equal(0, parsedDecimal);
-        Assert.NotNull(unrecognizedWord);
+        Assert.Equal(3_200_000.1m, parsedDecimal);
+        Assert.Null(unrecognizedWord);
+
+        void AssertParsedBounded(string words, long expected)
+        {
+            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+            Assert.True(words.TryToNumber(out var parsed, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+            Assert.Equal(expected, parsed);
+            Assert.Null(unrecognizedWord);
+            Assert.True(allocated < 8_000_000, $"Prefixed-scale parsing allocated {allocated:N0} bytes.");
+            Assert.Equal(expected, words.ToNumber(CultureInfo.CurrentCulture));
+        }
 
         void AssertRejected(string words)
         {

@@ -133,6 +133,57 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                 continue;
             }
 
+            if (index == 0)
+            {
+                var leadingRemainder = word;
+                var repeatedScaleValue = 0L;
+
+                do
+                {
+                    if (remainingWork-- <= 0)
+                    {
+                        remainingWork = -1;
+                        value = default;
+                        return false;
+                    }
+
+                    try
+                    {
+                        repeatedScaleValue = checked(repeatedScaleValue + scale.Value);
+                    }
+                    catch (OverflowException)
+                    {
+                        value = default;
+                        return false;
+                    }
+
+                    leadingRemainder = leadingRemainder[scaleToken.Length..];
+                }
+                while (leadingRemainder.StartsWith(scaleToken, StringComparison.Ordinal));
+
+                if (!TryParseOptional(leadingRemainder, depth + 1, ref remainingWork, out var suffix))
+                {
+                    if (remainingWork < 0)
+                    {
+                        value = default;
+                        return false;
+                    }
+
+                    continue;
+                }
+
+                try
+                {
+                    value = checked(repeatedScaleValue + suffix);
+                    return true;
+                }
+                catch (OverflowException)
+                {
+                    value = default;
+                    return false;
+                }
+            }
+
             var left = word[..index];
             var right = word[(index + scaleToken.Length)..];
             var factor = 1L;
