@@ -552,6 +552,8 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourGender: 'feminine'
+    minuteWordsMap:
+      1: 'minuta'
     min0: 'is-siegħa {hour}'
     defaultTemplate: 'is-siegħa {hour} u {minutes}'
 

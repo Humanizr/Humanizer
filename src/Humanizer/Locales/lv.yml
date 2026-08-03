@@ -1058,6 +1058,7 @@ surfaces:
   clock:
     engine: 'phrase-clock'
     hourMode: 'h24'
+    minuteGender: 'feminine'
     min0: '{hour}'
     min5: '{hour} un piecas'
     defaultTemplate: '{hour} un {minutes}'
