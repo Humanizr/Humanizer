@@ -4,7 +4,6 @@ namespace Humanizer.Tests.Localisation.sl;
 public class SlovenianGenderedOrdinalTests
 {
     static readonly CultureInfo Sl = new("sl");
-    static readonly CultureInfo SlSi = new("sl-SI");
 
     [Theory]
     [InlineData(2, "dve")]
@@ -83,6 +82,6 @@ public class SlovenianGenderedOrdinalTests
     public void ToClockNotation_RegionalCultureUsesSlovenianProfile() =>
         Assert.Equal(
             "dve dve",
-            new TimeOnly(2, 2).ToClockNotation(ClockNotationRounding.None, SlSi));
+            new TimeOnly(2, 2).ToClockNotation(ClockNotationRounding.None, new("sl-SI")));
 #endif
 }

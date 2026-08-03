@@ -4,7 +4,6 @@ namespace Humanizer.Tests.Localisation.bs;
 public class BosnianLocaleParityTests
 {
     static readonly CultureInfo Bs = new("bs");
-    static readonly CultureInfo BsLatnBa = new("bs-Latn-BA");
     static readonly int[] Pair = [1, 2];
     static readonly int[] Triple = [1, 2, 3];
 
@@ -171,7 +170,7 @@ public class BosnianLocaleParityTests
     {
         Assert.Equal(
             "pet sati i dvadeset dvije minute",
-            new TimeOnly(5, 22).ToClockNotation(ClockNotationRounding.None, BsLatnBa));
+            new TimeOnly(5, 22).ToClockNotation(ClockNotationRounding.None, new("bs-Latn-BA")));
     }
 #endif
 
