@@ -255,7 +255,8 @@ function Set-ApiCanonicalTypeRoutes {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
         [Parameter(Mandatory = $true)][string]$LinksPath,
-        [Parameter(Mandatory = $true)]$AssemblyTypes
+        [Parameter(Mandatory = $true)]$AssemblyTypes,
+        [Parameter(Mandatory = $true)]$ExpectedRecords
     )
 
     $lines = [System.Collections.Generic.List[string]]::new()
@@ -266,6 +267,25 @@ function Set-ApiCanonicalTypeRoutes {
         $parts = @($lines[$index] -split "\|", 3)
         if ($parts.Count -ne 3) {
             throw "Generated a malformed API link: $($lines[$index])"
+        }
+        if ($parts[0] -match '^M:.+\.op_CheckedExplicit\(.*\)$') {
+            $expectedPrefix = "$($parts[0])~"
+            $matches = @(
+                $ExpectedRecords |
+                    Where-Object {
+                        $_.Id.StartsWith(
+                            $expectedPrefix,
+                            [System.StringComparison]::Ordinal
+                        )
+                    }
+            )
+            if ($matches.Count -ne 1) {
+                throw (
+                    "Generated checked conversion ID $($parts[0]) matched " +
+                    "$($matches.Count) assembly-derived IDs."
+                )
+            }
+            $parts[0] = $matches[0].Id
         }
         $target = @($parts[1] -split "#", 2)
         if ($renames.ContainsKey($target[0])) {
@@ -721,7 +741,8 @@ function Invoke-ApiReferenceGeneration {
     Set-ApiCanonicalTypeRoutes `
         -OutputPath $OutputPath `
         -LinksPath $LinksPath `
-        -AssemblyTypes $expectedTypes
+        -AssemblyTypes $expectedTypes `
+        -ExpectedRecords $expectedRecords
     Add-ImplicitApiConstructors `
         -OutputPath $OutputPath `
         -LinksPath $LinksPath `

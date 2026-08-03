@@ -265,7 +265,10 @@ public static class ApiAccessReader
             var id = $"M:{typeId}.{memberName}";
             if (signature.ParameterTypes.Length > 0)
                 id += $"({string.Join(",", signature.ParameterTypes)})";
-            if (name is "op_Implicit" or "op_Explicit")
+            if (name is
+                "op_Implicit" or
+                "op_Explicit" or
+                "op_CheckedExplicit")
                 id += $"~{signature.ReturnType}";
 
             AddRecord(

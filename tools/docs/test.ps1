@@ -80,6 +80,58 @@ function New-ApiShapeInput {
     }
 }
 
+function New-CheckedConversionApiInput {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $name = "CheckedConversionFixture"
+    $projectRoot = Join-Path $Root $name
+    New-Item -ItemType Directory -Path $projectRoot | Out-Null
+    $projectPath = Join-Path $projectRoot "$name.csproj"
+    [System.IO.File]::WriteAllText(
+        $projectPath,
+        @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+</Project>
+"@,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        (Join-Path $projectRoot "Source.cs"),
+        @"
+namespace CheckedConversionFixture;
+
+public readonly struct CheckedToken
+{
+    public static explicit operator CheckedToken(int value) => default;
+    /// <summary>Converts an integer in a checked context.</summary>
+    public static explicit operator checked CheckedToken(int value) => default;
+}
+
+public class Generic<T> { }
+"@,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    Invoke-DocsCheckedCommand `
+        -FilePath "dotnet" `
+        -ArgumentList @(
+            "build", $projectPath,
+            "--configuration", "Release",
+            "--nologo",
+            "--verbosity", "quiet"
+        ) `
+        -WorkingDirectory $Root
+    $outputRoot = Join-Path $projectRoot "bin/Release/net8.0"
+    return [PSCustomObject]@{
+        Dll = Join-Path $outputRoot "$name.dll"
+        Xml = Join-Path $outputRoot "$name.xml"
+    }
+}
+
 function Assert-ApiPageCollision {
     param(
         [Parameter(Mandatory = $true)][string]$Root,
@@ -150,6 +202,42 @@ namespace CaseCollisionFixture;
 public class Same { }
 public class same { }
 "@
+
+        $checkedInput = New-CheckedConversionApiInput -Root $fixtureRoot
+        $checkedConversionId = (
+            "M:CheckedConversionFixture.CheckedToken." +
+            "op_CheckedExplicit(System.Int32)" +
+            "~CheckedConversionFixture.CheckedToken"
+        )
+        $compilerDocumentation = [xml](Get-Content -Raw $checkedInput.Xml)
+        $compilerDocumentationIds = @(
+            $compilerDocumentation.doc.members.member |
+                ForEach-Object name
+        )
+        if ($checkedConversionId -notin $compilerDocumentationIds) {
+            throw "The compiler omitted the checked conversion return type."
+        }
+        $checkedInventory = Get-AssemblyApiMemberInventory `
+            -AssemblyPath $checkedInput.Dll
+        if ($checkedConversionId -notin @($checkedInventory.Records.Id)) {
+            throw "The assembly inventory omitted the checked conversion return type."
+        }
+        $checkedOutput = Join-Path $fixtureRoot "checked"
+        $checkedLinks = Join-Path $fixtureRoot "checked-links.txt"
+        New-Item -ItemType Directory -Path $checkedOutput | Out-Null
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $checkedInput `
+            -OutputPath $checkedOutput `
+            -LinksPath $checkedLinks `
+            -AssemblyInventory $checkedInventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "checked conversion fixture" `
+            -ConfigurationFilePath (Join-Path $PSScriptRoot "api-reference-v4.json")
+        if ($checkedConversionId -notin @(
+            (Get-ApiLinkRecords -LinksPath $checkedLinks).Id
+        )) {
+            throw "Generated API links omitted the checked conversion return type."
+        }
 
         $apiInput = New-ApiShapeInput `
             -Root $fixtureRoot `
