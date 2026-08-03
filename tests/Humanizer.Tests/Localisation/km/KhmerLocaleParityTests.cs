@@ -188,6 +188,34 @@ public class KhmerLocaleParityTests
     }
 
     [Theory]
+    [InlineData("រយ", 100)]
+    [InlineData("ពាន់", 1000)]
+    [InlineData("ម៉ឺន", 10000)]
+    [InlineData("សែន", 100000)]
+    [InlineData("លាន", 1000000)]
+    public void WordsToNumber_BoundsRecursiveGluedScaleParsing(string suffix, long expected)
+    {
+        Assert.Equal(expected, $"មួយ{suffix}".ToNumber(km));
+        Assert.Equal(expected + 0.1m, $"មួយ{suffix} ចុច មួយ".ToDecimalNumber(km));
+
+        var words = "មួយ" + string.Concat(Enumerable.Repeat(suffix, 30));
+        Assert.False(words.TryToNumber(out var parsed, km, out var unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.NotNull(unrecognizedWord);
+
+        Assert.False($"ដក {words}".TryToNumber(out parsed, km, out unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.NotNull(unrecognizedWord);
+        Assert.False($"ទី{words}".TryToNumber(out parsed, km, out unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.NotNull(unrecognizedWord);
+
+        Assert.False($"{words} ចុច មួយ".TryToDecimalNumber(out var parsedDecimal, km, out unrecognizedWord));
+        Assert.Equal(0, parsedDecimal);
+        Assert.NotNull(unrecognizedWord);
+    }
+
+    [Theory]
     [MemberData(nameof(GluedScaleCountData))]
     public void WordsToNumber_ParsesAllProductiveGluedScaleCounts(string words, long expected)
     {
