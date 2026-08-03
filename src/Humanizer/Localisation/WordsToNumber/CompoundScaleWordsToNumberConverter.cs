@@ -118,21 +118,10 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
             // Multi-token phrases are reduced left to right. Small tokens accumulate into the
             // current group, while scale tokens flush the current group into the total using the
             // locale's scale-multiplier semantics.
-            while (!words.IsEmpty)
+            var tokenizer = new WordsToNumberTokenizer.Enumerator(words);
+            while (tokenizer.MoveNext())
             {
-                while (!words.IsEmpty && words[0] == ' ')
-                {
-                    words = words[1..];
-                }
-
-                if (words.IsEmpty)
-                {
-                    break;
-                }
-
-                var separatorIndex = words.IndexOf(' ');
-                var token = separatorIndex < 0 ? words : words[..separatorIndex];
-                words = separatorIndex < 0 ? [] : words[(separatorIndex + 1)..];
+                var token = tokenizer.Current;
 
                 if (token.SequenceEqual(profile.IgnoredToken))
                 {
