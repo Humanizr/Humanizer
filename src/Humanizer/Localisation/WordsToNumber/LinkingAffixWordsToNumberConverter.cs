@@ -133,7 +133,7 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     bool TryParseTeenToken(string token, out long value)
     {
         var remainder = token.AsSpan();
-        long prefixCount = 0;
+        var prefixCount = 0L;
 
         while (remainder.StartsWith(profile.TeenPrefix, StringComparison.Ordinal) &&
                remainder.Length > profile.TeenPrefix.Length)
@@ -154,7 +154,12 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
             return false;
         }
 
-        value = checked(checked(prefixCount * profile.TeenBaseValue) + terminalValue);
+        value = terminalValue;
+        for (var index = 0L; index < prefixCount; index++)
+        {
+            value = checked(profile.TeenBaseValue + value);
+        }
+
         return true;
     }
 

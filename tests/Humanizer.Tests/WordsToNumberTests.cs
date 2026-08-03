@@ -1638,6 +1638,26 @@ public class WordsToNumberTests_Filipino
 
         Assert.Equal("teenPrefix", exception.ParamName);
     }
+
+    [Fact]
+    public void LinkingAffixProfilePreservesCheckedTeenAggregationOrder()
+    {
+        var profile = new LinkingAffixWordsToNumberProfile(
+            new Dictionary<string, long>
+            {
+                ["end"] = -long.MaxValue
+            }.ToFrozenDictionary(),
+            "x",
+            long.MaxValue,
+            [],
+            [],
+            []);
+        var converter = new LinkingAffixWordsToNumberConverter(profile);
+
+        Assert.True(converter.TryConvert("xxend", out var parsed, out var unrecognizedWord));
+        Assert.Equal(long.MaxValue, parsed);
+        Assert.Null(unrecognizedWord);
+    }
 }
 
 [UseCulture("id-ID")]
