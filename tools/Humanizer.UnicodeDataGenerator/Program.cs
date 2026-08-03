@@ -2,6 +2,9 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
+CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+
 const int scalarCount = 0x110000;
 const uint allScripts = 0x03FFFFFF;
 
@@ -43,7 +46,12 @@ foreach (var input in inputs)
 var unicodeDataPath = Path.Combine(inputDirectory, "UnicodeData.txt");
 var categories = new string?[scalarCount];
 var uppercaseMappings = new Dictionary<int, int>();
-ReadUnicodeData(unicodeDataPath, categories, uppercaseMappings);
+var lowercaseMappings = new Dictionary<int, int>();
+ReadUnicodeData(
+    unicodeDataPath,
+    categories,
+    uppercaseMappings,
+    lowercaseMappings);
 
 var unicodeDataFile = Path.Combine(
     repositoryRoot,
@@ -51,12 +59,6 @@ var unicodeDataFile = Path.Combine(
     "Humanizer",
     "Inflections",
     "InflectionUnicodeData.cs");
-var engineFile = Path.Combine(
-    repositoryRoot,
-    "src",
-    "Humanizer",
-    "Inflections",
-    "InflectionEngine.cs");
 
 var unicodeSource = NormalizeLineEndings(File.ReadAllText(unicodeDataFile));
 unicodeSource = ReplaceGeneratedBlock(
@@ -71,6 +73,14 @@ unicodeSource = ReplaceGeneratedBlock(
         "SimpleCaseFold",
         ReadCaseFoldMappings(Path.Combine(inputDirectory, "CaseFolding.txt")),
         inputs["CaseFolding.txt"]));
+unicodeSource = ReplaceGeneratedBlock(
+    unicodeSource,
+    "generated-unicode-lowercase",
+    GenerateMappingBlock(
+        "UnicodeData.txt simple lowercase",
+        "SimpleLowercase",
+        lowercaseMappings,
+        inputs["UnicodeData.txt"]));
 unicodeSource = ReplaceGeneratedBlock(
     unicodeSource,
     "generated-unicode-uppercase",
@@ -91,20 +101,17 @@ unicodeSource = ReplaceGeneratedBlock(
         Path.Combine(inputDirectory, "ScriptExtensions.txt"),
         inputs["Scripts.txt"],
         inputs["ScriptExtensions.txt"]));
-
-var engineSource = NormalizeLineEndings(File.ReadAllText(engineFile));
-engineSource = ReplaceGeneratedBlock(
-    engineSource,
+unicodeSource = ReplaceGeneratedBlock(
+    unicodeSource,
     "generated-unicode-nfc-quick-check",
     GenerateNfcQuickCheckBlock(
         Path.Combine(inputDirectory, "DerivedNormalizationProps.txt"),
         inputs["DerivedNormalizationProps.txt"]));
 
 var unicodeChanged = CheckOrWrite(unicodeDataFile, unicodeSource, check);
-var engineChanged = CheckOrWrite(engineFile, engineSource, check);
 if (check)
 {
-    if (unicodeChanged || engineChanged)
+    if (unicodeChanged)
     {
         throw new InvalidOperationException(
             "Generated Unicode 16 inflection data is stale. Run the generator without --check.");
@@ -174,7 +181,8 @@ static string ReplaceGeneratedBlock(string source, string name, string generated
 static void ReadUnicodeData(
     string path,
     string?[] categories,
-    Dictionary<int, int> uppercaseMappings)
+    Dictionary<int, int> uppercaseMappings,
+    Dictionary<int, int> lowercaseMappings)
 {
     int? rangeStart = null;
     string? rangeCategory = null;
@@ -217,6 +225,11 @@ static void ReadUnicodeData(
         if (fields[12].Length != 0)
         {
             uppercaseMappings.Add(scalar, ParseHex(fields[12]));
+        }
+
+        if (fields[13].Length != 0)
+        {
+            lowercaseMappings.Add(scalar, ParseHex(fields[13]));
         }
     }
 
@@ -332,6 +345,7 @@ static string GenerateMappingBlock(
     var expected = identifier switch
     {
         "SimpleCaseFold" => (697, 1_484, "72486c276e049596d85cabcc3403a594412070c77dbb7ae7bff4e881d3742013"), // DevSkim: ignore DS173237
+        "SimpleLowercase" => (674, 1_460, "6745351649f4ae54d9e610efc7a31f54270e1a99b5b7382208ca01aeb3c01b3f"), // DevSkim: ignore DS173237
         "SimpleUppercase" => (690, 1_477, "c79db3da3d65ceaefddf07c370ccdc69f470769fb3933889be9d8841b836d085"), // DevSkim: ignore DS173237
         _ => throw new InvalidOperationException($"Unknown generated mapping '{identifier}'.")
     };
@@ -348,7 +362,7 @@ static string GenerateMappingBlock(
     }
 
     var builder = new StringBuilder();
-    if (identifier == "SimpleUppercase")
+    if (identifier is "SimpleLowercase" or "SimpleUppercase")
     {
         builder.AppendLine($"    // Unicode 16.0.0 {description} mappings, compressed");
         builder.AppendLine($"    // into {ranges.Count:N0} source ranges from {mappingCount:N0} mappings. Source SHA-256:");

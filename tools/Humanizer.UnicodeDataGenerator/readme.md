@@ -18,4 +18,10 @@ Verify that the checked-in tables are current without changing files with:
 dotnet run --project tools/Humanizer.UnicodeDataGenerator -- <ucd-directory> --check
 ```
 
+Verify deterministic output under both English and German process cultures with:
+
+```powershell
+./tools/Humanizer.UnicodeDataGenerator/verify-cultures.ps1 <ucd-directory>
+```
+
 The normal build and runtime never download Unicode data.

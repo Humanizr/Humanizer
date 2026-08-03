@@ -1267,31 +1267,50 @@ public static class CompiledUnicodeComparerHarness
     }
 
     [Fact]
-    public void Unicode16SimpleUppercaseMappingsMatchForEveryCodePoint()
+    public void Unicode16SimpleCaseMappingsMatchForEveryCodePoint()
     {
         var runtimeData = typeof(Humanizer.Configurator).Assembly
             .GetType("Humanizer.InflectionUnicodeData");
         Assert.NotNull(runtimeData);
+        var runtimeLower = runtimeData!
+            .GetMethod(
+                "ToLowerSimple",
+                BindingFlags.NonPublic | BindingFlags.Static)?
+            .CreateDelegate<Func<int, int>>();
         var runtimeUpper = runtimeData!
             .GetMethod(
                 "ToUpperSimple",
                 BindingFlags.NonPublic | BindingFlags.Static)?
             .CreateDelegate<Func<int, int>>();
+        Assert.NotNull(runtimeLower);
         Assert.NotNull(runtimeUpper);
 
+        using var lowerHash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
         using var upperHash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
         var hashBuffer = new byte[sizeof(int)];
-        var mappedCount = 0;
+        var lowercaseCount = 0;
+        var uppercaseCount = 0;
         for (var scalar = 0; scalar < 0x110000; scalar++)
         {
+            var lower = runtimeLower!(scalar);
             var upper = runtimeUpper!(scalar);
-            mappedCount += upper == scalar ? 0 : 1;
+            lowercaseCount += lower == scalar ? 0 : 1;
+            uppercaseCount += upper == scalar ? 0 : 1;
+            BinaryPrimitives.WriteInt32LittleEndian(hashBuffer, lower);
+            lowerHash.AppendData(hashBuffer);
             BinaryPrimitives.WriteInt32LittleEndian(hashBuffer, upper);
             upperHash.AppendData(hashBuffer);
         }
 
+        Assert.Equal(0xAB70, runtimeLower!(0x13A0));
+        Assert.Equal(0x1C8A, runtimeLower(0x1C89));
+        Assert.Equal(0x03C2, runtimeLower(0x03C2));
         Assert.Equal(0x1C89, runtimeUpper!(0x1C8A));
-        Assert.Equal(1_477, mappedCount);
+        Assert.Equal(1_460, lowercaseCount);
+        Assert.Equal(
+            "dc773c96a0faf9357e7244c4758295e2c7d4651104703758cf830a1fd6734299", // DevSkim: ignore DS173237
+            Convert.ToHexString(lowerHash.GetHashAndReset()).ToLowerInvariant());
+        Assert.Equal(1_477, uppercaseCount);
         Assert.Equal(
             "3433e4fd6ab0161feed0cc1b04680f905b21f742b47991e1b640b60f2fa78467", // DevSkim: ignore DS173237
             Convert.ToHexString(upperHash.GetHashAndReset()).ToLowerInvariant());

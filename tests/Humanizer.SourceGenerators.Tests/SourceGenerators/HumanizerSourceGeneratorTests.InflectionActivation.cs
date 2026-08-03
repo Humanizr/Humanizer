@@ -206,6 +206,23 @@ surfaces:
     }
 
     [Fact]
+    public void Unicode16AuthoredFormsUsePinnedLowercaseBeforeEmission()
+    {
+        var locale = CompleteInflectionFixtureFor("zz", "Cyrl")
+            .Replace("casing: 'exact'", "casing: 'lower-title-upper'", StringComparison.Ordinal)
+            .Replace("'а'", "'\u1C89а'", StringComparison.Ordinal)
+            .Replace("'б'", "'\u1C89б'", StringComparison.Ordinal);
+        var runResult = RunGeneratorIsolated(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Empty(runResult.Diagnostics);
+        var owner = GetGeneratedSource(runResult, "GeneratedInflection_zz.g.cs");
+        Assert.DoesNotContain("\u1C89", owner, StringComparison.Ordinal);
+        Assert.Contains("\u1C8Aа", owner, StringComparison.Ordinal);
+        Assert.Contains("\u1C8Aб", owner, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Unicode16AdjacentUnassignedScalarRemainsRejected()
     {
         var locale = CompleteInflectionFixtureFor("zz", "Cyrl").Replace(
