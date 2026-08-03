@@ -5,6 +5,8 @@ namespace Humanizer;
 /// </summary>
 internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
+    const int MaximumParseDepth = 128;
+
     readonly PrefixedTensScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
@@ -89,33 +91,116 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             return true;
         }
 
+        var remainingWork = (long)word.Length * 32L;
+        return TryParseCardinal(word.AsSpan(), 0, ref remainingWork, out value);
+    }
+
+    /// <summary>
+    /// Recursively parses a cardinal phrase while bounding stack depth and shared parsing work.
+    /// </summary>
+    /// <param name="word">The remaining phrase to parse.</param>
+    /// <param name="depth">The current recursion depth.</param>
+    /// <param name="remainingWork">The shared parse-tree budget; a negative value stops alternative branches.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
+    /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
+    bool TryParseCardinal(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
+    {
+        if (TryGetValue(profile.CardinalMap, word, out value))
+        {
+            return true;
+        }
+
+        if (word.IsEmpty || depth >= MaximumParseDepth || remainingWork-- <= 0)
+        {
+            if (!word.IsEmpty)
+            {
+                remainingWork = -1;
+            }
+
+            value = default;
+            return false;
+        }
+
         // Scale decomposition must run before prefix/tens handling because many glued compounds
         // contain tokens that look like smaller prefixes. Once a scale token matches, the left and
         // right fragments define the only valid recursive split for that branch.
         foreach (var scale in profile.Scales)
         {
-            var index = word.IndexOf(scale.Token, StringComparison.Ordinal);
+            var scaleToken = scale.Token.AsSpan();
+            var index = word.IndexOf(scaleToken, StringComparison.Ordinal);
             if (index < 0)
             {
                 continue;
             }
 
-            var left = word[..index];
-            var right = word[(index + scale.Token.Length)..];
-            var factor = 1L;
+            var scaleRemainder = word;
+            var scaledValue = 0L;
+            var branchIsValid = true;
+            var consumedScale = false;
 
-            if (!string.IsNullOrEmpty(left) && !TryParseCardinal(left, out factor))
+            while ((index = scaleRemainder.IndexOf(scaleToken, StringComparison.Ordinal)) >= 0)
+            {
+                if (remainingWork-- <= 0)
+                {
+                    remainingWork = -1;
+                    value = default;
+                    return false;
+                }
+
+                var factorWords = scaleRemainder[..index];
+                var factor = 1L;
+                if (!factorWords.IsEmpty && !TryParseCardinal(factorWords, depth + 1, ref remainingWork, out factor))
+                {
+                    if (remainingWork < 0)
+                    {
+                        value = default;
+                        return false;
+                    }
+
+                    branchIsValid = consumedScale;
+                    break;
+                }
+
+                try
+                {
+                    scaledValue = checked(scaledValue + checked(factor * scale.Value));
+                }
+                catch (OverflowException)
+                {
+                    value = default;
+                    return false;
+                }
+
+                scaleRemainder = scaleRemainder[(index + scaleToken.Length)..];
+                consumedScale = true;
+            }
+
+            if (!branchIsValid)
             {
                 continue;
             }
 
-            if (!TryParseOptional(right, out var remainder))
+            if (!TryParseOptional(scaleRemainder, depth + 1, ref remainingWork, out var remainder))
             {
+                if (remainingWork < 0)
+                {
+                    value = default;
+                    return false;
+                }
+
                 continue;
             }
 
-            value = checked(factor * scale.Value + remainder);
-            return true;
+            try
+            {
+                value = checked(scaledValue + remainder);
+                return true;
+            }
+            catch (OverflowException)
+            {
+                value = default;
+                return false;
+            }
         }
 
         // Prefix rules only accept 1..9 as their suffix because the prefix already contributes the
@@ -123,12 +208,19 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         // that the earlier branches are responsible for.
         foreach (var rule in profile.PrefixedTens)
         {
-            if (word.StartsWith(rule.Prefix, StringComparison.Ordinal) &&
-                TryParseCardinal(word[rule.Prefix.Length..], out var suffixValue) &&
+            var prefix = rule.Prefix.AsSpan();
+            if (word.StartsWith(prefix, StringComparison.Ordinal) &&
+                TryParseCardinal(word[prefix.Length..], depth + 1, ref remainingWork, out var suffixValue) &&
                 suffixValue is >= 1 and <= 9)
             {
                 value = rule.BaseValue + suffixValue;
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                return false;
             }
         }
 
@@ -136,22 +228,29 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         // prefixed forms have had their chance, the remaining valid suffix is a simple unit value.
         foreach (var tens in profile.TensMap)
         {
-            if (!word.StartsWith(tens.Key, StringComparison.Ordinal))
+            var tensToken = tens.Key.AsSpan();
+            if (!word.StartsWith(tensToken, StringComparison.Ordinal))
             {
                 continue;
             }
 
-            var remainder = word[tens.Key.Length..];
-            if (string.IsNullOrEmpty(remainder))
+            var remainder = word[tensToken.Length..];
+            if (remainder.IsEmpty)
             {
                 value = tens.Value;
                 return true;
             }
 
-            if (TryParseCardinal(remainder, out var unitValue) && unitValue is >= 1 and <= 9)
+            if (TryParseCardinal(remainder, depth + 1, ref remainingWork, out var unitValue) && unitValue is >= 1 and <= 9)
             {
                 value = tens.Value + unitValue;
                 return true;
+            }
+
+            if (remainingWork < 0)
+            {
+                value = default;
+                return false;
             }
         }
 
@@ -163,17 +262,34 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// Parses an optional remainder after a scale or prefix token.
     /// </summary>
     /// <param name="word">The remainder to parse.</param>
+    /// <param name="depth">The current recursion depth.</param>
+    /// <param name="remainingWork">The shared parse-tree budget.</param>
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string word, out long value)
+    bool TryParseOptional(ReadOnlySpan<char> word, int depth, ref long remainingWork, out long value)
     {
-        if (string.IsNullOrEmpty(word))
+        if (word.IsEmpty)
         {
             value = 0;
             return true;
         }
 
-        return TryParseCardinal(word, out value);
+        return TryParseCardinal(word, depth, ref remainingWork, out value);
+    }
+
+    static bool TryGetValue(FrozenDictionary<string, long> values, ReadOnlySpan<char> word, out long value)
+    {
+        foreach (var candidate in values)
+        {
+            if (word.Equals(candidate.Key.AsSpan(), StringComparison.Ordinal))
+            {
+                value = candidate.Value;
+                return true;
+            }
+        }
+
+        value = default;
+        return false;
     }
 
     /// <summary>
