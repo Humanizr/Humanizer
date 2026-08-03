@@ -4,6 +4,7 @@ namespace Humanizer.Tests.Localisation.bs;
 public class BosnianLocaleParityTests
 {
     static readonly CultureInfo Bs = new("bs");
+    static readonly CultureInfo BsLatnBa = new("bs-Latn-BA");
     static readonly int[] Pair = [1, 2];
     static readonly int[] Triple = [1, 2, 3];
 
@@ -69,6 +70,17 @@ public class BosnianLocaleParityTests
     public void NumberToWords_UsesBosnianCardinals(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Bs));
+    }
+
+    [Theory]
+    [InlineData(1, "jedna")]
+    [InlineData(2, "dvije")]
+    [InlineData(21, "dvadeset jedna")]
+    [InlineData(22, "dvadeset dvije")]
+    public void NumberToWords_UsesBosnianFeminineCardinals(long number, string expected)
+    {
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine, Bs));
+        Assert.Equal(expected, number.ToWords(WordForm.Normal, GrammaticalGender.Feminine, Bs));
     }
 
     [Theory]
@@ -145,9 +157,21 @@ public class BosnianLocaleParityTests
     [InlineData(13, 23, ClockNotationRounding.None, "trinaest sati i dvadeset tri minute")]
     [InlineData(13, 23, ClockNotationRounding.NearestFiveMinutes, "trinaest sati i dvadeset pet minuta")]
     [InlineData(1, 5, ClockNotationRounding.None, "jedan sat i pet minuta")]
+    [InlineData(5, 1, ClockNotationRounding.None, "pet sati i jedna minuta")]
+    [InlineData(2, 2, ClockNotationRounding.None, "dva sata i dvije minute")]
+    [InlineData(5, 21, ClockNotationRounding.None, "pet sati i dvadeset jedna minuta")]
+    [InlineData(2, 22, ClockNotationRounding.None, "dva sata i dvadeset dvije minute")]
     public void TimeOnlyToClockNotation_UsesBosnianClockPhrases(int hour, int minute, ClockNotationRounding rounding, string expected)
     {
         Assert.Equal(expected, new TimeOnly(hour, minute).ToClockNotation(rounding));
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_RegionalCultureUsesBosnianProfile()
+    {
+        Assert.Equal(
+            "pet sati i dvadeset dvije minute",
+            new TimeOnly(5, 22).ToClockNotation(ClockNotationRounding.None, BsLatnBa));
     }
 #endif
 
