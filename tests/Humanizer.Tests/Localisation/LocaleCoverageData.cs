@@ -692,7 +692,7 @@ static class LocaleCoverageData
         { "ku", new(13, 23, "یەک و بیست و پێنجی ئێوارە") },
         { "lb", new(13, 23, "fënnef vir hallwer zwou") },
         { "lt", new(13, 23, "trylika valandų dvidešimt penkios minutės") },
-        { "lv", new(13, 23, "trīspadsmit un divdesmit pieci") },
+        { "lv", new(13, 23, "trīspadsmit un divdesmit piecas") },
         { "ms", new(13, 23, "pukul satu dua puluh lima petang") },
         { "mt", new(13, 23, "is-siegħa waħda u ħamsa u għoxrin") },
         { "nb", new(13, 23, "tretten tjuefem") },

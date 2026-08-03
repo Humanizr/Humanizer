@@ -124,6 +124,17 @@ surfaces:
     }
 
     [Fact]
+    public void TimeOnlyClockNotationProfilesEmitLatvianAndMalteseMinuteAgreement()
+    {
+        var source = GetGeneratedSource("TimeOnlyToClockNotationProfileCatalog.g.cs");
+        var latvianProfile = ExtractCacheClassBody(source, "lv_cache");
+        var malteseProfile = ExtractCacheClassBody(source, "mt_cache");
+
+        Assert.Contains("GrammaticalGender.Feminine", latvianProfile, StringComparison.Ordinal);
+        Assert.Contains("new string[] { \"\", \"minuta\" }", malteseProfile, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void ChildClockMinuteWordsOverrideEquivalentParentNumericKeys()
     {
         const string parentLocale = """
