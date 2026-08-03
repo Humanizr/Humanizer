@@ -5600,5 +5600,2328 @@
         }
       }
     }
-  ]
+  ],
+  "acceptedCultureInventory": {
+    "source": "the generated accepted-culture catalog used by Humanizer\u0027s built-in registries",
+    "acceptedNameCount": 579,
+    "localeProfileOwnerCount": 102,
+    "mappings": [
+      {
+        "name": "af",
+        "localeProfileOwner": "af"
+      },
+      {
+        "name": "af-NA",
+        "localeProfileOwner": "af"
+      },
+      {
+        "name": "af-ZA",
+        "localeProfileOwner": "af"
+      },
+      {
+        "name": "am",
+        "localeProfileOwner": "am"
+      },
+      {
+        "name": "am-ET",
+        "localeProfileOwner": "am"
+      },
+      {
+        "name": "ar",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-001",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-AE",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-BH",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-DJ",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-DZ",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-EG",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-EH",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-ER",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-IL",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-IQ",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-JO",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-KM",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-KW",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-LB",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-LY",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-MA",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-MR",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-OM",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-PS",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-QA",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-SA",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-SD",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-SO",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-SS",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-SY",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-TD",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-TN",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "ar-YE",
+        "localeProfileOwner": "ar"
+      },
+      {
+        "name": "as",
+        "localeProfileOwner": "as"
+      },
+      {
+        "name": "as-IN",
+        "localeProfileOwner": "as"
+      },
+      {
+        "name": "az",
+        "localeProfileOwner": "az"
+      },
+      {
+        "name": "az-Cyrl",
+        "localeProfileOwner": "az"
+      },
+      {
+        "name": "az-Cyrl-AZ",
+        "localeProfileOwner": "az"
+      },
+      {
+        "name": "az-Latn",
+        "localeProfileOwner": "az"
+      },
+      {
+        "name": "az-Latn-AZ",
+        "localeProfileOwner": "az"
+      },
+      {
+        "name": "be",
+        "localeProfileOwner": "be"
+      },
+      {
+        "name": "be-BY",
+        "localeProfileOwner": "be"
+      },
+      {
+        "name": "bg",
+        "localeProfileOwner": "bg"
+      },
+      {
+        "name": "bg-BG",
+        "localeProfileOwner": "bg"
+      },
+      {
+        "name": "bn",
+        "localeProfileOwner": "bn"
+      },
+      {
+        "name": "bn-BD",
+        "localeProfileOwner": "bn"
+      },
+      {
+        "name": "bn-IN",
+        "localeProfileOwner": "bn"
+      },
+      {
+        "name": "bs",
+        "localeProfileOwner": "bs"
+      },
+      {
+        "name": "bs-Cyrl",
+        "localeProfileOwner": "bs"
+      },
+      {
+        "name": "bs-Cyrl-BA",
+        "localeProfileOwner": "bs"
+      },
+      {
+        "name": "bs-Latn",
+        "localeProfileOwner": "bs"
+      },
+      {
+        "name": "bs-Latn-BA",
+        "localeProfileOwner": "bs"
+      },
+      {
+        "name": "ca",
+        "localeProfileOwner": "ca"
+      },
+      {
+        "name": "ca-AD",
+        "localeProfileOwner": "ca"
+      },
+      {
+        "name": "ca-ES",
+        "localeProfileOwner": "ca"
+      },
+      {
+        "name": "ca-ES-valencia",
+        "localeProfileOwner": "ca"
+      },
+      {
+        "name": "ca-FR",
+        "localeProfileOwner": "ca"
+      },
+      {
+        "name": "ca-IT",
+        "localeProfileOwner": "ca"
+      },
+      {
+        "name": "cs",
+        "localeProfileOwner": "cs"
+      },
+      {
+        "name": "cs-CZ",
+        "localeProfileOwner": "cs"
+      },
+      {
+        "name": "cy",
+        "localeProfileOwner": "cy"
+      },
+      {
+        "name": "cy-GB",
+        "localeProfileOwner": "cy"
+      },
+      {
+        "name": "da",
+        "localeProfileOwner": "da"
+      },
+      {
+        "name": "da-DK",
+        "localeProfileOwner": "da"
+      },
+      {
+        "name": "da-GL",
+        "localeProfileOwner": "da"
+      },
+      {
+        "name": "de",
+        "localeProfileOwner": "de"
+      },
+      {
+        "name": "de-AT",
+        "localeProfileOwner": "de"
+      },
+      {
+        "name": "de-BE",
+        "localeProfileOwner": "de"
+      },
+      {
+        "name": "de-CH",
+        "localeProfileOwner": "de-CH"
+      },
+      {
+        "name": "de-DE",
+        "localeProfileOwner": "de"
+      },
+      {
+        "name": "de-IT",
+        "localeProfileOwner": "de"
+      },
+      {
+        "name": "de-LI",
+        "localeProfileOwner": "de-LI"
+      },
+      {
+        "name": "de-LU",
+        "localeProfileOwner": "de"
+      },
+      {
+        "name": "el",
+        "localeProfileOwner": "el"
+      },
+      {
+        "name": "el-CY",
+        "localeProfileOwner": "el"
+      },
+      {
+        "name": "el-GR",
+        "localeProfileOwner": "el"
+      },
+      {
+        "name": "en",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-001",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-029",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-150",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AL",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AT",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-AU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BB",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BD",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BN",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BW",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-BZ",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CA",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CC",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CH",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CL",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CN",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CO",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CV",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CX",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CY",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-CZ",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-DE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-DG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-DK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-DM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-EE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-ER",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-ES",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-FI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-FJ",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-FK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-FM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-FR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GB",
+        "localeProfileOwner": "en-GB"
+      },
+      {
+        "name": "en-GD",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GH",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-GY",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-HK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-HU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-ID",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-IE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-IL",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-IM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-IN",
+        "localeProfileOwner": "en-IN"
+      },
+      {
+        "name": "en-IO",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-IT",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-JE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-JM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-JP",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-KE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-KI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-KN",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-KR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-KY",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-LC",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-LR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-LS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-LT",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-LV",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MH",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MO",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MP",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MT",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MV",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MW",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MX",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-MY",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NA",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NF",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NL",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NO",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-NZ",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PH",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PL",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PN",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PT",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-PW",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-RO",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-RU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-RW",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SA",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SB",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SC",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SD",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SE",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SH",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SL",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SX",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-SZ",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TC",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TH",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TK",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TO",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TR",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TT",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TV",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TW",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-TZ",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-UA",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-UG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-UM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-US",
+        "localeProfileOwner": "en-US"
+      },
+      {
+        "name": "en-US-POSIX",
+        "localeProfileOwner": "en-US"
+      },
+      {
+        "name": "en-VC",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-VG",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-VI",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-VU",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-WS",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-ZA",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-ZM",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "en-ZW",
+        "localeProfileOwner": "en"
+      },
+      {
+        "name": "es",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-003",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-419",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-AG",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-AR",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BB",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BM",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BO",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BQ",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BR",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BS",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-BZ",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-CA",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-CL",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-CO",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-CR",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-CU",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-CW",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-DM",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-DO",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-EA",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-EC",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-ES",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-GD",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-GQ",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-GT",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-GY",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-HN",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-HT",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-IC",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-KN",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-KY",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-LC",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-MX",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-NI",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-PA",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-PE",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-PH",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-PR",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-PY",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-SV",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-TC",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-TT",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-US",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-UY",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-VC",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-VE",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-VG",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "es-VI",
+        "localeProfileOwner": "es"
+      },
+      {
+        "name": "et",
+        "localeProfileOwner": "et"
+      },
+      {
+        "name": "et-EE",
+        "localeProfileOwner": "et"
+      },
+      {
+        "name": "eu",
+        "localeProfileOwner": "eu"
+      },
+      {
+        "name": "eu-ES",
+        "localeProfileOwner": "eu"
+      },
+      {
+        "name": "fa",
+        "localeProfileOwner": "fa"
+      },
+      {
+        "name": "fa-AF",
+        "localeProfileOwner": "fa"
+      },
+      {
+        "name": "fa-IR",
+        "localeProfileOwner": "fa"
+      },
+      {
+        "name": "fi",
+        "localeProfileOwner": "fi"
+      },
+      {
+        "name": "fi-FI",
+        "localeProfileOwner": "fi"
+      },
+      {
+        "name": "fil",
+        "localeProfileOwner": "fil"
+      },
+      {
+        "name": "fil-PH",
+        "localeProfileOwner": "fil"
+      },
+      {
+        "name": "fr",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-029",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-BE",
+        "localeProfileOwner": "fr-BE"
+      },
+      {
+        "name": "fr-BF",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-BI",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-BJ",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-BL",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-CA",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-CD",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-CF",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-CG",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-CH",
+        "localeProfileOwner": "fr-CH"
+      },
+      {
+        "name": "fr-CI",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-CM",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-DJ",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-DZ",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-FR",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-GA",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-GF",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-GN",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-GP",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-GQ",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-HT",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-KM",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-LU",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MA",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MC",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MF",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MG",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-ML",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MQ",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MR",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-MU",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-NC",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-NE",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-PF",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-PM",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-RE",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-RW",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-SC",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-SN",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-SY",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-TD",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-TG",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-TN",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-VU",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-WF",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "fr-YT",
+        "localeProfileOwner": "fr"
+      },
+      {
+        "name": "ga",
+        "localeProfileOwner": "ga"
+      },
+      {
+        "name": "ga-GB",
+        "localeProfileOwner": "ga"
+      },
+      {
+        "name": "ga-IE",
+        "localeProfileOwner": "ga"
+      },
+      {
+        "name": "gl",
+        "localeProfileOwner": "gl"
+      },
+      {
+        "name": "gl-ES",
+        "localeProfileOwner": "gl"
+      },
+      {
+        "name": "gu",
+        "localeProfileOwner": "gu"
+      },
+      {
+        "name": "gu-IN",
+        "localeProfileOwner": "gu"
+      },
+      {
+        "name": "ha",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-GH",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-Latn",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-Latn-GH",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-Latn-NE",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-Latn-NG",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-NE",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "ha-NG",
+        "localeProfileOwner": "ha"
+      },
+      {
+        "name": "he",
+        "localeProfileOwner": "he"
+      },
+      {
+        "name": "he-IL",
+        "localeProfileOwner": "he"
+      },
+      {
+        "name": "hi",
+        "localeProfileOwner": "hi"
+      },
+      {
+        "name": "hi-IN",
+        "localeProfileOwner": "hi"
+      },
+      {
+        "name": "hi-Latn",
+        "localeProfileOwner": "hi"
+      },
+      {
+        "name": "hi-Latn-IN",
+        "localeProfileOwner": "hi"
+      },
+      {
+        "name": "hr",
+        "localeProfileOwner": "hr"
+      },
+      {
+        "name": "hr-BA",
+        "localeProfileOwner": "hr"
+      },
+      {
+        "name": "hr-HR",
+        "localeProfileOwner": "hr"
+      },
+      {
+        "name": "hu",
+        "localeProfileOwner": "hu"
+      },
+      {
+        "name": "hu-HU",
+        "localeProfileOwner": "hu"
+      },
+      {
+        "name": "hy",
+        "localeProfileOwner": "hy"
+      },
+      {
+        "name": "hy-AM",
+        "localeProfileOwner": "hy"
+      },
+      {
+        "name": "id",
+        "localeProfileOwner": "id"
+      },
+      {
+        "name": "id-ID",
+        "localeProfileOwner": "id"
+      },
+      {
+        "name": "ig",
+        "localeProfileOwner": "ig"
+      },
+      {
+        "name": "ig-NG",
+        "localeProfileOwner": "ig"
+      },
+      {
+        "name": "is",
+        "localeProfileOwner": "is"
+      },
+      {
+        "name": "is-IS",
+        "localeProfileOwner": "is"
+      },
+      {
+        "name": "it",
+        "localeProfileOwner": "it"
+      },
+      {
+        "name": "it-CH",
+        "localeProfileOwner": "it"
+      },
+      {
+        "name": "it-IT",
+        "localeProfileOwner": "it"
+      },
+      {
+        "name": "it-SM",
+        "localeProfileOwner": "it"
+      },
+      {
+        "name": "it-VA",
+        "localeProfileOwner": "it"
+      },
+      {
+        "name": "ja",
+        "localeProfileOwner": "ja"
+      },
+      {
+        "name": "ja-JP",
+        "localeProfileOwner": "ja"
+      },
+      {
+        "name": "ka",
+        "localeProfileOwner": "ka"
+      },
+      {
+        "name": "ka-GE",
+        "localeProfileOwner": "ka"
+      },
+      {
+        "name": "kk",
+        "localeProfileOwner": "kk"
+      },
+      {
+        "name": "kk-Arab",
+        "localeProfileOwner": "kk"
+      },
+      {
+        "name": "kk-Arab-CN",
+        "localeProfileOwner": "kk"
+      },
+      {
+        "name": "kk-Cyrl",
+        "localeProfileOwner": "kk"
+      },
+      {
+        "name": "kk-Cyrl-KZ",
+        "localeProfileOwner": "kk"
+      },
+      {
+        "name": "kk-KZ",
+        "localeProfileOwner": "kk"
+      },
+      {
+        "name": "km",
+        "localeProfileOwner": "km"
+      },
+      {
+        "name": "km-KH",
+        "localeProfileOwner": "km"
+      },
+      {
+        "name": "kn",
+        "localeProfileOwner": "kn"
+      },
+      {
+        "name": "kn-IN",
+        "localeProfileOwner": "kn"
+      },
+      {
+        "name": "ko",
+        "localeProfileOwner": "ko"
+      },
+      {
+        "name": "ko-CN",
+        "localeProfileOwner": "ko"
+      },
+      {
+        "name": "ko-KP",
+        "localeProfileOwner": "ko"
+      },
+      {
+        "name": "ko-KR",
+        "localeProfileOwner": "ko"
+      },
+      {
+        "name": "kok",
+        "localeProfileOwner": "kok"
+      },
+      {
+        "name": "kok-Deva",
+        "localeProfileOwner": "kok"
+      },
+      {
+        "name": "kok-Deva-IN",
+        "localeProfileOwner": "kok"
+      },
+      {
+        "name": "kok-IN",
+        "localeProfileOwner": "kok"
+      },
+      {
+        "name": "kok-Latn",
+        "localeProfileOwner": "kok"
+      },
+      {
+        "name": "kok-Latn-IN",
+        "localeProfileOwner": "kok"
+      },
+      {
+        "name": "ku",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Arab",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Arab-IQ",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Arab-IR",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Latn",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Latn-IQ",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Latn-SY",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-Latn-TR",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ku-TR",
+        "localeProfileOwner": "ku"
+      },
+      {
+        "name": "ky",
+        "localeProfileOwner": "ky"
+      },
+      {
+        "name": "ky-KG",
+        "localeProfileOwner": "ky"
+      },
+      {
+        "name": "lb",
+        "localeProfileOwner": "lb"
+      },
+      {
+        "name": "lb-LU",
+        "localeProfileOwner": "lb"
+      },
+      {
+        "name": "lo",
+        "localeProfileOwner": "lo"
+      },
+      {
+        "name": "lo-LA",
+        "localeProfileOwner": "lo"
+      },
+      {
+        "name": "lt",
+        "localeProfileOwner": "lt"
+      },
+      {
+        "name": "lt-LT",
+        "localeProfileOwner": "lt"
+      },
+      {
+        "name": "lv",
+        "localeProfileOwner": "lv"
+      },
+      {
+        "name": "lv-LV",
+        "localeProfileOwner": "lv"
+      },
+      {
+        "name": "mk",
+        "localeProfileOwner": "mk"
+      },
+      {
+        "name": "mk-MK",
+        "localeProfileOwner": "mk"
+      },
+      {
+        "name": "ml",
+        "localeProfileOwner": "ml"
+      },
+      {
+        "name": "ml-IN",
+        "localeProfileOwner": "ml"
+      },
+      {
+        "name": "mn",
+        "localeProfileOwner": "mn"
+      },
+      {
+        "name": "mn-Cyrl",
+        "localeProfileOwner": "mn"
+      },
+      {
+        "name": "mn-MN",
+        "localeProfileOwner": "mn"
+      },
+      {
+        "name": "mn-Mong",
+        "localeProfileOwner": "mn"
+      },
+      {
+        "name": "mn-Mong-CN",
+        "localeProfileOwner": "mn"
+      },
+      {
+        "name": "mn-Mong-MN",
+        "localeProfileOwner": "mn"
+      },
+      {
+        "name": "mr",
+        "localeProfileOwner": "mr"
+      },
+      {
+        "name": "mr-IN",
+        "localeProfileOwner": "mr"
+      },
+      {
+        "name": "ms",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-Arab",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-Arab-BN",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-Arab-MY",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-BN",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-ID",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-MY",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "ms-SG",
+        "localeProfileOwner": "ms"
+      },
+      {
+        "name": "mt",
+        "localeProfileOwner": "mt"
+      },
+      {
+        "name": "mt-MT",
+        "localeProfileOwner": "mt"
+      },
+      {
+        "name": "my",
+        "localeProfileOwner": "my"
+      },
+      {
+        "name": "my-MM",
+        "localeProfileOwner": "my"
+      },
+      {
+        "name": "nb",
+        "localeProfileOwner": "nb"
+      },
+      {
+        "name": "nb-NO",
+        "localeProfileOwner": "nb"
+      },
+      {
+        "name": "nb-SJ",
+        "localeProfileOwner": "nb"
+      },
+      {
+        "name": "ne",
+        "localeProfileOwner": "ne"
+      },
+      {
+        "name": "ne-IN",
+        "localeProfileOwner": "ne"
+      },
+      {
+        "name": "ne-NP",
+        "localeProfileOwner": "ne"
+      },
+      {
+        "name": "nl",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-AW",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-BE",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-BQ",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-CW",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-NL",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-SR",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nl-SX",
+        "localeProfileOwner": "nl"
+      },
+      {
+        "name": "nn",
+        "localeProfileOwner": "nn"
+      },
+      {
+        "name": "nn-NO",
+        "localeProfileOwner": "nn"
+      },
+      {
+        "name": "or",
+        "localeProfileOwner": "or"
+      },
+      {
+        "name": "or-IN",
+        "localeProfileOwner": "or"
+      },
+      {
+        "name": "pa",
+        "localeProfileOwner": "pa"
+      },
+      {
+        "name": "pa-Arab",
+        "localeProfileOwner": "pa-Arab"
+      },
+      {
+        "name": "pa-Arab-PK",
+        "localeProfileOwner": "pa-Arab"
+      },
+      {
+        "name": "pa-Aran-PK",
+        "localeProfileOwner": "pa-Arab"
+      },
+      {
+        "name": "pa-Guru",
+        "localeProfileOwner": "pa"
+      },
+      {
+        "name": "pa-Guru-IN",
+        "localeProfileOwner": "pa"
+      },
+      {
+        "name": "pa-IN",
+        "localeProfileOwner": "pa"
+      },
+      {
+        "name": "pl",
+        "localeProfileOwner": "pl"
+      },
+      {
+        "name": "pl-PL",
+        "localeProfileOwner": "pl"
+      },
+      {
+        "name": "ps",
+        "localeProfileOwner": "ps"
+      },
+      {
+        "name": "ps-AF",
+        "localeProfileOwner": "ps"
+      },
+      {
+        "name": "ps-PK",
+        "localeProfileOwner": "ps"
+      },
+      {
+        "name": "pt",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-AO",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-BR",
+        "localeProfileOwner": "pt-BR"
+      },
+      {
+        "name": "pt-CH",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-CV",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-FR",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-GQ",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-GW",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-LU",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-MO",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-MZ",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-PT",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-ST",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "pt-TL",
+        "localeProfileOwner": "pt"
+      },
+      {
+        "name": "ro",
+        "localeProfileOwner": "ro"
+      },
+      {
+        "name": "ro-MD",
+        "localeProfileOwner": "ro"
+      },
+      {
+        "name": "ro-RO",
+        "localeProfileOwner": "ro"
+      },
+      {
+        "name": "ru",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "ru-BY",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "ru-KG",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "ru-KZ",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "ru-MD",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "ru-RU",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "ru-UA",
+        "localeProfileOwner": "ru"
+      },
+      {
+        "name": "si",
+        "localeProfileOwner": "si"
+      },
+      {
+        "name": "si-LK",
+        "localeProfileOwner": "si"
+      },
+      {
+        "name": "sk",
+        "localeProfileOwner": "sk"
+      },
+      {
+        "name": "sk-SK",
+        "localeProfileOwner": "sk"
+      },
+      {
+        "name": "sl",
+        "localeProfileOwner": "sl"
+      },
+      {
+        "name": "sl-SI",
+        "localeProfileOwner": "sl"
+      },
+      {
+        "name": "so",
+        "localeProfileOwner": "so"
+      },
+      {
+        "name": "so-DJ",
+        "localeProfileOwner": "so"
+      },
+      {
+        "name": "so-ET",
+        "localeProfileOwner": "so"
+      },
+      {
+        "name": "so-KE",
+        "localeProfileOwner": "so"
+      },
+      {
+        "name": "so-SO",
+        "localeProfileOwner": "so"
+      },
+      {
+        "name": "sq",
+        "localeProfileOwner": "sq"
+      },
+      {
+        "name": "sq-AL",
+        "localeProfileOwner": "sq"
+      },
+      {
+        "name": "sq-MK",
+        "localeProfileOwner": "sq"
+      },
+      {
+        "name": "sq-XK",
+        "localeProfileOwner": "sq"
+      },
+      {
+        "name": "sr",
+        "localeProfileOwner": "sr"
+      },
+      {
+        "name": "sr-Cyrl",
+        "localeProfileOwner": "sr"
+      },
+      {
+        "name": "sr-Cyrl-BA",
+        "localeProfileOwner": "sr"
+      },
+      {
+        "name": "sr-Cyrl-ME",
+        "localeProfileOwner": "sr"
+      },
+      {
+        "name": "sr-Cyrl-RS",
+        "localeProfileOwner": "sr"
+      },
+      {
+        "name": "sr-Cyrl-XK",
+        "localeProfileOwner": "sr"
+      },
+      {
+        "name": "sr-Latn",
+        "localeProfileOwner": "sr-Latn"
+      },
+      {
+        "name": "sr-Latn-BA",
+        "localeProfileOwner": "sr-Latn"
+      },
+      {
+        "name": "sr-Latn-ME",
+        "localeProfileOwner": "sr-Latn"
+      },
+      {
+        "name": "sr-Latn-RS",
+        "localeProfileOwner": "sr-Latn"
+      },
+      {
+        "name": "sr-Latn-XK",
+        "localeProfileOwner": "sr-Latn"
+      },
+      {
+        "name": "sv",
+        "localeProfileOwner": "sv"
+      },
+      {
+        "name": "sv-AX",
+        "localeProfileOwner": "sv"
+      },
+      {
+        "name": "sv-FI",
+        "localeProfileOwner": "sv"
+      },
+      {
+        "name": "sv-SE",
+        "localeProfileOwner": "sv"
+      },
+      {
+        "name": "sw",
+        "localeProfileOwner": "sw"
+      },
+      {
+        "name": "sw-CD",
+        "localeProfileOwner": "sw"
+      },
+      {
+        "name": "sw-KE",
+        "localeProfileOwner": "sw"
+      },
+      {
+        "name": "sw-TZ",
+        "localeProfileOwner": "sw"
+      },
+      {
+        "name": "sw-UG",
+        "localeProfileOwner": "sw"
+      },
+      {
+        "name": "ta",
+        "localeProfileOwner": "ta"
+      },
+      {
+        "name": "ta-IN",
+        "localeProfileOwner": "ta"
+      },
+      {
+        "name": "ta-LK",
+        "localeProfileOwner": "ta"
+      },
+      {
+        "name": "ta-MY",
+        "localeProfileOwner": "ta"
+      },
+      {
+        "name": "ta-SG",
+        "localeProfileOwner": "ta"
+      },
+      {
+        "name": "te",
+        "localeProfileOwner": "te"
+      },
+      {
+        "name": "te-IN",
+        "localeProfileOwner": "te"
+      },
+      {
+        "name": "th",
+        "localeProfileOwner": "th"
+      },
+      {
+        "name": "th-TH",
+        "localeProfileOwner": "th"
+      },
+      {
+        "name": "tk",
+        "localeProfileOwner": "tk"
+      },
+      {
+        "name": "tk-TM",
+        "localeProfileOwner": "tk"
+      },
+      {
+        "name": "tr",
+        "localeProfileOwner": "tr"
+      },
+      {
+        "name": "tr-CY",
+        "localeProfileOwner": "tr"
+      },
+      {
+        "name": "tr-TR",
+        "localeProfileOwner": "tr"
+      },
+      {
+        "name": "uk",
+        "localeProfileOwner": "uk"
+      },
+      {
+        "name": "uk-UA",
+        "localeProfileOwner": "uk"
+      },
+      {
+        "name": "ur",
+        "localeProfileOwner": "ur"
+      },
+      {
+        "name": "ur-Arab",
+        "localeProfileOwner": "ur"
+      },
+      {
+        "name": "ur-Arab-IN",
+        "localeProfileOwner": "ur"
+      },
+      {
+        "name": "ur-Arab-PK",
+        "localeProfileOwner": "ur"
+      },
+      {
+        "name": "ur-Aran-IN",
+        "localeProfileOwner": "ur"
+      },
+      {
+        "name": "ur-Aran-PK",
+        "localeProfileOwner": "ur"
+      },
+      {
+        "name": "ur-IN",
+        "localeProfileOwner": "ur-IN"
+      },
+      {
+        "name": "ur-PK",
+        "localeProfileOwner": "ur-PK"
+      },
+      {
+        "name": "uz-Cyrl-UZ",
+        "localeProfileOwner": "uz-Cyrl-UZ"
+      },
+      {
+        "name": "uz-Latn-UZ",
+        "localeProfileOwner": "uz-Latn-UZ"
+      },
+      {
+        "name": "vi",
+        "localeProfileOwner": "vi"
+      },
+      {
+        "name": "vi-VN",
+        "localeProfileOwner": "vi"
+      },
+      {
+        "name": "yo",
+        "localeProfileOwner": "yo"
+      },
+      {
+        "name": "yo-BJ",
+        "localeProfileOwner": "yo"
+      },
+      {
+        "name": "yo-NG",
+        "localeProfileOwner": "yo"
+      },
+      {
+        "name": "zh-CHS",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-CHT",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-CN",
+        "localeProfileOwner": "zh-CN"
+      },
+      {
+        "name": "zh-HK",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hans",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hans-CN",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hans-HK",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hans-JP",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hans-MO",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hans-MY",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hans-SG",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-Hant",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hant-CN",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hant-HK",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hant-JP",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hant-MO",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hant-MY",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-Hant-TW",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-MO",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zh-SG",
+        "localeProfileOwner": "zh-Hans"
+      },
+      {
+        "name": "zh-TW",
+        "localeProfileOwner": "zh-Hant"
+      },
+      {
+        "name": "zu-ZA",
+        "localeProfileOwner": "zu-ZA"
+      }
+    ]
+  }
 }

@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Humanizer;
 
 /// <summary>
@@ -41,25 +43,49 @@ enum CardinalPluralRuleKind
 /// </summary>
 static class CardinalPluralRules
 {
-    public static CardinalPluralCategory Select(CardinalPluralRuleKind kind, decimal quantity)
+    public static CardinalPluralCategory Select(CardinalPluralRuleKind kind, decimal quantity) =>
+        Select(kind, CardinalPluralOperands.Create(quantity));
+
+    public static CardinalPluralCategory Select(CardinalPluralRuleKind kind, long quantity) =>
+        Select(kind, CardinalPluralOperands.Create(quantity));
+
+    public static bool TrySelect(
+        CardinalPluralRuleKind kind,
+        double quantity,
+        out CardinalPluralCategory category)
     {
         var value = CardinalPluralOperands.Create(quantity);
-        var n = value.N;
-        var i = value.I;
+        if (!value.IsSupported)
+        {
+            category = CardinalPluralCategory.Other;
+            return false;
+        }
+
+        category = Select(kind, value);
+        return true;
+    }
+
+    static CardinalPluralCategory Select(CardinalPluralRuleKind kind, CardinalPluralOperands value)
+    {
+        var i = value.IntegerDigits;
         var v = value.V;
-        var f = value.F;
-        var t = value.T;
+        var f = value.FractionDigits;
+        var t = value.FractionDigitsWithoutTrailingZeros;
 
         return kind switch
         {
             CardinalPluralRuleKind.Other => CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.AmharicLike => i == 0 || n == 1 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Armenian => i is 0 or 1 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.AmharicLike => i == 0 || NEquals(value, 1) ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.Armenian => i == 0 || i == 1 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
             CardinalPluralRuleKind.EnglishLike => i == 1 && v == 0 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Sinhala => n is 0 or 1 || i == 0 && f == 1 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Punjabi => IsIntegerInRange(n, 0, 1) ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.One => n == 1 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Danish => n == 1 || t != 0 && i is 0 or 1 ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.Sinhala => NEquals(value, 0) || NEquals(value, 1) || i == 0 && f == 1
+                ? CardinalPluralCategory.One
+                : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.Punjabi => NIsInRange(value, 0, 1) ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.One => NEquals(value, 1) ? CardinalPluralCategory.One : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.Danish => NEquals(value, 1) || !t.IsZero && (i == 0 || i == 1)
+                ? CardinalPluralCategory.One
+                : CardinalPluralCategory.Other,
             CardinalPluralRuleKind.Icelandic => t == 0 && i % 10 == 1 && i % 100 != 11 ||
                                                 t % 10 == 1 && t % 100 != 11
                 ? CardinalPluralCategory.One
@@ -73,16 +99,16 @@ static class CardinalPluralRules
             CardinalPluralRuleKind.Hebrew => SelectHebrew(value),
             CardinalPluralRuleKind.Romanian => i == 1 && v == 0
                 ? CardinalPluralCategory.One
-                : v != 0 || n == 0 || n != 1 && IsIntegerInRange(n % 100, 1, 19)
+                : v != 0 || NEquals(value, 0) || !NEquals(value, 1) && NModuloIsInRange(value, 100, 1, 19)
                     ? CardinalPluralCategory.Few
                     : CardinalPluralCategory.Other,
             CardinalPluralRuleKind.SouthSlavic => SelectSouthSlavic(value),
-            CardinalPluralRuleKind.French => i is 0 or 1
+            CardinalPluralRuleKind.French => i == 0 || i == 1
                 ? CardinalPluralCategory.One
                 : IsExactNonZeroMillion(i, v)
                     ? CardinalPluralCategory.Many
                     : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Portuguese => i is >= 0 and <= 1
+            CardinalPluralRuleKind.Portuguese => i == 0 || i == 1
                 ? CardinalPluralCategory.One
                 : IsExactNonZeroMillion(i, v)
                     ? CardinalPluralCategory.Many
@@ -92,7 +118,7 @@ static class CardinalPluralRules
                 : IsExactNonZeroMillion(i, v)
                     ? CardinalPluralCategory.Many
                     : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Spanish => n == 1
+            CardinalPluralRuleKind.Spanish => NEquals(value, 1)
                 ? CardinalPluralCategory.One
                 : IsExactNonZeroMillion(i, v)
                     ? CardinalPluralCategory.Many
@@ -100,28 +126,32 @@ static class CardinalPluralRules
             CardinalPluralRuleKind.Slovenian => SelectSlovenian(value),
             CardinalPluralRuleKind.CzechSlovak => i == 1 && v == 0
                 ? CardinalPluralCategory.One
-                : i is >= 2 and <= 4 && v == 0
+                : IsIntegerInRange(i, 2, 4) && v == 0
                     ? CardinalPluralCategory.Few
                     : v != 0
                         ? CardinalPluralCategory.Many
                         : CardinalPluralCategory.Other,
             CardinalPluralRuleKind.Polish => SelectPolish(value),
-            CardinalPluralRuleKind.Belarusian => SelectBelarusian(n),
+            CardinalPluralRuleKind.Belarusian => SelectBelarusian(value),
             CardinalPluralRuleKind.Lithuanian => SelectLithuanian(value),
             CardinalPluralRuleKind.RussianUkrainian => SelectRussianUkrainian(value),
-            CardinalPluralRuleKind.Maltese => SelectMaltese(n),
-            CardinalPluralRuleKind.Irish => SelectIrish(n),
-            CardinalPluralRuleKind.Arabic => SelectArabic(n),
-            CardinalPluralRuleKind.Welsh => SelectWelsh(n),
+            CardinalPluralRuleKind.Maltese => SelectMaltese(value),
+            CardinalPluralRuleKind.Irish => SelectIrish(value),
+            CardinalPluralRuleKind.Arabic => SelectArabic(value),
+            CardinalPluralRuleKind.Welsh => SelectWelsh(value),
             _ => throw new ArgumentOutOfRangeException(nameof(kind))
         };
     }
 
     static CardinalPluralCategory SelectFilipino(CardinalPluralOperands value)
     {
-        var integerIsOneToThree = value.V == 0 && value.I is 1 or 2 or 3;
-        var integerEndsInSupportedDigit = value.V == 0 && value.I % 10 is not (4 or 6 or 9);
-        var fractionEndsInSupportedDigit = value.V != 0 && value.F % 10 is not (4 or 6 or 9);
+        var integer = value.IntegerDigits;
+        var fraction = value.FractionDigits;
+        var integerEnding = integer % 10;
+        var fractionEnding = fraction % 10;
+        var integerIsOneToThree = value.V == 0 && IsIntegerInRange(integer, 1, 3);
+        var integerEndsInSupportedDigit = value.V == 0 && integerEnding != 4 && integerEnding != 6 && integerEnding != 9;
+        var fractionEndsInSupportedDigit = value.V != 0 && fractionEnding != 4 && fractionEnding != 6 && fractionEnding != 9;
         return integerIsOneToThree || integerEndsInSupportedDigit || fractionEndsInSupportedDigit
             ? CardinalPluralCategory.One
             : CardinalPluralCategory.Other;
@@ -129,35 +159,34 @@ static class CardinalPluralRules
 
     static CardinalPluralCategory SelectHebrew(CardinalPluralOperands value)
     {
-        if (value.I == 1 && value.V == 0)
+        if (value.IntegerDigits == 1 && value.V == 0)
         {
             return CardinalPluralCategory.One;
         }
 
-        if (value.I == 0 && value.V != 0)
+        if (value.IntegerDigits == 0 && value.V != 0)
         {
             return CardinalPluralCategory.One;
         }
 
-        return value.I == 2 && value.V == 0
+        return value.IntegerDigits == 2 && value.V == 0
             ? CardinalPluralCategory.Two
             : CardinalPluralCategory.Other;
     }
 
     static CardinalPluralCategory SelectLatvian(CardinalPluralOperands value)
     {
-        var n = value.N;
         var v = value.V;
-        var f = value.F;
-        var wholeEndsInZero = n % 10 == 0;
-        var wholeEndsInElevenToNineteen = IsIntegerInRange(n % 100, 11, 19);
-        var twoDigitFractionEndsInElevenToNineteen = v == 2 && f % 100 is >= 11 and <= 19;
+        var f = value.FractionDigits;
+        var wholeEndsInZero = NModuloEquals(value, 10, 0);
+        var wholeEndsInElevenToNineteen = NModuloIsInRange(value, 100, 11, 19);
+        var twoDigitFractionEndsInElevenToNineteen = v == 2 && IsIntegerInRange(f % 100, 11, 19);
         if (wholeEndsInZero || wholeEndsInElevenToNineteen || twoDigitFractionEndsInElevenToNineteen)
         {
             return CardinalPluralCategory.Zero;
         }
 
-        var wholeEndsInOneButNotEleven = n % 10 == 1 && n % 100 != 11;
+        var wholeEndsInOneButNotEleven = NModuloEquals(value, 10, 1) && !NModuloEquals(value, 100, 11);
         var twoDigitFractionEndsInOneButNotEleven = v == 2 && f % 10 == 1 && f % 100 != 11;
         var otherFractionEndsInOne = v != 2 && f % 10 == 1;
         return wholeEndsInOneButNotEleven ||
@@ -169,23 +198,23 @@ static class CardinalPluralRules
 
     static CardinalPluralCategory SelectSouthSlavic(CardinalPluralOperands value)
     {
-        var i = value.I;
+        var i = value.IntegerDigits;
         var v = value.V;
-        var f = value.F;
+        var f = value.FractionDigits;
         if (v == 0 && i % 10 == 1 && i % 100 != 11 || f % 10 == 1 && f % 100 != 11)
         {
             return CardinalPluralCategory.One;
         }
 
-        return v == 0 && i % 10 is >= 2 and <= 4 && i % 100 is not (>= 12 and <= 14) ||
-               f % 10 is >= 2 and <= 4 && f % 100 is not (>= 12 and <= 14)
+        return v == 0 && IsIntegerInRange(i % 10, 2, 4) && !IsIntegerInRange(i % 100, 12, 14) ||
+               IsIntegerInRange(f % 10, 2, 4) && !IsIntegerInRange(f % 100, 12, 14)
             ? CardinalPluralCategory.Few
             : CardinalPluralCategory.Other;
     }
 
     static CardinalPluralCategory SelectSlovenian(CardinalPluralOperands value)
     {
-        var i = value.I;
+        var i = value.IntegerDigits;
         var v = value.V;
         if (v == 0 && i % 100 == 1)
         {
@@ -197,21 +226,21 @@ static class CardinalPluralRules
             return CardinalPluralCategory.Two;
         }
 
-        return v == 0 && i % 100 is 3 or 4 || v != 0
+        return v == 0 && (i % 100 == 3 || i % 100 == 4) || v != 0
             ? CardinalPluralCategory.Few
             : CardinalPluralCategory.Other;
     }
 
     static CardinalPluralCategory SelectPolish(CardinalPluralOperands value)
     {
-        var i = value.I;
+        var i = value.IntegerDigits;
         var v = value.V;
         if (i == 1 && v == 0)
         {
             return CardinalPluralCategory.One;
         }
 
-        if (v == 0 && i % 10 is >= 2 and <= 4 && i % 100 is not (>= 12 and <= 14))
+        if (v == 0 && IsIntegerInRange(i % 10, 2, 4) && !IsIntegerInRange(i % 100, 12, 14))
         {
             return CardinalPluralCategory.Few;
         }
@@ -221,64 +250,65 @@ static class CardinalPluralRules
             return CardinalPluralCategory.Other;
         }
 
-        if (i != 1 && i % 10 is >= 0 and <= 1)
+        if (i != 1 && IsIntegerInRange(i % 10, 0, 1))
         {
             return CardinalPluralCategory.Many;
         }
 
-        if (i % 10 is >= 5 and <= 9)
+        if (IsIntegerInRange(i % 10, 5, 9))
         {
             return CardinalPluralCategory.Many;
         }
 
-        return i % 100 is >= 12 and <= 14
+        return IsIntegerInRange(i % 100, 12, 14)
             ? CardinalPluralCategory.Many
             : CardinalPluralCategory.Other;
     }
 
-    static CardinalPluralCategory SelectBelarusian(decimal n)
+    static CardinalPluralCategory SelectBelarusian(CardinalPluralOperands value)
     {
-        if (n % 10 == 1 && n % 100 != 11)
+        if (NModuloEquals(value, 10, 1) && !NModuloEquals(value, 100, 11))
         {
             return CardinalPluralCategory.One;
         }
 
-        if (IsIntegerInRange(n % 10, 2, 4) && !IsIntegerInRange(n % 100, 12, 14))
+        if (NModuloIsInRange(value, 10, 2, 4) && !NModuloIsInRange(value, 100, 12, 14))
         {
             return CardinalPluralCategory.Few;
         }
 
-        return n % 10 == 0 || IsIntegerInRange(n % 10, 5, 9) || IsIntegerInRange(n % 100, 11, 14)
+        return NModuloEquals(value, 10, 0) ||
+               NModuloIsInRange(value, 10, 5, 9) ||
+               NModuloIsInRange(value, 100, 11, 14)
             ? CardinalPluralCategory.Many
             : CardinalPluralCategory.Other;
     }
 
     static CardinalPluralCategory SelectLithuanian(CardinalPluralOperands value)
     {
-        var n = value.N;
-        if (n % 10 == 1 && !IsIntegerInRange(n % 100, 11, 19))
+        if (NModuloEquals(value, 10, 1) && !NModuloIsInRange(value, 100, 11, 19))
         {
             return CardinalPluralCategory.One;
         }
 
-        if (IsIntegerInRange(n % 10, 2, 9) && !IsIntegerInRange(n % 100, 11, 19))
+        if (NModuloIsInRange(value, 10, 2, 9) && !NModuloIsInRange(value, 100, 11, 19))
         {
             return CardinalPluralCategory.Few;
         }
 
-        return value.F != 0 ? CardinalPluralCategory.Many : CardinalPluralCategory.Other;
+        return !value.FractionDigits.IsZero ? CardinalPluralCategory.Many : CardinalPluralCategory.Other;
     }
 
     static CardinalPluralCategory SelectRussianUkrainian(CardinalPluralOperands value)
     {
-        var i = value.I;
+        var i = value.IntegerDigits;
         var v = value.V;
         if (v == 0 && i % 10 == 1 && i % 100 != 11)
         {
             return CardinalPluralCategory.One;
         }
 
-        if (v == 0 && i % 10 is >= 2 and <= 4 && i % 100 is not (>= 12 and <= 14))
+        if (v == 0 && IsIntegerInRange(i % 10, 2, 4) && !IsIntegerInRange(i % 100, 12, 14))
         {
             return CardinalPluralCategory.Few;
         }
@@ -293,67 +323,85 @@ static class CardinalPluralRules
             return CardinalPluralCategory.Many;
         }
 
-        if (i % 10 is >= 5 and <= 9)
+        if (IsIntegerInRange(i % 10, 5, 9))
         {
             return CardinalPluralCategory.Many;
         }
 
-        return i % 100 is >= 11 and <= 14
+        return IsIntegerInRange(i % 100, 11, 14)
             ? CardinalPluralCategory.Many
             : CardinalPluralCategory.Other;
     }
 
-    static CardinalPluralCategory SelectMaltese(decimal n) =>
-        n == 1
+    static CardinalPluralCategory SelectMaltese(CardinalPluralOperands value) =>
+        NEquals(value, 1)
             ? CardinalPluralCategory.One
-            : n == 2
+            : NEquals(value, 2)
                 ? CardinalPluralCategory.Two
-                : n == 0 || IsIntegerInRange(n % 100, 3, 10)
+                : NEquals(value, 0) || NModuloIsInRange(value, 100, 3, 10)
                     ? CardinalPluralCategory.Few
-                    : IsIntegerInRange(n % 100, 11, 19)
+                    : NModuloIsInRange(value, 100, 11, 19)
                         ? CardinalPluralCategory.Many
                         : CardinalPluralCategory.Other;
 
-    static CardinalPluralCategory SelectIrish(decimal n) =>
-        n == 1
+    static CardinalPluralCategory SelectIrish(CardinalPluralOperands value) =>
+        NEquals(value, 1)
             ? CardinalPluralCategory.One
-            : n == 2
+            : NEquals(value, 2)
                 ? CardinalPluralCategory.Two
-                : IsIntegerInRange(n, 3, 6)
+                : NIsInRange(value, 3, 6)
                     ? CardinalPluralCategory.Few
-                    : IsIntegerInRange(n, 7, 10)
+                    : NIsInRange(value, 7, 10)
                         ? CardinalPluralCategory.Many
                         : CardinalPluralCategory.Other;
 
-    static CardinalPluralCategory SelectArabic(decimal n) =>
-        n == 0
+    static CardinalPluralCategory SelectArabic(CardinalPluralOperands value) =>
+        NEquals(value, 0)
             ? CardinalPluralCategory.Zero
-            : n == 1
+            : NEquals(value, 1)
                 ? CardinalPluralCategory.One
-                : n == 2
+                : NEquals(value, 2)
                     ? CardinalPluralCategory.Two
-                    : IsIntegerInRange(n % 100, 3, 10)
+                    : NModuloIsInRange(value, 100, 3, 10)
                         ? CardinalPluralCategory.Few
-                        : IsIntegerInRange(n % 100, 11, 99)
+                        : NModuloIsInRange(value, 100, 11, 99)
                             ? CardinalPluralCategory.Many
                             : CardinalPluralCategory.Other;
 
-    static CardinalPluralCategory SelectWelsh(decimal n) =>
-        n == 0
+    static CardinalPluralCategory SelectWelsh(CardinalPluralOperands value) =>
+        NEquals(value, 0)
             ? CardinalPluralCategory.Zero
-            : n == 1
+            : NEquals(value, 1)
                 ? CardinalPluralCategory.One
-                : n == 2
+                : NEquals(value, 2)
                     ? CardinalPluralCategory.Two
-                    : n == 3
+                    : NEquals(value, 3)
                         ? CardinalPluralCategory.Few
-                        : n == 6
+                        : NEquals(value, 6)
                             ? CardinalPluralCategory.Many
                             : CardinalPluralCategory.Other;
 
-    static bool IsExactNonZeroMillion(decimal i, int v) =>
+    static bool IsExactNonZeroMillion(BigInteger i, int v) =>
         i != 0 && i % 1_000_000 == 0 && v == 0;
 
-    static bool IsIntegerInRange(decimal value, int minimum, int maximum) =>
-        decimal.Truncate(value) == value && value >= minimum && value <= maximum;
+    static bool NEquals(CardinalPluralOperands value, int expected) =>
+        value.FractionDigits.IsZero && value.IntegerDigits == expected;
+
+    static bool NIsInRange(CardinalPluralOperands value, int minimum, int maximum) =>
+        value.FractionDigits.IsZero &&
+        IsIntegerInRange(value.IntegerDigits, minimum, maximum);
+
+    static bool NModuloEquals(CardinalPluralOperands value, int divisor, int expected) =>
+        value.FractionDigits.IsZero && value.IntegerDigits % divisor == expected;
+
+    static bool NModuloIsInRange(
+        CardinalPluralOperands value,
+        int divisor,
+        int minimum,
+        int maximum) =>
+        value.FractionDigits.IsZero &&
+        IsIntegerInRange(value.IntegerDigits % divisor, minimum, maximum);
+
+    static bool IsIntegerInRange(BigInteger value, int minimum, int maximum) =>
+        value >= minimum && value <= maximum;
 }

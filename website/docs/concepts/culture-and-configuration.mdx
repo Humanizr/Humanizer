@@ -11,8 +11,10 @@ example: illustrative
 
 When an API accepts a `CultureInfo`, Humanizer uses it directly. Otherwise the
 API uses `CurrentCulture` or `CurrentUICulture`. A localiser registry then
-walks the selected culture's named parent chain and uses its default only when
-no registered parent matches.
+resolves the selected culture's exact name through Humanizer's generated
+accepted-culture map and uses its default when no mapping matches. A
+caller-created `LocaliserRegistry<TLocaliser>` still walks its registered parent
+chain.
 
 Per-call culture is the narrowest and safest choice. Ambient culture is useful
 when a request pipeline already establishes it. Global `Configurator` changes

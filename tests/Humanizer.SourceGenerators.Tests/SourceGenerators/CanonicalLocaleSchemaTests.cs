@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 using Xunit;
 
@@ -919,6 +921,28 @@ surfaces:
     }
 
     [Fact]
+    public void SemanticDiffDetectsInflectionQuantitySelectorChanges()
+    {
+        var leftCatalog = CreateCatalog(("zz", """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    capability: 'display-by-category'
+"""));
+        var rightCatalog = CreateCatalog(("zz", """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    capability: 'display-by-category'
+    quantitySelector: 'exact-numeric-singleton'
+"""));
+
+        Assert.NotEmpty(HumanizerSourceGenerator.LocaleSemanticDiff.Compare(leftCatalog.Locales, rightCatalog.Locales));
+    }
+
+    [Fact]
     public void InflectionInheritanceRequiresTheSameLanguageSubtag()
     {
         var catalog = CreateCatalog(
@@ -1677,6 +1701,247 @@ surfaces:
         Enumerable.Range(1, 12)
             .Select(index => $"{prefix}{index}")
             .ToArray();
+
+    [Fact]
+    public void AcceptedCultureCompatibilityIsTheFrozenPlatformUnionPlusEveryCanonicalRoot()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+
+        Assert.Empty(catalog.Diagnostics);
+        Assert.Equal(579, catalog.AcceptedCultures.Length);
+        Assert.Equal(
+            "ur",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "ur-Aran-IN").LocaleProfileOwner);
+        var arabicPunjabi = catalog.AcceptedCultures.Single(static culture =>
+            culture.Name == "pa-Aran-PK");
+        Assert.Equal("pa-Arab", arabicPunjabi.LocaleProfileOwner);
+        Assert.Equal(
+            "Arab",
+            HumanizerSourceGenerator.LocaleCatalogInput.GetEffectiveScript(arabicPunjabi.Name));
+        Assert.Equal(
+            "ur-IN",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "ur-IN").LocaleProfileOwner);
+        Assert.Equal(
+            "en",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "en-AL").LocaleProfileOwner);
+        Assert.Equal(
+            "zh-Hant",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "zh-Hant-JP").LocaleProfileOwner);
+        Assert.Equal(
+            "zh-CN",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "zh-CN").LocaleProfileOwner);
+        Assert.Equal(
+            "ca",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "ca-ES-valencia").LocaleProfileOwner);
+        Assert.Equal(
+            "zh-Hans",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "zh-CHS").LocaleProfileOwner);
+        Assert.Equal(
+            "zh-Hant",
+            catalog.AcceptedCultures.Single(static culture =>
+                culture.Name == "zh-TW").LocaleProfileOwner);
+        Assert.All(catalog.AcceptedCultures, static culture => Assert.Null(culture.InflectionOwner));
+    }
+
+    [Theory]
+    [InlineData("pa-Guru-IN", "pa", "Guru")]
+    [InlineData("pa-Arab-PK", "pa-Arab", "Arab")]
+    [InlineData("pa-Aran-PK", "pa-Arab", "Arab")]
+    [InlineData("sr-Cyrl-RS", "sr", "Cyrl")]
+    [InlineData("sr-Latn-RS", "sr-Latn", "Latn")]
+    [InlineData("uz-Cyrl-UZ", "uz-Cyrl-UZ", "Cyrl")]
+    [InlineData("uz-Latn-UZ", "uz-Latn-UZ", "Latn")]
+    [InlineData("ur-Aran-IN", "ur", "Arab")]
+    [InlineData("zh-CHS", "zh-Hans", "Hans")]
+    [InlineData("zh-CHT", "zh-Hant", "Hant")]
+    public void AcceptedCultureCompatibilityKeepsDistinctScriptOwnersAligned(
+        string name,
+        string expectedOwner,
+        string expectedScript)
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+
+        var acceptedCulture = catalog.AcceptedCultures.Single(culture =>
+            culture.Name == name);
+
+        Assert.Equal(expectedOwner, acceptedCulture.LocaleProfileOwner);
+        Assert.Equal(
+            expectedScript,
+            HumanizerSourceGenerator.LocaleCatalogInput.GetEffectiveScript(name));
+    }
+
+    [Fact]
+    public void AcceptedCultureCompatibilityMatchesTheIndependentFrozenSnapshotHash()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+        var rows = catalog.AcceptedCultures
+            .OrderBy(static culture => culture.Name, StringComparer.Ordinal)
+            .Select(culture =>
+            {
+                var effectiveScript =
+                    HumanizerSourceGenerator.LocaleCatalogInput.GetEffectiveScript(culture.Name);
+                Assert.NotNull(effectiveScript);
+                return $"{culture.Name}\t{culture.LocaleProfileOwner}\t{effectiveScript}";
+            });
+        var snapshot = string.Join("\n", rows);
+        var actual = Convert.ToHexString(
+                SHA256.HashData(Encoding.UTF8.GetBytes(snapshot)))
+            .ToLowerInvariant();
+        const string expected = "a8c95bbd2f66dd1699a5d13a8218831e6298ddc43461c4fd84d4033ab38ef914"; // DevSkim: ignore DS173237
+        var substituted = snapshot.Replace(
+            "af\taf\tLatn",
+            "af\ten\tLatn",
+            StringComparison.Ordinal);
+        var substitutedHash = Convert.ToHexString(
+                SHA256.HashData(Encoding.UTF8.GetBytes(substituted)))
+            .ToLowerInvariant();
+
+        Assert.Equal(expected, actual);
+        Assert.NotEqual(expected, substitutedHash);
+    }
+
+    [Fact]
+    public void AcceptedCultureCompatibilityMatchesCommittedPlatformLedgers()
+    {
+        var repositoryRoot = FindRepositoryRoot();
+        var macOsPath = Path.Combine(
+            repositoryRoot,
+            "tests",
+            "Humanizer.SourceGenerators.Tests",
+            "TestData",
+            "AcceptedCultures",
+            "macos.json");
+        var windowsPath = Path.Combine(
+            repositoryRoot,
+            "tests",
+            "Humanizer.SourceGenerators.Tests",
+            "TestData",
+            "AcceptedCultures",
+            "windows-nls.json");
+        Assert.Equal(
+            "6c9d99872c0dcc3e4ad519231168c8493bab2eae380e548f5d471651d5ec9d33", // DevSkim: ignore DS173237
+            GetSha256(macOsPath));
+        Assert.Equal(
+            "21c7919a1d5534622c31b10f74e998fb70dbb8952a541c13e3ba9da9d20fa19c", // DevSkim: ignore DS173237
+            GetSha256(windowsPath));
+
+        var expectedOwners = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase);
+        AddAcceptedCultureLedger(expectedOwners, macOsPath, expectedCount: 554);
+        AddAcceptedCultureLedger(expectedOwners, windowsPath, expectedCount: 480);
+        // .NET's compatibility alias walks to pa, while Humanizer's script-owned
+        // locale profiles deliberately route the legacy Aran spelling to pa-Arab.
+        expectedOwners["pa-Aran-PK"] = "pa-Arab";
+        foreach (var path in Directory.EnumerateFiles(
+                     Path.Combine(repositoryRoot, "src", "Humanizer", "Locales"),
+                     "*.yml"))
+        {
+            var localeCode = Path.GetFileNameWithoutExtension(path);
+            expectedOwners.TryAdd(localeCode, localeCode);
+        }
+
+        var actual = CreateCheckedInLocaleCatalog().AcceptedCultures
+            .OrderBy(static culture => culture.Name, StringComparer.Ordinal)
+            .Select(static culture =>
+                $"{culture.Name}\t{culture.LocaleProfileOwner}")
+            .ToArray();
+        var expected = expectedOwners
+            .OrderBy(static row => row.Key, StringComparer.Ordinal)
+            .Select(static row => $"{row.Key}\t{row.Value}")
+            .ToArray();
+
+        Assert.Equal(579, expected.Length);
+        Assert.Equal(expected, actual);
+    }
+
+    static void AddAcceptedCultureLedger(
+        Dictionary<string, string> owners,
+        string path,
+        int expectedCount)
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(path));
+        Assert.Equal(expectedCount, document.RootElement.GetArrayLength());
+        foreach (var row in document.RootElement.EnumerateArray())
+        {
+            var name = row.GetProperty("AcceptedName").GetString()!;
+            var owner = row.GetProperty("LocaleProfileOwner").GetString()!;
+            if (owners.TryGetValue(name, out var previousOwner))
+            {
+                Assert.Equal(previousOwner, owner);
+            }
+            else
+            {
+                owners.Add(name, owner);
+            }
+        }
+    }
+
+    static string GetSha256(string path) =>
+        Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)))
+            .ToLowerInvariant();
+
+    static string FindRepositoryRoot()
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (directory is not null &&
+               !File.Exists(Path.Combine(directory.FullName, "Humanizer.slnx")))
+        {
+            directory = directory.Parent;
+        }
+
+        return directory?.FullName ?? throw new DirectoryNotFoundException(
+            "Could not locate the Humanizer repository root.");
+    }
+
+    [Fact]
+    public void AcceptedCultureCompatibilityRejectsCaseInsensitiveDuplicateNames()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            HumanizerSourceGenerator.AcceptedCultureCompatibility.ValidateUniqueNames(
+            [
+                ("first", "aa,shared"),
+                ("second", "bb,SHARED")
+            ]));
+
+        Assert.Contains("SHARED", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("first", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("second", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void AuthoredInflectionReplacesInheritedBundleAtomically()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    capability: 'inert'
+    scripts:
+      - 'Latn'
+"""),
+            ("zz-ZZ", """
+locale: 'zz-ZZ'
+variantOf: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    capability: 'inert'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+        var child = catalog.Locales.Single(static locale => locale.LocaleCode == "zz-ZZ");
+        Assert.Equal("Other", child.Inflection!.GetScalar("cardinalRule"));
+        Assert.False(child.Inflection.TryGetValue("scripts", out _));
+    }
 
     static string MonthItems(IEnumerable<string> values) =>
         string.Join('\n', values.Select(static value => $"      - '{value}'"));

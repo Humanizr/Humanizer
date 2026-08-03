@@ -210,7 +210,7 @@ The culture to check\.
 
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
-[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when the culture or one of its named parents has generated locale support; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when the exact culture name has generated locale support; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Exceptions
 
@@ -218,7 +218,7 @@ The culture to check\.
 Thrown when [culture](Humanizer.Configurator.md#Humanizer.Configurator.IsCultureSupported(System.Globalization.CultureInfo).culture 'Humanizer\.Configurator\.IsCultureSupported\(System\.Globalization\.CultureInfo\)\.culture') is `null`\.
 
 ### Remarks
-This considers parent\-culture fallback, but does not report support merely because Humanizer can fall back to its default English localizers\.
+This checks the exact accepted\-culture inventory and does not walk [System\.Globalization\.CultureInfo\.Parent](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.parent 'System\.Globalization\.CultureInfo\.Parent')\. Caller\-created [LocaliserRegistry&lt;TLocaliser&gt;](Humanizer.LocaliserRegistry_TLocaliser_.md 'Humanizer\.LocaliserRegistry\<TLocaliser\>') instances retain parent\-culture fallback\.
 
 <a name='Humanizer.Configurator.UseEnumDescriptionPropertyLocator(System.Func_System.Reflection.PropertyInfo,bool_)'></a>
 

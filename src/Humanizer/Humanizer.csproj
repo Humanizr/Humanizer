@@ -4,6 +4,7 @@
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields, etc, into a human friendly format</Description>
     <Product>Humanizer</Product>
     <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseExpression>MIT AND BSL-1.0</PackageLicenseExpression>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup> 
   
@@ -21,6 +22,7 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\logo.png" Pack="true" PackagePath="" Visible="false" />
     <None Include="$(MSBuildThisFileDirectory)..\..\readme.md" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\THIRD-PARTY-NOTICES.txt" Pack="true" PackagePath="" Visible="false" />
     <None Include="$(ArtifactsPath)\bin\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn3.8\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn3.8/cs" Visible="false" />
     <None Include="$(ArtifactsPath)\bin\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn4.8\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="false" />
     <None Include="$(ArtifactsPath)\bin\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn4.14\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.14/cs" Visible="false" />

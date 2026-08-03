@@ -82,6 +82,62 @@ static JsonObject CreateOutput(GeneratorInput input)
                 });
             }
             root["locales"] = localeRows;
+
+            var localeProfileOwners = coverage.Locales
+                .Select(static locale => locale.Locale)
+                .ToHashSet(StringComparer.Ordinal);
+            var acceptedCultureRows = catalog.AcceptedCultures
+                .OrderBy(static culture => culture.Name, StringComparer.Ordinal)
+                .ToArray();
+            if (acceptedCultureRows
+                    .Select(static culture => culture.Name)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .Count() != acceptedCultureRows.Length)
+            {
+                throw new InvalidOperationException(
+                    "Accepted culture names must be unique ignoring case.");
+            }
+
+            var unknownOwners = acceptedCultureRows
+                .Select(static culture => culture.LocaleProfileOwner)
+                .Where(owner => !localeProfileOwners.Contains(owner))
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(static owner => owner, StringComparer.Ordinal)
+                .ToArray();
+            if (unknownOwners.Length != 0)
+            {
+                throw new InvalidOperationException(
+                    $"Accepted cultures reference unknown locale profile owners: {string.Join(", ", unknownOwners)}.");
+            }
+
+            var unrepresentedOwners = localeProfileOwners
+                .Where(owner => !acceptedCultureRows.Any(culture =>
+                    string.Equals(culture.LocaleProfileOwner, owner, StringComparison.Ordinal)))
+                .OrderBy(static owner => owner, StringComparer.Ordinal)
+                .ToArray();
+            if (unrepresentedOwners.Length != 0)
+            {
+                throw new InvalidOperationException(
+                    $"Locale profile owners are absent from the accepted-culture inventory: {string.Join(", ", unrepresentedOwners)}.");
+            }
+
+            var acceptedCultures = new JsonArray();
+            foreach (var acceptedCulture in acceptedCultureRows)
+            {
+                acceptedCultures.Add(new JsonObject
+                {
+                    ["name"] = acceptedCulture.Name,
+                    ["localeProfileOwner"] = acceptedCulture.LocaleProfileOwner
+                });
+            }
+
+            root["acceptedCultureInventory"] = new JsonObject
+            {
+                ["source"] = "the generated accepted-culture catalog used by Humanizer's built-in registries",
+                ["acceptedNameCount"] = acceptedCultureRows.Length,
+                ["localeProfileOwnerCount"] = localeProfileOwners.Count,
+                ["mappings"] = acceptedCultures
+            };
             break;
 
         case "published-package-cultures":

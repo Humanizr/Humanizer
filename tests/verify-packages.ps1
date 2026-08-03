@@ -4,10 +4,11 @@
 
 .DESCRIPTION
     This script validates the single Humanizer package produced by direct project packing.
-    It focuses only on analyzer packaging:
+    It validates analyzer packaging and the legal metadata shipped with the package:
 
     1. Verifies the expected analyzer/build assets exist inside the nupkg
-    2. Restores and builds small consumer projects that should trigger HUMANIZER001
+    2. Verifies the package license expression and third-party notices
+    3. Restores and builds small consumer projects that should trigger HUMANIZER001
 
 .PARAMETER PackageVersion
     The version of the Humanizer package to verify (for example, "3.0.0-rc.14").
@@ -168,6 +169,85 @@ function Test-AnalyzerPackageEntries {
     }
 }
 
+function Test-PackageLegalMetadata {
+    param([Parameter(Mandatory = $true)][string]$PackagePath)
+
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $zip = [System.IO.Compression.ZipFile]::OpenRead($PackagePath)
+    try {
+        $noticeEntries = @($zip.Entries | Where-Object { $_.FullName -eq "THIRD-PARTY-NOTICES.txt" })
+        if ($noticeEntries.Count -ne 1) {
+            return [PSCustomObject]@{
+                Success = $false
+                Details = "Expected exactly one THIRD-PARTY-NOTICES.txt entry; found $($noticeEntries.Count)."
+            }
+        }
+
+        $noticeReader = [System.IO.StreamReader]::new($noticeEntries[0].Open())
+        try {
+            $noticeContent = $noticeReader.ReadToEnd()
+        } finally {
+            $noticeReader.Dispose()
+        }
+
+        $sourceNoticePath = Join-Path $PSScriptRoot '..\THIRD-PARTY-NOTICES.txt'
+        $sourceNotice = Get-Content -Raw $sourceNoticePath
+        $normalizedNotice = $noticeContent.Replace("`r`n", "`n").Replace("`r", "`n")
+        $normalizedSourceNotice = $sourceNotice.Replace("`r`n", "`n").Replace("`r", "`n")
+        if ($normalizedNotice -ne $normalizedSourceNotice) {
+            return [PSCustomObject]@{
+                Success = $false
+                Details = 'Packaged THIRD-PARTY-NOTICES.txt does not match the repository notice.'
+            }
+        }
+
+        $unicodeNoticeCount = [regex]::Matches(
+            $noticeContent,
+            '(?m)^UNICODE LICENSE V3\r?$').Count
+        if ($unicodeNoticeCount -ne 1) {
+            return [PSCustomObject]@{
+                Success = $false
+                Details = "Expected exactly one Unicode License v3 notice; found $unicodeNoticeCount."
+            }
+        }
+
+        $nuspecEntries = @($zip.Entries | Where-Object { $_.FullName.EndsWith('.nuspec', [StringComparison]::Ordinal) })
+        if ($nuspecEntries.Count -ne 1) {
+            return [PSCustomObject]@{
+                Success = $false
+                Details = "Expected exactly one nuspec entry; found $($nuspecEntries.Count)."
+            }
+        }
+
+        $nuspecReader = [System.IO.StreamReader]::new($nuspecEntries[0].Open())
+        try {
+            [xml]$nuspec = $nuspecReader.ReadToEnd()
+        } finally {
+            $nuspecReader.Dispose()
+        }
+
+        $namespace = [System.Xml.XmlNamespaceManager]::new($nuspec.NameTable)
+        $namespace.AddNamespace('n', $nuspec.DocumentElement.NamespaceURI)
+        $license = $nuspec.SelectSingleNode('/n:package/n:metadata/n:license', $namespace)
+        $expectedExpression = 'MIT AND BSL-1.0'
+        if ($null -eq $license -or
+            $license.GetAttribute('type') -ne 'expression' -or
+            $license.InnerText -ne $expectedExpression) {
+            return [PSCustomObject]@{
+                Success = $false
+                Details = "Expected package license expression '$expectedExpression'."
+            }
+        }
+    } finally {
+        $zip.Dispose()
+    }
+
+    return [PSCustomObject]@{
+        Success = $true
+        Details = $null
+    }
+}
+
 function Invoke-AnalyzerSmokeTest {
     param(
         [Parameter(Mandatory = $true)][string]$DisplayName,
@@ -247,6 +327,16 @@ try {
     Write-Host "##[command]Analyzer package entries found"
     Write-Host ""
 
+    Write-AzureDevOpsSection "Inspecting package legal metadata"
+    $packageLegalResult = Test-PackageLegalMetadata -PackagePath $mainPackage.FullName
+    if (-not $packageLegalResult.Success) {
+        Write-AzureDevOpsError $packageLegalResult.Details
+        throw $packageLegalResult.Details
+    }
+
+    Write-Host "##[command]Package license and third-party notices verified"
+    Write-Host ""
+
     $nugetConfigPath = Join-Path $tempDir "NuGet.config"
     $absolutePackagesDir = (Resolve-Path $PackagesDirectory).Path
     @"
@@ -289,6 +379,7 @@ try {
     Write-AzureDevOpsSection "Verification Summary"
     Write-Host "Summary:"
     Write-Host "  ✓ Analyzer package entries present"
+    Write-Host "  ✓ Package license and third-party notices present"
     foreach ($smokeResult in $smokeResults) {
         Write-Host "  ✓ $($smokeResult.DisplayName)"
     }

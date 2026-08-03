@@ -10,10 +10,11 @@ example: illustrative
 # Languages and cultures
 
 Humanizer localizes behavior by culture, not by translating one final string.
-Choose a culture for the operation, then confirm that it or one of its named
-parents has a generated [Humanizer 4 locale profile](./supported-cultures.mdx).
-`Configurator.IsCultureSupported` performs the same parent-chain check in
-application code.
+Choose a culture for the operation, then confirm that its exact name has a
+generated [Humanizer 4 accepted-culture mapping](./supported-cultures.mdx).
+`Configurator.IsCultureSupported` performs that exact-name check in application
+code. An accepted regional name can map to a neutral same-language profile, but
+Humanizer does not infer support by walking an arbitrary .NET parent chain.
 
 Humanizer 4 ships its runtime, generated locale data, and analyzers in the
 single `Humanizer` package. Installing the package does not select a culture;
@@ -43,11 +44,13 @@ inventory. Use the [scenario finder](../scenarios/index.mdx) to reach the
 focused guide for number words, dates, clock notation, collections, or another
 localized task.
 
-## How culture fallback works
+## How culture resolution works
 
 Do not infer support from a package name or English fallback. A regional
-culture can reuse a same-language parent such as `fr`; that is an
-implementation detail, not partial support. Report incorrect inherited
+culture can reuse a same-language profile such as `fr` only when its exact name
+is in the accepted-culture inventory. That mapping is an implementation detail,
+not partial support. Caller-created `LocaliserRegistry<TLocaliser>` instances
+retain their public parent-chain fallback behavior. Report incorrect inherited
 behavior just as you would incorrect directly authored behavior.
 
 Found a wrong translation, parser result, or platform-specific format? Follow

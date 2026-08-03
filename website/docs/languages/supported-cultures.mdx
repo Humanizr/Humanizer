@@ -1,6 +1,7 @@
 ---
 id: supported-cultures
 title: Supported cultures
+description: Humanizer 4 supports 579 exact culture names through 102 generated locale profile roots.
 sidebar_position: 5
 diataxis: reference
 persona: application developer
@@ -9,16 +10,20 @@ example: illustrative
 
 import coverage from './language-coverage.json';
 
-export const supportedCultures =
+export const localeProfileRoots =
   coverage.locales?.map(({locale}) => locale) ?? coverage.cultures ?? [];
+export const acceptedCultureInventory = coverage.acceptedCultureInventory;
+export const acceptedCultures = acceptedCultureInventory?.mappings ?? [];
 
 # Supported cultures
 
-Humanizer 4 ships a complete generated locale profile for every code listed
-here. A regional culture can be supported through a listed same-language
-parent, so use `Configurator.IsCultureSupported` to check a requested
-`CultureInfo`. Calendar or numeric formatting uses .NET globalization data
-when a profile does not need a Humanizer override.
+Humanizer 4 ships {localeProfileRoots.length} generated locale profile roots
+and accepts {acceptedCultures.length} exact `CultureInfo` names. An accepted
+regional name can reuse a same-language profile root. Use
+`Configurator.IsCultureSupported` to check a requested culture by exact name;
+Humanizer does not infer support by walking an arbitrary .NET parent chain.
+Calendar or numeric formatting uses .NET globalization data when a profile
+does not need a Humanizer override.
 
 ## Example
 
@@ -38,11 +43,30 @@ The output is:
 cento e vinte e três
 ```
 
-<p>Humanizer 4 ships {supportedCultures.length} generated locale profiles:</p>
+## Locale profile roots
 
-<ul className="supportedCultureList" aria-label="Supported cultures">
-  {supportedCultures.map((locale) => (
+These {localeProfileRoots.length} codes own Humanizer's generated locale data.
+They are not the complete list of exact culture names accepted by the public
+registries.
+
+<ul className="supportedCultureList" aria-label="Locale profile roots">
+  {localeProfileRoots.map((locale) => (
     <li key={locale}><code>{locale}</code></li>
+  ))}
+</ul>
+
+## Accepted culture names
+
+This is the generated exact-name inventory used by
+`Configurator.IsCultureSupported` and Humanizer's built-in registries. The
+left code is the accepted `CultureInfo.Name`; the right code is the locale
+profile that owns its Humanizer data.
+
+<ul className="supportedCultureList" aria-label="Accepted culture names">
+  {acceptedCultures.map(({name, localeProfileOwner}) => (
+    <li key={name}>
+      <code>{name}</code> → <code>{localeProfileOwner}</code>
+    </li>
   ))}
 </ul>
 

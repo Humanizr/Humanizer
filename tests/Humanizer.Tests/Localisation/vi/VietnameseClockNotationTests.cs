@@ -1,5 +1,31 @@
 namespace Humanizer.Tests.Localisation.vi;
 
+[UseCulture("vi")]
+public class VietnameseLocaleParityTests
+{
+    static readonly CultureInfo Vietnamese = new("vi");
+
+    [Theory]
+    [InlineData(TimeUnit.Millisecond, "một mili giây")]
+    [InlineData(TimeUnit.Second, "một giây")]
+    [InlineData(TimeUnit.Minute, "một phút")]
+    [InlineData(TimeUnit.Hour, "một giờ")]
+    [InlineData(TimeUnit.Day, "một ngày")]
+    [InlineData(TimeUnit.Week, "một tuần")]
+    [InlineData(TimeUnit.Month, "một tháng")]
+    [InlineData(TimeUnit.Year, "một năm")]
+    public void TimeSpanHumanize_UsesVietnameseSingularWords(TimeUnit unit, string expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(Vietnamese);
+
+        Assert.Equal(expected, formatter.TimeSpanHumanize(unit, 1, toWords: true));
+    }
+
+    [Fact]
+    public void WordsToNumber_ParsesVietnameseOrdinal() =>
+        Assert.Equal(2, "thứ nhì".ToNumber(Vietnamese));
+}
+
 #if NET6_0_OR_GREATER
 [UseCulture("vi")]
 public class VietnameseClockNotationTests

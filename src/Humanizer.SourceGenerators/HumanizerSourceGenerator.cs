@@ -8,10 +8,11 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
     /// <inheritdoc />
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var localeFiles = context.AdditionalTextsProvider
+        var localeFile = context.AdditionalTextsProvider
             .Select(static (additionalText, cancellationToken) => LocaleDefinitionFile.Create(additionalText, cancellationToken))
-            .Where(static file => file is not null)
-            .Collect();
+            .Where(static file => file is not null);
+
+        var localeFiles = localeFile.Collect();
 
         var localeCatalog = localeFiles
             .Select(static (files, _) => LocaleCatalogInput.Create(files));
@@ -41,10 +42,43 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(formatterProfiles, static (productionContext, input) => input.Emit(productionContext));
 
-        var inflectionProfiles = localeCatalog
-            .Select(static (catalog, _) => InflectionCatalogInput.Create(catalog));
+        var inflectionOwnerSources = localeFile
+            .Select(static (file, _) => PerLocaleInflectionSourceInput.Create(file));
 
-        context.RegisterSourceOutput(inflectionProfiles, static (productionContext, input) => input.Emit(productionContext));
+        var inflectionOwnerSourceCatalog = inflectionOwnerSources
+            .Collect()
+            .Select(static (sources, _) => InflectionOwnerSourceCatalog.Create(sources));
+
+        var inflectionProfiles = localeCatalog
+            .Combine(inflectionOwnerSourceCatalog)
+            .Select(static (input, _) => InflectionCatalogInput.Create(
+                input.Left,
+                input.Right));
+
+        context.RegisterSourceOutput(
+            inflectionProfiles,
+            static (productionContext, input) => input.EmitDiagnostics(productionContext));
+
+        var inflectionRegistry = localeCatalog
+            .Combine(inflectionProfiles)
+            .Select(static (input, _) => input.Right.GetRegistryInput(input.Left))
+            .WithTrackingName("InflectionRegistrySource");
+
+        context.RegisterSourceOutput(
+            inflectionRegistry,
+            static (productionContext, input) => input.Emit(productionContext));
+
+        var inflectionOwnerState = inflectionProfiles
+            .Select(static (catalog, _) => catalog.GetOwnerEmissionState());
+
+        var inflectionOwners = inflectionOwnerSources
+            .Combine(inflectionOwnerState)
+            .Select(static (input, _) => PerLocaleInflectionInput.Create(
+                input.Left,
+                input.Right))
+            .WithTrackingName("InflectionOwnerSource");
+
+        context.RegisterSourceOutput(inflectionOwners, static (productionContext, input) => input.Emit(productionContext));
 
         var numberToWordsProfiles = localeCatalog
             .Select(static (catalog, _) => NumberToWordsProfileCatalogInput.Create(catalog));
@@ -62,7 +96,11 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(ordinalizerProfiles, static (productionContext, input) => input.Emit(productionContext));
 
         var localeRegistryInput = localeCatalog
-            .Select(static (catalog, _) => LocaleRegistryInput.Create(catalog));
+            .Combine(inflectionRegistry)
+            .Select(static (input, _) => LocaleRegistryInput.Create(
+                input.Left,
+                input.Right))
+            .WithTrackingName("LocaleRegistrySource");
 
         context.RegisterSourceOutput(localeRegistryInput, static (productionContext, input) => input.Emit(productionContext));
 

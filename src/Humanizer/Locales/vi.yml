@@ -140,56 +140,56 @@ surfaces:
       millisecond:
         single:
           numeric: '1 mili giây'
-          words: 'one mili giây'
+          words: 'một mili giây'
         multiple:
           forms:
             default: 'mili giây'
       second:
         single:
           numeric: '1 giây'
-          words: 'one giây'
+          words: 'một giây'
         multiple:
           forms:
             default: 'giây'
       minute:
         single:
           numeric: '1 phút'
-          words: 'one phút'
+          words: 'một phút'
         multiple:
           forms:
             default: 'phút'
       hour:
         single:
           numeric: '1 giờ'
-          words: 'one giờ'
+          words: 'một giờ'
         multiple:
           forms:
             default: 'giờ'
       day:
         single:
           numeric: '1 ngày'
-          words: 'one ngày'
+          words: 'một ngày'
         multiple:
           forms:
             default: 'ngày'
       week:
         single:
           numeric: '1 tuần'
-          words: 'one tuần'
+          words: 'một tuần'
         multiple:
           forms:
             default: 'tuần'
       month:
         single:
           numeric: '1 tháng'
-          words: 'one tháng'
+          words: 'một tháng'
         multiple:
           forms:
             default: 'tháng'
       year:
         single:
           numeric: '1 năm'
-          words: 'one năm'
+          words: 'một năm'
         multiple:
           forms:
             default: 'năm'

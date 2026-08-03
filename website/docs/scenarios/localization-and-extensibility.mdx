@@ -37,7 +37,7 @@ A per-call transformer is isolated and easy to test.
 | Case-aware duration policy | `IGrammaticalCaseTimeSpanHumanizeStrategy` and `IGrammaticalCaseTimeSpanFormatter` |
 | Enum metadata property | `UseEnumDescriptionPropertyLocator` at startup |
 
-Registries cover collection formatters, general formatters, number-word converters, ordinalizers, date-ordinal converters, and clock-notation converters. Culture resolution checks the requested culture and its parents before using the registry default.
+Registries cover collection formatters, general formatters, number-word converters, ordinalizers, date-ordinal converters, and clock-notation converters. Built-in registries resolve exact accepted-culture names through the generated map before using the registry default. Caller-created registries retain parent-chain fallback.
 
 ### Set a global time-span policy
 

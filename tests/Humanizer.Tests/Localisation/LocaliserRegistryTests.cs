@@ -118,6 +118,20 @@ public class LocaliserRegistryTests
     }
 
     [Fact]
+    public void GeneratedCultureResolverCannotBeEnabledAfterRegistryHasBeenUsed()
+    {
+        var registry = new LocaliserRegistry<string>("default");
+        _ = registry.ResolveForCulture(new("en"));
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            registry.UseGeneratedCultureResolver);
+
+        Assert.Equal(
+            "Cannot change culture resolution after the registry has been used.",
+            exception.Message);
+    }
+
+    [Fact]
     public void GetRegisteredLocaleCodesReturnsSortedRegisteredLocales()
     {
         var registry = new LocaliserRegistry<string>("default");
