@@ -80,12 +80,77 @@ function New-ApiShapeInput {
     }
 }
 
+function Assert-ApiPageCollision {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][string]$Source,
+        [Parameter(Mandatory = $true)][string]$ExpectedPage,
+        [Parameter(Mandatory = $true)][string[]]$ExpectedTypeIds
+    )
+
+    $apiInput = New-ApiShapeInput `
+        -Root $Root `
+        -Name $Name `
+        -Source $Source
+    $collisionFailed = $false
+    try {
+        Get-AssemblyApiMemberInventory `
+            -AssemblyPath $apiInput.Dll | Out-Null
+    } catch {
+        $collisionMessage = $_.Exception.Message
+        $collisionFailed = $collisionMessage.Contains(
+            "canonical page $ExpectedPage",
+            [System.StringComparison]::Ordinal
+        )
+        foreach ($typeId in $ExpectedTypeIds) {
+            $collisionFailed = $collisionFailed -and
+                $collisionMessage.Contains(
+                    $typeId,
+                    [System.StringComparison]::Ordinal
+                )
+        }
+    }
+    if (-not $collisionFailed) {
+        throw "A canonical API page collision did not fail closed."
+    }
+}
+
 function Assert-AssemblyApiShapes {
     $fixtureRoot = Join-Path (
         [System.IO.Path]::GetTempPath()
     ) "humanizer-assembly-api-shapes-$([guid]::NewGuid().ToString('N'))"
     New-Item -ItemType Directory -Path $fixtureRoot | Out-Null
     try {
+        Assert-ApiPageCollision `
+            -Root $fixtureRoot `
+            -Name "CollisionFixture" `
+            -ExpectedPage "CollisionFixture.Same_T_" `
+            -ExpectedTypeIds @(
+                'T:CollisionFixture.Same`1',
+                "T:CollisionFixture.Same_T_"
+            ) `
+            -Source @"
+namespace CollisionFixture;
+
+public class Same<T> { }
+public class Same_T_ { }
+"@
+        Assert-ApiPageCollision `
+            -Root $fixtureRoot `
+            -Name "CaseCollisionFixture" `
+            -ExpectedPage "CaseCollisionFixture.Same" `
+            -ExpectedTypeIds @(
+                "T:CaseCollisionFixture.Same",
+                "T:CaseCollisionFixture.same"
+            ) `
+            -Source @"
+namespace CaseCollisionFixture;
+
+public class Same { }
+public class same { }
+"@
+
         $apiInput = New-ApiShapeInput `
             -Root $fixtureRoot `
             -Name "Fixture" `
@@ -113,6 +178,40 @@ public sealed class Implementation : IContract
     string IContract.Name => "";
     string IContract.this[int index] => "";
     void IContract.Run() { }
+}
+
+public interface IGenericContract<T>
+{
+    string Name { get; }
+    void Run(T value);
+}
+
+public sealed class GenericImplementation : IGenericContract<int>
+{
+    string IGenericContract<int>.Name => "";
+    void IGenericContract<int>.Run(int value) { }
+}
+
+internal interface IHiddenGenericContract<T>
+{
+    void Run(T value);
+}
+
+public sealed class HiddenGenericImplementation : IHiddenGenericContract<int>
+{
+    void IHiddenGenericContract<int>.Run(int value) { }
+}
+
+public class GenericContainer<TOuter>
+{
+    public class Nested { }
+    public class Inner<TInner> { }
+    public delegate TResult Project<TResult>(TOuter input);
+}
+
+public static class NestedGenericConsumer
+{
+    public static void Use(GenericContainer<int>.Inner<string> value) { }
 }
 
 public interface IAccessShapes
@@ -147,6 +246,12 @@ public class Container
             "M:Fixture.IAccessShapes.ProtectedDefault" = @("protected", "Method", "Fixture.IAccessShapes")
             "M:Fixture.IAccessShapes.PublicDefault" = @("public", "Method", "Fixture.IAccessShapes")
             "M:Fixture.IAccessShapes.Transform(System.Int32)" = @("public", "Method", "Fixture.IAccessShapes")
+            "P:Fixture.GenericImplementation.Fixture#IGenericContract{System#Int32}#Name" = @("public", "Property", "Fixture.GenericImplementation")
+            "M:Fixture.GenericImplementation.Fixture#IGenericContract{System#Int32}#Run(System.Int32)" = @("public", "Method", "Fixture.GenericImplementation")
+            "T:Fixture.GenericContainer``1.Nested" = @("public", "Type", "Fixture.GenericContainer_TOuter_.Nested")
+            "T:Fixture.GenericContainer``1.Inner``1" = @("public", "Type", "Fixture.GenericContainer_TOuter_.Inner_TInner_")
+            "T:Fixture.GenericContainer``1.Project``1" = @("public", "Type", "Fixture.GenericContainer_TOuter_.Project_TResult_")
+            "M:Fixture.NestedGenericConsumer.Use(Fixture.GenericContainer{System.Int32}.Inner{System.String})" = @("public", "Method", "Fixture.NestedGenericConsumer")
             "T:Fixture.Container.Hidden" = @("protected", "Type", "Fixture.Container.Hidden")
             "T:Fixture.Container.Hidden.Nested" = @("protected", "Type", "Fixture.Container.Hidden.Nested")
             "M:Fixture.Container.Hidden.Nested.Run" = @("protected", "Method", "Fixture.Container.Hidden.Nested")
@@ -164,6 +269,16 @@ public class Container
                 $records[$id].PageName -ne $expected[2]) {
                 throw "The assembly inventory misclassified $id."
             }
+        }
+        $hiddenImplementationRecords = @(
+            $inventory.Records |
+                Where-Object {
+                    $_.TypeId -eq "Fixture.HiddenGenericImplementation" -and
+                    $_.Kind -notin @("Type", "Constructor")
+                }
+        )
+        if ($hiddenImplementationRecords.Count -ne 0) {
+            throw "The assembly inventory exposed an inaccessible generic interface."
         }
 
         $apiOutput = Join-Path $fixtureRoot "api"
@@ -210,28 +325,63 @@ public class Container
         $converterPage = Get-Content -Raw (
             Join-Path $apiOutput "Fixture.Converter_TInput_TResult_.md"
         )
+        $nestedPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.GenericContainer_TOuter_.Nested.md"
+        )
+        $innerPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.GenericContainer_TOuter_.Inner_TInner_.md"
+        )
+        $projectPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.GenericContainer_TOuter_.Project_TResult_.md"
+        )
         $namespacePage = Get-Content -Raw (Join-Path $apiOutput "Fixture.md")
-        if (-not $formatterPage.StartsWith(
+        $identityChecks = [ordered]@{
+            "formatter title" = $formatterPage.StartsWith(
                 "---`ntitle: 'Fixture.Formatter'",
                 [System.StringComparison]::Ordinal
-            ) -or
-            $formatterPage -notmatch "(?m)^## Formatter Delegate$" -or
-            -not $converterPage.StartsWith(
+            )
+            "formatter heading" = $formatterPage -match (
+                "(?m)^## Formatter Delegate$"
+            )
+            "generic delegate title" = $converterPage.StartsWith(
                 "---`ntitle: 'Fixture.Converter<TInput,TResult>'",
                 [System.StringComparison]::Ordinal
-            ) -or
-            $converterPage -notmatch (
+            )
+            "generic delegate heading" = $converterPage -match (
                 "(?m)^## Converter\\<TInput,TResult\\> Delegate$"
-            ) -or
-            -not $namespacePage.Contains(
+            )
+            "nested title" = $nestedPage.StartsWith(
+                "---`ntitle: 'Fixture.GenericContainer<TOuter>.Nested'",
+                [System.StringComparison]::Ordinal
+            )
+            "nested generic title" = $innerPage.StartsWith(
+                "---`ntitle: 'Fixture.GenericContainer<TOuter>.Inner<TInner>'",
+                [System.StringComparison]::Ordinal
+            )
+            "nested delegate title" = $projectPage.StartsWith(
+                "---`ntitle: 'Fixture.GenericContainer<TOuter>.Project<TResult>'",
+                [System.StringComparison]::Ordinal
+            )
+            "nested delegate heading" = $projectPage -match (
+                "(?m)^## GenericContainer\\<TOuter\\>\.Project\\<TResult\\> Delegate$"
+            )
+            "delegate namespace entry" = $namespacePage.Contains(
                 "[Formatter](Fixture.Formatter.md",
                 [System.StringComparison]::Ordinal
-            ) -or
-            -not $namespacePage.Contains(
+            )
+            "generic delegate namespace entry" = $namespacePage.Contains(
                 "[Converter&lt;TInput,TResult&gt;](Fixture.Converter_TInput_TResult_.md",
                 [System.StringComparison]::Ordinal
-            )) {
-            throw "The API generator did not canonicalize delegate type routes."
+            )
+            "nested delegate namespace entry" = $namespacePage.Contains(
+                "[GenericContainer&lt;TOuter&gt;.Project&lt;TResult&gt;](Fixture.GenericContainer_TOuter_.Project_TResult_.md",
+                [System.StringComparison]::Ordinal
+            )
+        }
+        foreach ($identityCheck in $identityChecks.GetEnumerator()) {
+            if (-not $identityCheck.Value) {
+                throw "The API generator did not canonicalize the $($identityCheck.Key)."
+            }
         }
 
         $publicIds = @(

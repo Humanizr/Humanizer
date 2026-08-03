@@ -145,8 +145,18 @@ function Get-AssemblyApiMemberInventory {
             Constructors = [System.Collections.Generic.List[object]]::new()
             DisplayName = $record.DisplayName
             Kind = $record.TypeKind
+            Namespace = $record.Namespace
             PageName = $record.PageName
             QualifiedDisplayName = $record.QualifiedDisplayName
+            RelativeDisplayName = if ([string]::IsNullOrEmpty(
+                    $record.Namespace
+                )) {
+                $record.QualifiedDisplayName
+            } else {
+                $record.QualifiedDisplayName.Substring(
+                    $record.Namespace.Length + 1
+                )
+            }
             TypeId = $record.TypeId
         }
     }
@@ -199,8 +209,10 @@ function Select-AssemblyApiTypes {
             )
             DisplayName = $type.DisplayName
             Kind = $type.Kind
+            Namespace = $type.Namespace
             PageName = $type.PageName
             QualifiedDisplayName = $type.QualifiedDisplayName
+            RelativeDisplayName = $type.RelativeDisplayName
             TypeId = $type.TypeId
         }
     }
@@ -271,7 +283,7 @@ function Set-ApiCanonicalTypeRoutes {
                 $renames[$target[0]] = $expectedPage
                 $target[0] = $expectedPage
             }
-            $parts[2] = $type.DisplayName
+            $parts[2] = $type.RelativeDisplayName
             $generatedTypes.Add([PSCustomObject]@{
                 Page = $expectedPage
                 Type = $type
@@ -303,7 +315,9 @@ function Set-ApiCanonicalTypeRoutes {
                 "(?m)^(?<prefix>\| )\[[^\]]+\]\(" + $pagePattern +
                 "(?: '[^']*')?\)(?<suffix> \|.*)$"
             )
-            $label = [System.Net.WebUtility]::HtmlEncode($type.DisplayName)
+            $label = [System.Net.WebUtility]::HtmlEncode(
+                $type.RelativeDisplayName
+            )
             $title = ConvertTo-ApiMarkdownTitle `
                 -Value $type.QualifiedDisplayName
             $content = [regex]::Replace(
@@ -341,7 +355,7 @@ function Set-ApiCanonicalTypeRoutes {
         }
         $pagePath = Join-Path $OutputPath $generatedType.Page
         $content = Get-Content -Raw $pagePath
-        $headingDisplay = $type.DisplayName.
+        $headingDisplay = $type.RelativeDisplayName.
             Replace("<", "\<").
             Replace(">", "\>")
         $kindTitle = $type.Kind.Substring(0, 1).ToUpperInvariant() +
@@ -524,7 +538,8 @@ function Set-ApiMarkdownStructure {
 function Set-ApiTypeMetadata {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
-        [Parameter(Mandatory = $true)][string]$LinksPath
+        [Parameter(Mandatory = $true)][string]$LinksPath,
+        [Parameter(Mandatory = $true)]$AssemblyTypes
     )
 
     foreach ($line in Get-Content $LinksPath | Select-Object -Skip 1) {
@@ -532,33 +547,22 @@ function Set-ApiTypeMetadata {
         if (-not $parts[0].StartsWith("T:")) {
             continue
         }
+        $typeId = $parts[0].Substring(2)
+        if (-not $AssemblyTypes.ContainsKey($typeId)) {
+            throw "Generated type page has no assembly identity: $typeId"
+        }
 
         $relativePage = (@($parts[1] -split "#", 2))[0]
         $pagePath = Join-Path $OutputPath $relativePage
         $content = Get-Content -Raw $pagePath
         if ($content -notmatch (
-                "(?m)^## (?<display>.+) " +
+                "(?m)^## .+ " +
                 "(?:Class|Struct|Interface|Enum|Delegate)\r?$"
             )) {
             throw "Generated type page has no display heading: $relativePage"
         }
 
-        $displayName = $Matches["display"].
-            Replace("\<", "<").
-            Replace("\>", ">")
-        $routeName = [System.IO.Path]::GetFileNameWithoutExtension(
-            $relativePage
-        )
-        $title = if ($displayName.Contains("<")) {
-            $namespaceEnd = $routeName.LastIndexOf(".")
-            if ($namespaceEnd -lt 0) {
-                $displayName
-            } else {
-                "$($routeName.Substring(0, $namespaceEnd + 1))$displayName"
-            }
-        } else {
-            $routeName
-        }
+        $title = $AssemblyTypes[$typeId].QualifiedDisplayName
         $quotedTitle = $title.Replace("'", "''")
         $frontMatter = @"
 ---
@@ -725,7 +729,8 @@ function Invoke-ApiReferenceGeneration {
     Set-ApiMarkdownStructure -OutputPath $OutputPath
     Set-ApiTypeMetadata `
         -OutputPath $OutputPath `
-        -LinksPath $LinksPath
+        -LinksPath $LinksPath `
+        -AssemblyTypes $expectedTypes
     Assert-GeneratedApiMemberCompleteness `
         -ExpectedRecords $expectedRecords `
         -LinksPath $LinksPath `

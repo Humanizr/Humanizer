@@ -26,6 +26,8 @@ public sealed class ApiAccessRecord
 
     public required string Name { get; init; }
 
+    public required string Namespace { get; init; }
+
     public required int ParameterCount { get; init; }
 
     public required string PageName { get; init; }
@@ -79,6 +81,19 @@ public static class ApiAccessReader
         if (duplicate is not null)
             throw new InvalidDataException($"Assembly API has duplicate documentation ID: {duplicate.Key}");
 
+        var pageCollision = records
+            .Where(record => record.Kind == "Type")
+            .GroupBy(record => record.PageName, StringComparer.OrdinalIgnoreCase)
+            .FirstOrDefault(group => group.Count() > 1);
+        if (pageCollision is not null)
+            throw new InvalidDataException(
+                $"Assembly API types share canonical page {pageCollision.Key}: " +
+                string.Join(
+                    ", ",
+                    pageCollision
+                        .Select(record => record.Id)
+                        .OrderBy(id => id, StringComparer.Ordinal)));
+
         return records.OrderBy(record => record.Id, StringComparer.Ordinal).ToArray();
     }
 
@@ -94,7 +109,10 @@ public static class ApiAccessReader
         var typeId = GetTypeName(reader, typeHandle);
         var typeDisplayName = GetTypeDisplayName(reader, typeHandle);
         var typeKind = GetTypeKind(reader, type);
-        var qualifiedDisplayName = GetQualifiedDisplayName(reader, typeHandle);
+        var qualifiedDisplayName = GetQualifiedDisplayName(
+            reader,
+            typeHandle,
+            out var typeNamespace);
         var pageName = GetPageName(qualifiedDisplayName);
         var declaredTypeAccess = GetTypeAccess(type.Attributes) ?? typeAccess;
         AddRecord(
@@ -109,6 +127,7 @@ public static class ApiAccessReader
             typeDisplayName,
             typeKind,
             pageName,
+            typeNamespace,
             qualifiedDisplayName);
 
         if (typeKind == "delegate")
@@ -142,6 +161,7 @@ public static class ApiAccessReader
                 typeDisplayName,
                 typeKind,
                 pageName,
+                typeNamespace,
                 qualifiedDisplayName);
         }
 
@@ -172,6 +192,7 @@ public static class ApiAccessReader
                 typeDisplayName,
                 typeKind,
                 pageName,
+                typeNamespace,
                 qualifiedDisplayName);
         }
 
@@ -206,6 +227,7 @@ public static class ApiAccessReader
                 typeDisplayName,
                 typeKind,
                 pageName,
+                typeNamespace,
                 qualifiedDisplayName);
         }
 
@@ -258,6 +280,7 @@ public static class ApiAccessReader
                 typeDisplayName,
                 typeKind,
                 pageName,
+                typeNamespace,
                 qualifiedDisplayName);
         }
     }
@@ -299,7 +322,7 @@ public static class ApiAccessReader
                     GetMethodAccess(method.Attributes));
             case HandleKind.MemberReference:
                 var member = reader.GetMemberReference((MemberReferenceHandle)declaration);
-                return GetDeclarationTypeAccess(reader, member.Parent, accessCache) ?? ApiAccess.Public;
+                return GetDeclarationTypeAccess(reader, member.Parent, accessCache);
             case HandleKind.MethodSpecification:
                 var specification = reader.GetMethodSpecification((MethodSpecificationHandle)declaration);
                 return GetDeclarationAccess(reader, specification.Method, accessCache);
@@ -312,18 +335,24 @@ public static class ApiAccessReader
     static ApiAccess? GetDeclarationTypeAccess(
         MetadataReader reader,
         EntityHandle handle,
-        Dictionary<TypeDefinitionHandle, ApiAccess?> accessCache) =>
-        handle.Kind switch
+        Dictionary<TypeDefinitionHandle, ApiAccess?> accessCache)
+    {
+        return handle.Kind switch
         {
             HandleKind.TypeDefinition => GetEffectiveTypeAccess(
                 reader,
                 (TypeDefinitionHandle)handle,
                 accessCache),
             HandleKind.TypeReference => ApiAccess.Public,
-            HandleKind.TypeSpecification => ApiAccess.Public,
+            HandleKind.TypeSpecification => reader.
+                GetTypeSpecification((TypeSpecificationHandle)handle).
+                DecodeSignature(
+                    new DeclarationAccessTypeProvider(accessCache),
+                    genericContext: null),
             HandleKind.MethodDefinition => GetDeclarationAccess(reader, handle, accessCache),
             _ => null
         };
+    }
 
     static void AddRecord(
         List<ApiAccessRecord> records,
@@ -337,6 +366,7 @@ public static class ApiAccessReader
         string typeDisplayName,
         string typeKind,
         string pageName,
+        string typeNamespace,
         string qualifiedDisplayName) =>
         records.Add(new ApiAccessRecord
         {
@@ -351,6 +381,7 @@ public static class ApiAccessReader
             Id = id,
             Kind = kind,
             Name = name,
+            Namespace = typeNamespace,
             ParameterCount = parameterCount,
             PageName = pageName,
             QualifiedDisplayName = qualifiedDisplayName,
@@ -520,7 +551,10 @@ public static class ApiAccessReader
         return $"{metadataName[..tick]}<{string.Join(",", parameterNames)}>";
     }
 
-    static string GetQualifiedDisplayName(MetadataReader reader, TypeDefinitionHandle handle)
+    static string GetQualifiedDisplayName(
+        MetadataReader reader,
+        TypeDefinitionHandle handle,
+        out string typeNamespace)
     {
         var segments = new Stack<string>();
         var current = handle;
@@ -534,9 +568,10 @@ public static class ApiAccessReader
             current = type.GetDeclaringType();
         }
 
-        return string.IsNullOrEmpty(@namespace)
+        typeNamespace = @namespace ?? "";
+        return string.IsNullOrEmpty(typeNamespace)
             ? string.Join(".", segments)
-            : $"{@namespace}.{string.Join(".", segments)}";
+            : $"{typeNamespace}.{string.Join(".", segments)}";
     }
 
     static string GetPageName(string qualifiedDisplayName) =>
@@ -545,7 +580,74 @@ public static class ApiAccessReader
             .Replace(">", "_", StringComparison.Ordinal)
             .Replace(",", "_", StringComparison.Ordinal);
 
-    static string EscapeMemberName(string name) => name.Replace('.', '#');
+    static string EscapeMemberName(string name) =>
+        name.Replace('.', '#').Replace('<', '{').Replace('>', '}');
+
+    sealed class DeclarationAccessTypeProvider : ISignatureTypeProvider<ApiAccess?, object?>
+    {
+        readonly Dictionary<TypeDefinitionHandle, ApiAccess?> accessCache;
+
+        public DeclarationAccessTypeProvider(
+            Dictionary<TypeDefinitionHandle, ApiAccess?> accessCache) =>
+            this.accessCache = accessCache;
+
+        public ApiAccess? GetArrayType(ApiAccess? elementType, ArrayShape shape) => elementType;
+
+        public ApiAccess? GetByReferenceType(ApiAccess? elementType) => elementType;
+
+        public ApiAccess? GetFunctionPointerType(MethodSignature<ApiAccess?> signature)
+        {
+            var access = signature.ReturnType;
+            foreach (var parameterType in signature.ParameterTypes)
+                access = GetEffectiveAccess(access, parameterType);
+            return access;
+        }
+
+        public ApiAccess? GetGenericInstantiation(
+            ApiAccess? genericType,
+            ImmutableArray<ApiAccess?> typeArguments) => genericType;
+
+        public ApiAccess? GetGenericMethodParameter(object? genericContext, int index) =>
+            ApiAccess.Public;
+
+        public ApiAccess? GetGenericTypeParameter(object? genericContext, int index) =>
+            ApiAccess.Public;
+
+        public ApiAccess? GetModifiedType(
+            ApiAccess? modifier,
+            ApiAccess? unmodifiedType,
+            bool isRequired) => unmodifiedType;
+
+        public ApiAccess? GetPinnedType(ApiAccess? elementType) => elementType;
+
+        public ApiAccess? GetPointerType(ApiAccess? elementType) => elementType;
+
+        public ApiAccess? GetPrimitiveType(PrimitiveTypeCode typeCode) => ApiAccess.Public;
+
+        public ApiAccess? GetSZArrayType(ApiAccess? elementType) => elementType;
+
+        public ApiAccess? GetTypeFromDefinition(
+            MetadataReader metadataReader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind) => GetEffectiveTypeAccess(
+                metadataReader,
+                handle,
+                accessCache);
+
+        public ApiAccess? GetTypeFromReference(
+            MetadataReader metadataReader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind) => ApiAccess.Public;
+
+        public ApiAccess? GetTypeFromSpecification(
+            MetadataReader metadataReader,
+            object? genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind) => GetDeclarationTypeAccess(
+                metadataReader,
+                handle,
+                accessCache);
+    }
 
     sealed class DocumentationIdTypeProvider : ISignatureTypeProvider<string, object?>
     {
@@ -568,9 +670,30 @@ public static class ApiAccessReader
 
         public string GetGenericInstantiation(
             string genericType,
-            ImmutableArray<string> typeArguments) =>
-            $"{Regex.Replace(genericType, "`[0-9]+", "")}" +
-            $"{{{string.Join(",", typeArguments)}}}";
+            ImmutableArray<string> typeArguments)
+        {
+            var argumentIndex = 0;
+            var encodedType = Regex.Replace(
+                genericType,
+                "`(?<arity>[0-9]+)",
+                match =>
+                {
+                    var arity = int.Parse(match.Groups["arity"].Value);
+                    if (argumentIndex + arity > typeArguments.Length)
+                        throw new InvalidDataException(
+                            $"Generic type arity exceeds its arguments: {genericType}");
+
+                    var arguments = typeArguments
+                        .Skip(argumentIndex)
+                        .Take(arity);
+                    argumentIndex += arity;
+                    return $"{{{string.Join(",", arguments)}}}";
+                });
+            if (argumentIndex != typeArguments.Length)
+                throw new InvalidDataException(
+                    $"Generic type arguments exceed its arity: {genericType}");
+            return encodedType;
+        }
 
         public string GetGenericMethodParameter(object? genericContext, int index) => $"``{index}";
 
