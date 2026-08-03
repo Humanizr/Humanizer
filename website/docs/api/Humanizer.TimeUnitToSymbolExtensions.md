@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.TimeUnitToSymbolExtensions'
+sidebar_label: 'Humanizer.TimeUnitToSymbolExtensions'
+description: 'API reference for Humanizer.TimeUnitToSymbolExtensions.'
+---
 ## TimeUnitToSymbolExtensions Class
 
 Transform a time unit into a symbol; e\.g\. [Year](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Year 'Humanizer\.TimeUnit\.Year') =\> "a"
@@ -7,18 +12,20 @@ public static class TimeUnitToSymbolExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → TimeUnitToSymbolExtensions
+- *Methods*
+  - **[ToSymbol\(this TimeUnit, CultureInfo\)](Humanizer.TimeUnitToSymbolExtensions.md#Humanizer.TimeUnitToSymbolExtensions.ToSymbol(thisHumanizer.TimeUnit,System.Globalization.CultureInfo) 'Humanizer\.TimeUnitToSymbolExtensions\.ToSymbol\(this Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)')**
 ### Methods
 
 <a name='Humanizer.TimeUnitToSymbolExtensions.ToSymbol(thisHumanizer.TimeUnit,System.Globalization.CultureInfo)'></a>
 
-## TimeUnitToSymbolExtensions\.ToSymbol\(this TimeUnit, CultureInfo\) Method
+#### TimeUnitToSymbolExtensions\.ToSymbol\(this TimeUnit, CultureInfo\) Method
 
 TimeUnit\.Day\.ToSymbol\(\) \-\> "d"
 
 ```csharp
 public static string ToSymbol(this Humanizer.TimeUnit unit, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeUnitToSymbolExtensions.ToSymbol(thisHumanizer.TimeUnit,System.Globalization.CultureInfo).unit'></a>
 
@@ -32,5 +39,5 @@ Unit of time to be turned to a symbol
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

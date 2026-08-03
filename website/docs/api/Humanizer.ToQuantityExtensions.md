@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ToQuantityExtensions'
+sidebar_label: 'Humanizer.ToQuantityExtensions'
+description: 'API reference for Humanizer.ToQuantityExtensions.'
+---
 ## ToQuantityExtensions Class
 
 Provides extensions for formatting a [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String') word as a quantity\.
@@ -7,18 +12,25 @@ public static class ToQuantityExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → ToQuantityExtensions
+- *Methods*
+  - **[ToQuantity\(this string, double\)](Humanizer.ToQuantityExtensions.md#Humanizer.ToQuantityExtensions.ToQuantity(thisstring,double) 'Humanizer\.ToQuantityExtensions\.ToQuantity\(this string, double\)')**
+  - **[ToQuantity\(this string, double, string, IFormatProvider\)](Humanizer.ToQuantityExtensions.md#Humanizer.ToQuantityExtensions.ToQuantity(thisstring,double,string,System.IFormatProvider) 'Humanizer\.ToQuantityExtensions\.ToQuantity\(this string, double, string, System\.IFormatProvider\)')**
+  - **[ToQuantity\(this string, int, ShowQuantityAs\)](Humanizer.ToQuantityExtensions.md#Humanizer.ToQuantityExtensions.ToQuantity(thisstring,int,Humanizer.ShowQuantityAs) 'Humanizer\.ToQuantityExtensions\.ToQuantity\(this string, int, Humanizer\.ShowQuantityAs\)')**
+  - **[ToQuantity\(this string, int, string, IFormatProvider\)](Humanizer.ToQuantityExtensions.md#Humanizer.ToQuantityExtensions.ToQuantity(thisstring,int,string,System.IFormatProvider) 'Humanizer\.ToQuantityExtensions\.ToQuantity\(this string, int, string, System\.IFormatProvider\)')**
+  - **[ToQuantity\(this string, long, ShowQuantityAs\)](Humanizer.ToQuantityExtensions.md#Humanizer.ToQuantityExtensions.ToQuantity(thisstring,long,Humanizer.ShowQuantityAs) 'Humanizer\.ToQuantityExtensions\.ToQuantity\(this string, long, Humanizer\.ShowQuantityAs\)')**
+  - **[ToQuantity\(this string, long, string, IFormatProvider\)](Humanizer.ToQuantityExtensions.md#Humanizer.ToQuantityExtensions.ToQuantity(thisstring,long,string,System.IFormatProvider) 'Humanizer\.ToQuantityExtensions\.ToQuantity\(this string, long, string, System\.IFormatProvider\)')**
 ### Methods
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,double)'></a>
 
-## ToQuantityExtensions\.ToQuantity\(this string, double\) Method
+#### ToQuantityExtensions\.ToQuantity\(this string, double\) Method
 
 Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
 
 ```csharp
 public static string ToQuantity(this string input, double quantity);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,double).input'></a>
 
@@ -32,22 +44,22 @@ The word to be prefixed
 
 The quantity of the word
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-### Example
+##### Example
 "request"\.ToQuantity\(0\.2\) =\> "0\.2 requests"
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,double,string,System.IFormatProvider)'></a>
 
-## ToQuantityExtensions\.ToQuantity\(this string, double, string, IFormatProvider\) Method
+#### ToQuantityExtensions\.ToQuantity\(this string, double, string, IFormatProvider\) Method
 
 Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
 
 ```csharp
 public static string ToQuantity(this string input, double quantity, string? format=null, System.IFormatProvider? formatProvider=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,double,string,System.IFormatProvider).input'></a>
 
@@ -73,24 +85,24 @@ A standard or custom numeric format string\.
 
 An object that supplies culture\-specific formatting information\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-### Example
+##### Example
 "request"\.ToQuantity\(0\.2\) =\> "0\.2 requests"
 "request"\.ToQuantity\(10\.6, format: "N0"\) =\> "10\.6 requests"
 "request"\.ToQuantity\(1\.0, format: "N0"\) =\> "1 request"
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,int,Humanizer.ShowQuantityAs)'></a>
 
-## ToQuantityExtensions\.ToQuantity\(this string, int, ShowQuantityAs\) Method
+#### ToQuantityExtensions\.ToQuantity\(this string, int, ShowQuantityAs\) Method
 
 Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
 
 ```csharp
 public static string ToQuantity(this string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs=Humanizer.ShowQuantityAs.Numeric);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,int,Humanizer.ShowQuantityAs).input'></a>
 
@@ -110,10 +122,10 @@ The quantity of the word
 
 How to show the quantity\. Numeric by default
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-### Example
+##### Example
 "request"\.ToQuantity\(0\) =\> "0 requests"
 "request"\.ToQuantity\(1\) =\> "1 request"
 "request"\.ToQuantity\(2\) =\> "2 requests"
@@ -122,14 +134,14 @@ How to show the quantity\. Numeric by default
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,int,string,System.IFormatProvider)'></a>
 
-## ToQuantityExtensions\.ToQuantity\(this string, int, string, IFormatProvider\) Method
+#### ToQuantityExtensions\.ToQuantity\(this string, int, string, IFormatProvider\) Method
 
 Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
 
 ```csharp
 public static string ToQuantity(this string input, int quantity, string? format, System.IFormatProvider? formatProvider=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,int,string,System.IFormatProvider).input'></a>
 
@@ -155,24 +167,24 @@ A standard or custom numeric format string\.
 
 An object that supplies culture\-specific formatting information\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-### Example
+##### Example
 "request"\.ToQuantity\(0\) =\> "0 requests"
 "request"\.ToQuantity\(10000, format: "N0"\) =\> "10,000 requests"
 "request"\.ToQuantity\(1, format: "N0"\) =\> "1 request"
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,long,Humanizer.ShowQuantityAs)'></a>
 
-## ToQuantityExtensions\.ToQuantity\(this string, long, ShowQuantityAs\) Method
+#### ToQuantityExtensions\.ToQuantity\(this string, long, ShowQuantityAs\) Method
 
 Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
 
 ```csharp
 public static string ToQuantity(this string input, long quantity, Humanizer.ShowQuantityAs showQuantityAs=Humanizer.ShowQuantityAs.Numeric);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,long,Humanizer.ShowQuantityAs).input'></a>
 
@@ -192,10 +204,10 @@ The quantity of the word
 
 How to show the quantity\. Numeric by default
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-### Example
+##### Example
 "request"\.ToQuantity\(0\) =\> "0 requests"
 "request"\.ToQuantity\(1\) =\> "1 request"
 "request"\.ToQuantity\(2\) =\> "2 requests"
@@ -204,14 +216,14 @@ How to show the quantity\. Numeric by default
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,long,string,System.IFormatProvider)'></a>
 
-## ToQuantityExtensions\.ToQuantity\(this string, long, string, IFormatProvider\) Method
+#### ToQuantityExtensions\.ToQuantity\(this string, long, string, IFormatProvider\) Method
 
 Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
 
 ```csharp
 public static string ToQuantity(this string input, long quantity, string? format, System.IFormatProvider? formatProvider=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ToQuantityExtensions.ToQuantity(thisstring,long,string,System.IFormatProvider).input'></a>
 
@@ -237,10 +249,10 @@ A standard or custom numeric format string\.
 
 An object that supplies culture\-specific formatting information\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-### Example
+##### Example
 "request"\.ToQuantity\(0\) =\> "0 requests"
 "request"\.ToQuantity\(10000, format: "N0"\) =\> "10,000 requests"
 "request"\.ToQuantity\(1, format: "N0"\) =\> "1 request"

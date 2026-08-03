@@ -1,0 +1,38 @@
+diff --git a/lib/server/parse.js b/lib/server/parse.js
+index 786be218697df0246ccf8bf28e234b22a915b26f..384f52f978401b3f0db0a240d733f4dd851d2cb5 100644
+--- a/lib/server/parse.js
++++ b/lib/server/parse.js
+@@ -83,7 +83,12 @@ export function html2text(html, type, url = "?") {
+             .remove();
+     }
+     if (type === "docs" || type === "blog") {
+-        const HEADINGS = "h1, h2, h3";
++        const hasLevelFourApiMembers = $("article h4")
++            .toArray()
++            .some((heading) => /-(?:constructor|field|property|method|operator|event|explicit-interface-implementation)$/.test($(heading).attr("id") || ""));
++        const HEADINGS = hasLevelFourApiMembers
++            ? "h1, h2, h3, h4"
++            : "h1, h2, h3";
+         const pageTitle = getText($, $("article h1").first().get());
+         const sections = [];
+         // Parse tags, and add them to the first section.
+diff --git a/src/server/parse.ts b/src/server/parse.ts
+index 673b74a7a51fc5e138a881adf2b8d7dade41a534..241add357038b74df788378648ceecea4bdde22d 100644
+--- a/src/server/parse.ts
++++ b/src/server/parse.ts
+@@ -98,5 +98,14 @@ export function html2text(
+   if (type === "docs" || type === "blog") {
+-    const HEADINGS = "h1, h2, h3";
++    const hasLevelFourApiMembers = $("article h4")
++      .toArray()
++      .some((heading) =>
++        /-(?:constructor|field|property|method|operator|event|explicit-interface-implementation)$/.test(
++          $(heading).attr("id") || "",
++        ),
++      );
++    const HEADINGS = hasLevelFourApiMembers
++      ? "h1, h2, h3, h4"
++      : "h1, h2, h3";
+     const pageTitle = getText($, $("article h1").first().get());
+     const sections: Array<{
+       title: string;

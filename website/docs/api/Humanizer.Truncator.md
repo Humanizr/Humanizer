@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.Truncator'
+sidebar_label: 'Humanizer.Truncator'
+description: 'API reference for Humanizer.Truncator.'
+---
 ## Truncator Class
 
 Gets a ITruncator
@@ -7,11 +12,17 @@ public static class Truncator
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Truncator
+- *Properties*
+  - **[DynamicLengthAndPreserveWords](Humanizer.Truncator.md#Humanizer.Truncator.DynamicLengthAndPreserveWords 'Humanizer\.Truncator\.DynamicLengthAndPreserveWords')**
+  - **[DynamicNumberOfCharactersAndPreserveWords](Humanizer.Truncator.md#Humanizer.Truncator.DynamicNumberOfCharactersAndPreserveWords 'Humanizer\.Truncator\.DynamicNumberOfCharactersAndPreserveWords')**
+  - **[FixedLength](Humanizer.Truncator.md#Humanizer.Truncator.FixedLength 'Humanizer\.Truncator\.FixedLength')**
+  - **[FixedNumberOfCharacters](Humanizer.Truncator.md#Humanizer.Truncator.FixedNumberOfCharacters 'Humanizer\.Truncator\.FixedNumberOfCharacters')**
+  - **[FixedNumberOfWords](Humanizer.Truncator.md#Humanizer.Truncator.FixedNumberOfWords 'Humanizer\.Truncator\.FixedNumberOfWords')**
 ### Properties
 
 <a name='Humanizer.Truncator.DynamicLengthAndPreserveWords'></a>
 
-## Truncator\.DynamicLengthAndPreserveWords Property
+#### Truncator\.DynamicLengthAndPreserveWords Property
 
 Dynamic length And Preserve Words truncator
 
@@ -19,12 +30,12 @@ Dynamic length And Preserve Words truncator
 public static Humanizer.ITruncator DynamicLengthAndPreserveWords { get; }
 ```
 
-#### Property Value
+##### Property Value
 [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator')
 
 <a name='Humanizer.Truncator.DynamicNumberOfCharactersAndPreserveWords'></a>
 
-## Truncator\.DynamicNumberOfCharactersAndPreserveWords Property
+#### Truncator\.DynamicNumberOfCharactersAndPreserveWords Property
 
 Dynamic number of characters And Preserve Words truncator
 
@@ -32,12 +43,12 @@ Dynamic number of characters And Preserve Words truncator
 public static Humanizer.ITruncator DynamicNumberOfCharactersAndPreserveWords { get; }
 ```
 
-#### Property Value
+##### Property Value
 [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator')
 
 <a name='Humanizer.Truncator.FixedLength'></a>
 
-## Truncator\.FixedLength Property
+#### Truncator\.FixedLength Property
 
 Fixed length truncator
 
@@ -45,12 +56,12 @@ Fixed length truncator
 public static Humanizer.ITruncator FixedLength { get; }
 ```
 
-#### Property Value
+##### Property Value
 [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator')
 
 <a name='Humanizer.Truncator.FixedNumberOfCharacters'></a>
 
-## Truncator\.FixedNumberOfCharacters Property
+#### Truncator\.FixedNumberOfCharacters Property
 
 Fixed number of characters truncator
 
@@ -58,12 +69,12 @@ Fixed number of characters truncator
 public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
 ```
 
-#### Property Value
+##### Property Value
 [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator')
 
 <a name='Humanizer.Truncator.FixedNumberOfWords'></a>
 
-## Truncator\.FixedNumberOfWords Property
+#### Truncator\.FixedNumberOfWords Property
 
 Fixed number of words truncator
 
@@ -71,5 +82,5 @@ Fixed number of words truncator
 public static Humanizer.ITruncator FixedNumberOfWords { get; }
 ```
 
-#### Property Value
+##### Property Value
 [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator')

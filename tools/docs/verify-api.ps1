@@ -9,9 +9,11 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+$apiReferenceV4Configuration = Join-Path $PSScriptRoot "api-reference-v4.json"
 . (Join-Path $PSScriptRoot "nuget-package.ps1")
 . (Join-Path $PSScriptRoot "snapshot-state.ps1")
 . (Join-Path $PSScriptRoot "api-approval.ps1")
+. (Join-Path $PSScriptRoot "api-reference.ps1")
 if (-not $ManifestPath) {
     $ManifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 }
@@ -127,47 +129,25 @@ function Use-ApiInput {
     throw "Unsupported API source kind '$($Entry.source.kind)' for $($Entry.version)."
 }
 
-function Invoke-ApiGenerator {
-    param(
-        [Parameter(Mandatory = $true)]$ApiInput,
-        [Parameter(Mandatory = $true)][string]$OutputPath,
-        [Parameter(Mandatory = $true)][string]$LinksPath,
-        [string]$AccessModifiers = "Api"
-    )
-
-    Invoke-DocsCheckedCommand `
-        -FilePath "dotnet" `
-        -ArgumentList @(
-            "tool", "run", "defaultdocumentation", "--",
-            "--AssemblyFilePath", $ApiInput.Dll,
-            "--DocumentationFilePath", $ApiInput.Xml,
-            "--OutputDirectoryPath", $OutputPath,
-            "--AssemblyPageName", "assembly",
-            "--GeneratedAccessModifiers", $AccessModifiers,
-            "--IncludeUndocumentedItems", "true",
-            "--GeneratedPages", "Namespaces,Types",
-            "--Sections", "Default",
-            "--LinksOutputFilePath", $LinksPath,
-            "--LinksBaseUrl", "./"
-        ) `
-        -WorkingDirectory $repoRoot
-}
-
 function Assert-GeneratedApi {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
         [Parameter(Mandatory = $true)][string]$VersionLabel,
-        [Parameter(Mandatory = $true)][string]$ApprovalPath,
+        [Parameter(Mandatory = $true)]$AssemblyInventory,
         [Parameter(Mandatory = $true)][string]$LinksPath,
-        [string[]]$ExpectedExtraTypes = @()
+        [switch]$RequireMemberIndex
     )
 
     $requiredFiles = @(
+        "Humanizer.md",
         "Humanizer.CasingExtensions.md",
         "Humanizer.CollectionHumanizeExtensions.md",
         "Humanizer.LetterCasing.md",
         "Humanizer.StringHumanizeExtensions.md"
     )
+    if ($RequireMemberIndex) {
+        $requiredFiles += "Humanizer.TimeUnit.md"
+    }
     foreach ($file in $requiredFiles) {
         $path = Join-Path $OutputPath $file
         if (-not (Test-Path $path -PathType Leaf)) {
@@ -177,44 +157,68 @@ function Assert-GeneratedApi {
 
     $stringApi = Get-Content -Raw (Join-Path $OutputPath "Humanizer.StringHumanizeExtensions.md")
     $collectionApi = Get-Content -Raw (Join-Path $OutputPath "Humanizer.CollectionHumanizeExtensions.md")
+    $enumApi = if ($RequireMemberIndex) {
+        Get-Content -Raw (Join-Path $OutputPath "Humanizer.TimeUnit.md")
+    } else {
+        ""
+    }
+    $namespaceApi = Get-Content -Raw (Join-Path $OutputPath "Humanizer.md")
+    if ($namespaceApi -notmatch "## Humanizer Namespace" -or
+        -not $namespaceApi.Contains(
+            "[StringHumanizeExtensions](Humanizer.StringHumanizeExtensions.md",
+            [System.StringComparison]::Ordinal
+        )) {
+        throw "$VersionLabel did not emit the namespace/type index."
+    }
     if ($stringApi -notmatch "## StringHumanizeExtensions Class") {
         throw "$VersionLabel did not emit the representative API type."
     }
     if ($collectionApi -notmatch "Humanize\\<T\\>") {
         throw "$VersionLabel did not preserve generic member names."
     }
-
-    $approvalTypes = [System.Collections.Generic.List[string]]::new()
-    $namespace = ""
-    $parents = @{}
-    foreach ($line in Get-Content $ApprovalPath) {
-        if ($line -match "^namespace (?<name>\S+)") {
-            $namespace = $Matches["name"]
-            $parents = @{}
-            continue
-        }
-        if ($line -notmatch "^(?<indent> +)public (?:(?:static|sealed|abstract|readonly|ref|partial) )*(?:class|struct|interface|enum|delegate)(?: static)? (?<name>[A-Za-z0-9_]+(?:<[^>]+>)?)") {
-            continue
-        }
-
-        $depth = [int]($Matches["indent"].Length / 4)
-        $parents[$depth] = $Matches["name"]
-        foreach ($key in @($parents.Keys)) {
-            if ($key -gt $depth) {
-                $parents.Remove($key)
-            }
-        }
-        $qualifiedName = "$namespace.$(
-            ((1..$depth | ForEach-Object { $parents[$_] }) -join ".")
-        )"
-        $approvalTypes.Add(
-            $qualifiedName.
-                Replace("<", "_").
-                Replace(">", "_").
-                Replace(",", "_")
+    if ($RequireMemberIndex) {
+        $genericApi = Get-Content -Raw (
+            Join-Path $OutputPath "Humanizer.LocaliserRegistry_TLocaliser_.md"
         )
+        $expectedGenericMetadata = @"
+---
+title: 'Humanizer.LocaliserRegistry<TLocaliser>'
+sidebar_label: 'Humanizer.LocaliserRegistry<TLocaliser>'
+description: 'API reference for Humanizer.LocaliserRegistry<TLocaliser>.'
+---
+"@
+        if (-not $genericApi.StartsWith(
+                $expectedGenericMetadata,
+                [System.StringComparison]::Ordinal
+            )) {
+            throw "$VersionLabel did not emit the C# generic type identity as page metadata."
+        }
     }
-    $approvalTypes = @($approvalTypes | Sort-Object -Unique)
+    if ($RequireMemberIndex -and
+        ($stringApi -notmatch "(?m)^- \*Methods\*\r?$" -or
+            $stringApi -notmatch (
+                "(?m)^  - \*\*\[Humanize\\\(this string\\\)\]" +
+                "\(Humanizer\.StringHumanizeExtensions\.md#"
+            ) -or
+            $stringApi -notmatch (
+                "(?m)^#### StringHumanizeExtensions\\\.Humanize" +
+                "\\\(this string\\\) Method\r?$"
+            ) -or
+            $stringApi -notmatch "(?m)^##### Parameters\r?$" -or
+            $enumApi -notmatch "(?m)^- \*Fields\*\r?$" -or
+            $enumApi -notmatch (
+                "(?m)^  - \*\*\[Year\]" +
+                "\(Humanizer\.TimeUnit\.md#Humanizer\.TimeUnit\.Year"
+            ) -or
+            $namespaceApi -notmatch "(?m)^\| Classes \| Summary \|\r?$")) {
+        throw "$VersionLabel did not emit a navigable member index."
+    }
+
+    $assemblyTypes = @(
+        $AssemblyInventory.Types.Values |
+            ForEach-Object PageName |
+            Sort-Object -Unique
+    )
     $generatedTypes = @(
         Get-ChildItem $OutputPath -Filter "*.md" -File |
             Where-Object {
@@ -225,15 +229,13 @@ function Assert-GeneratedApi {
             ForEach-Object BaseName |
             Sort-Object -Unique
     )
-    $missingTypes = @($approvalTypes | Where-Object { $_ -notin $generatedTypes })
-    $extraTypes = @($generatedTypes | Where-Object { $_ -notin $approvalTypes })
-    if ($approvalTypes.Count -eq 0 -or $missingTypes.Count -gt 0) {
-        throw "$VersionLabel API type coverage differs from its PublicAPI approval. Missing: $($missingTypes -join ', '); extra: $($extraTypes -join ', ')."
+    $missingTypes = @($assemblyTypes | Where-Object { $_ -notin $generatedTypes })
+    $extraTypes = @($generatedTypes | Where-Object { $_ -notin $assemblyTypes })
+    if ($assemblyTypes.Count -eq 0 -or
+        $missingTypes.Count -gt 0 -or
+        $extraTypes.Count -gt 0) {
+        throw "$VersionLabel API type coverage differs from its assembly-derived exact inventory. Missing: $($missingTypes -join ', '); extra: $($extraTypes -join ', ')."
     }
-    Assert-GeneratedExtraTypes `
-        -VersionLabel $VersionLabel `
-        -Actual $extraTypes `
-        -Expected $ExpectedExtraTypes
     Assert-GeneratedApiLinks `
         -OutputPath $OutputPath `
         -LinksPath $LinksPath `
@@ -322,6 +324,17 @@ function Test-ApiEntry {
     if (-not (Test-Path $approvalPath -PathType Leaf)) {
         throw "Version $($Entry.version) is missing PublicAPI approval evidence."
     }
+    $assemblyInventory = Get-AssemblyApiMemberInventory `
+        -AssemblyPath $ApiInput.Dll
+    $useIndexedApiReference = Test-UsesIndexedApiReference -Entry $Entry
+    $configurationFilePath = if ($useIndexedApiReference) {
+        if (-not (Test-Path $apiReferenceV4Configuration -PathType Leaf)) {
+            throw "The indexed API reference configuration is missing."
+        }
+        $apiReferenceV4Configuration
+    } else {
+        $null
+    }
 
     $preserveOutput = -not [string]::IsNullOrWhiteSpace($OutputDirectory)
     $firstOutput = if ($preserveOutput) {
@@ -337,23 +350,29 @@ function Test-ApiEntry {
     $publicLinks = "$publicOutput-links.txt"
     New-Item -ItemType Directory -Path $firstOutput | Out-Null
     try {
-        Invoke-ApiGenerator `
+        Invoke-ApiReferenceGeneration `
             -ApiInput $ApiInput `
             -OutputPath $firstOutput `
-            -LinksPath $firstLinks
+            -LinksPath $firstLinks `
+            -AssemblyInventory $assemblyInventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel $Entry.version `
+            -ConfigurationFilePath $configurationFilePath
         Assert-GeneratedApi `
             -OutputPath $firstOutput `
             -VersionLabel $Entry.version `
-            -ApprovalPath $approvalPath `
+            -AssemblyInventory $assemblyInventory `
             -LinksPath $firstLinks `
-            -ExpectedExtraTypes @(
-                $Entry.publicApiApproval.generatedExtraTypes
-            )
+            -RequireMemberIndex:$useIndexedApiReference
         New-Item -ItemType Directory -Path $publicOutput | Out-Null
-        Invoke-ApiGenerator `
+        Invoke-ApiReferenceGeneration `
             -ApiInput $ApiInput `
             -OutputPath $publicOutput `
             -LinksPath $publicLinks `
+            -AssemblyInventory $assemblyInventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "$($Entry.version) public" `
+            -ConfigurationFilePath $configurationFilePath `
             -AccessModifiers "Public"
         Assert-GeneratedApiLinks `
             -OutputPath $publicOutput `
@@ -362,7 +381,7 @@ function Test-ApiEntry {
         Assert-ApiAccessCoverage `
             -ApiLinksPath $firstLinks `
             -PublicLinksPath $publicLinks `
-            -ApprovalPath $approvalPath `
+            -AssemblyInventory $assemblyInventory `
             -VersionLabel $Entry.version
         if (-not $preserveOutput) {
             Assert-CommittedApi `
@@ -375,10 +394,14 @@ function Test-ApiEntry {
             $secondLinks = "$secondOutput-links.txt"
             New-Item -ItemType Directory -Path $secondOutput | Out-Null
             try {
-                Invoke-ApiGenerator `
+                Invoke-ApiReferenceGeneration `
                     -ApiInput $ApiInput `
                     -OutputPath $secondOutput `
-                    -LinksPath $secondLinks
+                    -LinksPath $secondLinks `
+                    -AssemblyInventory $assemblyInventory `
+                    -RepositoryRoot $repoRoot `
+                    -VersionLabel "$($Entry.version) second" `
+                    -ConfigurationFilePath $configurationFilePath
                 if ((Get-SnapshotDirectoryDigest $firstOutput) -ne
                     (Get-SnapshotDirectoryDigest $secondOutput) -or
                     (Get-FileHash $firstLinks -Algorithm SHA256).Hash -ne

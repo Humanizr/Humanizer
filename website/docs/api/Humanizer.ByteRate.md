@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ByteRate'
+sidebar_label: 'Humanizer.ByteRate'
+description: 'API reference for Humanizer.ByteRate.'
+---
 ## ByteRate Class
 
 Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
@@ -12,18 +17,33 @@ Implements [System\.IComparable&lt;](https://learn.microsoft.com/en-us/dotnet/ap
 
 ### Remarks
 Create a ByteRate with given quantity of bytes across an interval
+- *Constructors*
+  - **[ByteRate\(ByteSize, TimeSpan\)](Humanizer.ByteRate.md#Humanizer.ByteRate.ByteRate(Humanizer.ByteSize,System.TimeSpan) 'Humanizer\.ByteRate\.ByteRate\(Humanizer\.ByteSize, System\.TimeSpan\)')**
+- *Properties*
+  - **[Interval](Humanizer.ByteRate.md#Humanizer.ByteRate.Interval 'Humanizer\.ByteRate\.Interval')**
+  - **[Size](Humanizer.ByteRate.md#Humanizer.ByteRate.Size 'Humanizer\.ByteRate\.Size')**
+- *Methods*
+  - **[CompareTo\(ByteRate\)](Humanizer.ByteRate.md#Humanizer.ByteRate.CompareTo(Humanizer.ByteRate) 'Humanizer\.ByteRate\.CompareTo\(Humanizer\.ByteRate\)')**
+  - **[CompareTo\(object\)](Humanizer.ByteRate.md#Humanizer.ByteRate.CompareTo(object) 'Humanizer\.ByteRate\.CompareTo\(object\)')**
+  - **[Equals\(ByteRate\)](Humanizer.ByteRate.md#Humanizer.ByteRate.Equals(Humanizer.ByteRate) 'Humanizer\.ByteRate\.Equals\(Humanizer\.ByteRate\)')**
+  - **[Equals\(object\)](Humanizer.ByteRate.md#Humanizer.ByteRate.Equals(object) 'Humanizer\.ByteRate\.Equals\(object\)')**
+  - **[GetHashCode\(\)](Humanizer.ByteRate.md#Humanizer.ByteRate.GetHashCode() 'Humanizer\.ByteRate\.GetHashCode\(\)')**
+  - **[Humanize\(TimeUnit\)](Humanizer.ByteRate.md#Humanizer.ByteRate.Humanize(Humanizer.TimeUnit) 'Humanizer\.ByteRate\.Humanize\(Humanizer\.TimeUnit\)')**
+  - **[Humanize\(string, TimeUnit, CultureInfo\)](Humanizer.ByteRate.md#Humanizer.ByteRate.Humanize(string,Humanizer.TimeUnit,System.Globalization.CultureInfo) 'Humanizer\.ByteRate\.Humanize\(string, Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)')**
+  - **[HumanizeWithUnitSystem\(ByteSizeUnitSystem, string, TimeUnit, CultureInfo\)](Humanizer.ByteRate.md#Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo) 'Humanizer\.ByteRate\.HumanizeWithUnitSystem\(Humanizer\.ByteSizeUnitSystem, string, Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)')**
+  - **[ToString\(\)](Humanizer.ByteRate.md#Humanizer.ByteRate.ToString() 'Humanizer\.ByteRate\.ToString\(\)')**
 ### Constructors
 
 <a name='Humanizer.ByteRate.ByteRate(Humanizer.ByteSize,System.TimeSpan)'></a>
 
-## ByteRate\(ByteSize, TimeSpan\) Constructor
+#### ByteRate\(ByteSize, TimeSpan\) Constructor
 
 Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
 
 ```csharp
 public ByteRate(Humanizer.ByteSize size, System.TimeSpan interval);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.ByteRate(Humanizer.ByteSize,System.TimeSpan).size'></a>
 
@@ -33,13 +53,13 @@ public ByteRate(Humanizer.ByteSize size, System.TimeSpan interval);
 
 `interval` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
 
-### Remarks
+##### Remarks
 Create a ByteRate with given quantity of bytes across an interval
 ### Properties
 
 <a name='Humanizer.ByteRate.Interval'></a>
 
-## ByteRate\.Interval Property
+#### ByteRate\.Interval Property
 
 Interval that bytes were transferred in
 
@@ -47,12 +67,12 @@ Interval that bytes were transferred in
 public System.TimeSpan Interval { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
 
 <a name='Humanizer.ByteRate.Size'></a>
 
-## ByteRate\.Size Property
+#### ByteRate\.Size Property
 
 Quantity of bytes
 
@@ -60,20 +80,20 @@ Quantity of bytes
 public Humanizer.ByteSize Size { get; }
 ```
 
-#### Property Value
+##### Property Value
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 ### Methods
 
 <a name='Humanizer.ByteRate.CompareTo(Humanizer.ByteRate)'></a>
 
-## ByteRate\.CompareTo\(ByteRate\) Method
+#### ByteRate\.CompareTo\(ByteRate\) Method
 
 Compares this rate with another rate after normalizing both to bytes per second\.
 
 ```csharp
 public int CompareTo(Humanizer.ByteRate? other);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.CompareTo(Humanizer.ByteRate).other'></a>
 
@@ -81,17 +101,17 @@ public int CompareTo(Humanizer.ByteRate? other);
 
 The rate to compare with\.
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 <a name='Humanizer.ByteRate.CompareTo(object)'></a>
 
-## ByteRate\.CompareTo\(object\) Method
+#### ByteRate\.CompareTo\(object\) Method
 
 ```csharp
 public int CompareTo(object? obj);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.CompareTo(object).obj'></a>
 
@@ -99,62 +119,62 @@ public int CompareTo(object? obj);
 
 Implements [CompareTo\(object\)](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable.compareto#system-icomparable-compareto(system-object) 'System\.IComparable\.CompareTo\(System\.Object\)')
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 <a name='Humanizer.ByteRate.Equals(Humanizer.ByteRate)'></a>
 
-## ByteRate\.Equals\(ByteRate\) Method
+#### ByteRate\.Equals\(ByteRate\) Method
 
 ```csharp
 public bool Equals(Humanizer.ByteRate? other);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.Equals(Humanizer.ByteRate).other'></a>
 
 `other` [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate')
 
-#### Returns
+##### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 <a name='Humanizer.ByteRate.Equals(object)'></a>
 
-## ByteRate\.Equals\(object\) Method
+#### ByteRate\.Equals\(object\) Method
 
 ```csharp
 public override bool Equals(object? obj);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.Equals(object).obj'></a>
 
 `obj` [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object')
 
-#### Returns
+##### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 <a name='Humanizer.ByteRate.GetHashCode()'></a>
 
-## ByteRate\.GetHashCode\(\) Method
+#### ByteRate\.GetHashCode\(\) Method
 
 ```csharp
 public override int GetHashCode();
 ```
 
-#### Returns
+##### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 <a name='Humanizer.ByteRate.Humanize(Humanizer.TimeUnit)'></a>
 
-## ByteRate\.Humanize\(TimeUnit\) Method
+#### ByteRate\.Humanize\(TimeUnit\) Method
 
 Calculate rate for the quantity of bytes and interval defined by this instance
 
 ```csharp
 public string Humanize(Humanizer.TimeUnit timeUnit=Humanizer.TimeUnit.Second);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.Humanize(Humanizer.TimeUnit).timeUnit'></a>
 
@@ -162,19 +182,19 @@ public string Humanize(Humanizer.TimeUnit timeUnit=Humanizer.TimeUnit.Second);
 
 Unit of time to calculate rate for \(defaults is per second\)
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.ByteRate.Humanize(string,Humanizer.TimeUnit,System.Globalization.CultureInfo)'></a>
 
-## ByteRate\.Humanize\(string, TimeUnit, CultureInfo\) Method
+#### ByteRate\.Humanize\(string, TimeUnit, CultureInfo\) Method
 
 Calculate rate for the quantity of bytes and interval defined by this instance
 
 ```csharp
 public string Humanize(string? format, Humanizer.TimeUnit timeUnit=Humanizer.TimeUnit.Second, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.Humanize(string,Humanizer.TimeUnit,System.Globalization.CultureInfo).format'></a>
 
@@ -194,19 +214,19 @@ Unit of time to calculate rate for \(defaults is per second\)
 
 Culture to use\. If null, current thread's culture is used\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo)'></a>
 
-## ByteRate\.HumanizeWithUnitSystem\(ByteSizeUnitSystem, string, TimeUnit, CultureInfo\) Method
+#### ByteRate\.HumanizeWithUnitSystem\(ByteSizeUnitSystem, string, TimeUnit, CultureInfo\) Method
 
 Calculates and humanizes this rate using an explicitly selected byte\-size unit system\.
 
 ```csharp
 public string HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem unitSystem, string? format=null, Humanizer.TimeUnit timeUnit=Humanizer.TimeUnit.Second, System.Globalization.CultureInfo? culture=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).unitSystem'></a>
 
@@ -235,11 +255,11 @@ The time unit to use for the displayed rate\.
 
 The culture used to format the numeric value, byte\-size unit, and time\-unit symbol\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The humanized rate\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [unitSystem](Humanizer.ByteRate.md#Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).unitSystem 'Humanizer\.ByteRate\.HumanizeWithUnitSystem\(Humanizer\.ByteSizeUnitSystem, string, Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)\.unitSystem') is not defined\.
@@ -253,7 +273,7 @@ The humanized rate\.
 
 <a name='Humanizer.ByteRate.ToString()'></a>
 
-## ByteRate\.ToString\(\) Method
+#### ByteRate\.ToString\(\) Method
 
 Returns the humanized rate using the default format and time unit\.
 
@@ -261,5 +281,5 @@ Returns the humanized rate using the default format and time unit\.
 public override string ToString();
 ```
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

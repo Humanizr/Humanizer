@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator'
+sidebar_label: 'Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator'
+description: 'API reference for Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.'
+---
 ## DynamicNumberOfCharactersAndPreserveWordsTruncator Class
 
 Truncate a string to a fixed number of letters or digits,
@@ -14,16 +19,31 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : Humanizer.ITru
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DynamicNumberOfCharactersAndPreserveWordsTruncator
 
 Implements [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator')
+- *Constructors*
+  - **[DynamicNumberOfCharactersAndPreserveWordsTruncator\(\)](Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.md#Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.DynamicNumberOfCharactersAndPreserveWordsTruncator())**
+- *Methods*
+  - **[Truncate\(string, int, string, TruncateFrom\)](Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.md#Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.Truncate(string,int,string,Humanizer.TruncateFrom) 'Humanizer\.DynamicNumberOfCharactersAndPreserveWordsTruncator\.Truncate\(string, int, string, Humanizer\.TruncateFrom\)')**
+### Constructors
+
+<a name='Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.DynamicNumberOfCharactersAndPreserveWordsTruncator()'></a>
+
+#### DynamicNumberOfCharactersAndPreserveWordsTruncator\(\) Constructor
+
+Initializes a new instance of the DynamicNumberOfCharactersAndPreserveWordsTruncator class.
+
+```csharp
+public DynamicNumberOfCharactersAndPreserveWordsTruncator();
+```
 ### Methods
 
 <a name='Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.Truncate(string,int,string,Humanizer.TruncateFrom)'></a>
 
-## DynamicNumberOfCharactersAndPreserveWordsTruncator\.Truncate\(string, int, string, TruncateFrom\) Method
+#### DynamicNumberOfCharactersAndPreserveWordsTruncator\.Truncate\(string, int, string, TruncateFrom\) Method
 
 ```csharp
 public string? Truncate(string? value, int totalLength, string? delimiter, Humanizer.TruncateFrom truncateFrom=Humanizer.TruncateFrom.Right);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.Truncate(string,int,string,Humanizer.TruncateFrom).value'></a>
 
@@ -43,5 +63,5 @@ public string? Truncate(string? value, int totalLength, string? delimiter, Human
 
 Implements [Truncate\(string, int, string, TruncateFrom\)](Humanizer.ITruncator.md#Humanizer.ITruncator.Truncate(string,int,string,Humanizer.TruncateFrom) 'Humanizer\.ITruncator\.Truncate\(string, int, string, Humanizer\.TruncateFrom\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

@@ -9,6 +9,940 @@ $manifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 . (Join-Path $PSScriptRoot "snapshot-state.ps1")
 . (Join-Path $PSScriptRoot "api-approval.ps1")
 . (Join-Path $PSScriptRoot "nuget-package.ps1")
+. (Join-Path $PSScriptRoot "api-reference.ps1")
+
+function Assert-ApiReferenceArchitecture {
+    $verifyPath = Join-Path $PSScriptRoot "verify-api.ps1"
+    $verifyLines = [System.IO.File]::ReadAllLines($verifyPath)
+    $verifySource = $verifyLines -join "`n"
+    if ($verifyLines.Count -ge 1000) {
+        throw "verify-api.ps1 must remain a verifier/orchestrator below 1,000 lines."
+    }
+
+    $assemblyParses = [regex]::Matches(
+        $verifySource,
+        "\bGet-AssemblyApiMemberInventory\b"
+    ).Count
+    if ($assemblyParses -ne 1) {
+        throw "verify-api.ps1 must derive the assembly API inventory exactly once."
+    }
+
+    $pipelineCalls = [regex]::Matches(
+        $verifySource,
+        "\bInvoke-ApiReferenceGeneration\b"
+    ).Count
+    if ($pipelineCalls -ne 3) {
+        throw "verify-api.ps1 must use one shared API generation pipeline for its three outputs."
+    }
+
+    foreach ($stage in @(
+        "Add-ImplicitApiConstructors",
+        "Set-ApiMarkdownStructure",
+        "Set-ApiTypeMetadata",
+        "Assert-GeneratedApiMemberCompleteness",
+        "Assert-ApiHeadingOwnership"
+    )) {
+        if ($verifySource -match "(?m)^function $stage\b") {
+            throw "$stage belongs in the shared API reference module."
+        }
+    }
+}
+
+Assert-ApiReferenceArchitecture
+
+function New-ApiShapeInput {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][string]$Source,
+        [string[]]$CompilerOptions = @()
+    )
+
+    $dllPath = Join-Path $Root "$Name.dll"
+    $arguments = @{
+        Language = "CSharp"
+        OutputAssembly = $dllPath
+        TypeDefinition = $Source
+    }
+    if ($CompilerOptions.Count -gt 0) {
+        $arguments.CompilerOptions = $CompilerOptions
+    }
+    Add-Type @arguments
+    $xmlPath = Join-Path $Root "$Name.xml"
+    [System.IO.File]::WriteAllText(
+        $xmlPath,
+        "<doc><assembly><name>$Name</name></assembly><members /></doc>`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    return [PSCustomObject]@{
+        Dll = $dllPath
+        Xml = $xmlPath
+    }
+}
+
+function New-CheckedConversionApiInput {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $name = "CheckedConversionFixture"
+    $projectRoot = Join-Path $Root $name
+    New-Item -ItemType Directory -Path $projectRoot | Out-Null
+    $projectPath = Join-Path $projectRoot "$name.csproj"
+    [System.IO.File]::WriteAllText(
+        $projectPath,
+        @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+</Project>
+"@,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        (Join-Path $projectRoot "Source.cs"),
+        @"
+namespace CheckedConversionFixture;
+
+public readonly struct CheckedToken
+{
+    public static explicit operator CheckedToken(int value) => default;
+    /// <summary>Converts an integer in a checked context.</summary>
+    public static explicit operator checked CheckedToken(int value) => default;
+}
+
+public class Generic<T> { }
+"@,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    Invoke-DocsCheckedCommand `
+        -FilePath "dotnet" `
+        -ArgumentList @(
+            "build", $projectPath,
+            "--configuration", "Release",
+            "--nologo",
+            "--verbosity", "quiet"
+        ) `
+        -WorkingDirectory $Root
+    $outputRoot = Join-Path $projectRoot "bin/Release/net8.0"
+    return [PSCustomObject]@{
+        Dll = Join-Path $outputRoot "$name.dll"
+        Xml = Join-Path $outputRoot "$name.xml"
+    }
+}
+
+function Assert-ApiPageCollision {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][string]$Source,
+        [Parameter(Mandatory = $true)][string]$ExpectedPage,
+        [Parameter(Mandatory = $true)][string[]]$ExpectedTypeIds
+    )
+
+    $apiInput = New-ApiShapeInput `
+        -Root $Root `
+        -Name $Name `
+        -Source $Source
+    $collisionFailed = $false
+    try {
+        Get-AssemblyApiMemberInventory `
+            -AssemblyPath $apiInput.Dll | Out-Null
+    } catch {
+        $collisionMessage = $_.Exception.Message
+        $collisionFailed = $collisionMessage.Contains(
+            "canonical page $ExpectedPage",
+            [System.StringComparison]::Ordinal
+        )
+        foreach ($typeId in $ExpectedTypeIds) {
+            $collisionFailed = $collisionFailed -and
+                $collisionMessage.Contains(
+                    $typeId,
+                    [System.StringComparison]::Ordinal
+                )
+        }
+    }
+    if (-not $collisionFailed) {
+        throw "A canonical API page collision did not fail closed."
+    }
+}
+
+function Assert-ApiCultureDeterminism {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $apiInput = New-ApiShapeInput `
+        -Root $Root `
+        -Name "CultureFixture" `
+        -Source @"
+namespace Äther
+{
+    public class Api { }
+}
+
+namespace Zeta
+{
+    public class Api { }
+    public class Generic<T> { }
+}
+"@
+    $inventory = Get-AssemblyApiMemberInventory `
+        -AssemblyPath $apiInput.Dll
+    $entry = [PSCustomObject]@{
+        version = "current"
+        label = "4.0 preview"
+        referenceTfm = "net10.0"
+    }
+    $directoryManifests = @{}
+    $directoryDigests = @{}
+    $linksContents = @{}
+    $linksDigests = @{}
+    $landingContents = @{}
+    $originalCulture = [System.Globalization.CultureInfo]::CurrentCulture
+    $originalUiCulture = [System.Globalization.CultureInfo]::CurrentUICulture
+    try {
+        foreach ($cultureName in @("en-US", "sv-SE")) {
+            $outputRoot = Join-Path $Root "culture-$cultureName"
+            $linksPath = Join-Path $Root "culture-$cultureName-links.txt"
+            New-Item -ItemType Directory -Path $outputRoot | Out-Null
+            $culture = [System.Globalization.CultureInfo]::GetCultureInfo(
+                $cultureName
+            )
+            [System.Globalization.CultureInfo]::CurrentCulture = $culture
+            [System.Globalization.CultureInfo]::CurrentUICulture = $culture
+
+            Invoke-ApiReferenceGeneration `
+                -ApiInput $apiInput `
+                -OutputPath $outputRoot `
+                -LinksPath $linksPath `
+                -AssemblyInventory $inventory `
+                -RepositoryRoot $repoRoot `
+                -VersionLabel "$cultureName culture fixture" `
+                -ConfigurationFilePath (Join-Path $PSScriptRoot "api-reference-v4.json")
+            Add-ApiLanding -ApiRoot $outputRoot -Entry $entry
+
+            $relativePaths = [string[]]@(
+                Get-ChildItem $outputRoot -File -Recurse |
+                    ForEach-Object {
+                        [System.IO.Path]::GetRelativePath(
+                            $outputRoot,
+                            $_.FullName
+                        ).Replace("\", "/")
+                    }
+            )
+            [Array]::Sort($relativePaths, [StringComparer]::Ordinal)
+            $digestLines = foreach ($relativePath in $relativePaths) {
+                $path = Join-Path $outputRoot $relativePath
+                "$relativePath $((Get-FileHash $path -Algorithm SHA256).Hash)"
+            }
+            $manifest = $digestLines -join "`n"
+            $manifestBytes = [System.Text.Encoding]::UTF8.GetBytes($manifest)
+            $directoryManifests[$cultureName] = $manifest
+            $directoryDigests[$cultureName] = [Convert]::ToHexString(
+                [System.Security.Cryptography.SHA256]::HashData($manifestBytes)
+            )
+
+            $linksBytes = [System.IO.File]::ReadAllBytes($linksPath)
+            $linksContents[$cultureName] = [Convert]::ToBase64String($linksBytes)
+            $linksDigests[$cultureName] = [Convert]::ToHexString(
+                [System.Security.Cryptography.SHA256]::HashData($linksBytes)
+            )
+            $landingContents[$cultureName] = Get-Content -Raw (
+                Join-Path $outputRoot "index.md"
+            )
+        }
+    } finally {
+        [System.Globalization.CultureInfo]::CurrentCulture = $originalCulture
+        [System.Globalization.CultureInfo]::CurrentUICulture = $originalUiCulture
+    }
+
+    if ($directoryManifests["en-US"] -ne $directoryManifests["sv-SE"] -or
+        $directoryDigests["en-US"] -ne $directoryDigests["sv-SE"]) {
+        throw "Generated API files changed with the process culture."
+    }
+    if ($linksContents["en-US"] -ne $linksContents["sv-SE"] -or
+        $linksDigests["en-US"] -ne $linksDigests["sv-SE"]) {
+        throw "Generated API links changed with the process culture."
+    }
+
+    $landing = $landingContents["en-US"]
+    $zetaNamespace = $landing.IndexOf(
+        "### [Zeta Namespace]",
+        [System.StringComparison]::Ordinal
+    )
+    $aetherNamespace = $landing.IndexOf(
+        "### [Äther Namespace]",
+        [System.StringComparison]::Ordinal
+    )
+    if ($zetaNamespace -lt 0 -or $aetherNamespace -lt 0 -or
+        $zetaNamespace -gt $aetherNamespace) {
+        throw "Generated API namespaces are not in ordinal order."
+    }
+
+    $links = [System.Text.Encoding]::UTF8.GetString(
+        [Convert]::FromBase64String($linksContents["en-US"])
+    )
+    $zetaConstructor = $links.IndexOf(
+        "M:Zeta.Api.#ctor",
+        [System.StringComparison]::Ordinal
+    )
+    $aetherConstructor = $links.IndexOf(
+        "M:Äther.Api.#ctor",
+        [System.StringComparison]::Ordinal
+    )
+    if ($zetaConstructor -lt 0 -or $aetherConstructor -lt 0 -or
+        $zetaConstructor -gt $aetherConstructor) {
+        throw "Generated implicit-constructor links are not in ordinal order."
+    }
+}
+
+function Assert-AssemblyApiShapes {
+    $fixtureRoot = Join-Path (
+        [System.IO.Path]::GetTempPath()
+    ) "humanizer-assembly-api-shapes-$([guid]::NewGuid().ToString('N'))"
+    New-Item -ItemType Directory -Path $fixtureRoot | Out-Null
+    try {
+        Assert-ApiCultureDeterminism -Root $fixtureRoot
+        Assert-ApiPageCollision `
+            -Root $fixtureRoot `
+            -Name "CollisionFixture" `
+            -ExpectedPage "CollisionFixture.Same_T_" `
+            -ExpectedTypeIds @(
+                'T:CollisionFixture.Same`1',
+                "T:CollisionFixture.Same_T_"
+            ) `
+            -Source @"
+namespace CollisionFixture;
+
+public class Same<T> { }
+public class Same_T_ { }
+"@
+        Assert-ApiPageCollision `
+            -Root $fixtureRoot `
+            -Name "CaseCollisionFixture" `
+            -ExpectedPage "CaseCollisionFixture.Same" `
+            -ExpectedTypeIds @(
+                "T:CaseCollisionFixture.Same",
+                "T:CaseCollisionFixture.same"
+            ) `
+            -Source @"
+namespace CaseCollisionFixture;
+
+public class Same { }
+public class same { }
+"@
+
+        $checkedInput = New-CheckedConversionApiInput -Root $fixtureRoot
+        $checkedConversionId = (
+            "M:CheckedConversionFixture.CheckedToken." +
+            "op_CheckedExplicit(System.Int32)" +
+            "~CheckedConversionFixture.CheckedToken"
+        )
+        $compilerDocumentation = [xml](Get-Content -Raw $checkedInput.Xml)
+        $compilerDocumentationIds = @(
+            $compilerDocumentation.doc.members.member |
+                ForEach-Object name
+        )
+        if ($checkedConversionId -notin $compilerDocumentationIds) {
+            throw "The compiler omitted the checked conversion return type."
+        }
+        $checkedInventory = Get-AssemblyApiMemberInventory `
+            -AssemblyPath $checkedInput.Dll
+        if ($checkedConversionId -notin @($checkedInventory.Records.Id)) {
+            throw "The assembly inventory omitted the checked conversion return type."
+        }
+        $checkedConversionAlias = $checkedConversionId.Substring(
+            0,
+            $checkedConversionId.LastIndexOf("~")
+        )
+        $resolvedCheckedConversionId = Resolve-ApiCheckedConversionId `
+            -Id $checkedConversionAlias `
+            -ExpectedRecords $checkedInventory.Records
+        if ($resolvedCheckedConversionId -ne $checkedConversionId) {
+            throw "The checked conversion route did not resolve its canonical ID."
+        }
+        $ordinaryCheckedMethod = [PSCustomObject]@{
+            Id = $checkedConversionAlias
+            Kind = "Method"
+        }
+        if ((Resolve-ApiCheckedConversionId `
+                -Id $checkedConversionAlias `
+                -ExpectedRecords @($ordinaryCheckedMethod)) -ne
+            $checkedConversionAlias) {
+            throw "An ordinary checked-conversion-named method changed its ID."
+        }
+        $invalidCheckedRouteCases = @(
+            [PSCustomObject]@{
+                Records = @()
+                CandidateCount = 0
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    $ordinaryCheckedMethod,
+                    [PSCustomObject]@{
+                        Id = $checkedConversionId
+                        Kind = "Operator"
+                    }
+                )
+                CandidateCount = 2
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    [PSCustomObject]@{
+                        Id = $checkedConversionId
+                        Kind = "Operator"
+                    },
+                    [PSCustomObject]@{
+                        Id = "$checkedConversionAlias~System.Object"
+                        Kind = "Operator"
+                    }
+                )
+                CandidateCount = 2
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    $ordinaryCheckedMethod,
+                    $ordinaryCheckedMethod
+                )
+                CandidateCount = 2
+            },
+            [PSCustomObject]@{
+                Records = @(
+                    [PSCustomObject]@{
+                        Id = $checkedConversionId
+                        Kind = "Method"
+                    }
+                )
+                CandidateCount = 0
+            }
+        )
+        foreach ($routeCase in $invalidCheckedRouteCases) {
+            $routeFailed = $false
+            try {
+                Resolve-ApiCheckedConversionId `
+                    -Id $checkedConversionAlias `
+                    -ExpectedRecords $routeCase.Records | Out-Null
+            } catch {
+                $routeFailed = $_.Exception.Message.Contains(
+                    "matched $($routeCase.CandidateCount) assembly-derived IDs",
+                    [System.StringComparison]::Ordinal
+                )
+            }
+            if (-not $routeFailed) {
+                throw "An invalid checked conversion route did not fail closed."
+            }
+        }
+        $originalCheckedXml = Get-Content -Raw $checkedInput.Xml
+        $checkedOutput = Join-Path $fixtureRoot "checked"
+        $checkedLinks = Join-Path $fixtureRoot "checked-links.txt"
+        New-Item -ItemType Directory -Path $checkedOutput | Out-Null
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $checkedInput `
+            -OutputPath $checkedOutput `
+            -LinksPath $checkedLinks `
+            -AssemblyInventory $checkedInventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "checked conversion fixture" `
+            -ConfigurationFilePath (Join-Path $PSScriptRoot "api-reference-v4.json")
+        if ($checkedConversionId -notin @(
+            (Get-ApiLinkRecords -LinksPath $checkedLinks).Id
+        )) {
+            throw "Generated API links omitted the checked conversion return type."
+        }
+        $checkedPage = Get-Content -Raw (
+            Join-Path $checkedOutput "CheckedConversionFixture.CheckedToken.md"
+        )
+        if (-not $checkedPage.Contains(
+                "Converts an integer in a checked context",
+                [System.StringComparison]::Ordinal
+            )) {
+            throw "Generated API omitted the checked conversion summary."
+        }
+        if ((Get-Content -Raw $checkedInput.Xml) -ne $originalCheckedXml) {
+            throw "Checked conversion generation mutated the compiler XML."
+        }
+
+        $conflictingXml = Join-Path $fixtureRoot "checked-conflict.xml"
+        $conflictingDocument = [System.Xml.XmlDocument]::new()
+        $conflictingDocument.PreserveWhitespace = $true
+        $conflictingDocument.Load($checkedInput.Xml)
+        $canonicalNodes = @(
+            $conflictingDocument.SelectNodes('/doc/members/member') |
+                Where-Object {
+                    [string]::Equals(
+                        $_.GetAttribute("name"),
+                        $checkedConversionId,
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+        )
+        if ($canonicalNodes.Count -ne 1) {
+            throw "The checked conversion fixture has no unique canonical XML member."
+        }
+        $canonicalNode = $canonicalNodes[0]
+        $conflictingNode = $canonicalNode.CloneNode($true)
+        $conflictingNode.SetAttribute("name", $checkedConversionAlias)
+        $conflictingMembers = $conflictingDocument.SelectSingleNode('/doc/members')
+        [void]$conflictingMembers.AppendChild($conflictingNode)
+        [void]$conflictingMembers.AppendChild(
+            $conflictingDocument.CreateWhitespace("`n    ")
+        )
+        $conflictingDocument.Save($conflictingXml)
+        $conflictFailed = $false
+        try {
+            New-DefaultDocumentationApiInput `
+                -ApiInput ([PSCustomObject]@{
+                    Dll = $checkedInput.Dll
+                    Xml = $conflictingXml
+                }) `
+                -ExpectedRecords $checkedInventory.Records | Out-Null
+        } catch {
+            $conflictFailed = $_.Exception.Message.Contains(
+                "Checked conversion XML alias already exists: $checkedConversionAlias",
+                [System.StringComparison]::Ordinal
+            )
+        }
+        if (-not $conflictFailed) {
+            throw "A conflicting checked conversion XML alias did not fail closed."
+        }
+
+        $ambiguousFailed = $false
+        try {
+            New-DefaultDocumentationApiInput `
+                -ApiInput $checkedInput `
+                -ExpectedRecords @(
+                    [PSCustomObject]@{ Id = $checkedConversionId },
+                    [PSCustomObject]@{
+                        Id = "$checkedConversionAlias~System.Object"
+                    }
+                ) | Out-Null
+        } catch {
+            $ambiguousFailed = $_.Exception.Message.Contains(
+                "matched 2 assembly-derived IDs",
+                [System.StringComparison]::Ordinal
+            )
+        }
+        if (-not $ambiguousFailed) {
+            throw "An ambiguous checked conversion XML alias did not fail closed."
+        }
+
+        $uncheckedOutput = Join-Path $fixtureRoot "checked-without-config"
+        $uncheckedLinks = Join-Path $fixtureRoot "checked-without-config-links.txt"
+        New-Item -ItemType Directory -Path $uncheckedOutput | Out-Null
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $checkedInput `
+            -OutputPath $uncheckedOutput `
+            -LinksPath $uncheckedLinks `
+            -AssemblyInventory $checkedInventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "checked conversion fixture without configuration"
+        $uncheckedPage = Get-Content -Raw (
+            Join-Path $uncheckedOutput "CheckedConversionFixture.CheckedToken.md"
+        )
+        if (-not $uncheckedPage.Contains(
+                "Converts an integer in a checked context",
+                [System.StringComparison]::Ordinal
+            )) {
+            throw "Unconfigured API generation omitted the checked conversion summary."
+        }
+
+        $apiInput = New-ApiShapeInput `
+            -Root $fixtureRoot `
+            -Name "Fixture" `
+            -Source @"
+namespace Fixture;
+
+public delegate string Formatter(string input);
+public delegate TResult Converter<in TInput, out TResult>(TInput value);
+
+public readonly struct Token
+{
+    public static explicit operator Token(string value) => default;
+    public static implicit operator string(Token value) => "";
+}
+
+public interface IContract
+{
+    string Name { get; }
+    string this[int index] { get; }
+    void Run();
+}
+
+public sealed class Implementation : IContract
+{
+    string IContract.Name => "";
+    string IContract.this[int index] => "";
+    void IContract.Run() { }
+}
+
+public interface IGenericContract<T>
+{
+    string Name { get; }
+    void Run(T value);
+}
+
+public sealed class GenericImplementation : IGenericContract<int>
+{
+    string IGenericContract<int>.Name => "";
+    void IGenericContract<int>.Run(int value) { }
+}
+
+internal interface IHiddenGenericContract<T>
+{
+    void Run(T value);
+}
+
+public sealed class HiddenGenericImplementation : IHiddenGenericContract<int>
+{
+    void IHiddenGenericContract<int>.Run(int value) { }
+}
+
+public class GenericContainer<TOuter>
+{
+    public class Nested { }
+    public class Inner<TInner> { }
+    public delegate TResult Project<TResult>(TOuter input);
+}
+
+public static class NestedGenericConsumer
+{
+    public static void Use(GenericContainer<int>.Inner<string> value) { }
+}
+
+public interface IAccessShapes
+{
+    protected void ProtectedDefault() { }
+    void PublicDefault() { }
+    static abstract string Transform(int value);
+}
+
+public class Container
+{
+    protected class Hidden
+    {
+        public class Nested
+        {
+            public void Run() { }
+        }
+    }
+}
+
+public class AccessorLikeMethods
+{
+    public void get_Value() { }
+    public void set_Value(int value) { }
+    public void add_Changed(System.Action value) { }
+    public void remove_Changed(System.Action value) { }
+    public void raise_Changed() { }
+}
+
+public static class ConversionLikeMethods
+{
+    public static string op_Implicit(int value) => "";
+    public static int op_Explicit(string value) => 0;
+    public static long op_CheckedExplicit(byte value) => 0;
+}
+"@
+        $inventory = Get-AssemblyApiMemberInventory `
+            -AssemblyPath $apiInput.Dll
+        $records = @{}
+        foreach ($record in $inventory.Records) {
+            $records[$record.Id] = $record
+        }
+        $expectedRecords = [ordered]@{
+            "T:Fixture.Formatter" = @("public", "Type", "Fixture.Formatter")
+            "T:Fixture.Converter``2" = @("public", "Type", "Fixture.Converter_TInput_TResult_")
+            "M:Fixture.Token.op_Explicit(System.String)~Fixture.Token" = @("public", "Operator", "Fixture.Token")
+            "M:Fixture.Token.op_Implicit(Fixture.Token)~System.String" = @("public", "Operator", "Fixture.Token")
+            "M:Fixture.IAccessShapes.ProtectedDefault" = @("protected", "Method", "Fixture.IAccessShapes")
+            "M:Fixture.IAccessShapes.PublicDefault" = @("public", "Method", "Fixture.IAccessShapes")
+            "M:Fixture.IAccessShapes.Transform(System.Int32)" = @("public", "Method", "Fixture.IAccessShapes")
+            "P:Fixture.GenericImplementation.Fixture#IGenericContract{System#Int32}#Name" = @("public", "Property", "Fixture.GenericImplementation")
+            "M:Fixture.GenericImplementation.Fixture#IGenericContract{System#Int32}#Run(System.Int32)" = @("public", "Method", "Fixture.GenericImplementation")
+            "T:Fixture.GenericContainer``1.Nested" = @("public", "Type", "Fixture.GenericContainer_TOuter_.Nested")
+            "T:Fixture.GenericContainer``1.Inner``1" = @("public", "Type", "Fixture.GenericContainer_TOuter_.Inner_TInner_")
+            "T:Fixture.GenericContainer``1.Project``1" = @("public", "Type", "Fixture.GenericContainer_TOuter_.Project_TResult_")
+            "M:Fixture.NestedGenericConsumer.Use(Fixture.GenericContainer{System.Int32}.Inner{System.String})" = @("public", "Method", "Fixture.NestedGenericConsumer")
+            "T:Fixture.Container.Hidden" = @("protected", "Type", "Fixture.Container.Hidden")
+            "T:Fixture.Container.Hidden.Nested" = @("protected", "Type", "Fixture.Container.Hidden.Nested")
+            "M:Fixture.Container.Hidden.Nested.Run" = @("protected", "Method", "Fixture.Container.Hidden.Nested")
+            "M:Fixture.AccessorLikeMethods.get_Value" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.set_Value(System.Int32)" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.add_Changed(System.Action)" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.remove_Changed(System.Action)" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.AccessorLikeMethods.raise_Changed" = @("public", "Method", "Fixture.AccessorLikeMethods")
+            "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
+            "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
+            "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")
+        }
+        foreach ($id in $expectedRecords.Keys) {
+            if (-not $records.ContainsKey($id)) {
+                throw "The assembly inventory omitted $id."
+            }
+            $expected = $expectedRecords[$id]
+            if ($records[$id].Access -ne $expected[0] -or
+                $records[$id].Kind -ne $expected[1] -or
+                $records[$id].PageName -ne $expected[2]) {
+                throw "The assembly inventory misclassified $id."
+            }
+        }
+        $hiddenImplementationRecords = @(
+            $inventory.Records |
+                Where-Object {
+                    $_.TypeId -eq "Fixture.HiddenGenericImplementation" -and
+                    $_.Kind -notin @("Type", "Constructor")
+                }
+        )
+        if ($hiddenImplementationRecords.Count -ne 0) {
+            throw "The assembly inventory exposed an inaccessible generic interface."
+        }
+
+        $apiOutput = Join-Path $fixtureRoot "api"
+        $publicOutput = Join-Path $fixtureRoot "public"
+        $apiLinks = Join-Path $fixtureRoot "api-links.txt"
+        $publicLinks = Join-Path $fixtureRoot "public-links.txt"
+        New-Item -ItemType Directory -Path $apiOutput | Out-Null
+        New-Item -ItemType Directory -Path $publicOutput | Out-Null
+        $configurationPath = Join-Path $PSScriptRoot "api-reference-v4.json"
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $apiInput `
+            -OutputPath $apiOutput `
+            -LinksPath $apiLinks `
+            -AssemblyInventory $inventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "assembly fixture" `
+            -ConfigurationFilePath $configurationPath
+        Invoke-ApiReferenceGeneration `
+            -ApiInput $apiInput `
+            -OutputPath $publicOutput `
+            -LinksPath $publicLinks `
+            -AssemblyInventory $inventory `
+            -RepositoryRoot $repoRoot `
+            -VersionLabel "public assembly fixture" `
+            -ConfigurationFilePath $configurationPath `
+            -AccessModifiers "Public"
+        Assert-GeneratedApiLinks `
+            -OutputPath $apiOutput `
+            -LinksPath $apiLinks `
+            -VersionLabel "assembly fixture"
+        Assert-GeneratedApiLinks `
+            -OutputPath $publicOutput `
+            -LinksPath $publicLinks `
+            -VersionLabel "public assembly fixture"
+        Assert-ApiAccessCoverage `
+            -ApiLinksPath $apiLinks `
+            -PublicLinksPath $publicLinks `
+            -AssemblyInventory $inventory `
+            -VersionLabel "assembly fixture"
+
+        $apiIds = @(
+            Get-ApiLinkRecords -LinksPath $apiLinks |
+                ForEach-Object Id
+        )
+        foreach ($ordinaryConversionNameId in @(
+            "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)",
+            "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)",
+            "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)"
+        )) {
+            if ($ordinaryConversionNameId -notin $apiIds -or
+                @($apiIds | Where-Object {
+                    $_.StartsWith(
+                        "$ordinaryConversionNameId~",
+                        [System.StringComparison]::Ordinal
+                    )
+                }).Count -ne 0) {
+                throw (
+                    "Ordinary conversion-named method did not retain ID " +
+                    "$ordinaryConversionNameId."
+                )
+            }
+        }
+
+        $formatterPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.Formatter.md"
+        )
+        $converterPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.Converter_TInput_TResult_.md"
+        )
+        $nestedPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.GenericContainer_TOuter_.Nested.md"
+        )
+        $innerPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.GenericContainer_TOuter_.Inner_TInner_.md"
+        )
+        $projectPage = Get-Content -Raw (
+            Join-Path $apiOutput "Fixture.GenericContainer_TOuter_.Project_TResult_.md"
+        )
+        $namespacePage = Get-Content -Raw (Join-Path $apiOutput "Fixture.md")
+        $identityChecks = [ordered]@{
+            "formatter title" = $formatterPage.StartsWith(
+                "---`ntitle: 'Fixture.Formatter'",
+                [System.StringComparison]::Ordinal
+            )
+            "formatter heading" = $formatterPage -match (
+                "(?m)^## Formatter Delegate$"
+            )
+            "generic delegate title" = $converterPage.StartsWith(
+                "---`ntitle: 'Fixture.Converter<TInput,TResult>'",
+                [System.StringComparison]::Ordinal
+            )
+            "generic delegate heading" = $converterPage -match (
+                "(?m)^## Converter\\<TInput,TResult\\> Delegate$"
+            )
+            "nested title" = $nestedPage.StartsWith(
+                "---`ntitle: 'Fixture.GenericContainer<TOuter>.Nested'",
+                [System.StringComparison]::Ordinal
+            )
+            "nested generic title" = $innerPage.StartsWith(
+                "---`ntitle: 'Fixture.GenericContainer<TOuter>.Inner<TInner>'",
+                [System.StringComparison]::Ordinal
+            )
+            "nested delegate title" = $projectPage.StartsWith(
+                "---`ntitle: 'Fixture.GenericContainer<TOuter>.Project<TResult>'",
+                [System.StringComparison]::Ordinal
+            )
+            "nested delegate heading" = $projectPage -match (
+                "(?m)^## GenericContainer\\<TOuter\\>\.Project\\<TResult\\> Delegate$"
+            )
+            "delegate namespace entry" = $namespacePage.Contains(
+                "[Formatter](Fixture.Formatter.md",
+                [System.StringComparison]::Ordinal
+            )
+            "generic delegate namespace entry" = $namespacePage.Contains(
+                "[Converter&lt;TInput,TResult&gt;](Fixture.Converter_TInput_TResult_.md",
+                [System.StringComparison]::Ordinal
+            )
+            "nested delegate namespace entry" = $namespacePage.Contains(
+                "[GenericContainer&lt;TOuter&gt;.Project&lt;TResult&gt;](Fixture.GenericContainer_TOuter_.Project_TResult_.md",
+                [System.StringComparison]::Ordinal
+            )
+        }
+        foreach ($identityCheck in $identityChecks.GetEnumerator()) {
+            if (-not $identityCheck.Value) {
+                throw "The API generator did not canonicalize the $($identityCheck.Key)."
+            }
+        }
+
+        $publicIds = @(
+            Get-ApiLinkRecords -LinksPath $publicLinks |
+                ForEach-Object Id
+        )
+        foreach ($protectedId in @(
+            "M:Fixture.IAccessShapes.ProtectedDefault",
+            "T:Fixture.Container.Hidden",
+            "T:Fixture.Container.Hidden.Nested",
+            "M:Fixture.Container.Hidden.Nested.Run"
+        )) {
+            if ($protectedId -in $publicIds) {
+                throw "Public API generation included protected ID $protectedId."
+            }
+        }
+
+        $originalLinks = Get-Content -Raw $apiLinks
+        $mutatedLinks = $originalLinks.Replace(
+            "M:Fixture.IAccessShapes.PublicDefault|",
+            "M:Fixture.IAccessShapes.ReplacedDefault|",
+            [System.StringComparison]::Ordinal
+        )
+        if ($mutatedLinks -eq $originalLinks) {
+            throw "The exact-member fixture could not replace its method ID."
+        }
+        [System.IO.File]::WriteAllText(
+            $apiLinks,
+            $mutatedLinks,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+        $wrongIdFailed = $false
+        try {
+            Assert-GeneratedApiMemberCompleteness `
+                -ExpectedRecords (Select-AssemblyApiRecords $inventory) `
+                -LinksPath $apiLinks `
+                -VersionLabel "same-kind mutation"
+        } catch {
+            $wrongIdFailed = $_.Exception.Message -match (
+                "missing M:Fixture\.IAccessShapes\.PublicDefault"
+            ) -and $_.Exception.Message -match (
+                "unexpected M:Fixture\.IAccessShapes\.ReplacedDefault"
+            )
+        }
+        if (-not $wrongIdFailed) {
+            throw "A wrong same-kind API member ID unexpectedly passed."
+        }
+
+        $eventInput = New-ApiShapeInput `
+            -Root $fixtureRoot `
+            -Name "EventFixture" `
+            -Source @"
+namespace EventFixture;
+
+public interface IEvents
+{
+    event System.EventHandler Changed;
+}
+
+public sealed class Implementation : IEvents
+{
+    event System.EventHandler IEvents.Changed { add { } remove { } }
+}
+"@
+        $eventInventory = Get-AssemblyApiMemberInventory `
+            -AssemblyPath $eventInput.Dll
+        $eventOutput = Join-Path $fixtureRoot "event"
+        $eventLinks = Join-Path $fixtureRoot "event-links.txt"
+        New-Item -ItemType Directory -Path $eventOutput | Out-Null
+        $eventFailed = $false
+        try {
+            Invoke-ApiReferenceGeneration `
+                -ApiInput $eventInput `
+                -OutputPath $eventOutput `
+                -LinksPath $eventLinks `
+                -AssemblyInventory $eventInventory `
+                -RepositoryRoot $repoRoot `
+                -VersionLabel "explicit event fixture" `
+                -ConfigurationFilePath $configurationPath
+        } catch {
+            $eventFailed = $_.Exception.Message -match (
+                "missing E:EventFixture\.Implementation\.EventFixture#IEvents#Changed"
+            )
+        }
+        if (-not $eventFailed) {
+            throw "DefaultDocumentation's explicit-event blind spot did not fail closed."
+        }
+
+        $pointerInput = New-ApiShapeInput `
+            -Root $fixtureRoot `
+            -Name "PointerFixture" `
+            -CompilerOptions "/unsafe" `
+            -Source @"
+namespace PointerFixture;
+
+public static unsafe class PointerShape
+{
+    public static int Invoke(
+        delegate* unmanaged[Cdecl]<int, int> callback,
+        int value) => callback(value);
+}
+"@
+        $pointerFailed = $false
+        try {
+            Get-AssemblyApiMemberInventory -AssemblyPath $pointerInput.Dll
+        } catch {
+            $pointerFailed = $_.Exception.Message -match (
+                "function-pointer documentation IDs are not supported"
+            )
+        }
+        if (-not $pointerFailed) {
+            throw "An unsupported function-pointer API did not fail closed."
+        }
+    } finally {
+        Remove-Item $fixtureRoot -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
+Assert-AssemblyApiShapes
 
 function Assert-VersionedExampleDefaults {
     param(
@@ -328,48 +1262,6 @@ try {
         throw "Verified package extraction was reused instead of recreated."
     }
 
-    $expectedExtras = @(
-        "Humanizer.ICulturedStringTransformer",
-        "Humanizer.Localisation.DataUnit",
-        "Humanizer.MetricNumeralFormats"
-    )
-    $invalidExtraSets = @(
-        [PSCustomObject]@{
-            Name = "missing declaration"
-            Actual = $expectedExtras
-            Expected = $expectedExtras[0..1]
-        },
-        [PSCustomObject]@{
-            Name = "unexpected generated type"
-            Actual = @($expectedExtras + "Humanizer.Unexpected")
-            Expected = $expectedExtras
-        },
-        [PSCustomObject]@{
-            Name = "duplicate exception"
-            Actual = $expectedExtras
-            Expected = @($expectedExtras + $expectedExtras[0])
-        },
-        [PSCustomObject]@{
-            Name = "now-approved unused exception"
-            Actual = $expectedExtras[0..1]
-            Expected = $expectedExtras
-        }
-    )
-    foreach ($case in $invalidExtraSets) {
-        $failed = $false
-        try {
-            Assert-GeneratedExtraTypes `
-                -VersionLabel "2.10.1" `
-                -Actual $case.Actual `
-                -Expected $case.Expected
-        } catch {
-            $failed = $true
-        }
-        if (-not $failed) {
-            throw "PublicAPI extra-type $($case.Name) unexpectedly passed."
-        }
-    }
-
     $memberCoverageRoot = Join-Path $tempRoot "api-member-coverage"
     Copy-Item `
         (Join-Path $repoRoot "website/docs/api") `
@@ -380,7 +1272,6 @@ try {
     ) "Humanizer.DefaultFormatter.md"
     $memberLinksPath = Join-Path $tempRoot "api-member-links.txt"
     $publicLinksPath = Join-Path $tempRoot "public-api-links.txt"
-    $protectedApprovalPath = Join-Path $tempRoot "protected-api-approval.txt"
     [System.IO.File]::WriteAllText(
         $memberLinksPath,
         "./`nT:Humanizer.DefaultFormatter|Humanizer.DefaultFormatter.md|DefaultFormatter`nP:Humanizer.DefaultFormatter.Culture|Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.Culture|Culture`n",
@@ -391,27 +1282,34 @@ try {
         "./`nT:Humanizer.DefaultFormatter|Humanizer.DefaultFormatter.md|DefaultFormatter`n",
         [System.Text.UTF8Encoding]::new($false)
     )
-    [System.IO.File]::WriteAllText(
-        $protectedApprovalPath,
-        "        protected System.Globalization.CultureInfo Culture { get; }`n",
-        [System.Text.UTF8Encoding]::new($false)
-    )
     Assert-GeneratedApiLinks `
         -OutputPath $memberCoverageRoot `
         -LinksPath $memberLinksPath `
         -VersionLabel "current baseline"
+    $memberCoverageInventory = [PSCustomObject]@{
+        Records = @(
+            [PSCustomObject]@{
+                Access = "public"
+                Id = "T:Humanizer.DefaultFormatter"
+            },
+            [PSCustomObject]@{
+                Access = "protected"
+                Id = "P:Humanizer.DefaultFormatter.Culture"
+            }
+        )
+    }
     Assert-ApiAccessCoverage `
         -ApiLinksPath $memberLinksPath `
         -PublicLinksPath $publicLinksPath `
-        -ApprovalPath $protectedApprovalPath `
+        -AssemblyInventory $memberCoverageInventory `
         -VersionLabel "current baseline"
     $publicOnlyFailed = $false
     try {
-        Assert-ApiAccessCoverage `
-            -ApiLinksPath $publicLinksPath `
-            -PublicLinksPath $publicLinksPath `
-            -ApprovalPath $protectedApprovalPath `
-            -VersionLabel "public-only"
+            Assert-ApiAccessCoverage `
+                -ApiLinksPath $publicLinksPath `
+                -PublicLinksPath $publicLinksPath `
+                -AssemblyInventory $memberCoverageInventory `
+                -VersionLabel "public-only"
     } catch {
         $publicOnlyFailed = $true
     }
@@ -940,6 +1838,61 @@ try {
         -ManifestPath $isolatedManifestPath `
         -WebsiteRoot $isolatedWebsiteRoot *> $null
 
+    $currentLanding = Get-Content -Raw (
+        Join-Path $isolatedCurrentApi "index.md"
+    )
+    if ($currentLanding -notmatch "(?m)^## Namespaces$" -or
+        -not $currentLanding.Contains(
+            "[StringHumanizeExtensions](Humanizer.StringHumanizeExtensions.md",
+            [System.StringComparison]::Ordinal
+        )) {
+        throw "Current Humanizer 4 API landing is missing its generated index."
+    }
+    $v4ReleaseRoot = Join-Path $tempRoot "v4-release-source"
+    $v4ReleaseRebuildRoot = Join-Path $tempRoot "v4-release-rebuild"
+    $v4ReleaseSource = Join-Path $v4ReleaseRoot "api"
+    $v4ReleaseRebuild = Join-Path $v4ReleaseRebuildRoot "api"
+    New-Item -ItemType Directory -Path $v4ReleaseRoot | Out-Null
+    New-Item -ItemType Directory -Path $v4ReleaseRebuildRoot | Out-Null
+    Copy-Item $isolatedCurrentApi $v4ReleaseSource -Recurse
+    Copy-Item $isolatedCurrentApi $v4ReleaseRebuild -Recurse
+    $v4ReleaseEntry = [PSCustomObject]@{
+        version = "4.0.0"
+        apiPackage = "Humanizer"
+        referenceTfm = "net10.0"
+        source = [PSCustomObject]@{
+            packageVersion = "4.0.0"
+        }
+    }
+    Add-ApiLanding -ApiRoot $v4ReleaseSource -Entry $v4ReleaseEntry
+    Add-ApiLanding -ApiRoot $v4ReleaseRebuild -Entry $v4ReleaseEntry
+    $v4ReleaseDigest = Get-SnapshotDirectoryDigest $v4ReleaseSource
+    if ($v4ReleaseDigest -ne
+        (Get-SnapshotDirectoryDigest $v4ReleaseRebuild)) {
+        throw "Humanizer 4 release API landing is not deterministic."
+    }
+    $v4ReleaseTarget = "versioned_docs/version-4.0.0"
+    Invoke-SnapshotTransaction `
+        -WebsiteRoot $isolatedWebsiteRoot `
+        -Changes @(
+            [PSCustomObject]@{
+                Target = $v4ReleaseTarget
+                Source = $v4ReleaseRoot
+            }
+        )
+    $v4InstalledApi = Join-Path (
+        Join-Path $isolatedWebsiteRoot $v4ReleaseTarget
+    ) "api"
+    if ((Get-SnapshotDirectoryDigest $v4InstalledApi) -ne
+        $v4ReleaseDigest -or
+        (Get-Content -Raw (Join-Path $v4InstalledApi "index.md")) -notmatch
+            "(?m)^## Namespaces$") {
+        throw "Humanizer 4 release round trip lost the generated API index."
+    }
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot $v4ReleaseTarget
+    ) -Recurse -Force
+
     $isolatedManifest = Get-Content -Raw $isolatedManifestPath |
         ConvertFrom-Json -Depth 20
     $isolatedCandidateEntries = @(
@@ -994,6 +1947,10 @@ try {
         $isolatedWebsiteRoot
     ) "versioned_sidebars/version-$candidateVersion-sidebars.json"
     $releaseSnapshotDigest = Get-SnapshotDirectoryDigest $releaseSnapshotPath
+    $releaseApiLandingPath = Join-Path $releaseSnapshotPath "api/index.md"
+    $releaseApiLandingHash = (
+        Get-FileHash $releaseApiLandingPath -Algorithm SHA256
+    ).Hash
     $releaseSidebarHash = (
         Get-FileHash $releaseSidebarPath -Algorithm SHA256
     ).Hash
@@ -1109,10 +2066,29 @@ try {
             )) -ne $releaseSnapshotDigest -or
             (Get-FileHash (
                 Join-Path $isolatedWebsiteRoot (
+                    "versioned_docs/version-$candidateVersion/api/index.md"
+                )
+            ) -Algorithm SHA256).Hash -ne $releaseApiLandingHash -or
+            (Get-FileHash (
+                Join-Path $isolatedWebsiteRoot (
                     "versioned_sidebars/version-$candidateVersion-sidebars.json"
                 )
             ) -Algorithm SHA256).Hash -ne $releaseSidebarHash) {
             throw "$Mode release round trip changed immutable $candidateVersion state."
+        }
+        $releasedApiLanding = Get-Content -Raw (
+            Join-Path $isolatedWebsiteRoot (
+                "versioned_docs/version-$candidateVersion/api/index.md"
+            )
+        )
+        $candidateMajor = [System.Management.Automation.SemanticVersion]::Parse(
+            $candidateVersion
+        ).Major
+        if (($candidateMajor -ge 4 -and
+                $releasedApiLanding -notmatch "(?m)^## Namespaces$") -or
+            ($candidateMajor -lt 4 -and
+                $releasedApiLanding -match "(?m)^## Namespaces$")) {
+            throw "$Mode release emitted the wrong API landing for $candidateVersion."
         }
         foreach ($priorVersion in $priorVersions) {
             $releasedPrior = @(

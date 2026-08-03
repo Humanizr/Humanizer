@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ITimeSpanHumanizeStrategy'
+sidebar_label: 'Humanizer.ITimeSpanHumanizeStrategy'
+description: 'API reference for Humanizer.ITimeSpanHumanizeStrategy.'
+---
 ## ITimeSpanHumanizeStrategy Interface
 
 Defines a strategy for converting [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') values into human\-readable text\.
@@ -9,18 +14,20 @@ public interface ITimeSpanHumanizeStrategy
 Derived  
 ↳ [DefaultTimeSpanHumanizeStrategy](Humanizer.DefaultTimeSpanHumanizeStrategy.md 'Humanizer\.DefaultTimeSpanHumanizeStrategy')  
 ↳ [IGrammaticalCaseTimeSpanHumanizeStrategy](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy')
+- *Methods*
+  - **[Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\)](Humanizer.ITimeSpanHumanizeStrategy.md#Humanizer.ITimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool) 'Humanizer\.ITimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, bool\)')**
 ### Methods
 
 <a name='Humanizer.ITimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool)'></a>
 
-## ITimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\) Method
+#### ITimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, bool\) Method
 
 Converts a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into human\-readable text\.
 
 ```csharp
 string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ITimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool).timeSpan'></a>
 
@@ -76,6 +83,6 @@ Whether numbers are rendered as words\.
 
 Whether time units are rendered as symbols\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span\.

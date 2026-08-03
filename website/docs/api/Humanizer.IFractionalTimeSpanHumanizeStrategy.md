@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IFractionalTimeSpanHumanizeStrategy'
+sidebar_label: 'Humanizer.IFractionalTimeSpanHumanizeStrategy'
+description: 'API reference for Humanizer.IFractionalTimeSpanHumanizeStrategy.'
+---
 ## IFractionalTimeSpanHumanizeStrategy Interface
 
 Extends a time\-span humanization strategy with fractional\-second support\.
@@ -5,18 +10,20 @@ Extends a time\-span humanization strategy with fractional\-second support\.
 ```csharp
 public interface IFractionalTimeSpanHumanizeStrategy
 ```
+- *Methods*
+  - **[HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\)](Humanizer.IFractionalTimeSpanHumanizeStrategy.md#Humanizer.IFractionalTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool) 'Humanizer\.IFractionalTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string, int, System\.MidpointRounding, bool\)')**
 ### Methods
 
 <a name='Humanizer.IFractionalTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool)'></a>
 
-## IFractionalTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\) Method
+#### IFractionalTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\) Method
 
 Converts a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into human\-readable text with seconds as the minimum unit\.
 
 ```csharp
 string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IFractionalTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool).timeSpan'></a>
 
@@ -72,6 +79,6 @@ The midpoint rounding mode\.
 
 Whether time units are rendered as symbols\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span\.

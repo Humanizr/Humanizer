@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ITruncator'
+sidebar_label: 'Humanizer.ITruncator'
+description: 'API reference for Humanizer.ITruncator.'
+---
 ## ITruncator Interface
 
 Can truncate a string\.
@@ -8,18 +13,20 @@ public interface ITruncator
 
 Derived  
 ↳ [DynamicNumberOfCharactersAndPreserveWordsTruncator](Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.md 'Humanizer\.DynamicNumberOfCharactersAndPreserveWordsTruncator')
+- *Methods*
+  - **[Truncate\(string, int, string, TruncateFrom\)](Humanizer.ITruncator.md#Humanizer.ITruncator.Truncate(string,int,string,Humanizer.TruncateFrom) 'Humanizer\.ITruncator\.Truncate\(string, int, string, Humanizer\.TruncateFrom\)')**
 ### Methods
 
 <a name='Humanizer.ITruncator.Truncate(string,int,string,Humanizer.TruncateFrom)'></a>
 
-## ITruncator\.Truncate\(string, int, string, TruncateFrom\) Method
+#### ITruncator\.Truncate\(string, int, string, TruncateFrom\) Method
 
 Truncate a string
 
 ```csharp
 string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFrom truncateFrom=Humanizer.TruncateFrom.Right);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ITruncator.Truncate(string,int,string,Humanizer.TruncateFrom).value'></a>
 
@@ -45,6 +52,6 @@ The string used to truncate with
 
 The enum value used to determine from where to truncate the string
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The truncated string

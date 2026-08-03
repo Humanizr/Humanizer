@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.TimeSpanDehumanizeExtensions'
+sidebar_label: 'Humanizer.TimeSpanDehumanizeExtensions'
+description: 'API reference for Humanizer.TimeSpanDehumanizeExtensions.'
+---
 ## TimeSpanDehumanizeExtensions Class
 
 Contains extension methods for parsing invariant duration text into a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')\.
@@ -7,11 +12,14 @@ public static class TimeSpanDehumanizeExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → TimeSpanDehumanizeExtensions
+- *Methods*
+  - **[DehumanizeTimeSpan\(this string\)](Humanizer.TimeSpanDehumanizeExtensions.md#Humanizer.TimeSpanDehumanizeExtensions.DehumanizeTimeSpan(thisstring) 'Humanizer\.TimeSpanDehumanizeExtensions\.DehumanizeTimeSpan\(this string\)')**
+  - **[TryDehumanizeTimeSpan\(this string, TimeSpan\)](Humanizer.TimeSpanDehumanizeExtensions.md#Humanizer.TimeSpanDehumanizeExtensions.TryDehumanizeTimeSpan(thisstring,System.TimeSpan) 'Humanizer\.TimeSpanDehumanizeExtensions\.TryDehumanizeTimeSpan\(this string, System\.TimeSpan\)')**
 ### Methods
 
 <a name='Humanizer.TimeSpanDehumanizeExtensions.DehumanizeTimeSpan(thisstring)'></a>
 
-## TimeSpanDehumanizeExtensions\.DehumanizeTimeSpan\(this string\) Method
+#### TimeSpanDehumanizeExtensions\.DehumanizeTimeSpan\(this string\) Method
 
 Parses a standard invariant [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') value or compact duration tokens using
 `ms`, `s`, `m`, `h`, `d`, and `w`\.
@@ -19,7 +27,7 @@ Parses a standard invariant [System\.TimeSpan](https://learn.microsoft.com/en-us
 ```csharp
 public static System.TimeSpan DehumanizeTimeSpan(this string input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanDehumanizeExtensions.DehumanizeTimeSpan(thisstring).input'></a>
 
@@ -27,11 +35,11 @@ public static System.TimeSpan DehumanizeTimeSpan(this string input);
 
 The duration text to parse\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 The parsed duration\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 Thrown when [input](Humanizer.TimeSpanDehumanizeExtensions.md#Humanizer.TimeSpanDehumanizeExtensions.DehumanizeTimeSpan(thisstring).input 'Humanizer\.TimeSpanDehumanizeExtensions\.DehumanizeTimeSpan\(this string\)\.input') is null\.
@@ -39,7 +47,7 @@ Thrown when [input](Humanizer.TimeSpanDehumanizeExtensions.md#Humanizer.TimeSpan
 [System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
 Thrown when [input](Humanizer.TimeSpanDehumanizeExtensions.md#Humanizer.TimeSpanDehumanizeExtensions.DehumanizeTimeSpan(thisstring).input 'Humanizer\.TimeSpanDehumanizeExtensions\.DehumanizeTimeSpan\(this string\)\.input') is not a supported duration\.
 
-### Remarks
+##### Remarks
 Compact tokens are culture\-invariant, may be separated by whitespace, and may have one leading sign\.
 Units may repeat and appear in any order; their values are added\. Each token must resolve to whole ticks\.
 A week is seven days\.
@@ -47,7 +55,7 @@ Colon\-separated values use the standard invariant [System\.TimeSpan](https://le
 
 <a name='Humanizer.TimeSpanDehumanizeExtensions.TryDehumanizeTimeSpan(thisstring,System.TimeSpan)'></a>
 
-## TimeSpanDehumanizeExtensions\.TryDehumanizeTimeSpan\(this string, TimeSpan\) Method
+#### TimeSpanDehumanizeExtensions\.TryDehumanizeTimeSpan\(this string, TimeSpan\) Method
 
 Tries to parse a standard invariant [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') value or compact duration tokens using
 `ms`, `s`, `m`, `h`, `d`, and `w`\.
@@ -55,7 +63,7 @@ Tries to parse a standard invariant [System\.TimeSpan](https://learn.microsoft.c
 ```csharp
 public static bool TryDehumanizeTimeSpan(this string? input, out System.TimeSpan result);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.TimeSpanDehumanizeExtensions.TryDehumanizeTimeSpan(thisstring,System.TimeSpan).input'></a>
 
@@ -69,11 +77,11 @@ The duration text to parse\.
 
 The parsed duration, or [System\.TimeSpan\.Zero](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.zero 'System\.TimeSpan\.Zero') when parsing fails\.
 
-#### Returns
+##### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when parsing succeeds; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
-### Remarks
+##### Remarks
 Compact tokens are culture\-invariant, may be separated by whitespace, and may have one leading sign\.
 Units may repeat and appear in any order; their values are added\. Each token must resolve to whole ticks\.
 A week is seven days\.

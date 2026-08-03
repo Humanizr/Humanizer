@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.WordForm'
+sidebar_label: 'Humanizer.WordForm'
+description: 'API reference for Humanizer.WordForm.'
+---
 ## WordForm Enum
 
 Options for specifying the form of the word when different variations of the same word exists\.
@@ -5,6 +10,10 @@ Options for specifying the form of the word when different variations of the sam
 ```csharp
 public enum WordForm
 ```
+- *Fields*
+  - **[Abbreviation](Humanizer.WordForm.md#Humanizer.WordForm.Abbreviation 'Humanizer\.WordForm\.Abbreviation')**
+  - **[Eifeler](Humanizer.WordForm.md#Humanizer.WordForm.Eifeler 'Humanizer\.WordForm\.Eifeler')**
+  - **[Normal](Humanizer.WordForm.md#Humanizer.WordForm.Normal 'Humanizer\.WordForm\.Normal')**
 ### Fields
 
 <a name='Humanizer.WordForm.Normal'></a>

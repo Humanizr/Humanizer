@@ -1,19 +1,3 @@
-function Assert-GeneratedExtraTypes {
-    param(
-        [Parameter(Mandatory = $true)][string]$VersionLabel,
-        [string[]]$Actual = @(),
-        [string[]]$Expected = @()
-    )
-
-    $actualUnique = @($Actual | Sort-Object -Unique)
-    $expectedUnique = @($Expected | Sort-Object -Unique)
-    if ($Actual.Count -ne $actualUnique.Count -or
-        $Expected.Count -ne $expectedUnique.Count -or
-        ($actualUnique -join "`n") -ne ($expectedUnique -join "`n")) {
-        throw "$VersionLabel generated PublicAPI extras differ. Actual: $($actualUnique -join ', '); expected: $($expectedUnique -join ', ')."
-    }
-}
-
 function Assert-GeneratedApiLinks {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
@@ -75,7 +59,7 @@ function Assert-ApiAccessCoverage {
     param(
         [Parameter(Mandatory = $true)][string]$ApiLinksPath,
         [Parameter(Mandatory = $true)][string]$PublicLinksPath,
-        [Parameter(Mandatory = $true)][string]$ApprovalPath,
+        [Parameter(Mandatory = $true)]$AssemblyInventory,
         [Parameter(Mandatory = $true)][string]$VersionLabel
     )
 
@@ -103,13 +87,15 @@ function Assert-ApiAccessCoverage {
         [void]$publicSet.Add($id)
     }
     $apiOnly = @($apiIds | Where-Object { -not $publicSet.Contains($_) })
-    $approvedProtectedCount = @(
-        Get-Content $ApprovalPath |
-            Where-Object { $_ -match "^\s+protected(?: internal)? " }
-    ).Count
-
+    $expectedProtected = @(
+        $AssemblyInventory.Records |
+            Where-Object Access -eq "protected" |
+            ForEach-Object Id |
+            Sort-Object -Unique
+    )
+    $actualProtected = @($apiOnly | Sort-Object -Unique)
     if ($missingPublic.Count -gt 0 -or
-        $apiOnly.Count -ne $approvedProtectedCount) {
-        throw "$VersionLabel API access coverage differs from PublicAPI approval. Missing public: $($missingPublic -join ', '); generated protected: $($apiOnly.Count); approved protected: $approvedProtectedCount."
+        ($actualProtected -join "`n") -ne ($expectedProtected -join "`n")) {
+        throw "$VersionLabel API access coverage differs from its assembly-derived exact inventory. Missing public: $($missingPublic -join ', '); generated protected: $($actualProtected -join ', '); expected protected: $($expectedProtected -join ', ')."
     }
 }

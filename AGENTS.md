@@ -48,8 +48,9 @@ These instructions apply to the entire repository.
 - Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 
 ## Documentation Updates
-- Update `readme.md`, resource comments, or XML docs when introducing new features or behavior changes.
-- Provide meaningful examples in documentation and XML summaries where appropriate.
+- Every public API change must update its XML documentation and any affected `readme.md`, narrative docs, or examples.
+- Regenerate and commit the checked-in current API reference with `pwsh tools/docs/snapshot.ps1 -Version current`; verify it with `pwsh tools/docs/snapshot.ps1 -Version current -Check`.
+- When the documentation pipeline or generated API reference changes, also run `pwsh tools/docs/test.ps1 -RequireNativeAot`.
 
 ## Issue Communication
 - For issue-driven work, especially reports from external contributors, communicate politely in the public issue: thank or acknowledge the reporter once reproduction is confirmed; link any fixing pull request when one exists; distinguish reproduced, fixed, merged, and released states; keep promised sibling or applicability follow-ups current; and post a final resolution without claiming release before publication. Do not add noisy pre-reproduction updates or disclose security-sensitive details.

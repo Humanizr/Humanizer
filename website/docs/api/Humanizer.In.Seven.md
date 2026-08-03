@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.In.Seven'
+sidebar_label: 'Humanizer.In.Seven'
+description: 'API reference for Humanizer.In.Seven.'
+---
 ## In\.Seven Class
 
 ```csharp
@@ -5,11 +10,27 @@ public static class In.Seven
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Seven
+- *Properties*
+  - **[Days](Humanizer.In.Seven.md#Humanizer.In.Seven.Days 'Humanizer\.In\.Seven\.Days')**
+  - **[Hours](Humanizer.In.Seven.md#Humanizer.In.Seven.Hours 'Humanizer\.In\.Seven\.Hours')**
+  - **[Minutes](Humanizer.In.Seven.md#Humanizer.In.Seven.Minutes 'Humanizer\.In\.Seven\.Minutes')**
+  - **[Months](Humanizer.In.Seven.md#Humanizer.In.Seven.Months 'Humanizer\.In\.Seven\.Months')**
+  - **[Seconds](Humanizer.In.Seven.md#Humanizer.In.Seven.Seconds 'Humanizer\.In\.Seven\.Seconds')**
+  - **[Weeks](Humanizer.In.Seven.md#Humanizer.In.Seven.Weeks 'Humanizer\.In\.Seven\.Weeks')**
+  - **[Years](Humanizer.In.Seven.md#Humanizer.In.Seven.Years 'Humanizer\.In\.Seven\.Years')**
+- *Methods*
+  - **[DaysFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.DaysFrom(System.DateTime) 'Humanizer\.In\.Seven\.DaysFrom\(System\.DateTime\)')**
+  - **[HoursFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.HoursFrom(System.DateTime) 'Humanizer\.In\.Seven\.HoursFrom\(System\.DateTime\)')**
+  - **[MinutesFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.MinutesFrom(System.DateTime) 'Humanizer\.In\.Seven\.MinutesFrom\(System\.DateTime\)')**
+  - **[MonthsFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.MonthsFrom(System.DateTime) 'Humanizer\.In\.Seven\.MonthsFrom\(System\.DateTime\)')**
+  - **[SecondsFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.SecondsFrom(System.DateTime) 'Humanizer\.In\.Seven\.SecondsFrom\(System\.DateTime\)')**
+  - **[WeeksFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.WeeksFrom(System.DateTime) 'Humanizer\.In\.Seven\.WeeksFrom\(System\.DateTime\)')**
+  - **[YearsFrom\(DateTime\)](Humanizer.In.Seven.md#Humanizer.In.Seven.YearsFrom(System.DateTime) 'Humanizer\.In\.Seven\.YearsFrom\(System\.DateTime\)')**
 ### Properties
 
 <a name='Humanizer.In.Seven.Days'></a>
 
-## In\.Seven\.Days Property
+#### In\.Seven\.Days Property
 
 7 days from now
 
@@ -17,12 +38,12 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 public static System.DateTime Days { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.Hours'></a>
 
-## In\.Seven\.Hours Property
+#### In\.Seven\.Hours Property
 
 7 hours from now
 
@@ -30,12 +51,12 @@ public static System.DateTime Days { get; }
 public static System.DateTime Hours { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.Minutes'></a>
 
-## In\.Seven\.Minutes Property
+#### In\.Seven\.Minutes Property
 
 7 minutes from now
 
@@ -43,12 +64,12 @@ public static System.DateTime Hours { get; }
 public static System.DateTime Minutes { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.Months'></a>
 
-## In\.Seven\.Months Property
+#### In\.Seven\.Months Property
 
 7 months from now
 
@@ -56,12 +77,12 @@ public static System.DateTime Minutes { get; }
 public static System.DateTime Months { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.Seconds'></a>
 
-## In\.Seven\.Seconds Property
+#### In\.Seven\.Seconds Property
 
 7 seconds from now
 
@@ -69,12 +90,12 @@ public static System.DateTime Months { get; }
 public static System.DateTime Seconds { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.Weeks'></a>
 
-## In\.Seven\.Weeks Property
+#### In\.Seven\.Weeks Property
 
 7 weeks from now
 
@@ -82,12 +103,12 @@ public static System.DateTime Seconds { get; }
 public static System.DateTime Weeks { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.Years'></a>
 
-## In\.Seven\.Years Property
+#### In\.Seven\.Years Property
 
 7 years from now
 
@@ -95,132 +116,132 @@ public static System.DateTime Weeks { get; }
 public static System.DateTime Years { get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 ### Methods
 
 <a name='Humanizer.In.Seven.DaysFrom(System.DateTime)'></a>
 
-## In\.Seven\.DaysFrom\(DateTime\) Method
+#### In\.Seven\.DaysFrom\(DateTime\) Method
 
 7 days from the provided date
 
 ```csharp
 public static System.DateTime DaysFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.DaysFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.HoursFrom(System.DateTime)'></a>
 
-## In\.Seven\.HoursFrom\(DateTime\) Method
+#### In\.Seven\.HoursFrom\(DateTime\) Method
 
 7 hours from the provided date
 
 ```csharp
 public static System.DateTime HoursFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.HoursFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.MinutesFrom(System.DateTime)'></a>
 
-## In\.Seven\.MinutesFrom\(DateTime\) Method
+#### In\.Seven\.MinutesFrom\(DateTime\) Method
 
 7 minutes from the provided date
 
 ```csharp
 public static System.DateTime MinutesFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.MinutesFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.MonthsFrom(System.DateTime)'></a>
 
-## In\.Seven\.MonthsFrom\(DateTime\) Method
+#### In\.Seven\.MonthsFrom\(DateTime\) Method
 
 7 months from the provided date
 
 ```csharp
 public static System.DateTime MonthsFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.MonthsFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.SecondsFrom(System.DateTime)'></a>
 
-## In\.Seven\.SecondsFrom\(DateTime\) Method
+#### In\.Seven\.SecondsFrom\(DateTime\) Method
 
 7 seconds from the provided date
 
 ```csharp
 public static System.DateTime SecondsFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.SecondsFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.WeeksFrom(System.DateTime)'></a>
 
-## In\.Seven\.WeeksFrom\(DateTime\) Method
+#### In\.Seven\.WeeksFrom\(DateTime\) Method
 
 7 weeks from the provided date
 
 ```csharp
 public static System.DateTime WeeksFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.WeeksFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Humanizer.In.Seven.YearsFrom(System.DateTime)'></a>
 
-## In\.Seven\.YearsFrom\(DateTime\) Method
+#### In\.Seven\.YearsFrom\(DateTime\) Method
 
 7 years from the provided date
 
 ```csharp
 public static System.DateTime YearsFrom(System.DateTime date);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.In.Seven.YearsFrom(System.DateTime).date'></a>
 
 `date` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
-#### Returns
+##### Returns
 [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')

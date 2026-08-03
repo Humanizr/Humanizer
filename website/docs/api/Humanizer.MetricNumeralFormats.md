@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.MetricNumeralFormats'
+sidebar_label: 'Humanizer.MetricNumeralFormats'
+description: 'API reference for Humanizer.MetricNumeralFormats.'
+---
 ## MetricNumeralFormats Enum
 
 Flags for formatting the metric representation of numerals\.
@@ -5,6 +10,13 @@ Flags for formatting the metric representation of numerals\.
 ```csharp
 public enum MetricNumeralFormats
 ```
+- *Fields*
+  - **[KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros')**
+  - **[UseLongScaleWord](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.UseLongScaleWord 'Humanizer\.MetricNumeralFormats\.UseLongScaleWord')**
+  - **[UseName](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.UseName 'Humanizer\.MetricNumeralFormats\.UseName')**
+  - **[UseScaleWord](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.UseScaleWord 'Humanizer\.MetricNumeralFormats\.UseScaleWord')**
+  - **[UseShortScaleWord](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.UseShortScaleWord 'Humanizer\.MetricNumeralFormats\.UseShortScaleWord')**
+  - **[WithSpace](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.WithSpace 'Humanizer\.MetricNumeralFormats\.WithSpace')**
 ### Fields
 
 <a name='Humanizer.MetricNumeralFormats.UseLongScaleWord'></a>

@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.INumberToWordsConverter'
+sidebar_label: 'Humanizer.INumberToWordsConverter'
+description: 'API reference for Humanizer.INumberToWordsConverter.'
+---
 ## INumberToWordsConverter Interface
 
 Converts numbers into locale\-specific words, ordinals, and tuple names\.
@@ -5,18 +10,30 @@ Converts numbers into locale\-specific words, ordinals, and tuple names\.
 ```csharp
 public interface INumberToWordsConverter
 ```
+- *Methods*
+  - **[Convert\(long\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long) 'Humanizer\.INumberToWordsConverter\.Convert\(long\)')**
+  - **[Convert\(long, bool\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,bool) 'Humanizer\.INumberToWordsConverter\.Convert\(long, bool\)')**
+  - **[Convert\(long, bool, WordForm\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,bool,Humanizer.WordForm) 'Humanizer\.INumberToWordsConverter\.Convert\(long, bool, Humanizer\.WordForm\)')**
+  - **[Convert\(long, GrammaticalGender, bool\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,Humanizer.GrammaticalGender,bool) 'Humanizer\.INumberToWordsConverter\.Convert\(long, Humanizer\.GrammaticalGender, bool\)')**
+  - **[Convert\(long, WordForm\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm) 'Humanizer\.INumberToWordsConverter\.Convert\(long, Humanizer\.WordForm\)')**
+  - **[Convert\(long, WordForm, GrammaticalGender, bool\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm,Humanizer.GrammaticalGender,bool) 'Humanizer\.INumberToWordsConverter\.Convert\(long, Humanizer\.WordForm, Humanizer\.GrammaticalGender, bool\)')**
+  - **[ConvertToOrdinal\(int\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int) 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int\)')**
+  - **[ConvertToOrdinal\(int, GrammaticalGender\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender) 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int, Humanizer\.GrammaticalGender\)')**
+  - **[ConvertToOrdinal\(int, GrammaticalGender, WordForm\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender,Humanizer.WordForm) 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int, Humanizer\.GrammaticalGender, Humanizer\.WordForm\)')**
+  - **[ConvertToOrdinal\(int, WordForm\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.WordForm) 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int, Humanizer\.WordForm\)')**
+  - **[ConvertToTuple\(int\)](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToTuple(int) 'Humanizer\.INumberToWordsConverter\.ConvertToTuple\(int\)')**
 ### Methods
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long)'></a>
 
-## INumberToWordsConverter\.Convert\(long\) Method
+#### INumberToWordsConverter\.Convert\(long\) Method
 
 Converts the number using the locale's default grammatical gender\.
 
 ```csharp
 string Convert(long number);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long).number'></a>
 
@@ -24,20 +41,20 @@ string Convert(long number);
 
 The number to convert\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long).number 'Humanizer\.INumberToWordsConverter\.Convert\(long\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,bool)'></a>
 
-## INumberToWordsConverter\.Convert\(long, bool\) Method
+#### INumberToWordsConverter\.Convert\(long, bool\) Method
 
 Converts the number using the locale's default grammatical gender and optionally inserts the locale\-specific conjunction\.
 
 ```csharp
 string Convert(long number, bool addAnd);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,bool).number'></a>
 
@@ -51,20 +68,20 @@ The number to convert\.
 
 `true` to insert the locale\-specific conjunction in compound numbers; otherwise, `false`\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,bool).number 'Humanizer\.INumberToWordsConverter\.Convert\(long, bool\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,bool,Humanizer.WordForm)'></a>
 
-## INumberToWordsConverter\.Convert\(long, bool, WordForm\) Method
+#### INumberToWordsConverter\.Convert\(long, bool, WordForm\) Method
 
 Converts the number using the locale's default grammatical gender, the specified word form, and optional conjunction handling\.
 
 ```csharp
 string Convert(long number, bool addAnd, Humanizer.WordForm wordForm);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,bool,Humanizer.WordForm).number'></a>
 
@@ -84,20 +101,20 @@ The number to convert\.
 
 The grammatical or morphological word form to use\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,bool,Humanizer.WordForm).number 'Humanizer\.INumberToWordsConverter\.Convert\(long, bool, Humanizer\.WordForm\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,Humanizer.GrammaticalGender,bool)'></a>
 
-## INumberToWordsConverter\.Convert\(long, GrammaticalGender, bool\) Method
+#### INumberToWordsConverter\.Convert\(long, GrammaticalGender, bool\) Method
 
 Converts the number using the specified grammatical gender\.
 
 ```csharp
 string Convert(long number, Humanizer.GrammaticalGender gender, bool addAnd=true);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,Humanizer.GrammaticalGender,bool).number'></a>
 
@@ -117,20 +134,20 @@ The grammatical gender to use when the locale distinguishes gendered forms\.
 
 `true` to insert the locale\-specific conjunction in compound numbers; otherwise, `false`\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,Humanizer.GrammaticalGender,bool).number 'Humanizer\.INumberToWordsConverter\.Convert\(long, Humanizer\.GrammaticalGender, bool\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm)'></a>
 
-## INumberToWordsConverter\.Convert\(long, WordForm\) Method
+#### INumberToWordsConverter\.Convert\(long, WordForm\) Method
 
 Converts the number using the locale's default grammatical gender and the specified word form\.
 
 ```csharp
 string Convert(long number, Humanizer.WordForm wordForm);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm).number'></a>
 
@@ -144,20 +161,20 @@ The number to convert\.
 
 The grammatical or morphological word form to use\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm).number 'Humanizer\.INumberToWordsConverter\.Convert\(long, Humanizer\.WordForm\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm,Humanizer.GrammaticalGender,bool)'></a>
 
-## INumberToWordsConverter\.Convert\(long, WordForm, GrammaticalGender, bool\) Method
+#### INumberToWordsConverter\.Convert\(long, WordForm, GrammaticalGender, bool\) Method
 
 Converts the number using the specified grammatical gender and word form\.
 
 ```csharp
 string Convert(long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, bool addAnd=true);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm,Humanizer.GrammaticalGender,bool).number'></a>
 
@@ -183,20 +200,20 @@ The grammatical gender to use when the locale distinguishes gendered forms\.
 
 `true` to insert the locale\-specific conjunction in compound numbers; otherwise, `false`\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.Convert(long,Humanizer.WordForm,Humanizer.GrammaticalGender,bool).number 'Humanizer\.INumberToWordsConverter\.Convert\(long, Humanizer\.WordForm, Humanizer\.GrammaticalGender, bool\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int)'></a>
 
-## INumberToWordsConverter\.ConvertToOrdinal\(int\) Method
+#### INumberToWordsConverter\.ConvertToOrdinal\(int\) Method
 
 Converts the number to an ordinal string using the locale's default grammatical gender\.
 
 ```csharp
 string ConvertToOrdinal(int number);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int).number'></a>
 
@@ -204,20 +221,20 @@ string ConvertToOrdinal(int number);
 
 The number to convert\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized ordinal words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int).number 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender)'></a>
 
-## INumberToWordsConverter\.ConvertToOrdinal\(int, GrammaticalGender\) Method
+#### INumberToWordsConverter\.ConvertToOrdinal\(int, GrammaticalGender\) Method
 
 Converts the number to an ordinal string using the specified grammatical gender\.
 
 ```csharp
 string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender).number'></a>
 
@@ -231,20 +248,20 @@ The number to convert\.
 
 The grammatical gender to use when the locale distinguishes gendered forms\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized ordinal words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender).number 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int, Humanizer\.GrammaticalGender\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender,Humanizer.WordForm)'></a>
 
-## INumberToWordsConverter\.ConvertToOrdinal\(int, GrammaticalGender, WordForm\) Method
+#### INumberToWordsConverter\.ConvertToOrdinal\(int, GrammaticalGender, WordForm\) Method
 
 Converts the number to an ordinal string using the specified grammatical gender and word form\.
 
 ```csharp
 string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender,Humanizer.WordForm).number'></a>
 
@@ -264,20 +281,20 @@ The grammatical gender to use when the locale distinguishes gendered forms\.
 
 The grammatical or morphological word form to use\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized ordinal words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.GrammaticalGender,Humanizer.WordForm).number 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int, Humanizer\.GrammaticalGender, Humanizer\.WordForm\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.WordForm)'></a>
 
-## INumberToWordsConverter\.ConvertToOrdinal\(int, WordForm\) Method
+#### INumberToWordsConverter\.ConvertToOrdinal\(int, WordForm\) Method
 
 Converts the number to an ordinal string using the locale's default grammatical gender and the specified word form\.
 
 ```csharp
 string ConvertToOrdinal(int number, Humanizer.WordForm wordForm);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.WordForm).number'></a>
 
@@ -291,20 +308,20 @@ The number to convert\.
 
 The grammatical or morphological word form to use\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized ordinal words for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToOrdinal(int,Humanizer.WordForm).number 'Humanizer\.INumberToWordsConverter\.ConvertToOrdinal\(int, Humanizer\.WordForm\)\.number')\.
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToTuple(int)'></a>
 
-## INumberToWordsConverter\.ConvertToTuple\(int\) Method
+#### INumberToWordsConverter\.ConvertToTuple\(int\) Method
 
 Converts the integer to a locale\-specific named tuple such as `single` or `double`\.
 
 ```csharp
 string ConvertToTuple(int number);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.INumberToWordsConverter.ConvertToTuple(int).number'></a>
 
@@ -312,6 +329,6 @@ string ConvertToTuple(int number);
 
 The number to convert\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized tuple name for [number](Humanizer.INumberToWordsConverter.md#Humanizer.INumberToWordsConverter.ConvertToTuple(int).number 'Humanizer\.INumberToWordsConverter\.ConvertToTuple\(int\)\.number') when the locale defines one; otherwise, a numeric fallback\.

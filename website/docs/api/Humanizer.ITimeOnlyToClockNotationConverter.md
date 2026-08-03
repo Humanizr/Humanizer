@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.ITimeOnlyToClockNotationConverter'
+sidebar_label: 'Humanizer.ITimeOnlyToClockNotationConverter'
+description: 'API reference for Humanizer.ITimeOnlyToClockNotationConverter.'
+---
 ## ITimeOnlyToClockNotationConverter Interface
 
 Converts times into the localized text used by `ToClockNotation`\.
@@ -5,18 +10,20 @@ Converts times into the localized text used by `ToClockNotation`\.
 ```csharp
 public interface ITimeOnlyToClockNotationConverter
 ```
+- *Methods*
+  - **[Convert\(TimeOnly, ClockNotationRounding\)](Humanizer.ITimeOnlyToClockNotationConverter.md#Humanizer.ITimeOnlyToClockNotationConverter.Convert(System.TimeOnly,Humanizer.ClockNotationRounding) 'Humanizer\.ITimeOnlyToClockNotationConverter\.Convert\(System\.TimeOnly, Humanizer\.ClockNotationRounding\)')**
 ### Methods
 
 <a name='Humanizer.ITimeOnlyToClockNotationConverter.Convert(System.TimeOnly,Humanizer.ClockNotationRounding)'></a>
 
-## ITimeOnlyToClockNotationConverter\.Convert\(TimeOnly, ClockNotationRounding\) Method
+#### ITimeOnlyToClockNotationConverter\.Convert\(TimeOnly, ClockNotationRounding\) Method
 
 Converts the given [time](Humanizer.ITimeOnlyToClockNotationConverter.md#Humanizer.ITimeOnlyToClockNotationConverter.Convert(System.TimeOnly,Humanizer.ClockNotationRounding).time 'Humanizer\.ITimeOnlyToClockNotationConverter\.Convert\(System\.TimeOnly, Humanizer\.ClockNotationRounding\)\.time') to clock notation\.
 
 ```csharp
 string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.ITimeOnlyToClockNotationConverter.Convert(System.TimeOnly,Humanizer.ClockNotationRounding).time'></a>
 
@@ -30,6 +37,6 @@ The time to format\.
 
 The rounding mode to apply before formatting the time\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized clock\-notation string\.

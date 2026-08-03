@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.NumberToTimeSpanExtensions'
+sidebar_label: 'Humanizer.NumberToTimeSpanExtensions'
+description: 'API reference for Humanizer.NumberToTimeSpanExtensions.'
+---
 ## NumberToTimeSpanExtensions Class
 
 Provides extension methods for converting numeric values to [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') instances,
@@ -15,18 +20,73 @@ These extensions make it easy to create TimeSpan values in a more natural, reada
 \- Instead of TimeSpan\.FromMinutes\(30\), you can write 30\.Minutes\(\)
 \- Supports all numeric types: byte, sbyte, short, ushort, int, uint, long, ulong, and double
 \- Weeks are converted to days \(1 week = 7 days\)
+- *Methods*
+  - **[Days\(this byte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this byte\)')**
+  - **[Days\(this double\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisdouble) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this double\)')**
+  - **[Days\(this int\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisint) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this int\)')**
+  - **[Days\(this long\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thislong) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this long\)')**
+  - **[Days\(this sbyte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thissbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this sbyte\)')**
+  - **[Days\(this short\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisshort) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this short\)')**
+  - **[Days\(this uint\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisuint) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this uint\)')**
+  - **[Days\(this ulong\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisulong) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this ulong\)')**
+  - **[Days\(this ushort\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisushort) 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this ushort\)')**
+  - **[Hours\(this byte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this byte\)')**
+  - **[Hours\(this double\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisdouble) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this double\)')**
+  - **[Hours\(this int\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisint) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this int\)')**
+  - **[Hours\(this long\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thislong) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this long\)')**
+  - **[Hours\(this sbyte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thissbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this sbyte\)')**
+  - **[Hours\(this short\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisshort) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this short\)')**
+  - **[Hours\(this uint\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisuint) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this uint\)')**
+  - **[Hours\(this ulong\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisulong) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this ulong\)')**
+  - **[Hours\(this ushort\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisushort) 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this ushort\)')**
+  - **[Milliseconds\(this byte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this byte\)')**
+  - **[Milliseconds\(this double\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisdouble) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this double\)')**
+  - **[Milliseconds\(this int\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisint) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this int\)')**
+  - **[Milliseconds\(this long\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thislong) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this long\)')**
+  - **[Milliseconds\(this sbyte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thissbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this sbyte\)')**
+  - **[Milliseconds\(this short\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisshort) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this short\)')**
+  - **[Milliseconds\(this uint\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisuint) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this uint\)')**
+  - **[Milliseconds\(this ulong\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisulong) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this ulong\)')**
+  - **[Milliseconds\(this ushort\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisushort) 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this ushort\)')**
+  - **[Minutes\(this byte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this byte\)')**
+  - **[Minutes\(this double\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisdouble) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this double\)')**
+  - **[Minutes\(this int\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisint) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this int\)')**
+  - **[Minutes\(this long\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thislong) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this long\)')**
+  - **[Minutes\(this sbyte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thissbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this sbyte\)')**
+  - **[Minutes\(this short\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisshort) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this short\)')**
+  - **[Minutes\(this uint\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisuint) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this uint\)')**
+  - **[Minutes\(this ulong\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisulong) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this ulong\)')**
+  - **[Minutes\(this ushort\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisushort) 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this ushort\)')**
+  - **[Seconds\(this byte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this byte\)')**
+  - **[Seconds\(this double\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisdouble) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this double\)')**
+  - **[Seconds\(this int\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisint) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this int\)')**
+  - **[Seconds\(this long\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thislong) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this long\)')**
+  - **[Seconds\(this sbyte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thissbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this sbyte\)')**
+  - **[Seconds\(this short\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisshort) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this short\)')**
+  - **[Seconds\(this uint\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisuint) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this uint\)')**
+  - **[Seconds\(this ulong\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisulong) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this ulong\)')**
+  - **[Seconds\(this ushort\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisushort) 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this ushort\)')**
+  - **[Weeks\(this byte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this byte\)')**
+  - **[Weeks\(this double\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisdouble) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this double\)')**
+  - **[Weeks\(this int\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisint) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this int\)')**
+  - **[Weeks\(this long\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thislong) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this long\)')**
+  - **[Weeks\(this sbyte\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thissbyte) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this sbyte\)')**
+  - **[Weeks\(this short\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisshort) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this short\)')**
+  - **[Weeks\(this uint\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisuint) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this uint\)')**
+  - **[Weeks\(this ulong\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisulong) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this ulong\)')**
+  - **[Weeks\(this ushort\)](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisushort) 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this ushort\)')**
 ### Methods
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this byte\) Method
+#### NumberToTimeSpanExtensions\.Days\(this byte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this byte days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisbyte).days'></a>
 
@@ -34,11 +94,11 @@ public static System.TimeSpan Days(this byte days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisbyte).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this byte\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 ((byte)2).Days() => TimeSpan.FromDays(2)
@@ -46,14 +106,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisdouble)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this double\) Method
+#### NumberToTimeSpanExtensions\.Days\(this double\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this double days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisdouble).days'></a>
 
@@ -61,11 +121,11 @@ public static System.TimeSpan Days(this double days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisdouble).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this double\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 2.Days() => TimeSpan representing 2 days  
@@ -75,14 +135,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisint)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this int\) Method
+#### NumberToTimeSpanExtensions\.Days\(this int\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this int days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisint).days'></a>
 
@@ -90,11 +150,11 @@ public static System.TimeSpan Days(this int days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisint).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this int\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 2.Days() => TimeSpan.FromDays(2)
@@ -102,14 +162,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thislong)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this long\) Method
+#### NumberToTimeSpanExtensions\.Days\(this long\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this long days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thislong).days'></a>
 
@@ -117,11 +177,11 @@ public static System.TimeSpan Days(this long days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thislong).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this long\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 2L.Days() => TimeSpan.FromDays(2)
@@ -129,14 +189,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thissbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this sbyte\) Method
+#### NumberToTimeSpanExtensions\.Days\(this sbyte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this sbyte days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thissbyte).days'></a>
 
@@ -144,11 +204,11 @@ public static System.TimeSpan Days(this sbyte days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thissbyte).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this sbyte\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 ((sbyte)2).Days() => TimeSpan.FromDays(2)
@@ -156,14 +216,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisshort)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this short\) Method
+#### NumberToTimeSpanExtensions\.Days\(this short\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this short days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisshort).days'></a>
 
@@ -171,11 +231,11 @@ public static System.TimeSpan Days(this short days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisshort).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this short\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 ((short)2).Days() => TimeSpan.FromDays(2)
@@ -183,14 +243,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisuint)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this uint\) Method
+#### NumberToTimeSpanExtensions\.Days\(this uint\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this uint days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisuint).days'></a>
 
@@ -198,11 +258,11 @@ public static System.TimeSpan Days(this uint days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisuint).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this uint\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 2U.Days() => TimeSpan.FromDays(2)
@@ -210,14 +270,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisulong)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this ulong\) Method
+#### NumberToTimeSpanExtensions\.Days\(this ulong\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this ulong days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisulong).days'></a>
 
@@ -225,11 +285,11 @@ public static System.TimeSpan Days(this ulong days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisulong).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this ulong\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 2UL.Days() => TimeSpan.FromDays(2)
@@ -237,14 +297,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisushort)'></a>
 
-## NumberToTimeSpanExtensions\.Days\(this ushort\) Method
+#### NumberToTimeSpanExtensions\.Days\(this ushort\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of days\.
 
 ```csharp
 public static System.TimeSpan Days(this ushort days);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Days(thisushort).days'></a>
 
@@ -252,11 +312,11 @@ public static System.TimeSpan Days(this ushort days);
 
 The number of days\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [days](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Days(thisushort).days 'Humanizer\.NumberToTimeSpanExtensions\.Days\(this ushort\)\.days') days\.
 
-### Example
+##### Example
 
 ```csharp
 ((ushort)2).Days() => TimeSpan.FromDays(2)
@@ -264,14 +324,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this byte\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this byte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this byte hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisbyte).hours'></a>
 
@@ -279,11 +339,11 @@ public static System.TimeSpan Hours(this byte hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisbyte).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this byte\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 ((byte)3).Hours() => TimeSpan.FromHours(3)
@@ -291,14 +351,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisdouble)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this double\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this double\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this double hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisdouble).hours'></a>
 
@@ -306,11 +366,11 @@ public static System.TimeSpan Hours(this double hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisdouble).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this double\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 3.Hours() => TimeSpan representing 3 hours
@@ -320,14 +380,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisint)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this int\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this int\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this int hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisint).hours'></a>
 
@@ -335,11 +395,11 @@ public static System.TimeSpan Hours(this int hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisint).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this int\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 3.Hours() => TimeSpan.FromHours(3)
@@ -347,14 +407,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thislong)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this long\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this long\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this long hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thislong).hours'></a>
 
@@ -362,11 +422,11 @@ public static System.TimeSpan Hours(this long hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thislong).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this long\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 3L.Hours() => TimeSpan.FromHours(3)
@@ -374,14 +434,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thissbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this sbyte\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this sbyte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this sbyte hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thissbyte).hours'></a>
 
@@ -389,11 +449,11 @@ public static System.TimeSpan Hours(this sbyte hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thissbyte).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this sbyte\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 ((sbyte)3).Hours() => TimeSpan.FromHours(3)
@@ -401,14 +461,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisshort)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this short\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this short\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this short hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisshort).hours'></a>
 
@@ -416,11 +476,11 @@ public static System.TimeSpan Hours(this short hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisshort).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this short\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 ((short)3).Hours() => TimeSpan.FromHours(3)
@@ -428,14 +488,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisuint)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this uint\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this uint\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this uint hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisuint).hours'></a>
 
@@ -443,11 +503,11 @@ public static System.TimeSpan Hours(this uint hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisuint).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this uint\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 3U.Hours() => TimeSpan.FromHours(3)
@@ -455,14 +515,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisulong)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this ulong\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this ulong\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this ulong hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisulong).hours'></a>
 
@@ -470,11 +530,11 @@ public static System.TimeSpan Hours(this ulong hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisulong).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this ulong\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 3UL.Hours() => TimeSpan.FromHours(3)
@@ -482,14 +542,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisushort)'></a>
 
-## NumberToTimeSpanExtensions\.Hours\(this ushort\) Method
+#### NumberToTimeSpanExtensions\.Hours\(this ushort\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of hours\.
 
 ```csharp
 public static System.TimeSpan Hours(this ushort hours);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Hours(thisushort).hours'></a>
 
@@ -497,11 +557,11 @@ public static System.TimeSpan Hours(this ushort hours);
 
 The number of hours\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [hours](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Hours(thisushort).hours 'Humanizer\.NumberToTimeSpanExtensions\.Hours\(this ushort\)\.hours') hours\.
 
-### Example
+##### Example
 
 ```csharp
 ((ushort)3).Hours() => TimeSpan.FromHours(3)
@@ -509,14 +569,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this byte\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this byte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this byte ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisbyte).ms'></a>
 
@@ -524,11 +584,11 @@ public static System.TimeSpan Milliseconds(this byte ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisbyte).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this byte\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 500.Milliseconds() => TimeSpan representing 500 milliseconds
@@ -537,14 +597,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisdouble)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this double\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this double\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this double ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisdouble).ms'></a>
 
@@ -552,11 +612,11 @@ public static System.TimeSpan Milliseconds(this double ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisdouble).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this double\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 500.0.Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -564,14 +624,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisint)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this int\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this int\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this int ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisint).ms'></a>
 
@@ -579,11 +639,11 @@ public static System.TimeSpan Milliseconds(this int ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisint).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this int\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 500.Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -591,14 +651,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thislong)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this long\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this long\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this long ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thislong).ms'></a>
 
@@ -606,11 +666,11 @@ public static System.TimeSpan Milliseconds(this long ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thislong).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this long\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 500L.Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -618,14 +678,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thissbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this sbyte\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this sbyte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this sbyte ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thissbyte).ms'></a>
 
@@ -633,11 +693,11 @@ public static System.TimeSpan Milliseconds(this sbyte ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thissbyte).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this sbyte\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((sbyte)500).Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -645,14 +705,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisshort)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this short\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this short\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this short ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisshort).ms'></a>
 
@@ -660,11 +720,11 @@ public static System.TimeSpan Milliseconds(this short ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisshort).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this short\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((short)500).Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -672,14 +732,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisuint)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this uint\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this uint\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this uint ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisuint).ms'></a>
 
@@ -687,11 +747,11 @@ public static System.TimeSpan Milliseconds(this uint ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisuint).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this uint\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 500U.Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -699,14 +759,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisulong)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this ulong\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this ulong\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this ulong ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisulong).ms'></a>
 
@@ -714,11 +774,11 @@ public static System.TimeSpan Milliseconds(this ulong ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisulong).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this ulong\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 500UL.Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -726,14 +786,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisushort)'></a>
 
-## NumberToTimeSpanExtensions\.Milliseconds\(this ushort\) Method
+#### NumberToTimeSpanExtensions\.Milliseconds\(this ushort\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of milliseconds\.
 
 ```csharp
 public static System.TimeSpan Milliseconds(this ushort ms);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisushort).ms'></a>
 
@@ -741,11 +801,11 @@ public static System.TimeSpan Milliseconds(this ushort ms);
 
 The number of milliseconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [ms](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Milliseconds(thisushort).ms 'Humanizer\.NumberToTimeSpanExtensions\.Milliseconds\(this ushort\)\.ms') milliseconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((ushort)500).Milliseconds() => TimeSpan.FromMilliseconds(500)
@@ -753,14 +813,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this byte\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this byte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this byte minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisbyte).minutes'></a>
 
@@ -768,11 +828,11 @@ public static System.TimeSpan Minutes(this byte minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisbyte).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this byte\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 ((byte)30).Minutes() => TimeSpan.FromMinutes(30)
@@ -780,14 +840,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisdouble)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this double\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this double\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this double minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisdouble).minutes'></a>
 
@@ -795,11 +855,11 @@ public static System.TimeSpan Minutes(this double minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisdouble).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this double\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 30.Minutes() => TimeSpan representing 30 minutes
@@ -808,14 +868,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisint)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this int\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this int\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this int minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisint).minutes'></a>
 
@@ -823,11 +883,11 @@ public static System.TimeSpan Minutes(this int minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisint).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this int\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 30.Minutes() => TimeSpan.FromMinutes(30)
@@ -835,14 +895,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thislong)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this long\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this long\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this long minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thislong).minutes'></a>
 
@@ -850,11 +910,11 @@ public static System.TimeSpan Minutes(this long minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thislong).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this long\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 30L.Minutes() => TimeSpan.FromMinutes(30)
@@ -862,14 +922,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thissbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this sbyte\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this sbyte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this sbyte minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thissbyte).minutes'></a>
 
@@ -877,11 +937,11 @@ public static System.TimeSpan Minutes(this sbyte minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thissbyte).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this sbyte\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 ((sbyte)30).Minutes() => TimeSpan.FromMinutes(30)
@@ -889,14 +949,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisshort)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this short\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this short\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this short minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisshort).minutes'></a>
 
@@ -904,11 +964,11 @@ public static System.TimeSpan Minutes(this short minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisshort).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this short\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 ((short)30).Minutes() => TimeSpan.FromMinutes(30)
@@ -916,14 +976,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisuint)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this uint\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this uint\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this uint minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisuint).minutes'></a>
 
@@ -931,11 +991,11 @@ public static System.TimeSpan Minutes(this uint minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisuint).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this uint\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 30U.Minutes() => TimeSpan.FromMinutes(30)
@@ -943,14 +1003,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisulong)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this ulong\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this ulong\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this ulong minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisulong).minutes'></a>
 
@@ -958,11 +1018,11 @@ public static System.TimeSpan Minutes(this ulong minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisulong).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this ulong\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 30UL.Minutes() => TimeSpan.FromMinutes(30)
@@ -970,14 +1030,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisushort)'></a>
 
-## NumberToTimeSpanExtensions\.Minutes\(this ushort\) Method
+#### NumberToTimeSpanExtensions\.Minutes\(this ushort\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of minutes\.
 
 ```csharp
 public static System.TimeSpan Minutes(this ushort minutes);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Minutes(thisushort).minutes'></a>
 
@@ -985,11 +1045,11 @@ public static System.TimeSpan Minutes(this ushort minutes);
 
 The number of minutes\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [minutes](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Minutes(thisushort).minutes 'Humanizer\.NumberToTimeSpanExtensions\.Minutes\(this ushort\)\.minutes') minutes\.
 
-### Example
+##### Example
 
 ```csharp
 ((ushort)30).Minutes() => TimeSpan.FromMinutes(30)
@@ -997,14 +1057,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this byte\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this byte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this byte seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisbyte).seconds'></a>
 
@@ -1012,11 +1072,11 @@ public static System.TimeSpan Seconds(this byte seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisbyte).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this byte\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((byte)30).Seconds() => TimeSpan.FromSeconds(30)
@@ -1024,14 +1084,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisdouble)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this double\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this double\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this double seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisdouble).seconds'></a>
 
@@ -1039,11 +1099,11 @@ public static System.TimeSpan Seconds(this double seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisdouble).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this double\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 30.Seconds() => TimeSpan representing 30 seconds
@@ -1052,14 +1112,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisint)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this int\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this int\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this int seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisint).seconds'></a>
 
@@ -1067,11 +1127,11 @@ public static System.TimeSpan Seconds(this int seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisint).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this int\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 30.Seconds() => TimeSpan.FromSeconds(30)
@@ -1079,14 +1139,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thislong)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this long\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this long\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this long seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thislong).seconds'></a>
 
@@ -1094,11 +1154,11 @@ public static System.TimeSpan Seconds(this long seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thislong).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this long\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 30L.Seconds() => TimeSpan.FromSeconds(30)
@@ -1106,14 +1166,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thissbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this sbyte\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this sbyte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this sbyte seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thissbyte).seconds'></a>
 
@@ -1121,11 +1181,11 @@ public static System.TimeSpan Seconds(this sbyte seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thissbyte).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this sbyte\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((sbyte)30).Seconds() => TimeSpan.FromSeconds(30)
@@ -1133,14 +1193,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisshort)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this short\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this short\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this short seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisshort).seconds'></a>
 
@@ -1148,11 +1208,11 @@ public static System.TimeSpan Seconds(this short seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisshort).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this short\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((short)30).Seconds() => TimeSpan.FromSeconds(30)
@@ -1160,14 +1220,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisuint)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this uint\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this uint\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this uint seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisuint).seconds'></a>
 
@@ -1175,11 +1235,11 @@ public static System.TimeSpan Seconds(this uint seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisuint).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this uint\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 30U.Seconds() => TimeSpan.FromSeconds(30)
@@ -1187,14 +1247,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisulong)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this ulong\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this ulong\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this ulong seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisulong).seconds'></a>
 
@@ -1202,11 +1262,11 @@ public static System.TimeSpan Seconds(this ulong seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisulong).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this ulong\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 30UL.Seconds() => TimeSpan.FromSeconds(30)
@@ -1214,14 +1274,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisushort)'></a>
 
-## NumberToTimeSpanExtensions\.Seconds\(this ushort\) Method
+#### NumberToTimeSpanExtensions\.Seconds\(this ushort\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of seconds\.
 
 ```csharp
 public static System.TimeSpan Seconds(this ushort seconds);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Seconds(thisushort).seconds'></a>
 
@@ -1229,11 +1289,11 @@ public static System.TimeSpan Seconds(this ushort seconds);
 
 The number of seconds\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [seconds](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Seconds(thisushort).seconds 'Humanizer\.NumberToTimeSpanExtensions\.Seconds\(this ushort\)\.seconds') seconds\.
 
-### Example
+##### Example
 
 ```csharp
 ((ushort)30).Seconds() => TimeSpan.FromSeconds(30)
@@ -1241,14 +1301,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this byte\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this byte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this byte input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisbyte).input'></a>
 
@@ -1256,11 +1316,11 @@ public static System.TimeSpan Weeks(this byte input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisbyte).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this byte\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 ((byte)2).Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1268,14 +1328,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisdouble)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this double\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this double\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this double input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisdouble).input'></a>
 
@@ -1283,11 +1343,11 @@ public static System.TimeSpan Weeks(this double input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisdouble).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this double\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 2.Weeks() => TimeSpan representing 14 days
@@ -1295,20 +1355,20 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 0.5.Weeks() => TimeSpan representing 3.5 days
 ```
 
-### Remarks
+##### Remarks
 Since [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') doesn't have a native concept of weeks, this method converts
 weeks to days \(multiplying by 7\)\.
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisint)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this int\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this int\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this int input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisint).input'></a>
 
@@ -1316,11 +1376,11 @@ public static System.TimeSpan Weeks(this int input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisint).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this int\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 2.Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1328,14 +1388,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thislong)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this long\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this long\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this long input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thislong).input'></a>
 
@@ -1343,11 +1403,11 @@ public static System.TimeSpan Weeks(this long input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thislong).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this long\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 2L.Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1355,14 +1415,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thissbyte)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this sbyte\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this sbyte\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this sbyte input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thissbyte).input'></a>
 
@@ -1370,11 +1430,11 @@ public static System.TimeSpan Weeks(this sbyte input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thissbyte).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this sbyte\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 ((sbyte)2).Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1382,14 +1442,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisshort)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this short\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this short\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this short input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisshort).input'></a>
 
@@ -1397,11 +1457,11 @@ public static System.TimeSpan Weeks(this short input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisshort).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this short\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 ((short)2).Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1409,14 +1469,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisuint)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this uint\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this uint\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this uint input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisuint).input'></a>
 
@@ -1424,11 +1484,11 @@ public static System.TimeSpan Weeks(this uint input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisuint).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this uint\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 2U.Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1436,14 +1496,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisulong)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this ulong\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this ulong\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this ulong input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisulong).input'></a>
 
@@ -1451,11 +1511,11 @@ public static System.TimeSpan Weeks(this ulong input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisulong).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this ulong\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 2UL.Weeks() => new TimeSpan(14, 0, 0, 0)
@@ -1463,14 +1523,14 @@ A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespa
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisushort)'></a>
 
-## NumberToTimeSpanExtensions\.Weeks\(this ushort\) Method
+#### NumberToTimeSpanExtensions\.Weeks\(this ushort\) Method
 
 Creates a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing the specified number of weeks\.
 
 ```csharp
 public static System.TimeSpan Weeks(this ushort input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.NumberToTimeSpanExtensions.Weeks(thisushort).input'></a>
 
@@ -1478,11 +1538,11 @@ public static System.TimeSpan Weeks(this ushort input);
 
 The number of weeks\.
 
-#### Returns
+##### Returns
 [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')  
 A [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') representing [input](Humanizer.NumberToTimeSpanExtensions.md#Humanizer.NumberToTimeSpanExtensions.Weeks(thisushort).input 'Humanizer\.NumberToTimeSpanExtensions\.Weeks\(this ushort\)\.input') weeks \(converted to days: 1 week = 7 days\)\.
 
-### Example
+##### Example
 
 ```csharp
 ((ushort)2).Weeks() => new TimeSpan(14, 0, 0, 0)

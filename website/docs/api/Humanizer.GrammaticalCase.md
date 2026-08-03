@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.GrammaticalCase'
+sidebar_label: 'Humanizer.GrammaticalCase'
+description: 'API reference for Humanizer.GrammaticalCase.'
+---
 ## GrammaticalCase Enum
 
 Options for specifying the desired grammatical case for the output words
@@ -5,6 +10,37 @@ Options for specifying the desired grammatical case for the output words
 ```csharp
 public enum GrammaticalCase
 ```
+- *Fields*
+  - **[Abessive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Abessive 'Humanizer\.GrammaticalCase\.Abessive')**
+  - **[Ablative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Ablative 'Humanizer\.GrammaticalCase\.Ablative')**
+  - **[Absolutive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Absolutive 'Humanizer\.GrammaticalCase\.Absolutive')**
+  - **[Accusative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Accusative 'Humanizer\.GrammaticalCase\.Accusative')**
+  - **[Additive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Additive 'Humanizer\.GrammaticalCase\.Additive')**
+  - **[Adessive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Adessive 'Humanizer\.GrammaticalCase\.Adessive')**
+  - **[Allative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Allative 'Humanizer\.GrammaticalCase\.Allative')**
+  - **[Benefactive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Benefactive 'Humanizer\.GrammaticalCase\.Benefactive')**
+  - **[Causal](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Causal 'Humanizer\.GrammaticalCase\.Causal')**
+  - **[Comitative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Comitative 'Humanizer\.GrammaticalCase\.Comitative')**
+  - **[Dative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Dative 'Humanizer\.GrammaticalCase\.Dative')**
+  - **[Directive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Directive 'Humanizer\.GrammaticalCase\.Directive')**
+  - **[Elative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Elative 'Humanizer\.GrammaticalCase\.Elative')**
+  - **[Equative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Equative 'Humanizer\.GrammaticalCase\.Equative')**
+  - **[Ergative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Ergative 'Humanizer\.GrammaticalCase\.Ergative')**
+  - **[Essive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Essive 'Humanizer\.GrammaticalCase\.Essive')**
+  - **[Genitive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Genitive 'Humanizer\.GrammaticalCase\.Genitive')**
+  - **[Illative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Illative 'Humanizer\.GrammaticalCase\.Illative')**
+  - **[Inessive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Inessive 'Humanizer\.GrammaticalCase\.Inessive')**
+  - **[Instrumental](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Instrumental 'Humanizer\.GrammaticalCase\.Instrumental')**
+  - **[Lative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Lative 'Humanizer\.GrammaticalCase\.Lative')**
+  - **[Locative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Locative 'Humanizer\.GrammaticalCase\.Locative')**
+  - **[Nominative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Nominative 'Humanizer\.GrammaticalCase\.Nominative')**
+  - **[Oblique](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Oblique 'Humanizer\.GrammaticalCase\.Oblique')**
+  - **[Partitive](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Partitive 'Humanizer\.GrammaticalCase\.Partitive')**
+  - **[Prepositional](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Prepositional 'Humanizer\.GrammaticalCase\.Prepositional')**
+  - **[Sociative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Sociative 'Humanizer\.GrammaticalCase\.Sociative')**
+  - **[Terminative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Terminative 'Humanizer\.GrammaticalCase\.Terminative')**
+  - **[Translative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Translative 'Humanizer\.GrammaticalCase\.Translative')**
+  - **[Vocative](Humanizer.GrammaticalCase.md#Humanizer.GrammaticalCase.Vocative 'Humanizer\.GrammaticalCase\.Vocative')**
 ### Fields
 
 <a name='Humanizer.GrammaticalCase.Nominative'></a>

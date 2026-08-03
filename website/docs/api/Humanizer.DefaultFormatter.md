@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.DefaultFormatter'
+sidebar_label: 'Humanizer.DefaultFormatter'
+description: 'API reference for Humanizer.DefaultFormatter.'
+---
 ## DefaultFormatter Class
 
 Provides the standard formatter implementation for Humanizer locales\.
@@ -9,18 +14,36 @@ public class DefaultFormatter : Humanizer.IGrammaticalCaseTimeSpanFormatter, Hum
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultFormatter
 
 Implements [IGrammaticalCaseTimeSpanFormatter](Humanizer.IGrammaticalCaseTimeSpanFormatter.md 'Humanizer\.IGrammaticalCaseTimeSpanFormatter'), [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter')
+- *Constructors*
+  - **[DefaultFormatter\(string\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DefaultFormatter(string) 'Humanizer\.DefaultFormatter\.DefaultFormatter\(string\)')**
+  - **[DefaultFormatter\(CultureInfo\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DefaultFormatter(System.Globalization.CultureInfo) 'Humanizer\.DefaultFormatter\.DefaultFormatter\(System\.Globalization\.CultureInfo\)')**
+- *Properties*
+  - **[Culture](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.Culture 'Humanizer\.DefaultFormatter\.Culture')**
+- *Methods*
+  - **[DataUnitHumanize\(DataUnit, double, bool\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool) 'Humanizer\.DefaultFormatter\.DataUnitHumanize\(Humanizer\.DataUnit, double, bool\)')**
+  - **[DateHumanize\(TimeUnit, Tense, int\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int) 'Humanizer\.DefaultFormatter\.DateHumanize\(Humanizer\.TimeUnit, Humanizer\.Tense, int\)')**
+  - **[DateHumanize\_Never\(\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DateHumanize_Never() 'Humanizer\.DefaultFormatter\.DateHumanize\_Never\(\)')**
+  - **[DateHumanize\_Now\(\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DateHumanize_Now() 'Humanizer\.DefaultFormatter\.DateHumanize\_Now\(\)')**
+  - **[NumberToWords\(TimeUnit, int, CultureInfo\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo) 'Humanizer\.DefaultFormatter\.NumberToWords\(Humanizer\.TimeUnit, int, System\.Globalization\.CultureInfo\)')**
+  - **[TimeSpanHumanize\(TimeUnit, int, bool\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool) 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)')**
+  - **[TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool) 'Humanizer\.DefaultFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\)')**
+  - **[TimeSpanHumanize\_Age\(\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize_Age() 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\_Age\(\)')**
+  - **[TimeSpanHumanize\_Zero\(\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize_Zero() 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\_Zero\(\)')**
+  - **[TimeUnitHumanize\(TimeUnit\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit) 'Humanizer\.DefaultFormatter\.TimeUnitHumanize\(Humanizer\.TimeUnit\)')**
+- *Explicit Interface Implementations*
+  - **[Humanizer\.IGrammaticalCaseTimeSpanFormatter\.TimeSpanHumanize\(TimeUnit, int, GrammaticalCase\)](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase) 'Humanizer\.DefaultFormatter\.Humanizer\.IGrammaticalCaseTimeSpanFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, Humanizer\.GrammaticalCase\)')**
 ### Constructors
 
 <a name='Humanizer.DefaultFormatter.DefaultFormatter(string)'></a>
 
-## DefaultFormatter\(string\) Constructor
+#### DefaultFormatter\(string\) Constructor
 
 Initializes a new formatter for the specified locale code\.
 
 ```csharp
 public DefaultFormatter(string localeCode);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.DefaultFormatter(string).localeCode'></a>
 
@@ -30,14 +53,14 @@ The locale code used to construct the formatter culture\.
 
 <a name='Humanizer.DefaultFormatter.DefaultFormatter(System.Globalization.CultureInfo)'></a>
 
-## DefaultFormatter\(CultureInfo\) Constructor
+#### DefaultFormatter\(CultureInfo\) Constructor
 
 Initializes a new formatter for the specified culture\.
 
 ```csharp
 public DefaultFormatter(System.Globalization.CultureInfo culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.DefaultFormatter(System.Globalization.CultureInfo).culture'></a>
 
@@ -48,7 +71,7 @@ The culture used to resolve resources and localized number words\.
 
 <a name='Humanizer.DefaultFormatter.Culture'></a>
 
-## DefaultFormatter\.Culture Property
+#### DefaultFormatter\.Culture Property
 
 Gets the culture used to resolve resources and localized number words\.
 
@@ -56,20 +79,20 @@ Gets the culture used to resolve resources and localized number words\.
 protected System.Globalization.CultureInfo Culture { protected get; }
 ```
 
-#### Property Value
+##### Property Value
 [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 ### Methods
 
 <a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool)'></a>
 
-## DefaultFormatter\.DataUnitHumanize\(DataUnit, double, bool\) Method
+#### DefaultFormatter\.DataUnitHumanize\(DataUnit, double, bool\) Method
 
 Returns the localized representation of a data unit, either as a symbol or a full word\.
 
 ```csharp
 public virtual string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol=true);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool).dataUnit'></a>
 
@@ -91,25 +114,25 @@ Whether the unit should be rendered as a symbol\.
 
 Implements [DataUnitHumanize\(DataUnit, double, bool\)](Humanizer.IFormatter.md#Humanizer.IFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool) 'Humanizer\.IFormatter\.DataUnitHumanize\(Humanizer\.DataUnit, double, bool\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized data\-unit representation\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 If [dataUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool).dataUnit 'Humanizer\.DefaultFormatter\.DataUnitHumanize\(Humanizer\.DataUnit, double, bool\)\.dataUnit') is unsupported\.
 
 <a name='Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int)'></a>
 
-## DefaultFormatter\.DateHumanize\(TimeUnit, Tense, int\) Method
+#### DefaultFormatter\.DateHumanize\(TimeUnit, Tense, int\) Method
 
 Returns the localized representation of a relative date phrase\.
 
 ```csharp
 public virtual string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int).timeUnit'></a>
 
@@ -131,18 +154,18 @@ The number of units being described\.
 
 Implements [DateHumanize\(TimeUnit, Tense, int\)](Humanizer.IFormatter.md#Humanizer.IFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int) 'Humanizer\.IFormatter\.DateHumanize\(Humanizer\.TimeUnit, Humanizer\.Tense, int\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized relative date phrase\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int).timeUnit 'Humanizer\.DefaultFormatter\.DateHumanize\(Humanizer\.TimeUnit, Humanizer\.Tense, int\)\.timeUnit') is unsupported or [unit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int).unit 'Humanizer\.DefaultFormatter\.DateHumanize\(Humanizer\.TimeUnit, Humanizer\.Tense, int\)\.unit') is negative\.
 
 <a name='Humanizer.DefaultFormatter.DateHumanize_Never()'></a>
 
-## DefaultFormatter\.DateHumanize\_Never\(\) Method
+#### DefaultFormatter\.DateHumanize\_Never\(\) Method
 
 Returns the localized text used when a date never occurs\.
 
@@ -152,12 +175,12 @@ public virtual string DateHumanize_Never();
 
 Implements [DateHumanize\_Never\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.DateHumanize_Never() 'Humanizer\.IFormatter\.DateHumanize\_Never\(\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.DefaultFormatter.DateHumanize_Now()'></a>
 
-## DefaultFormatter\.DateHumanize\_Now\(\) Method
+#### DefaultFormatter\.DateHumanize\_Now\(\) Method
 
 Returns the localized text for the current moment\.
 
@@ -167,19 +190,19 @@ public virtual string DateHumanize_Now();
 
 Implements [DateHumanize\_Now\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.DateHumanize_Now() 'Humanizer\.IFormatter\.DateHumanize\_Now\(\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo)'></a>
 
-## DefaultFormatter\.NumberToWords\(TimeUnit, int, CultureInfo\) Method
+#### DefaultFormatter\.NumberToWords\(TimeUnit, int, CultureInfo\) Method
 
 Converts a number to words for the current culture\.
 
 ```csharp
 protected virtual string NumberToWords(Humanizer.TimeUnit unit, int number, System.Globalization.CultureInfo culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo).unit'></a>
 
@@ -199,20 +222,20 @@ The numeric value to convert\.
 
 The culture to use when generating the words\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The number rendered as words for the configured culture\.
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool)'></a>
 
-## DefaultFormatter\.TimeSpanHumanize\(TimeUnit, int, bool\) Method
+#### DefaultFormatter\.TimeSpanHumanize\(TimeUnit, int, bool\) Method
 
 Returns the localized representation of a duration\.
 
 ```csharp
 public virtual string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords=false);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).timeUnit'></a>
 
@@ -234,25 +257,25 @@ Whether the number should be rendered as words\.
 
 Implements [TimeSpanHumanize\(TimeUnit, int, bool\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool) 'Humanizer\.IFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized duration phrase\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).timeUnit 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)\.timeUnit') is unsupported or [unit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).unit 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)\.unit') is negative\.
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool)'></a>
 
-## DefaultFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\) Method
+#### DefaultFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\) Method
 
 Returns the localized representation of a non\-negative seconds value\.
 
 ```csharp
 public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool).seconds'></a>
 
@@ -266,13 +289,13 @@ The non\-negative seconds value to format\.
 
 Whether the seconds unit is rendered as a symbol\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized seconds value\.
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanize_Age()'></a>
 
-## DefaultFormatter\.TimeSpanHumanize\_Age\(\) Method
+#### DefaultFormatter\.TimeSpanHumanize\_Age\(\) Method
 
 Returns the localized age suffix format for a humanized duration\.
 
@@ -282,13 +305,13 @@ public virtual string TimeSpanHumanize_Age();
 
 Implements [TimeSpanHumanize\_Age\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeSpanHumanize_Age() 'Humanizer\.IFormatter\.TimeSpanHumanize\_Age\(\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized age suffix format\.
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanize_Zero()'></a>
 
-## DefaultFormatter\.TimeSpanHumanize\_Zero\(\) Method
+#### DefaultFormatter\.TimeSpanHumanize\_Zero\(\) Method
 
 Returns the localized representation of a zero\-length duration\.
 
@@ -298,20 +321,20 @@ public virtual string TimeSpanHumanize_Zero();
 
 Implements [TimeSpanHumanize\_Zero\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeSpanHumanize_Zero() 'Humanizer\.IFormatter\.TimeSpanHumanize\_Zero\(\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized zero\-duration phrase\.
 
 <a name='Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit)'></a>
 
-## DefaultFormatter\.TimeUnitHumanize\(TimeUnit\) Method
+#### DefaultFormatter\.TimeUnitHumanize\(TimeUnit\) Method
 
 Returns the localized symbol for the given [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')\.
 
 ```csharp
 public virtual string TimeUnitHumanize(Humanizer.TimeUnit timeUnit);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit).timeUnit'></a>
 
@@ -321,11 +344,11 @@ The time unit to format\.
 
 Implements [TimeUnitHumanize\(TimeUnit\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeUnitHumanize(Humanizer.TimeUnit) 'Humanizer\.IFormatter\.TimeUnitHumanize\(Humanizer\.TimeUnit\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The localized symbol for [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit).timeUnit 'Humanizer\.DefaultFormatter\.TimeUnitHumanize\(Humanizer\.TimeUnit\)\.timeUnit')\.
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit).timeUnit 'Humanizer\.DefaultFormatter\.TimeUnitHumanize\(Humanizer\.TimeUnit\)\.timeUnit') is unsupported\.
@@ -333,12 +356,12 @@ If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeUnitH
 
 <a name='Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase)'></a>
 
-## Humanizer\.IGrammaticalCaseTimeSpanFormatter\.TimeSpanHumanize\(TimeUnit, int, GrammaticalCase\) Method
+#### Humanizer\.IGrammaticalCaseTimeSpanFormatter\.TimeSpanHumanize\(TimeUnit, int, GrammaticalCase\) Method
 
 ```csharp
 string Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, Humanizer.GrammaticalCase grammaticalCase);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase).timeUnit'></a>
 

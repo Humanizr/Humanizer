@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.IDateTimeOffsetHumanizeStrategy'
+sidebar_label: 'Humanizer.IDateTimeOffsetHumanizeStrategy'
+description: 'API reference for Humanizer.IDateTimeOffsetHumanizeStrategy.'
+---
 ## IDateTimeOffsetHumanizeStrategy Interface
 
 Implement this interface to create a new strategy for DateTime\.Humanize and hook it in the Configurator\.DateTimeOffsetHumanizeStrategy
@@ -9,18 +14,20 @@ public interface IDateTimeOffsetHumanizeStrategy
 Derived  
 ↳ [DefaultDateTimeOffsetHumanizeStrategy](Humanizer.DefaultDateTimeOffsetHumanizeStrategy.md 'Humanizer\.DefaultDateTimeOffsetHumanizeStrategy')  
 ↳ [PrecisionDateTimeOffsetHumanizeStrategy](Humanizer.PrecisionDateTimeOffsetHumanizeStrategy.md 'Humanizer\.PrecisionDateTimeOffsetHumanizeStrategy')
+- *Methods*
+  - **[Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\)](Humanizer.IDateTimeOffsetHumanizeStrategy.md#Humanizer.IDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo) 'Humanizer\.IDateTimeOffsetHumanizeStrategy\.Humanize\(System\.DateTimeOffset, System\.DateTimeOffset, System\.Globalization\.CultureInfo\)')**
 ### Methods
 
 <a name='Humanizer.IDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo)'></a>
 
-## IDateTimeOffsetHumanizeStrategy\.Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\) Method
+#### IDateTimeOffsetHumanizeStrategy\.Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\) Method
 
 Calculates the distance of time in words between two provided dates used for DateTimeOffset\.Humanize
 
 ```csharp
 string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.IDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo).input'></a>
 
@@ -34,5 +41,5 @@ string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBas
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.StringHumanizeExtensions'
+sidebar_label: 'Humanizer.StringHumanizeExtensions'
+description: 'API reference for Humanizer.StringHumanizeExtensions.'
+---
 ## StringHumanizeExtensions Class
 
 Contains extension methods for humanizing string values\.
@@ -7,11 +12,14 @@ public static class StringHumanizeExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → StringHumanizeExtensions
+- *Methods*
+  - **[Humanize\(this string\)](Humanizer.StringHumanizeExtensions.md#Humanizer.StringHumanizeExtensions.Humanize(thisstring) 'Humanizer\.StringHumanizeExtensions\.Humanize\(this string\)')**
+  - **[Humanize\(this string, LetterCasing\)](Humanizer.StringHumanizeExtensions.md#Humanizer.StringHumanizeExtensions.Humanize(thisstring,Humanizer.LetterCasing) 'Humanizer\.StringHumanizeExtensions\.Humanize\(this string, Humanizer\.LetterCasing\)')**
 ### Methods
 
 <a name='Humanizer.StringHumanizeExtensions.Humanize(thisstring)'></a>
 
-## StringHumanizeExtensions\.Humanize\(this string\) Method
+#### StringHumanizeExtensions\.Humanize\(this string\) Method
 
 Transforms a string into a human\-readable format by intelligently handling PascalCase, camelCase,
 underscored\_strings, and dash\-separated\-strings, converting them into space\-separated text with
@@ -20,7 +28,7 @@ appropriate capitalization\.
 ```csharp
 public static string Humanize(this string input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.StringHumanizeExtensions.Humanize(thisstring).input'></a>
 
@@ -28,12 +36,12 @@ public static string Humanize(this string input);
 
 The string to be humanized\. Must not be null\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A humanized version of the input string with spaces inserted between words and appropriate
 capitalization\. Preserves all\-uppercase acronyms unless registered with different canonical casing\.
 
-### Example
+##### Example
 
 ```csharp
 "PascalCaseInputString".Humanize() => "Pascal case input string"
@@ -46,7 +54,7 @@ Vocabularies.Default.AddAcronym("iOS");
 "Rock&Roll".Humanize() => "Rock & roll"
 ```
 
-### Remarks
+##### Remarks
 The method applies several rules in order:
 \- If the entire input is uppercase \(an acronym\), it returns unchanged unless it matches a registered acronym
 \- Handles freestanding underscores/dashes \(e\.g\., "some \_ string"\)
@@ -58,14 +66,14 @@ Otherwise, if the result begins with a letter, that letter is capitalized\.
 
 <a name='Humanizer.StringHumanizeExtensions.Humanize(thisstring,Humanizer.LetterCasing)'></a>
 
-## StringHumanizeExtensions\.Humanize\(this string, LetterCasing\) Method
+#### StringHumanizeExtensions\.Humanize\(this string, LetterCasing\) Method
 
 Transforms a string into a human\-readable format and applies the specified letter casing\.
 
 ```csharp
 public static string Humanize(this string input, Humanizer.LetterCasing casing);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.StringHumanizeExtensions.Humanize(thisstring,Humanizer.LetterCasing).input'></a>
 
@@ -79,11 +87,11 @@ The string to be humanized\. Must not be null\.
 
 The desired letter casing to apply to the humanized result\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A humanized version of the input string with the specified casing applied\.
 
-### Example
+##### Example
 
 ```csharp
 "PascalCaseInputString".Humanize(LetterCasing.AllCaps) => "PASCAL CASE INPUT STRING"
@@ -91,5 +99,5 @@ A humanized version of the input string with the specified casing applied\.
 "PascalCaseInputString".Humanize(LetterCasing.Title) => "Pascal Case Input String"
 ```
 
-### Remarks
+##### Remarks
 This is a convenience method that combines [Humanize\(this string\)](Humanizer.StringHumanizeExtensions.md#Humanizer.StringHumanizeExtensions.Humanize(thisstring) 'Humanizer\.StringHumanizeExtensions\.Humanize\(this string\)') with [ApplyCase\(this string, LetterCasing\)](Humanizer.CasingExtensions.md#Humanizer.CasingExtensions.ApplyCase(thisstring,Humanizer.LetterCasing) 'Humanizer\.CasingExtensions\.ApplyCase\(this string, Humanizer\.LetterCasing\)')\.

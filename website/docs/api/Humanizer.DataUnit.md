@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.DataUnit'
+sidebar_label: 'Humanizer.DataUnit'
+description: 'API reference for Humanizer.DataUnit.'
+---
 ## DataUnit Enum
 
 Represents the data units supported by Humanizer's data\-size formatting\.
@@ -5,6 +10,31 @@ Represents the data units supported by Humanizer's data\-size formatting\.
 ```csharp
 public enum DataUnit
 ```
+- *Fields*
+  - **[BinaryGibibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.BinaryGibibyte 'Humanizer\.DataUnit\.BinaryGibibyte')**
+  - **[BinaryKibibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.BinaryKibibyte 'Humanizer\.DataUnit\.BinaryKibibyte')**
+  - **[BinaryMebibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.BinaryMebibyte 'Humanizer\.DataUnit\.BinaryMebibyte')**
+  - **[BinaryPebibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.BinaryPebibyte 'Humanizer\.DataUnit\.BinaryPebibyte')**
+  - **[BinaryTebibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.BinaryTebibyte 'Humanizer\.DataUnit\.BinaryTebibyte')**
+  - **[Bit](Humanizer.DataUnit.md#Humanizer.DataUnit.Bit 'Humanizer\.DataUnit\.Bit')**
+  - **[Byte](Humanizer.DataUnit.md#Humanizer.DataUnit.Byte 'Humanizer\.DataUnit\.Byte')**
+  - **[DecimalExabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.DecimalExabyte 'Humanizer\.DataUnit\.DecimalExabyte')**
+  - **[DecimalGigabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.DecimalGigabyte 'Humanizer\.DataUnit\.DecimalGigabyte')**
+  - **[DecimalKilobyte](Humanizer.DataUnit.md#Humanizer.DataUnit.DecimalKilobyte 'Humanizer\.DataUnit\.DecimalKilobyte')**
+  - **[DecimalMegabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.DecimalMegabyte 'Humanizer\.DataUnit\.DecimalMegabyte')**
+  - **[DecimalPetabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.DecimalPetabyte 'Humanizer\.DataUnit\.DecimalPetabyte')**
+  - **[DecimalTerabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.DecimalTerabyte 'Humanizer\.DataUnit\.DecimalTerabyte')**
+  - **[Exabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Exabyte 'Humanizer\.DataUnit\.Exabyte')**
+  - **[Gibibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Gibibyte 'Humanizer\.DataUnit\.Gibibyte')**
+  - **[Gigabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Gigabyte 'Humanizer\.DataUnit\.Gigabyte')**
+  - **[Kibibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Kibibyte 'Humanizer\.DataUnit\.Kibibyte')**
+  - **[Kilobyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Kilobyte 'Humanizer\.DataUnit\.Kilobyte')**
+  - **[Mebibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Mebibyte 'Humanizer\.DataUnit\.Mebibyte')**
+  - **[Megabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Megabyte 'Humanizer\.DataUnit\.Megabyte')**
+  - **[Pebibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Pebibyte 'Humanizer\.DataUnit\.Pebibyte')**
+  - **[Petabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Petabyte 'Humanizer\.DataUnit\.Petabyte')**
+  - **[Tebibyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Tebibyte 'Humanizer\.DataUnit\.Tebibyte')**
+  - **[Terabyte](Humanizer.DataUnit.md#Humanizer.DataUnit.Terabyte 'Humanizer\.DataUnit\.Terabyte')**
 ### Fields
 
 <a name='Humanizer.DataUnit.Bit'></a>

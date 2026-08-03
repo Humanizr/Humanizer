@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.MetricNumeralExtensions'
+sidebar_label: 'Humanizer.MetricNumeralExtensions'
+description: 'API reference for Humanizer.MetricNumeralExtensions.'
+---
 ## MetricNumeralExtensions Class
 
 Contains extension methods for changing a number to Metric representation \(ToMetric\)
@@ -8,18 +13,23 @@ public static class MetricNumeralExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → MetricNumeralExtensions
+- *Methods*
+  - **[FromMetric\(this string\)](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.FromMetric(thisstring) 'Humanizer\.MetricNumeralExtensions\.FromMetric\(this string\)')**
+  - **[ToMetric\(this double, Nullable&lt;MetricNumeralFormats&gt;, Nullable&lt;int&gt;\)](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thisdouble,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_) 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this double, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)')**
+  - **[ToMetric\(this int, Nullable&lt;MetricNumeralFormats&gt;, Nullable&lt;int&gt;\)](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thisint,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_) 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this int, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)')**
+  - **[ToMetric\(this long, Nullable&lt;MetricNumeralFormats&gt;, Nullable&lt;int&gt;\)](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thislong,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_) 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this long, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)')**
 ### Methods
 
 <a name='Humanizer.MetricNumeralExtensions.FromMetric(thisstring)'></a>
 
-## MetricNumeralExtensions\.FromMetric\(this string\) Method
+#### MetricNumeralExtensions\.FromMetric\(this string\) Method
 
 Converts a Metric representation into a number\.
 
 ```csharp
 public static double FromMetric(this string input);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.MetricNumeralExtensions.FromMetric(thisstring).input'></a>
 
@@ -27,11 +37,11 @@ public static double FromMetric(this string input);
 
 Metric representation to convert to a number
 
-#### Returns
+##### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 A number after a conversion from a Metric representation\.
 
-### Example
+##### Example
 
 ```csharp
 "1k".FromMetric() => 1000d
@@ -39,20 +49,20 @@ A number after a conversion from a Metric representation\.
 "100m".FromMetric() => 1E-1
 ```
 
-### Remarks
+##### Remarks
 We don't support input in the format \{number\}\{name\} nor \{number\} \{name\}\.
 We only provide a solution for \{number\}\{symbol\} and \{number\} \{symbol\}\.
 
 <a name='Humanizer.MetricNumeralExtensions.ToMetric(thisdouble,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_)'></a>
 
-## MetricNumeralExtensions\.ToMetric\(this double, Nullable\<MetricNumeralFormats\>, Nullable\<int\>\) Method
+#### MetricNumeralExtensions\.ToMetric\(this double, Nullable\<MetricNumeralFormats\>, Nullable\<int\>\) Method
 
 Converts a number into a valid and Human\-readable Metric representation\.
 
 ```csharp
 public static string ToMetric(this double input, System.Nullable<Humanizer.MetricNumeralFormats> formats=null, System.Nullable<int> decimals=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.MetricNumeralExtensions.ToMetric(thisdouble,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).input'></a>
 
@@ -72,16 +82,16 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits from 0 through 15 are included\. If null, all available precision is preserved and the flag has no effect\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A valid Metric representation
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [decimals](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thisdouble,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).decimals 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this double, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)\.decimals') is outside the range 0 through 15 when [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used\.
 
-### Example
+##### Example
 
 ```csharp
 1000d.ToMetric() => "1k"
@@ -89,20 +99,20 @@ A valid Metric representation
 1E-1.ToMetric() => "100m"
 ```
 
-### Remarks
+##### Remarks
 Inspired by a snippet from Thom Smith\.
 See \<a href="http://stackoverflow\.com/questions/12181024/formatting\-a\-number\-with\-a\-metric\-prefix"\>this link\</a\> for more\.
 
 <a name='Humanizer.MetricNumeralExtensions.ToMetric(thisint,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_)'></a>
 
-## MetricNumeralExtensions\.ToMetric\(this int, Nullable\<MetricNumeralFormats\>, Nullable\<int\>\) Method
+#### MetricNumeralExtensions\.ToMetric\(this int, Nullable\<MetricNumeralFormats\>, Nullable\<int\>\) Method
 
 Converts a number into a valid and Human\-readable Metric representation\.
 
 ```csharp
 public static string ToMetric(this int input, System.Nullable<Humanizer.MetricNumeralFormats> formats=null, System.Nullable<int> decimals=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.MetricNumeralExtensions.ToMetric(thisint,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).input'></a>
 
@@ -122,16 +132,16 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits from 0 through 15 are included\. If null, all available precision is preserved and the flag has no effect\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A valid Metric representation
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [decimals](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thisint,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).decimals 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this int, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)\.decimals') is outside the range 0 through 15 when [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used\.
 
-### Example
+##### Example
 
 ```csharp
 1000.ToMetric() => "1k"
@@ -139,20 +149,20 @@ A valid Metric representation
 1E-1.ToMetric() => "100m"
 ```
 
-### Remarks
+##### Remarks
 Inspired by a snippet from Thom Smith\.
 See \<a href="http://stackoverflow\.com/questions/12181024/formatting\-a\-number\-with\-a\-metric\-prefix"\>this link\</a\> for more\.
 
 <a name='Humanizer.MetricNumeralExtensions.ToMetric(thislong,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_)'></a>
 
-## MetricNumeralExtensions\.ToMetric\(this long, Nullable\<MetricNumeralFormats\>, Nullable\<int\>\) Method
+#### MetricNumeralExtensions\.ToMetric\(this long, Nullable\<MetricNumeralFormats\>, Nullable\<int\>\) Method
 
 Converts a number into a valid and Human\-readable Metric representation\.
 
 ```csharp
 public static string ToMetric(this long input, System.Nullable<Humanizer.MetricNumeralFormats> formats=null, System.Nullable<int> decimals=null);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.MetricNumeralExtensions.ToMetric(thislong,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).input'></a>
 
@@ -172,16 +182,16 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 The maximum number of fractional digits to include\. When [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used, exactly this many fractional digits from 0 through 15 are included\. If null, all available precision is preserved and the flag has no effect\.
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A valid Metric representation
 
-#### Exceptions
+##### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 [decimals](Humanizer.MetricNumeralExtensions.md#Humanizer.MetricNumeralExtensions.ToMetric(thislong,System.Nullable_Humanizer.MetricNumeralFormats_,System.Nullable_int_).decimals 'Humanizer\.MetricNumeralExtensions\.ToMetric\(this long, System\.Nullable\<Humanizer\.MetricNumeralFormats\>, System\.Nullable\<int\>\)\.decimals') is outside the range 0 through 15 when [KeepTrailingZeros](Humanizer.MetricNumeralFormats.md#Humanizer.MetricNumeralFormats.KeepTrailingZeros 'Humanizer\.MetricNumeralFormats\.KeepTrailingZeros') is used\.
 
-### Example
+##### Example
 
 ```csharp
 1000.ToMetric() => "1k"
@@ -189,6 +199,6 @@ A valid Metric representation
 1E-1.ToMetric() => "100m"
 ```
 
-### Remarks
+##### Remarks
 Inspired by a snippet from Thom Smith\.
 See \<a href="http://stackoverflow\.com/questions/12181024/formatting\-a\-number\-with\-a\-metric\-prefix"\>this link\</a\> for more\.

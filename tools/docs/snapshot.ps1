@@ -11,6 +11,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 . (Join-Path $PSScriptRoot "snapshot-state.ps1")
+. (Join-Path $PSScriptRoot "api-reference.ps1")
 
 if (-not $WebsiteRoot) {
     $WebsiteRoot = Join-Path $repoRoot "website"
@@ -350,35 +351,6 @@ function Assert-DocumentIdentity {
         $Matches["id"] -ne $sourceId) {
         throw "Correction changes document identity: $RelativePath"
     }
-}
-
-function Add-ApiLanding {
-    param(
-        [Parameter(Mandatory = $true)][string]$ApiRoot,
-        [Parameter(Mandatory = $true)]$Entry
-    )
-
-    $provenance = if ($Entry.version -eq "current") {
-        "Generated from the Humanizer 4 ``$($Entry.referenceTfm)`` reference assembly."
-    } else {
-        "Generated from ``$($Entry.apiPackage)`` ``$($Entry.source.packageVersion)`` using the ``$($Entry.referenceTfm)`` reference assembly."
-    }
-    $landing = @"
----
-id: api
-title: API reference
-sidebar_position: 2
----
-
-# Humanizer API reference
-
-$provenance
-"@
-    [System.IO.File]::WriteAllText(
-        (Join-Path $ApiRoot "index.md"),
-        "$landing`n",
-        [System.Text.UTF8Encoding]::new($false)
-    )
 }
 
 function Set-VersionedExampleDefaults {

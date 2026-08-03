@@ -1,3 +1,8 @@
+---
+title: 'Humanizer.DefaultDateTimeOffsetHumanizeStrategy'
+sidebar_label: 'Humanizer.DefaultDateTimeOffsetHumanizeStrategy'
+description: 'API reference for Humanizer.DefaultDateTimeOffsetHumanizeStrategy.'
+---
 ## DefaultDateTimeOffsetHumanizeStrategy Class
 
 The default 'distance of time' \-\> words calculator\.
@@ -9,18 +14,33 @@ public class DefaultDateTimeOffsetHumanizeStrategy : Humanizer.IDateTimeOffsetHu
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultDateTimeOffsetHumanizeStrategy
 
 Implements [IDateTimeOffsetHumanizeStrategy](Humanizer.IDateTimeOffsetHumanizeStrategy.md 'Humanizer\.IDateTimeOffsetHumanizeStrategy')
+- *Constructors*
+  - **[DefaultDateTimeOffsetHumanizeStrategy\(\)](Humanizer.DefaultDateTimeOffsetHumanizeStrategy.md#Humanizer.DefaultDateTimeOffsetHumanizeStrategy.DefaultDateTimeOffsetHumanizeStrategy())**
+- *Methods*
+  - **[Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\)](Humanizer.DefaultDateTimeOffsetHumanizeStrategy.md#Humanizer.DefaultDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo) 'Humanizer\.DefaultDateTimeOffsetHumanizeStrategy\.Humanize\(System\.DateTimeOffset, System\.DateTimeOffset, System\.Globalization\.CultureInfo\)')**
+### Constructors
+
+<a name='Humanizer.DefaultDateTimeOffsetHumanizeStrategy.DefaultDateTimeOffsetHumanizeStrategy()'></a>
+
+#### DefaultDateTimeOffsetHumanizeStrategy\(\) Constructor
+
+Initializes a new instance of the DefaultDateTimeOffsetHumanizeStrategy class.
+
+```csharp
+public DefaultDateTimeOffsetHumanizeStrategy();
+```
 ### Methods
 
 <a name='Humanizer.DefaultDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo)'></a>
 
-## DefaultDateTimeOffsetHumanizeStrategy\.Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\) Method
+#### DefaultDateTimeOffsetHumanizeStrategy\.Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\) Method
 
 Calculates the distance of time in words between two provided dates
 
 ```csharp
 public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture);
 ```
-#### Parameters
+##### Parameters
 
 <a name='Humanizer.DefaultDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo).input'></a>
 
@@ -36,5 +56,5 @@ public string Humanize(System.DateTimeOffset input, System.DateTimeOffset compar
 
 Implements [Humanize\(DateTimeOffset, DateTimeOffset, CultureInfo\)](Humanizer.IDateTimeOffsetHumanizeStrategy.md#Humanizer.IDateTimeOffsetHumanizeStrategy.Humanize(System.DateTimeOffset,System.DateTimeOffset,System.Globalization.CultureInfo) 'Humanizer\.IDateTimeOffsetHumanizeStrategy\.Humanize\(System\.DateTimeOffset, System\.DateTimeOffset, System\.Globalization\.CultureInfo\)')
 
-#### Returns
+##### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

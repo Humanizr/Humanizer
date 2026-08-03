@@ -310,7 +310,7 @@ body:has(.navbar-sidebar--show) .humanizerAllVersionsShell {
   overflow-wrap: anywhere;
 }
 
-.theme-doc-markdown :where(p, li) a {
+.theme-doc-markdown :where(p, li, td) a {
   text-decoration: underline;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.15em;
