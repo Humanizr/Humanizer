@@ -868,6 +868,7 @@ public class WordsToNumberTests_Hungarian
         var legitimateWords = string.Concat(Enumerable.Repeat("szaz", 130));
         Assert.Equal(13000, legitimateWords.ToNumber(CultureInfo.CurrentCulture));
         Assert.Equal(13000.1m, $"{legitimateWords} egész egy".ToDecimalNumber(CultureInfo.CurrentCulture));
+        Assert.Equal(1_000_081, "milliónyolcvannullamillióegy".ToNumber(CultureInfo.CurrentCulture));
 
         var scaleWords = string.Concat(Enumerable.Repeat("szaz", 32_000));
         AssertParsedBounded(scaleWords, 3_200_000);

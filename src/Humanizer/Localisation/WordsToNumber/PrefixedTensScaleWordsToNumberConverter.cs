@@ -136,6 +136,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             var scaleRemainder = word;
             var scaledValue = 0L;
             var branchIsValid = true;
+            var consumedScale = false;
 
             while ((index = scaleRemainder.IndexOf(scaleToken, StringComparison.Ordinal)) >= 0)
             {
@@ -156,7 +157,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                         return false;
                     }
 
-                    branchIsValid = false;
+                    branchIsValid = consumedScale;
                     break;
                 }
 
@@ -171,6 +172,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                 }
 
                 scaleRemainder = scaleRemainder[(index + scaleToken.Length)..];
+                consumedScale = true;
             }
 
             if (!branchIsValid)
