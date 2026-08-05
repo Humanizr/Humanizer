@@ -95,6 +95,12 @@ The main library is in [`src/Humanizer`](src/Humanizer), and its xUnit tests are
 
 Humanizer is available under the [MIT license](license.txt).
 
+## Sponsorship
+
+Sponsorship helps fund Humanizer's ongoing maintenance, multilingual development, testing, documentation, release engineering, and the AI and infrastructure costs behind expanding and validating language support.
+
+[Support Claire Novotny's open-source work through GitHub Sponsors](https://github.com/sponsors/clairernovotny).
+
 ## Support
 
 - [Report a bug or request a feature](https://github.com/Humanizr/Humanizer/issues)
