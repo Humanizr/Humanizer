@@ -414,6 +414,13 @@ public class ByteSizeExtensionsTests
         Assert.Equal(ByteSize.FromBits(size), size.Bits());
     }
 
+    [Fact]
+    public void DoubleBits()
+    {
+        const double size = 2.5;
+        Assert.Equal(0.3125, size.Bits().Bytes);
+    }
+
     [Theory]
     [InlineData(0, null, "en", "0 b")]
     [InlineData(0, "b", "en", "0 b")]

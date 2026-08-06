@@ -49,6 +49,12 @@ public static class ByteSizeExtensions
         ByteSize.FromBits(input);
 
     /// <summary>
+    /// Considers input as bits
+    /// </summary>
+    public static ByteSize Bits(this double input) =>
+        ByteSize.FromBytes(input / ByteSize.BitsInByte);
+
+    /// <summary>
     /// Considers input as bytes
     /// </summary>
     public static ByteSize Bytes(this byte input) =>
