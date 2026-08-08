@@ -139,7 +139,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             return false;
         }
 
-        return !Enum.IsDefined(TypeOfT, input);
+        return !Enum.IsDefined(input);
     }
 
     static (string Text, bool IsMetadata) GetDescription(T input)
