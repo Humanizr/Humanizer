@@ -112,5 +112,11 @@ static class PolyfillShims
             }
         }
     }
+
+    extension(Enum)
+    {
+        public static string? GetName<TEnum>(TEnum value)
+            where TEnum : struct, Enum => Enum.GetName(typeof(TEnum), value);
+    }
 }
 #endif

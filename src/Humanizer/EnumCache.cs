@@ -144,11 +144,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
     static (string Text, bool IsMetadata) GetDescription(T input)
     {
-#if NET5_0_OR_GREATER
         var caseName = Enum.GetName(input)!;
-#else
-        var caseName = Enum.GetName(TypeOfT, input)!;
-#endif
         var member = TypeOfT.GetField(caseName)!;
 
         if (TryGetDescription(member, out var description))
@@ -161,11 +157,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
     static (string EnumName, DisplayAttribute? Display) GetSources(T input)
     {
-#if NET5_0_OR_GREATER
         var caseName = Enum.GetName(input)!;
-#else
-        var caseName = Enum.GetName(TypeOfT, input)!;
-#endif
         var member = TypeOfT.GetField(caseName)!;
         return (caseName.Humanize(), member.GetCustomAttribute<DisplayAttribute>());
     }
