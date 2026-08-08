@@ -34,7 +34,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
-        var namesArray = Enum.GetNames(TypeOfT);
+        var namesArray = Enum.GetNames<T>();
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
