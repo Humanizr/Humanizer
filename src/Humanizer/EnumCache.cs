@@ -51,7 +51,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             dehumanized[description.Text] = value;
         }
 
-        var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
+        var isBitFieldEnum = TypeOfT.IsDefined(typeof(FlagsAttribute), false);
         return (
             zero,
             humanized.ToFrozenDictionary(),
@@ -74,7 +74,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             sources[value] = GetSources(value);
         }
 
-        var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
+        var isBitFieldEnum = TypeOfT.IsDefined(typeof(FlagsAttribute), false);
         return (zero, sources.ToFrozenDictionary(), valuesArray.ToFrozenSet(), isBitFieldEnum);
     }
 
