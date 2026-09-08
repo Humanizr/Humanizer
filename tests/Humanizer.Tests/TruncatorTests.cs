@@ -317,4 +317,14 @@ public class TruncatorTests
     [InlineData("Null truncation string truncates to truncate length without truncation string", 7, null, "string")]
     public void TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "22 - TruncateWithDynamicLengthAndPreserveWordsTruncatorTreatsAllWhitespaceAsWordBoundary")]
+    [InlineData("Hello world", 8, "Hello\u2026")]
+    [InlineData("Hello\tworld", 8, "Hello\u2026")]
+    [InlineData("Hello\nworld", 8, "Hello\u2026")]
+    [InlineData("Hello\r\nworld", 8, "Hello\u2026")]
+    [InlineData("Hello\u00A0world", 8, "Hello\u2026")]
+    [InlineData("221B Baker Street\nLondon NW1 6XE", 20, "221B Baker Street\u2026")]
+    public void TruncateWithDynamicLengthAndPreserveWordsTruncatorTreatsAllWhitespaceAsWordBoundary(string input, int length, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, Truncator.DynamicLengthAndPreserveWords));
 }

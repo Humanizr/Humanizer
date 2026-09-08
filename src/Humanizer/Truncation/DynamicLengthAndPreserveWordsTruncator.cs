@@ -87,10 +87,10 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
         {
             return truncationString;
         }
-        // If the cutoff falls in the middle of a word, backtrack to the last space.
+        // If the cutoff falls in the middle of a word, backtrack to the last word boundary.
         if (effectiveLength < value.Length && !char.IsWhiteSpace(value[effectiveLength]))
         {
-            var lastSpace = value.LastIndexOf(' ', effectiveLength);
+            var lastSpace = LastIndexOfWhiteSpace(value, effectiveLength);
             if (lastSpace > 0)
             {
                 effectiveLength = lastSpace;
@@ -107,5 +107,19 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
         }
 
         return prefix + truncationString;
+    }
+
+    // Any whitespace is a word boundary, as in the backward scan in TruncateFromLeft.
+    static int LastIndexOfWhiteSpace(string value, int startIndex)
+    {
+        for (var i = startIndex; i >= 0; i--)
+        {
+            if (char.IsWhiteSpace(value[i]))
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
