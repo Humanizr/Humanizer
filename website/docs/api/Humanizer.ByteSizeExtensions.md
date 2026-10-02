@@ -14,6 +14,7 @@ public static class ByteSizeExtensions
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → ByteSizeExtensions
 - *Methods*
   - **[Bits\(this byte\)](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.Bits(thisbyte) 'Humanizer\.ByteSizeExtensions\.Bits\(this byte\)')**
+  - **[Bits\(this double\)](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.Bits(thisdouble) 'Humanizer\.ByteSizeExtensions\.Bits\(this double\)')**
   - **[Bits\(this int\)](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.Bits(thisint) 'Humanizer\.ByteSizeExtensions\.Bits\(this int\)')**
   - **[Bits\(this long\)](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.Bits(thislong) 'Humanizer\.ByteSizeExtensions\.Bits\(this long\)')**
   - **[Bits\(this sbyte\)](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.Bits(thissbyte) 'Humanizer\.ByteSizeExtensions\.Bits\(this sbyte\)')**
@@ -110,6 +111,29 @@ public static Humanizer.ByteSize Bits(this byte input);
 
 ##### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Bits(thisdouble)'></a>
+
+#### ByteSizeExtensions\.Bits\(this double\) Method
+
+Considers input as bits, including fractional values\.
+
+```csharp
+public static Humanizer.ByteSize Bits(this double input);
+```
+##### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Bits(thisdouble).input'></a>
+
+`input` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+##### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+##### Remarks
+Fractional values are preserved in [Bytes](Humanizer.ByteSize.md#Humanizer.ByteSize.Bytes 'Humanizer\.ByteSize\.Bytes')\.
+[Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits') rounds up to the nearest whole bit\.
+For example, 2\.5 bits produces 0\.3125 bytes and a Bits value of 3\.
 
 <a name='Humanizer.ByteSizeExtensions.Bits(thisint)'></a>
 

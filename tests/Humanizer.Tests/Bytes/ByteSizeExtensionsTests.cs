@@ -418,7 +418,9 @@ public class ByteSizeExtensionsTests
     public void DoubleBits()
     {
         const double size = 2.5;
-        Assert.Equal(0.3125, size.Bits().Bytes);
+        var byteSize = size.Bits();
+        Assert.Equal(0.3125, byteSize.Bytes);
+        Assert.Equal(3, byteSize.Bits);
     }
 
     [Theory]

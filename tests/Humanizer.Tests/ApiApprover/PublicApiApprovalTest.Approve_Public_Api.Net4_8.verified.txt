@@ -158,6 +158,7 @@ namespace Humanizer
     public static class ByteSizeExtensions
     {
         public static Humanizer.ByteSize Bits(this byte input) { }
+        public static Humanizer.ByteSize Bits(this double input) { }
         public static Humanizer.ByteSize Bits(this int input) { }
         public static Humanizer.ByteSize Bits(this long input) { }
         public static Humanizer.ByteSize Bits(this sbyte input) { }
