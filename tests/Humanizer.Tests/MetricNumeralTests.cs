@@ -458,6 +458,80 @@ public class MetricNumeralTests
     public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals) =>
         Assert.Equal(expected, input.ToMetric(format, decimals));
 
+    [Theory]
+    [InlineData(12.345, "12.34")]
+    [InlineData(-12.345, "-12.34")]
+    [InlineData(12.375, "12.38")]
+    [InlineData(-12.375, "-12.38")]
+    [InlineData(12345d, "12.34k")]
+    [InlineData(-12345d, "-12.34k")]
+    [InlineData(12375d, "12.38k")]
+    [InlineData(-12375d, "-12.38k")]
+    [InlineData(12345000d, "12.34M")]
+    [InlineData(-12345000d, "-12.34M")]
+    [InlineData(12375000d, "12.38M")]
+    [InlineData(-12375000d, "-12.38M")]
+    [InlineData(0.012345, "12.34m")]
+    [InlineData(-0.012345, "-12.34m")]
+    [InlineData(0.012375, "12.38m")]
+    [InlineData(-0.012375, "-12.38m")]
+    [InlineData(0.000012345, "12.34μ")]
+    [InlineData(-0.000012345, "-12.34μ")]
+    [InlineData(0.000012375, "12.38μ")]
+    [InlineData(-0.000012375, "-12.38μ")]
+    public void ToMetric_PreservesDecimalMidpointRoundingAcrossScales(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(decimals: 2));
+
+    [Theory]
+    [InlineData(2.005, "2", "2.00")]
+    [InlineData(-2.005, "-2", "-2.00")]
+    [InlineData(2005d, "2k", "2.00k")]
+    [InlineData(-2005d, "-2k", "-2.00k")]
+    public void ToMetric_PreservesMidpointRoundingWithTrailingZeros(double input, string expected, string expectedWithZeros)
+    {
+        Assert.Equal(expected, input.ToMetric(decimals: 2));
+        Assert.Equal(expectedWithZeros, input.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 2));
+    }
+
+    [Theory]
+    [InlineData(12344d, "12.34k")]
+    [InlineData(12346d, "12.35k")]
+    [InlineData(-12344d, "-12.34k")]
+    [InlineData(-12346d, "-12.35k")]
+    public void ToMetric_RoundsValuesAroundDecimalMidpoints(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(decimals: 2));
+
+    [Theory]
+    [InlineData(12345d, 0, "12k")]
+    [InlineData(1000d, 15, "1k")]
+    [InlineData(1e26, 2, "100Y")]
+    [InlineData(-1e26, 2, "-100Y")]
+    [InlineData(1e-23, 2, "10y")]
+    [InlineData(-1e-23, 2, "-10y")]
+    public void ToMetric_RoundsSupportedPrecisionAndMagnitudeBoundaries(double input, int decimals, string expected) =>
+        Assert.Equal(expected, input.ToMetric(decimals: decimals));
+
+    [Theory]
+    [InlineData(12345, "12.34k")]
+    [InlineData(-12345, "-12.34k")]
+    [InlineData(12375, "12.38k")]
+    [InlineData(-12375, "-12.38k")]
+    public void ToMetric_RoundsIntegralOverloadsConsistently(int input, string expected)
+    {
+        Assert.Equal(expected, input.ToMetric(decimals: 2));
+        Assert.Equal(expected, ((long)input).ToMetric(decimals: 2));
+        Assert.Equal(expected, ((double)input).ToMetric(decimals: 2));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(16)]
+    public void ToMetric_RejectsInvalidDoublePrecision(int decimals)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => 12.345.ToMetric(decimals: decimals));
+        Assert.Throws<ArgumentOutOfRangeException>(() => 12345d.ToMetric(decimals: decimals));
+    }
+
     [Fact]
     public void ToMetric_KeepTrailingZeros_IsOptIn()
     {

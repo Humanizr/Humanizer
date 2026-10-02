@@ -241,6 +241,7 @@ public static class MetricNumeralExtensions
     /// Converts a number into a valid and Human-readable Metric representation.
     /// </summary>
     /// <remarks>
+    /// Specified decimal precision uses midpoint rounding to the nearest even value, consistently across supported .NET runtimes.
     /// Inspired by a snippet from Thom Smith.
     /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
     /// </remarks>
@@ -526,7 +527,7 @@ public static class MetricNumeralExtensions
 
         if (decimals.HasValue)
         {
-            input = Math.Round(input, decimals.Value);
+            input = RoundToEven(input, decimals.Value);
 
             if (Math.Abs(input) >= 1000)
                 return BuildMetricRepresentation(input, 1, formats, decimals);
@@ -553,7 +554,7 @@ public static class MetricNumeralExtensions
         var number = input * Math.Pow(1000, -exponent);
         if (decimals.HasValue)
         {
-            number = Math.Round(number, decimals.Value);
+            number = RoundToEven(number, decimals.Value);
         }
 
         if (Math.Abs(number) >= 1000 && exponent < Symbols[0].Count)
@@ -572,6 +573,19 @@ public static class MetricNumeralExtensions
         var unitText = GetUnitText(exponent, formats, displayedNumber);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
         return representation + space + unitText;
+    }
+
+    static double RoundToEven(double value, int digits)
+    {
+        if (digits is < 0 or > 15)
+            throw new ArgumentOutOfRangeException(nameof(digits));
+
+        if (Math.Abs(value) >= 1e16)
+            return value;
+
+        // Preserve the decimal midpoint behavior used by .NET 8 and .NET 10.
+        var factor = Math.Pow(10, digits);
+        return Math.Round(value * factor) / factor;
     }
 
     /// <summary>

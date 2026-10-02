@@ -100,6 +100,7 @@ A valid Metric representation
 ```
 
 ##### Remarks
+Specified decimal precision uses midpoint rounding to the nearest even value, consistently across supported \.NET runtimes\.
 Inspired by a snippet from Thom Smith\.
 See \<a href="http://stackoverflow\.com/questions/12181024/formatting\-a\-number\-with\-a\-metric\-prefix"\>this link\</a\> for more\.
 
