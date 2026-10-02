@@ -161,7 +161,16 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
     public override int GetHashCode() =>
         BytesPerSecond.GetHashCode();
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Compares this rate with another object.
+    /// </summary>
+    /// <param name="obj">The rate to compare with this instance, or <see langword="null" />.</param>
+    /// <returns>
+    /// A value less than zero if this instance precedes <paramref name="obj" /> in the sort order;
+    /// zero if they have the same position; or greater than zero if this instance follows
+    /// <paramref name="obj" /> or <paramref name="obj" /> is <see langword="null" />.
+    /// </returns>
+    /// <exception cref="ArgumentException"><paramref name="obj" /> is not a <see cref="ByteRate" />.</exception>
     public int CompareTo(object? obj) =>
         obj switch
         {

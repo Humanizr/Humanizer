@@ -436,6 +436,50 @@ function Resolve-ApiCheckedConversionId {
     return $Id
 }
 
+function Resolve-ApiConversionMethodId {
+    param(
+        [Parameter(Mandatory = $true)][string]$Id,
+        [Parameter(Mandatory = $true)][AllowEmptyCollection()]$ExpectedRecords
+    )
+
+    $canonicalMatches = @(
+        $ExpectedRecords |
+            Where-Object {
+                [string]::Equals(
+                    $_.Id,
+                    $Id,
+                    [System.StringComparison]::Ordinal
+                )
+            }
+    )
+    if ($canonicalMatches.Count -gt 1) {
+        throw "Generated conversion ID $Id matched multiple assembly-derived IDs."
+    }
+    if ($canonicalMatches.Count -eq 1) {
+        return $Id
+    }
+
+    $returnTypeSeparator = $Id.LastIndexOf("~")
+    $methodId = $Id.Substring(0, $returnTypeSeparator)
+    $ordinaryMatches = @(
+        $ExpectedRecords |
+            Where-Object {
+                [string]::Equals(
+                    $_.Id,
+                    $methodId,
+                    [System.StringComparison]::Ordinal
+                ) -and $_.Kind -eq "Method"
+            }
+    )
+    if ($ordinaryMatches.Count -gt 1) {
+        throw "Generated conversion-named method ID $Id matched multiple assembly-derived IDs."
+    }
+    if ($ordinaryMatches.Count -eq 1) {
+        return $methodId
+    }
+    return $Id
+}
+
 function Set-ApiCanonicalTypeRoutes {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
@@ -452,6 +496,11 @@ function Set-ApiCanonicalTypeRoutes {
         $parts = @($lines[$index] -split "\|", 3)
         if ($parts.Count -ne 3) {
             throw "Generated a malformed API link: $($lines[$index])"
+        }
+        if ($parts[0] -match '^M:.+\.op_(?:Implicit|Explicit|CheckedExplicit)(?:``\d+)?(?:\(.*\))?~.+$') {
+            $parts[0] = Resolve-ApiConversionMethodId `
+                -Id $parts[0] `
+                -ExpectedRecords $ExpectedRecords
         }
         if ($parts[0] -match '^M:.+\.op_CheckedExplicit\(.*\)$') {
             $parts[0] = Resolve-ApiCheckedConversionId `

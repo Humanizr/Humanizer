@@ -432,6 +432,50 @@ public class same { }
                 throw "An invalid checked conversion route did not fail closed."
             }
         }
+        foreach ($conversionName in @("Implicit", "Explicit", "CheckedExplicit")) {
+            $ordinaryId = "M:Fixture.ConversionLikeMethods.op_$conversionName(System.Int32)"
+            $generatedId = "$ordinaryId~System.String"
+            $ordinaryRecord = [PSCustomObject]@{
+                Id = $ordinaryId
+                Kind = "Method"
+            }
+            $operatorRecord = [PSCustomObject]@{
+                Id = $generatedId
+                Kind = "Operator"
+            }
+            if ((Resolve-ApiConversionMethodId `
+                    -Id $generatedId `
+                    -ExpectedRecords @($ordinaryRecord)) -ne $ordinaryId) {
+                throw "An ordinary conversion-named method retained a return-type suffix."
+            }
+            if ((Resolve-ApiConversionMethodId `
+                    -Id $generatedId `
+                    -ExpectedRecords @($ordinaryRecord, $operatorRecord)) -ne $generatedId) {
+                throw "An exact conversion operator ID lost its return-type suffix."
+            }
+            if ((Resolve-ApiConversionMethodId `
+                    -Id $generatedId `
+                    -ExpectedRecords @()) -ne $generatedId) {
+                throw "An unknown conversion ID bypassed exact member completeness."
+            }
+            foreach ($duplicateRecord in @($ordinaryRecord, $operatorRecord)) {
+                $duplicateRejected = $false
+                try {
+                    Resolve-ApiConversionMethodId `
+                        -Id $generatedId `
+                        -ExpectedRecords @($duplicateRecord, $duplicateRecord) | Out-Null
+                } catch {
+                    $duplicateRejected = $_.Exception.Message.Contains(
+                        "matched multiple assembly-derived IDs",
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+                if (-not $duplicateRejected) {
+                    throw "A duplicate conversion ID did not fail closed."
+                }
+            }
+        }
+
         $originalCheckedXml = Get-Content -Raw $checkedInput.Xml
         $checkedOutput = Join-Path $fixtureRoot "checked"
         $checkedLinks = Join-Path $fixtureRoot "checked-links.txt"
@@ -641,6 +685,12 @@ public static class ConversionLikeMethods
     public static string op_Implicit(int value) => "";
     public static int op_Explicit(string value) => 0;
     public static long op_CheckedExplicit(byte value) => 0;
+    public static string op_Implicit() => "";
+    public static string op_Explicit() => "";
+    public static string op_CheckedExplicit() => "";
+    public static string op_Implicit<T>(T value) => "";
+    public static string op_Explicit<T>(T value) => "";
+    public static string op_CheckedExplicit<T>(T value) => "";
 }
 "@
         $inventory = Get-AssemblyApiMemberInventory `
@@ -674,6 +724,12 @@ public static class ConversionLikeMethods
             "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)" = @("public", "Method", "Fixture.ConversionLikeMethods")
             "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)" = @("public", "Method", "Fixture.ConversionLikeMethods")
             "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Implicit' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Explicit' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Implicit``1(``0)' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Explicit``1(``0)' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit``1(``0)' = @("public", "Method", "Fixture.ConversionLikeMethods")
             "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
             "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
             "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")
@@ -746,6 +802,12 @@ public static class ConversionLikeMethods
             "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)",
             "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)",
             "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)"
+            'M:Fixture.ConversionLikeMethods.op_Implicit'
+            'M:Fixture.ConversionLikeMethods.op_Explicit'
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit'
+            'M:Fixture.ConversionLikeMethods.op_Implicit``1(``0)'
+            'M:Fixture.ConversionLikeMethods.op_Explicit``1(``0)'
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit``1(``0)'
         )) {
             if ($ordinaryConversionNameId -notin $apiIds -or
                 @($apiIds | Where-Object {
@@ -1848,6 +1910,27 @@ try {
         )) {
         throw "Current Humanizer 4 API landing is missing its generated index."
     }
+    $comparisonDocumentation = @(
+        (Get-Content -Raw (Join-Path $isolatedCurrentApi "Humanizer.ByteRate.md")) -split '(?m)^#### ' |
+            Where-Object {
+                $_.StartsWith(
+                    'ByteRate\.CompareTo\(object\) Method',
+                    [System.StringComparison]::Ordinal
+                )
+            }
+    )
+    if ($comparisonDocumentation.Count -ne 1) {
+        throw "Current ByteRate API is missing its object comparison method."
+    }
+    foreach ($returnValueMeaning in @("less than zero", "zero if", "greater than zero")) {
+        if (-not $comparisonDocumentation[0].Contains(
+            $returnValueMeaning,
+            [System.StringComparison]::Ordinal
+        )) {
+            throw "Current ByteRate comparison API omitted '$returnValueMeaning'."
+        }
+    }
+
     $v4ReleaseRoot = Join-Path $tempRoot "v4-release-source"
     $v4ReleaseRebuildRoot = Join-Path $tempRoot "v4-release-rebuild"
     $v4ReleaseSource = Join-Path $v4ReleaseRoot "api"
