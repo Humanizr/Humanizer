@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\GlobalizationProviderAttestation.cs" Link="GlobalizationProviderAttestation.cs" />
     <Using Include="Xunit.v3" />
   </ItemGroup>
   

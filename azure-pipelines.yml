@@ -77,6 +77,10 @@ stages:
           --report-trx --xunit-info
           --results-directory "$(Agent.TempDirectory)/humanizer-test-results"
       displayName: Run Tests
+      env:
+        DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: '0'
+        DOTNET_SYSTEM_GLOBALIZATION_USENLS: '0'
+        HUMANIZER_EXPECTED_MODERN_GLOBALIZATION_PROVIDER: ICU
 
     - task: PublishTestResults@2
       displayName: Publish test results
@@ -116,10 +120,12 @@ stages:
           VmImage: ubuntu-latest
           PlatformName: LinuxICU
           UseNls: '0'
+          ExpectedModernProvider: ICU
         WindowsNLS:
           VmImage: windows-latest
           PlatformName: WindowsNLS
           UseNls: '1'
+          ExpectedModernProvider: NLS
     pool:
       vmImage: $(VmImage)
     steps:
@@ -160,6 +166,7 @@ stages:
       env:
         DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: '0'
         DOTNET_SYSTEM_GLOBALIZATION_USENLS: $(UseNls)
+        HUMANIZER_EXPECTED_MODERN_GLOBALIZATION_PROVIDER: $(ExpectedModernProvider)
 
     - task: PublishTestResults@2
       displayName: Publish $(PlatformName) test results

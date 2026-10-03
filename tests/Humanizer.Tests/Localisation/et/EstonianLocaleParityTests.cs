@@ -89,11 +89,7 @@ public class EstonianLocaleParityTests
     public void Ordinalize_UsesEstonianNegativeDotSuffix() =>
         Assert.Equal(ExpectedNegativeOrdinal, (-21).Ordinalize(Estonian));
 
-#if NET48
-    const string ExpectedNegativeOrdinal = "-21.";
-#else
-    const string ExpectedNegativeOrdinal = "−21.";
-#endif
+    static readonly string ExpectedNegativeOrdinal = Estonian.NumberFormat.NegativeSign + "21.";
 
     [Fact]
     public void CollectionHumanize_UsesEstonianConjunction()
