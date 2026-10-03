@@ -68,10 +68,25 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: test
-        projects: Humanizer.slnx
-        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
+        command: custom
+        custom: test
+        arguments: >-
+          --solution Humanizer.slnx
+          -c $(BuildConfiguration)
+          --coverage --coverage-output-format cobertura
+          --report-trx --xunit-info
+          --results-directory "$(Agent.TempDirectory)/humanizer-test-results"
       displayName: Run Tests
+
+    - task: PublishTestResults@2
+      displayName: Publish test results
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFormat: VSTest
+        testResultsFiles: '$(Agent.TempDirectory)/humanizer-test-results/**/*.trx'
+        testRunTitle: Humanizer Windows package build
+        failTaskOnFailedTests: true
+        failTaskOnMissingResultsFile: true
 
     # Generate code coverage report
     # https://danielpalme.github.io/ReportGenerator/
@@ -92,6 +107,74 @@ stages:
       artifact: BuildPackages
       condition: succeededOrFailed()
 
+
+  - job: RuntimeValidation
+    displayName: Runtime platform validation
+    strategy:
+      matrix:
+        LinuxICU:
+          VmImage: ubuntu-latest
+          PlatformName: LinuxICU
+          UseNls: '0'
+        WindowsNLS:
+          VmImage: windows-latest
+          PlatformName: WindowsNLS
+          UseNls: '1'
+    pool:
+      vmImage: $(VmImage)
+    steps:
+    - checkout: self
+      fetchDepth: 0
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET 8 SDK'
+      inputs:
+        version: 8.x
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET 10 SDK'
+      inputs:
+        version: 10.x
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET 11 SDK'
+      inputs:
+        version: 11.0.100-preview.6.26359.118
+
+    - task: DotNetCoreCLI@2
+      displayName: Record runner SDK
+      inputs:
+        command: custom
+        custom: --info
+
+    - task: DotNetCoreCLI@2
+      displayName: Run runtime, generator, and analyzer tests
+      inputs:
+        command: custom
+        custom: test
+        arguments: >-
+          --solution Humanizer.slnx
+          -c $(BuildConfiguration)
+          --report-trx
+          --results-directory "$(Agent.TempDirectory)/humanizer-test-results"
+      env:
+        DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: '0'
+        DOTNET_SYSTEM_GLOBALIZATION_USENLS: $(UseNls)
+
+    - task: PublishTestResults@2
+      displayName: Publish $(PlatformName) test results
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFormat: VSTest
+        testResultsFiles: '$(Agent.TempDirectory)/humanizer-test-results/**/*.trx'
+        testRunTitle: Humanizer $(PlatformName)
+        failTaskOnFailedTests: true
+        failTaskOnMissingResultsFile: true
+
+    - publish: $(Agent.TempDirectory)/humanizer-test-results
+      displayName: Preserve $(PlatformName) test artifacts
+      artifact: RuntimeValidation-$(PlatformName)
+      condition: succeededOrFailed()
 
 - stage: CodeSign
   dependsOn: Build
