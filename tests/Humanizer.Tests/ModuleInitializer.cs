@@ -5,6 +5,7 @@ public static class ModuleInitializer
     [ModuleInitializer]
     public static void Initialize()
     {
+        Humanizer.Tests.Infrastructure.GlobalizationProviderAttestation.Initialize();
         VerifyDiffPlex.Initialize(OutputType.Compact);
         VerifierSettings.InitializePlugins();
         Configurator.Formatters.Register("en-150", new LegacyFormatter());

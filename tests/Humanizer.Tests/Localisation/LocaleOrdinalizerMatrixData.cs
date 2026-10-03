@@ -4543,17 +4543,8 @@ static class LocaleOrdinalizerMatrixData
         {
             { "tk", -6, "-6-njy" },
 
-#if NET48
-        { "eu", -1, "-1." },
-#else
-        { "eu", -1, "−1." },
-#endif
-
-#if NET48
-            { "et", -21, "-21." },
-#else
-            { "et", -21, "−21." },
-#endif
+        { "eu", -1, new CultureInfo("eu").NumberFormat.NegativeSign + "1." },
+            { "et", -21, new CultureInfo("et").NumberFormat.NegativeSign + "21." },
             { "sq", -1, "-1-rë" },
         { "mk", -1, "-1." },
 
