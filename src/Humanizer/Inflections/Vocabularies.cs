@@ -20,6 +20,94 @@ public static class Vocabularies
     internal static string NormalizeAcronyms(string input) =>
         Instance.IsValueCreated ? Instance.Value.NormalizeAcronyms(input) : input;
 
+    /// <summary>
+    /// Element names ending in -ium (and aluminum) are most often uncountable
+    /// </summary>
+    internal static readonly string[] UncountableChemicalElementNames =
+    [
+        "actinium",
+        "aluminium",
+        "aluminum",
+        "americium",
+        "barium",
+        "berkelium",
+        "beryllium",
+        "bohrium",
+        "cadmium",
+        "caesium",
+        "californium",
+        "calcium",
+        "cerium",
+        "cesium",
+        "chromium",
+        "copernicium",
+        "curium",
+        "darmstadtium",
+        "dubnium",
+        "dysprosium",
+        "einsteinium",
+        "erbium",
+        "europium",
+        "fermium",
+        "flerovium",
+        "francium",
+        "gadolinium",
+        "gallium",
+        "germanium",
+        "hafnium",
+        "hassium",
+        "helium",
+        "holmium",
+        "indium",
+        "iridium",
+        "lawrencium",
+        "lithium",
+        "livermorium",
+        "lutetium",
+        "magnesium",
+        "meitnerium",
+        "mendelevium",
+        "moscovium",
+        "neodymium",
+        "neptunium",
+        "nihonium",
+        "niobium",
+        "nobelium",
+        "osmium",
+        "palladium",
+        "plutonium",
+        "polonium",
+        "potassium",
+        "praseodymium",
+        "promethium",
+        "protactinium",
+        "radium",
+        "rhenium",
+        "rhodium",
+        "roentgenium",
+        "rubidium",
+        "ruthenium",
+        "rutherfordium",
+        "samarium",
+        "scandium",
+        "seaborgium",
+        "selenium",
+        "sodium",
+        "strontium",
+        "technetium",
+        "tellurium",
+        "terbium",
+        "thallium",
+        "thorium",
+        "thulium",
+        "titanium",
+        "uranium",
+        "vanadium",
+        "ytterbium",
+        "yttrium",
+        "zirconium",
+    ];
+
     static Vocabulary BuildDefault()
     {
         var _default = new Vocabulary();
@@ -27,8 +115,8 @@ public static class Vocabularies
         _default.AddPlural("$", "s");
         _default.AddPlural("s$", "s");
         _default.AddPlural("(ax|test)is$", "$1es");
-        _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)us$", "$1i");
-        _default.AddPlural("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis)$", "$1es");
+        _default.AddPlural("(vir|alumn|fung|cact|foc|radi|stimul|syllab|nucle)us$", "$1i");
+        _default.AddPlural("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis|octopus|hippopotamus)$", "$1es");
         _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
         _default.AddPlural("([dti])um$", "$1a");
         _default.AddPlural("sis$", "ses");
@@ -50,6 +138,7 @@ public static class Vocabularies
         _default.AddSingular("([dti])a$", "$1um");
         _default.AddSingular("(analy|ba|diagno|parenthe|progno|synop|the|ellip|empha|neuro|oa|paraly)ses$", "$1sis");
         _default.AddSingular("(.+)ves$", "$1ve");
+        _default.AddSingular("(him|her|it|my|one)selves$", "$1self");
         _default.AddSingular("(hive)s$", "$1");
         _default.AddSingular("(tive)s$", "$1");
         _default.AddSingular("(cal|dwar|el|hal|hoo|lea|loa|scar|sel|shel|thie|tur|whar|wol)ves$", "$1f");
@@ -63,9 +152,11 @@ public static class Vocabularies
         _default.AddSingular("(shoe)s$", "$1");
         _default.AddSingular("((?<![a-z])ax|(?-i:(?<=[A-Za-z])Ax)|cris|test)es$", "$1is");
         _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
-        _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis)es$", "$1");
+        _default.AddSingular("(octop)odes$", "$1us");
+        _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis|octopus|hippopotamus)es$", "$1");
         _default.AddSingular("^(ox)en", "$1");
         _default.AddSingular("(matr|d)ices$", "$1ix");
+        _default.AddSingular("(spand)ices$", "$1ex");
         _default.AddSingular("(vert|ind)ices$", "$1ex");
         _default.AddSingular("(quiz)zes$", "$1");
         _default.AddSingular("(buz|blit|walt)zes$", "$1z");
@@ -86,6 +177,17 @@ public static class Vocabularies
         _default.AddIrregular("foot", "feet");
         _default.AddIrregular("tooth", "teeth");
         _default.AddIrregular("curriculum", "curricula");
+        _default.AddIrregular("premium", "premiums");
+        _default.AddIrregular("stadium", "stadiums");
+        _default.AddPlural("((?<![a-z])podium|(?-i:(?<=[A-Za-z])Podium))$", "$1s");
+        _default.AddSingular("((?<![a-z])podium|(?-i:(?<=[A-Za-z])Podium))s$", "$1");
+        _default.AddIrregular("ultimatum", "ultimatums");
+        _default.AddIrregular("condominium", "condominiums");
+        _default.AddIrregular("euphonium", "euphoniums");
+        _default.AddIrregular("harmonium", "harmoniums");
+        _default.AddIrregular("criterium", "criteriums"); // Note: not the same as criterion
+        _default.AddIrregular("spandex", "spandexes");
+        _default.AddPlural("(octopi|hippopotami|premia|stadia|podia|ultimata|condominia|euphonia|harmonia)$", "$1");
         _default.AddIrregular("database", "databases");
         _default.AddIrregular("zombie", "zombies");
         _default.AddIrregular("personnel", "personnel");
@@ -139,6 +241,11 @@ public static class Vocabularies
         _default.AddUncountable("salmon");
         _default.AddUncountable("shrimp");
         _default.AddUncountable("someone");
+        _default.AddUncountable("himself");
+        _default.AddUncountable("herself");
+        _default.AddUncountable("itself");
+        _default.AddUncountable("myself");
+        _default.AddUncountable("oneself");
         _default.AddUncountable("swine");
         _default.AddUncountable("trout");
         _default.AddUncountable("tuna");
@@ -155,6 +262,8 @@ public static class Vocabularies
 
         //Fix 1132
         _default.AddUncountable("metadata");
+
+        Array.ForEach(UncountableChemicalElementNames, _default.AddUncountable);
 
         _default.MarkRulesAsBuiltIn();
         return _default;

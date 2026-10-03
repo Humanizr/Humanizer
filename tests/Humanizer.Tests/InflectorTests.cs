@@ -173,6 +173,123 @@ public class InflectorTests
         Assert.Equal(expected, plural.Singularize());
 
     [Theory]
+    [InlineData("octopuses", "octopus")]
+    [InlineData("octopi", "octopus")]
+    [InlineData("octopodes", "octopus")]
+    [InlineData("hippopotamuses", "hippopotamus")]
+    [InlineData("hippopotami", "hippopotamus")]
+    [InlineData("premiums", "premium")]
+    [InlineData("premia", "premium")]
+    [InlineData("stadiums", "stadium")]
+    [InlineData("stadia", "stadium")]
+    [InlineData("podiums", "podium")]
+    [InlineData("podia", "podium")]
+    [InlineData("ultimatums", "ultimatum")]
+    [InlineData("ultimata", "ultimatum")]
+    [InlineData("condominiums", "condominium")]
+    [InlineData("condominia", "condominium")]
+    [InlineData("euphoniums", "euphonium")]
+    [InlineData("euphonia", "euphonium")]
+    [InlineData("harmoniums", "harmonium")]
+    [InlineData("harmonia", "harmonium")]
+    [InlineData("criteriums", "criterium")]
+    [InlineData("spandexes", "spandex")]
+    [InlineData("spandices", "spandex")]
+    [InlineData("himselves", "himself")]
+    [InlineData("herselves", "herself")]
+    [InlineData("itselves", "itself")]
+    [InlineData("myselves", "myself")]
+    [InlineData("oneselves", "oneself")]
+    [InlineData("yourselves", "yourself")]
+    [InlineData("aquariums", "aquarium")]
+    [InlineData("auditoriums", "auditorium")]
+    [InlineData("consortiums", "consortium")]
+    [InlineData("symposiums", "symposium")]
+    public void SingularizeRecognizesAlternatePlurals(string plural, string singular)
+    {
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Theory]
+    [UseCulture("en-US")]
+    [InlineData("octopi")]
+    [InlineData("hippopotami")]
+    [InlineData("premia")]
+    [InlineData("stadia")]
+    [InlineData("podia")]
+    [InlineData("ultimata")]
+    [InlineData("condominia")]
+    [InlineData("euphonia")]
+    [InlineData("harmonia")]
+    [InlineData("Octopi")]
+    [InlineData("OCTOPI")]
+    [InlineData("octopi per tank")]
+    public void PluralizePreservesAlternatePluralsWhenPluralityIsUnknown(string plural)
+    {
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal($"2 {plural}", plural.ToQuantity(2));
+    }
+
+    [Theory]
+    [InlineData("podium", "podiums")]
+    [InlineData("Podium", "Podiums")]
+    [InlineData("PODIUM", "PODIUMS")]
+    [InlineData("blue podium", "blue podiums")]
+    [InlineData("Blue Podium", "Blue Podiums")]
+    [InlineData("BluePodium", "BluePodiums")]
+    [InlineData("HTTPPodium", "HTTPPodiums")]
+    [InlineData("blue-podium", "blue-podiums")]
+    [InlineData("blue_podium", "blue_podiums")]
+    [InlineData("BLUE PODIUM", "BLUE PODIUMS")]
+    [InlineData("pseudopodium", "pseudopodia")]
+    [InlineData("Pseudopodium", "Pseudopodia")]
+    [InlineData("PSEUDOPODIUM", "PSEUDOPODIA")]
+    [InlineData("sympodium", "sympodia")]
+    public void InflectionsPreservePodiumWordBoundaries(string singular, string plural)
+    {
+        Assert.Equal(plural, singular.Pluralize());
+        Assert.Equal(plural, singular.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Theory]
+    [InlineData("spandices", "spandex")]
+    [InlineData("Spandices", "Spandex")]
+    [InlineData("SPANDICES", "SPANDEX")]
+    [InlineData("BlueSpandices", "BlueSpandex")]
+    [InlineData("Blue Spandices", "Blue Spandex")]
+    [InlineData("BLUE SPANDICES", "BLUE SPANDEX")]
+    public void SingularizeSpandicesPreservesMatchedCapitalization(string plural, string singular)
+    {
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Fact]
+    public void TelluriumIsUncountable()
+    {
+        Assert.Equal("tellurium", "tellurium".Pluralize());
+        Assert.Equal("tellurium", "tellurium".Singularize());
+        Assert.Equal("tellurium", "tellurium".Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal("tellurium", "tellurium".Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Fact]
+    public void ChemicalElementNamesEndingInIumAreUncountable()
+    {
+        foreach (var element in Vocabularies.UncountableChemicalElementNames)
+        {
+            Assert.Equal(element, element.Pluralize());
+            Assert.Equal(element, element.Singularize());
+            Assert.Equal(element, element.Pluralize(inputIsKnownToBeSingular: false));
+            Assert.Equal(element, element.Singularize(inputIsKnownToBePlural: false));
+        }
+    }
+
+    [Theory]
     [InlineData("a")]
     [InlineData("A")]
     [InlineData("s")]
@@ -495,7 +612,7 @@ class PluralTestSource : IEnumerable<object[]>
 
         yield return ["louse", "lice"];
         yield return ["house", "houses"];
-        yield return ["octopus", "octopi"];
+        yield return ["octopus", "octopuses"];
         yield return ["alias", "aliases"];
         yield return ["portfolio", "portfolios"];
         yield return ["criterion", "criteria"];
@@ -567,7 +684,7 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["grass", "grass"];
         yield return ["hair", "hair"];
         yield return ["hero", "heroes"];
-        yield return ["hippopotamus", "hippopotami"];
+        yield return ["hippopotamus", "hippopotamuses"];
         yield return ["hoof", "hooves"];
         yield return ["iris", "irises"];
         yield return ["larva", "larvae"];
@@ -656,6 +773,28 @@ class PluralTestSource : IEnumerable<object[]>
 
         //Issue #1042
         yield return ["database", "databases"];
+
+        //Issue #1962
+        yield return ["premium", "premiums"];
+        yield return ["stadium", "stadiums"];
+        yield return ["podium", "podiums"];
+        yield return ["ultimatum", "ultimatums"];
+        yield return ["condominium", "condominiums"];
+        yield return ["euphonium", "euphoniums"];
+        yield return ["harmonium", "harmoniums"];
+        yield return ["criterium", "criteriums"];
+        yield return ["spandex", "spandexes"];
+        yield return ["himself", "himself"];
+        yield return ["herself", "herself"];
+        yield return ["itself", "itself"];
+        yield return ["myself", "myself"];
+        yield return ["oneself", "oneself"];
+        yield return ["yourself", "yourselves"];
+        yield return ["self", "selves"];
+        yield return ["aquarium", "aquaria"];
+        yield return ["auditorium", "auditoria"];
+        yield return ["consortium", "consortia"];
+        yield return ["symposium", "symposia"];
     }
 
     IEnumerator IEnumerable.GetEnumerator() =>
