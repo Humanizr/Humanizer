@@ -2489,7 +2489,7 @@ static class LocalePhraseTheoryData
         { "pt", 2, TimeUnit.Hour, false, "2 horas" },
         { "pt", 1, TimeUnit.Day, false, "1 dia" },
         { "pt", 2, TimeUnit.Day, false, "2 dias" },
-        { "pt", 0, TimeUnit.Millisecond, false, "0 milisegundos" },
+        { "pt", 0, TimeUnit.Millisecond, false, "0 milissegundos" },
         { "pt", 0, TimeUnit.Millisecond, true, "sem horário" },
         { "pt-BR", 1, TimeUnit.Second, false, "1 segundo" },
         { "pt-BR", 2, TimeUnit.Second, false, "2 segundos" },

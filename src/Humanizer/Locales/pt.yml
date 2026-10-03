@@ -148,12 +148,12 @@ surfaces:
         template: '{value}'
       millisecond:
         single:
-          numeric: '1 milisegundo'
-          words: 'um milisegundo'
+          numeric: '1 milissegundo'
+          words: 'um milissegundo'
         multiple:
           forms:
-            default: 'milisegundos'
-            singular: 'milisegundo'
+            default: 'milissegundos'
+            singular: 'milissegundo'
       second:
         single:
           numeric: '1 segundo'
@@ -472,7 +472,7 @@ surfaces:
         mil: 1000
         'milhão': 1000000
         'milhões': 1000000
-        milhar: 1000000000
+        milhar: 1000
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'masculine-and-feminine'
       compositeScaleMap:
