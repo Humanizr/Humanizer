@@ -49,6 +49,17 @@ public static class ByteSizeExtensions
         ByteSize.FromBits(input);
 
     /// <summary>
+    /// Considers input as bits, including fractional values.
+    /// </summary>
+    /// <remarks>
+    /// Fractional values are preserved in <see cref="ByteSize.Bytes"/>.
+    /// <see cref="ByteSize.Bits"/> rounds up to the nearest whole bit.
+    /// For example, 2.5 bits produces 0.3125 bytes and a Bits value of 3.
+    /// </remarks>
+    public static ByteSize Bits(this double input) =>
+        ByteSize.FromBytes(input / ByteSize.BitsInByte);
+
+    /// <summary>
     /// Considers input as bytes
     /// </summary>
     public static ByteSize Bytes(this byte input) =>
