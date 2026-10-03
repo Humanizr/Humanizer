@@ -5,7 +5,7 @@
     <SystemDependencyVersion>10.0.10</SystemDependencyVersion>
   </PropertyGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.10.91" />
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.10.94" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.4" />
