@@ -3,6 +3,8 @@ namespace Humanizer.Tests.Infrastructure;
 internal static class GlobalizationProviderAttestation
 {
     static bool initialized;
+    static string? validatedProvider;
+    static string? validatedExpectation;
 
     [System.Runtime.CompilerServices.ModuleInitializer]
     internal static void Initialize()
@@ -64,6 +66,62 @@ internal static class GlobalizationProviderAttestation
         if (actual != effectiveExpected)
             throw new InvalidOperationException($"Globalization provider mismatch: expected {effectiveExpected}, actual {actual}.");
 
+        validatedProvider = actual;
+        validatedExpectation = effectiveExpected;
         Console.WriteLine($"GLOBALIZATION_PROVIDER_ATTESTATION assembly={System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} requestedModern={expected} expected={effectiveExpected} actual={actual} runtime={Environment.Version} proof={proof}");
     }
+
+    internal static void Record()
+    {
+        Initialize();
+        var directory = Environment.GetEnvironmentVariable("HUMANIZER_GLOBALIZATION_ATTESTATION_DIRECTORY");
+        if (string.IsNullOrEmpty(directory))
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TF_BUILD")))
+                throw new InvalidOperationException("Azure test processes must retain their provider attestation.");
+
+            return;
+        }
+
+        if (validatedProvider is null || validatedExpectation is null || !System.IO.Path.IsPathRooted(directory))
+            throw new InvalidOperationException("Provider attestation requires a validated mode and an absolute output directory.");
+
+        var assembly = typeof(GlobalizationProviderAttestation).Assembly;
+        var framework = assembly.GetCustomAttributes(typeof(System.Runtime.Versioning.TargetFrameworkAttribute), false)
+            .Cast<System.Runtime.Versioning.TargetFrameworkAttribute>().Single().FrameworkName;
+        var identity = assembly.GetName().Name!;
+#if NET48
+        using var process = System.Diagnostics.Process.GetCurrentProcess();
+        var processId = process.Id;
+#else
+        var processId = Environment.ProcessId;
+#endif
+        var lines = new[]
+        {
+            "assembly=" + identity,
+            "fullName=" + assembly.FullName,
+            "framework=" + framework,
+            "mvid=" + assembly.ManifestModule.ModuleVersionId,
+            "process=" + processId,
+            "runtime=" + Environment.Version,
+            "provider=" + validatedProvider,
+            "expected=" + validatedExpectation,
+            "invariant=false"
+        };
+        System.IO.Directory.CreateDirectory(directory);
+        var final = System.IO.Path.Combine(directory, identity + ".provider." + Guid.NewGuid().ToString("N") + ".txt");
+        var temporary = final + ".tmp";
+        using (var stream = new System.IO.FileStream(temporary, System.IO.FileMode.CreateNew, System.IO.FileAccess.Write))
+        using (var writer = new System.IO.StreamWriter(stream, new System.Text.UTF8Encoding(false)))
+            foreach (var line in lines)
+                writer.WriteLine(line);
+
+        System.IO.File.Move(temporary, final);
+    }
+}
+
+public class GlobalizationProviderTests
+{
+    [Xunit.Fact]
+    public void RecordsActualGlobalizationProvider() => GlobalizationProviderAttestation.Record();
 }
