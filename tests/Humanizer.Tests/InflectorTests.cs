@@ -211,6 +211,72 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
     }
 
+    [Theory]
+    [UseCulture("en-US")]
+    [InlineData("octopi")]
+    [InlineData("hippopotami")]
+    [InlineData("premia")]
+    [InlineData("stadia")]
+    [InlineData("podia")]
+    [InlineData("ultimata")]
+    [InlineData("condominia")]
+    [InlineData("euphonia")]
+    [InlineData("harmonia")]
+    [InlineData("Octopi")]
+    [InlineData("OCTOPI")]
+    [InlineData("octopi per tank")]
+    public void PluralizePreservesAlternatePluralsWhenPluralityIsUnknown(string plural)
+    {
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal($"2 {plural}", plural.ToQuantity(2));
+    }
+
+    [Theory]
+    [InlineData("podium", "podiums")]
+    [InlineData("Podium", "Podiums")]
+    [InlineData("PODIUM", "PODIUMS")]
+    [InlineData("blue podium", "blue podiums")]
+    [InlineData("Blue Podium", "Blue Podiums")]
+    [InlineData("BluePodium", "BluePodiums")]
+    [InlineData("HTTPPodium", "HTTPPodiums")]
+    [InlineData("blue-podium", "blue-podiums")]
+    [InlineData("blue_podium", "blue_podiums")]
+    [InlineData("BLUE PODIUM", "BLUE PODIUMS")]
+    [InlineData("pseudopodium", "pseudopodia")]
+    [InlineData("Pseudopodium", "Pseudopodia")]
+    [InlineData("PSEUDOPODIUM", "PSEUDOPODIA")]
+    [InlineData("sympodium", "sympodia")]
+    public void InflectionsPreservePodiumWordBoundaries(string singular, string plural)
+    {
+        Assert.Equal(plural, singular.Pluralize());
+        Assert.Equal(plural, singular.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Theory]
+    [InlineData("spandices", "spandex")]
+    [InlineData("Spandices", "Spandex")]
+    [InlineData("SPANDICES", "SPANDEX")]
+    [InlineData("BlueSpandices", "BlueSpandex")]
+    [InlineData("Blue Spandices", "Blue Spandex")]
+    [InlineData("BLUE SPANDICES", "BLUE SPANDEX")]
+    public void SingularizeSpandicesPreservesMatchedCapitalization(string plural, string singular)
+    {
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Fact]
+    public void TelluriumIsUncountable()
+    {
+        Assert.Equal("tellurium", "tellurium".Pluralize());
+        Assert.Equal("tellurium", "tellurium".Singularize());
+        Assert.Equal("tellurium", "tellurium".Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal("tellurium", "tellurium".Singularize(inputIsKnownToBePlural: false));
+    }
+
     [Fact]
     public void ChemicalElementNamesEndingInIumAreUncountable()
     {

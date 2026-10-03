@@ -156,7 +156,7 @@ public static class Vocabularies
         _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis|octopus|hippopotamus)es$", "$1");
         _default.AddSingular("^(ox)en", "$1");
         _default.AddSingular("(matr|d)ices$", "$1ix");
-        _default.AddSingular("spandices$", "spandex");
+        _default.AddSingular("(spand)ices$", "$1ex");
         _default.AddSingular("(vert|ind)ices$", "$1ex");
         _default.AddSingular("(quiz)zes$", "$1");
         _default.AddSingular("(buz|blit|walt)zes$", "$1z");
@@ -179,13 +179,15 @@ public static class Vocabularies
         _default.AddIrregular("curriculum", "curricula");
         _default.AddIrregular("premium", "premiums");
         _default.AddIrregular("stadium", "stadiums");
-        _default.AddIrregular("podium", "podiums");
+        _default.AddPlural("((?<![a-z])podium|(?-i:(?<=[A-Za-z])Podium))$", "$1s");
+        _default.AddSingular("((?<![a-z])podium|(?-i:(?<=[A-Za-z])Podium))s$", "$1");
         _default.AddIrregular("ultimatum", "ultimatums");
         _default.AddIrregular("condominium", "condominiums");
         _default.AddIrregular("euphonium", "euphoniums");
         _default.AddIrregular("harmonium", "harmoniums");
         _default.AddIrregular("criterium", "criteriums"); // Note: not the same as criterion
         _default.AddIrregular("spandex", "spandexes");
+        _default.AddPlural("(octopi|hippopotami|premia|stadia|podia|ultimata|condominia|euphonia|harmonia)$", "$1");
         _default.AddIrregular("database", "databases");
         _default.AddIrregular("zombie", "zombies");
         _default.AddIrregular("personnel", "personnel");
