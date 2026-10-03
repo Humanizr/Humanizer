@@ -43,9 +43,9 @@ stages:
         version: 10.x
 
     - task: UseDotNet@2
-      displayName: 'Use .NET 11 SDK'
+      displayName: 'Use .NET 11 RC SDK'
       inputs:
-        version: 11.0.100-preview.6.26359.118
+        version: 11.0.100-rc.1.26425.128
 
     - task: DotNetCoreCLI@2
       inputs:
@@ -172,9 +172,9 @@ stages:
         version: 10.x
 
     - task: UseDotNet@2
-      displayName: 'Use .NET 11 SDK'
+      displayName: 'Use .NET 11 RC SDK'
       inputs:
-        version: 11.0.100-preview.6.26359.118
+        version: 11.0.100-rc.1.26425.128
 
     - task: DotNetCoreCLI@2
       displayName: Record runner SDK
@@ -243,9 +243,9 @@ stages:
       displayName: Download build artifacts
 
     - task: UseDotNet@2
-      displayName: 'Use .NET 11 SDK'
+      displayName: 'Use .NET 11 RC SDK'
       inputs:
-        version: 11.0.100-preview.6.26359.118
+        version: 11.0.100-rc.1.26425.128
 
     # Install the code signing tool
     - task: DotNetCoreCLI@2
