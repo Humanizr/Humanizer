@@ -21,6 +21,12 @@ stages:
       vmImage: windows-latest
 
     steps:
+    - task: PowerShell@2
+      displayName: Test complete MTP report validator
+      inputs:
+        pwsh: true
+        filePath: tests/validate-mtp-results.ps1
+
     - task: UseDotNet@2
       displayName: 'Use .NET 8 SDK'
       inputs:
@@ -148,6 +154,12 @@ stages:
     steps:
     - checkout: self
       fetchDepth: 0
+
+    - task: PowerShell@2
+      displayName: Test complete MTP report validator
+      inputs:
+        pwsh: true
+        filePath: tests/validate-mtp-results.ps1
 
     - task: UseDotNet@2
       displayName: 'Use .NET 8 SDK'
