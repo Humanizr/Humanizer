@@ -80,10 +80,13 @@ function New-ApiShapeInput {
     }
 }
 
-function New-CheckedConversionApiInput {
-    param([Parameter(Mandatory = $true)][string]$Root)
+function New-CompilerApiInput {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][string]$Source
+    )
 
-    $name = "CheckedConversionFixture"
     $projectRoot = Join-Path $Root $name
     New-Item -ItemType Directory -Path $projectRoot | Out-Null
     $projectPath = Join-Path $projectRoot "$name.csproj"
@@ -102,7 +105,30 @@ function New-CheckedConversionApiInput {
     )
     [System.IO.File]::WriteAllText(
         (Join-Path $projectRoot "Source.cs"),
-        @"
+        $Source,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    Invoke-DocsCheckedCommand `
+        -FilePath "dotnet" `
+        -ArgumentList @(
+            "build", $projectPath,
+            "--configuration", "Release",
+            "--nologo",
+            "--disable-build-servers", "-m:1", "-nr:false", "-p:UseSharedCompilation=false",
+            "--verbosity", "quiet"
+        ) `
+        -WorkingDirectory $Root
+    $outputRoot = Join-Path $projectRoot "bin/Release/net8.0"
+    return [PSCustomObject]@{
+        Dll = Join-Path $outputRoot "$name.dll"
+        Xml = Join-Path $outputRoot "$name.xml"
+    }
+}
+
+function New-CheckedConversionApiInput {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    New-CompilerApiInput -Root $Root -Name "CheckedConversionFixture" -Source @"
 namespace CheckedConversionFixture;
 
 public readonly struct CheckedToken
@@ -113,23 +139,7 @@ public readonly struct CheckedToken
 }
 
 public class Generic<T> { }
-"@,
-        [System.Text.UTF8Encoding]::new($false)
-    )
-    Invoke-DocsCheckedCommand `
-        -FilePath "dotnet" `
-        -ArgumentList @(
-            "build", $projectPath,
-            "--configuration", "Release",
-            "--nologo",
-            "--verbosity", "quiet"
-        ) `
-        -WorkingDirectory $Root
-    $outputRoot = Join-Path $projectRoot "bin/Release/net8.0"
-    return [PSCustomObject]@{
-        Dll = Join-Path $outputRoot "$name.dll"
-        Xml = Join-Path $outputRoot "$name.xml"
-    }
+"@
 }
 
 function Assert-ApiPageCollision {
@@ -432,6 +442,50 @@ public class same { }
                 throw "An invalid checked conversion route did not fail closed."
             }
         }
+        foreach ($conversionName in @("Implicit", "Explicit", "CheckedExplicit")) {
+            $ordinaryId = "M:Fixture.ConversionLikeMethods.op_$conversionName(System.Int32)"
+            $generatedId = "$ordinaryId~System.String"
+            $ordinaryRecord = [PSCustomObject]@{
+                Id = $ordinaryId
+                Kind = "Method"
+            }
+            $operatorRecord = [PSCustomObject]@{
+                Id = $generatedId
+                Kind = "Operator"
+            }
+            if ((Resolve-ApiConversionMethodId `
+                    -Id $generatedId `
+                    -ExpectedRecords @($ordinaryRecord)) -ne $ordinaryId) {
+                throw "An ordinary conversion-named method retained a return-type suffix."
+            }
+            if ((Resolve-ApiConversionMethodId `
+                    -Id $generatedId `
+                    -ExpectedRecords @($ordinaryRecord, $operatorRecord)) -ne $generatedId) {
+                throw "An exact conversion operator ID lost its return-type suffix."
+            }
+            if ((Resolve-ApiConversionMethodId `
+                    -Id $generatedId `
+                    -ExpectedRecords @()) -ne $generatedId) {
+                throw "An unknown conversion ID bypassed exact member completeness."
+            }
+            foreach ($duplicateRecord in @($ordinaryRecord, $operatorRecord)) {
+                $duplicateRejected = $false
+                try {
+                    Resolve-ApiConversionMethodId `
+                        -Id $generatedId `
+                        -ExpectedRecords @($duplicateRecord, $duplicateRecord) | Out-Null
+                } catch {
+                    $duplicateRejected = $_.Exception.Message.Contains(
+                        "matched multiple assembly-derived IDs",
+                        [System.StringComparison]::Ordinal
+                    )
+                }
+                if (-not $duplicateRejected) {
+                    throw "A duplicate conversion ID did not fail closed."
+                }
+            }
+        }
+
         $originalCheckedXml = Get-Content -Raw $checkedInput.Xml
         $checkedOutput = Join-Path $fixtureRoot "checked"
         $checkedLinks = Join-Path $fixtureRoot "checked-links.txt"
@@ -546,7 +600,7 @@ public class same { }
             throw "Unconfigured API generation omitted the checked conversion summary."
         }
 
-        $apiInput = New-ApiShapeInput `
+        $apiInput = New-CompilerApiInput `
             -Root $fixtureRoot `
             -Name "Fixture" `
             -Source @"
@@ -638,13 +692,36 @@ public class AccessorLikeMethods
 
 public static class ConversionLikeMethods
 {
+    /// <summary>PARAMETERIMPLICITDOCUMENTED <see cref="op_Explicit(string)"/> <see cref="op_Implicit(bool)"/>.</summary>
+    /// <param name="value">ORDINARYPARAMETERDOCUMENTED</param>
+    /// <returns>ORDINARYRETURNDOCUMENTED</returns>
     public static string op_Implicit(int value) => "";
+    public static void op_Implicit(bool value) { }
+    /// <summary>PARAMETEREXPLICITDOCUMENTED</summary>
     public static int op_Explicit(string value) => 0;
+    /// <summary>PARAMETERCHECKEDDOCUMENTED</summary>
     public static long op_CheckedExplicit(byte value) => 0;
+    /// <summary>ZEROIMPLICITDOCUMENTED</summary>
+    public static string op_Implicit() => "";
+    /// <summary>ZEROEXPLICITDOCUMENTED</summary>
+    public static string op_Explicit() => "";
+    /// <summary>ZEROCHECKEDDOCUMENTED</summary>
+    public static string op_CheckedExplicit() => "";
+    /// <summary>GENERICIMPLICITDOCUMENTED</summary>
+    public static string op_Implicit<T>(T value) => "";
+    /// <summary>GENERICEXPLICITDOCUMENTED</summary>
+    public static string op_Explicit<T>(T value) => "";
+    /// <summary>GENERICCHECKEDDOCUMENTED</summary>
+    public static string op_CheckedExplicit<T>(T value) => "";
 }
 "@
-        $inventory = Get-AssemblyApiMemberInventory `
-            -AssemblyPath $apiInput.Dll
+        $compilerXml = [System.IO.File]::ReadAllBytes($apiInput.Xml)
+        [System.IO.File]::WriteAllText($apiInput.Xml, "<doc><members /></doc>")
+        try {
+            $inventory = Get-AssemblyApiMemberInventory -AssemblyPath $apiInput.Dll
+        } finally {
+            [System.IO.File]::WriteAllBytes($apiInput.Xml, $compilerXml)
+        }
         $records = @{}
         foreach ($record in $inventory.Records) {
             $records[$record.Id] = $record
@@ -674,6 +751,12 @@ public static class ConversionLikeMethods
             "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)" = @("public", "Method", "Fixture.ConversionLikeMethods")
             "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)" = @("public", "Method", "Fixture.ConversionLikeMethods")
             "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)" = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Implicit' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Explicit' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Implicit``1(``0)' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_Explicit``1(``0)' = @("public", "Method", "Fixture.ConversionLikeMethods")
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit``1(``0)' = @("public", "Method", "Fixture.ConversionLikeMethods")
             "P:Fixture.Implementation.Fixture#IContract#Name" = @("public", "Property", "Fixture.Implementation")
             "P:Fixture.Implementation.Fixture#IContract#Item(System.Int32)" = @("public", "Property", "Fixture.Implementation")
             "M:Fixture.Implementation.Fixture#IContract#Run" = @("public", "Method", "Fixture.Implementation")
@@ -707,6 +790,7 @@ public static class ConversionLikeMethods
         New-Item -ItemType Directory -Path $apiOutput | Out-Null
         New-Item -ItemType Directory -Path $publicOutput | Out-Null
         $configurationPath = Join-Path $PSScriptRoot "api-reference-v4.json"
+        $originalApiXmlHash = (Get-FileHash $apiInput.Xml -Algorithm SHA256).Hash
         Invoke-ApiReferenceGeneration `
             -ApiInput $apiInput `
             -OutputPath $apiOutput `
@@ -746,6 +830,12 @@ public static class ConversionLikeMethods
             "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)",
             "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)",
             "M:Fixture.ConversionLikeMethods.op_CheckedExplicit(System.Byte)"
+            'M:Fixture.ConversionLikeMethods.op_Implicit'
+            'M:Fixture.ConversionLikeMethods.op_Explicit'
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit'
+            'M:Fixture.ConversionLikeMethods.op_Implicit``1(``0)'
+            'M:Fixture.ConversionLikeMethods.op_Explicit``1(``0)'
+            'M:Fixture.ConversionLikeMethods.op_CheckedExplicit``1(``0)'
         )) {
             if ($ordinaryConversionNameId -notin $apiIds -or
                 @($apiIds | Where-Object {
@@ -758,6 +848,107 @@ public static class ConversionLikeMethods
                     "Ordinary conversion-named method did not retain ID " +
                     "$ordinaryConversionNameId."
                 )
+            }
+        }
+
+        $ordinaryPage = @($apiOutput, $publicOutput) |
+            ForEach-Object {
+                Get-Content -Raw (Join-Path $_ "Fixture.ConversionLikeMethods.md")
+            }
+        foreach ($documentationMarker in @(
+            "PARAMETERIMPLICITDOCUMENTED", "PARAMETEREXPLICITDOCUMENTED", "PARAMETERCHECKEDDOCUMENTED",
+            "ZEROIMPLICITDOCUMENTED", "ZEROEXPLICITDOCUMENTED", "ZEROCHECKEDDOCUMENTED",
+            "GENERICIMPLICITDOCUMENTED", "GENERICEXPLICITDOCUMENTED", "GENERICCHECKEDDOCUMENTED",
+            "ORDINARYPARAMETERDOCUMENTED", "ORDINARYRETURNDOCUMENTED"
+        )) {
+            foreach ($generatedPage in $ordinaryPage) {
+                if (-not $generatedPage.Contains($documentationMarker, [System.StringComparison]::Ordinal)) {
+                    throw "Generated ordinary conversion-named API omitted XML content: $documentationMarker"
+                }
+            }
+        }
+        foreach ($referenceId in @(
+            "M:Fixture.ConversionLikeMethods.op_Explicit(System.String)",
+            "M:Fixture.ConversionLikeMethods.op_Implicit(System.Boolean)"
+        )) {
+            $expectedReference = @(
+                Get-ApiLinkRecords -LinksPath $apiLinks |
+                    Where-Object Id -CEQ $referenceId
+            )[0].Target
+            foreach ($generatedPage in $ordinaryPage) {
+                $summaryLine = @($generatedPage -split "`n" |
+                    Where-Object { $_.StartsWith("PARAMETERIMPLICITDOCUMENTED", [System.StringComparison]::Ordinal) })[0]
+                if (-not $summaryLine.Contains(
+                    "]($expectedReference '",
+                    [System.StringComparison]::Ordinal
+                )) {
+                    throw "An ordinary conversion-named cref lost its local target: $referenceId"
+                }
+            }
+        }
+
+        if ((Get-FileHash $apiInput.Xml -Algorithm SHA256).Hash -ne $originalApiXmlHash) {
+            throw "Ordinary conversion generation mutated the compiler XML."
+        }
+
+        $ordinaryId = "M:Fixture.ConversionLikeMethods.op_Implicit(System.Int32)"
+        $ordinaryRecord = $records[$ordinaryId]
+        $ordinaryAlias = "$ordinaryId~$($ordinaryRecord.MethodReturnType)"
+        foreach ($invalidRecords in @(
+            [PSCustomObject]@{
+                Records = @($ordinaryRecord, $ordinaryRecord)
+                Message = "matched 2 assembly-derived IDs"
+            },
+            [PSCustomObject]@{
+                Records = @($ordinaryRecord, [PSCustomObject]@{ Id = $ordinaryAlias })
+                Message = "collides with an assembly ID"
+            },
+            [PSCustomObject]@{
+                Records = @([PSCustomObject]@{
+                    Id = $ordinaryId
+                    Kind = "Method"
+                    Name = "op_Implicit"
+                })
+                Message = "return type is missing"
+            }
+        )) {
+            $invalidRecordsRejected = $false
+            try {
+                New-DefaultDocumentationApiInput -ApiInput $apiInput `
+                    -ExpectedRecords $invalidRecords.Records | Out-Null
+            } catch {
+                $invalidRecordsRejected = $_.Exception.Message.Contains(
+                    $invalidRecords.Message,
+                    [System.StringComparison]::Ordinal
+                )
+            }
+            if (-not $invalidRecordsRejected) {
+                throw "Invalid ordinary XML alias records did not fail closed: $($invalidRecords.Message)"
+            }
+        }
+        foreach ($duplicateCanonical in @($false, $true)) {
+            $invalidDocument = [System.Xml.XmlDocument]::new()
+            $invalidDocument.Load($apiInput.Xml)
+            $ordinaryNode = @($invalidDocument.SelectNodes('/doc/members/member') |
+                Where-Object { $_.GetAttribute("name") -ceq $ordinaryId })[0]
+            $invalidNode = $ordinaryNode.CloneNode($true)
+            $invalidNode.SetAttribute("name", $(if ($duplicateCanonical) { $ordinaryId } else { $ordinaryAlias }))
+            [void]$invalidDocument.SelectSingleNode('/doc/members').AppendChild($invalidNode)
+            $invalidXml = Join-Path $fixtureRoot "ordinary-invalid-$duplicateCanonical.xml"
+            $invalidDocument.Save($invalidXml)
+            $invalidXmlRejected = $false
+            try {
+                New-DefaultDocumentationApiInput `
+                    -ApiInput ([PSCustomObject]@{ Dll = $apiInput.Dll; Xml = $invalidXml }) `
+                    -ExpectedRecords @($ordinaryRecord) | Out-Null
+            } catch {
+                $invalidXmlRejected = $_.Exception.Message.Contains(
+                    $(if ($duplicateCanonical) { "XML ID is duplicated" } else { "XML alias already exists" }),
+                    [System.StringComparison]::Ordinal
+                )
+            }
+            if (-not $invalidXmlRejected) {
+                throw "A conflicting ordinary XML document did not fail closed."
             }
         }
 
@@ -1848,6 +2039,27 @@ try {
         )) {
         throw "Current Humanizer 4 API landing is missing its generated index."
     }
+    $comparisonDocumentation = @(
+        (Get-Content -Raw (Join-Path $isolatedCurrentApi "Humanizer.ByteRate.md")) -split '(?m)^#### ' |
+            Where-Object {
+                $_.StartsWith(
+                    'ByteRate\.CompareTo\(object\) Method',
+                    [System.StringComparison]::Ordinal
+                )
+            }
+    )
+    if ($comparisonDocumentation.Count -ne 1) {
+        throw "Current ByteRate API is missing its object comparison method."
+    }
+    foreach ($returnValueMeaning in @("less than zero", "zero if", "greater than zero")) {
+        if (-not $comparisonDocumentation[0].Contains(
+            $returnValueMeaning,
+            [System.StringComparison]::Ordinal
+        )) {
+            throw "Current ByteRate comparison API omitted '$returnValueMeaning'."
+        }
+    }
+
     $v4ReleaseRoot = Join-Path $tempRoot "v4-release-source"
     $v4ReleaseRebuildRoot = Join-Path $tempRoot "v4-release-rebuild"
     $v4ReleaseSource = Join-Path $v4ReleaseRoot "api"

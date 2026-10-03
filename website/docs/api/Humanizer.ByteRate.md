@@ -108,6 +108,8 @@ The rate to compare with\.
 
 #### ByteRate\.CompareTo\(object\) Method
 
+Compares this rate with another object\.
+
 ```csharp
 public int CompareTo(object? obj);
 ```
@@ -117,10 +119,20 @@ public int CompareTo(object? obj);
 
 `obj` [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object')
 
+The rate to compare with this instance, or [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.
+
 Implements [CompareTo\(object\)](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable.compareto#system-icomparable-compareto(system-object) 'System\.IComparable\.CompareTo\(System\.Object\)')
 
 ##### Returns
-[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
+A value less than zero if this instance precedes [obj](Humanizer.ByteRate.md#Humanizer.ByteRate.CompareTo(object).obj 'Humanizer\.ByteRate\.CompareTo\(object\)\.obj') in the sort order;
+zero if they have the same position; or greater than zero if this instance follows
+[obj](Humanizer.ByteRate.md#Humanizer.ByteRate.CompareTo(object).obj 'Humanizer\.ByteRate\.CompareTo\(object\)\.obj') or [obj](Humanizer.ByteRate.md#Humanizer.ByteRate.CompareTo(object).obj 'Humanizer\.ByteRate\.CompareTo\(object\)\.obj') is [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.
+
+##### Exceptions
+
+[System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
+[obj](Humanizer.ByteRate.md#Humanizer.ByteRate.CompareTo(object).obj 'Humanizer\.ByteRate\.CompareTo\(object\)\.obj') is not a [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate')\.
 
 <a name='Humanizer.ByteRate.Equals(Humanizer.ByteRate)'></a>
 
@@ -142,6 +154,8 @@ public bool Equals(Humanizer.ByteRate? other);
 
 #### ByteRate\.Equals\(object\) Method
 
+Determines whether the specified object is equal to the current object\.
+
 ```csharp
 public override bool Equals(object? obj);
 ```
@@ -151,19 +165,25 @@ public override bool Equals(object? obj);
 
 `obj` [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object')
 
+The object to compare with the current object\.
+
 ##### Returns
-[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') if the specified object  is equal to the current object; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 <a name='Humanizer.ByteRate.GetHashCode()'></a>
 
 #### ByteRate\.GetHashCode\(\) Method
+
+Serves as the default hash function\.
 
 ```csharp
 public override int GetHashCode();
 ```
 
 ##### Returns
-[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
+A hash code for the current object\.
 
 <a name='Humanizer.ByteRate.Humanize(Humanizer.TimeUnit)'></a>
 

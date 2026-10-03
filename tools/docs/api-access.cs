@@ -24,6 +24,9 @@ public sealed class ApiAccessRecord
 
     public required string Kind { get; init; }
 
+    /// <summary>The method return type in XML documentation ID syntax, or null for other members.</summary>
+    public string? MethodReturnType { get; init; }
+
     public required string Name { get; init; }
 
     public required string Namespace { get; init; }
@@ -299,7 +302,8 @@ public static class ApiAccessReader
                 typeKind,
                 pageName,
                 typeNamespace,
-                qualifiedDisplayName);
+                qualifiedDisplayName,
+                signature.ReturnType);
         }
     }
 
@@ -385,7 +389,8 @@ public static class ApiAccessReader
         string typeKind,
         string pageName,
         string typeNamespace,
-        string qualifiedDisplayName) =>
+        string qualifiedDisplayName,
+        string? methodReturnType = null) =>
         records.Add(new ApiAccessRecord
         {
             Access = ToText(access),
@@ -398,6 +403,7 @@ public static class ApiAccessReader
             },
             Id = id,
             Kind = kind,
+            MethodReturnType = methodReturnType,
             Name = name,
             Namespace = typeNamespace,
             ParameterCount = parameterCount,
