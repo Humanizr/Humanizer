@@ -379,7 +379,7 @@ public class MetricNumeralTests
     [InlineData("1 k", 1000d, MetricNumeralFormats.WithSpace, null)]
     [InlineData("1milli", 1E-3, MetricNumeralFormats.UseName, null)]
     [InlineData("1.23milli", 1.234E-3, MetricNumeralFormats.UseName, 2)]
-    [InlineData("12.34k", 12345, null, 2)]
+    [InlineData("12.38k", 12375, null, 2)]
     [InlineData("12k", 12345, null, 0)]
     [InlineData("1M", 999500d, null, 0)]
     [InlineData("-3.9m", -3.91e-3, null, 1)]
