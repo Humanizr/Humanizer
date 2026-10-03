@@ -135,8 +135,10 @@ by `3.0.10`. Older build hosts still use the packaged fallback target. Verify
 every CI image and IDE because analyzer selection is a build-host concern, not
 a runtime TFM concern.
 
-Building Humanizer itself at the audited candidate uses the SDK pinned in
-`global.json` (`11.0.100-preview.6.26359.118`); `3.0.10` used `10.0.100`.
+The audited Humanizer 4 candidate used the SDK pinned in its `global.json`
+(`11.0.100-preview.6.26359.118`); `3.0.10` used `10.0.100`.
+Current contributor builds use .NET 11 RC 1 (`11.0.100-rc.1.26425.128`);
+check `global.json` in the checkout you are building for its SDK requirement.
 Those are contributor toolchains, not consumer minimums. A consuming project
 only needs an SDK compatible with its own target framework and build policy.
 
