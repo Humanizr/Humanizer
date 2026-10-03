@@ -48,10 +48,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Setup .NET 11 preview
+      - name: Setup .NET 11 RC
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '11.0.100-preview.6.26359.118'
+          dotnet-version: '11.0.100-rc.1.26425.128'
 
       - name: Display run information
         run: |
@@ -144,10 +144,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Setup .NET 11 preview
+      - name: Setup .NET 11 RC
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '11.0.100-preview.6.26359.118'
+          dotnet-version: '11.0.100-rc.1.26425.128'
       
       - name: Clone and Build ResultsComparer
         run: |
