@@ -34,7 +34,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
-        var namesArray = Enum.GetNames(TypeOfT);
+        var namesArray = Enum.GetNames<T>();
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
@@ -51,7 +51,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             dehumanized[description.Text] = value;
         }
 
-        var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
+        var isBitFieldEnum = TypeOfT.IsDefined(typeof(FlagsAttribute), false);
         return (
             zero,
             humanized.ToFrozenDictionary(),
@@ -74,7 +74,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             sources[value] = GetSources(value);
         }
 
-        var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
+        var isBitFieldEnum = TypeOfT.IsDefined(typeof(FlagsAttribute), false);
         return (zero, sources.ToFrozenDictionary(), valuesArray.ToFrozenSet(), isBitFieldEnum);
     }
 
@@ -139,16 +139,12 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             return false;
         }
 
-        return !Enum.IsDefined(TypeOfT, input);
+        return !Enum.IsDefined(input);
     }
 
     static (string Text, bool IsMetadata) GetDescription(T input)
     {
-#if NET5_0_OR_GREATER
         var caseName = Enum.GetName(input)!;
-#else
-        var caseName = Enum.GetName(TypeOfT, input)!;
-#endif
         var member = TypeOfT.GetField(caseName)!;
 
         if (TryGetDescription(member, out var description))
@@ -161,11 +157,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
     static (string EnumName, DisplayAttribute? Display) GetSources(T input)
     {
-#if NET5_0_OR_GREATER
         var caseName = Enum.GetName(input)!;
-#else
-        var caseName = Enum.GetName(TypeOfT, input)!;
-#endif
         var member = TypeOfT.GetField(caseName)!;
         return (caseName.Humanize(), member.GetCustomAttribute<DisplayAttribute>());
     }
