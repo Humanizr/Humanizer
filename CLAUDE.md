@@ -84,7 +84,7 @@ docs/plans/                     # Documentation implementation plans
 
 ## Key Config Files
 
-- `global.json` - .NET SDK version (11.0.100-preview.6.26359.118)
+- `global.json` - .NET SDK version (11.0.100-rc.1.26425.128)
 - `Directory.Build.props` - Shared MSBuild properties (nullable, warnings-as-errors, analyzers)
 - `Directory.Packages.props` - Central package management (all NuGet versions)
 - `version.json` - Nerdbank.GitVersioning semver config
