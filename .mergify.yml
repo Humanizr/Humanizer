@@ -7,8 +7,8 @@
 # Only a maintainer can let a PR in: it must be authored by clairernovotny or
 # approved by someone with write access (Mergify ignores other approvals).
 # Pull requests from anyone else, bots included, wait for that approval, and
-# a new push by anyone but clairernovotny dismisses earlier approvals, so
-# only reviewed code can land. Checks are pinned to the app that posts them.
+# any new push dismisses earlier approvals, so only reviewed code can land.
+# Checks are pinned to the app that posts them.
 
 shared:
   ci_checks: &ci_checks
@@ -24,10 +24,9 @@ shared:
 
 pull_request_rules:
   # Mergify's own branch updates do not trigger this, only new commits.
-  - name: Dismiss approvals when someone else pushes new commits
+  - name: Dismiss approvals when new commits are pushed
     conditions:
       - base = main
-      - -author = clairernovotny
     actions:
       dismiss_reviews:
         approved: true
@@ -38,7 +37,12 @@ merge_protections:
     description: CI green, authored or approved by a maintainer, review threads resolved, not held.
     if:
       - base = main
-      - -head ~= ^mergify/merge-queue/
+      # Mergify's own draft PRs are checked by merge_conditions instead. Only a
+      # branch in this repo qualifies, so a fork branch with that name cannot
+      # switch the protection off.
+      - or:
+          - -head ~= ^mergify/merge-queue/
+          - head-repo-full-name != Humanizr/Humanizer
     success_conditions: *ready_conditions
 
 merge_protections_settings:
