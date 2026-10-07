@@ -68,3 +68,7 @@ These instructions apply to the entire repository.
 - Security changes also require Codex Security proof-of-concept or attack-path closure. Changes affecting rendered documentation, the site, or UI require desktop and mobile checks in light and dark modes, accessibility and link checks, and version-snapshot validation. Localization or source-generator changes require every applicable locale, schema, generator, and runtime matrix with no partial or English fallback.
 - Merge only the exact approved head. Then verify the merge on the default branch, the changed behavior, and any applicable security dashboard; safely remove worktrees and branches and archive completed tasks.
 - Thermos is a merge-director evidence gate recorded in each pull request body using the template, not a GitHub required status. Subject to its configured bypass, the active repository ruleset separately enforces hosted CI, CodeQL, DevSkim, and code-quality checks; organization-admin bypass will not be used for agent-managed merges.
+
+## Merging
+
+PRs land through the Mergify merge queue (`.mergify.yml`), squashed into one commit on `main` titled and described by the PR; merge commits and rebase merges are turned off. Do not merge by hand. Mergify queues a PR once it is not a draft, its required checks are green, every review thread is resolved, and it is authored by clairernovotny or approved by someone with write access. Add the `do-not-merge` label to hold one back.

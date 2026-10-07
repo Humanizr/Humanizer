@@ -1,0 +1,51 @@
+# Mergify: the same merge flow as Claire's other repos. A PR lands through
+# the merge queue, squashed into one commit on main titled and described by
+# the PR. The main ruleset requires the `Mergify Merge Protections` check, so
+# every merge goes through the rules below, and a PR is queued as soon as it
+# is ready. Add the `do-not-merge` label to hold one back.
+#
+# Only a maintainer can let a PR in: it must be authored by clairernovotny or
+# approved by someone with write access (Mergify ignores other approvals).
+# Pull requests from anyone else, bots included, wait for that approval.
+
+shared:
+  ci_checks: &ci_checks
+    - check-success = Humanizer-CI
+  ready_conditions: &ready_conditions
+    - and: *ci_checks
+    - or:
+        - author = clairernovotny
+        - "#approved-reviews-by >= 1"
+    - "#changes-requested-reviews-by = 0"
+    - "#review-threads-unresolved = 0"
+    - -label = do-not-merge
+
+merge_protections:
+  - name: Ready to land on main
+    description: CI green, authored or approved by a maintainer, review threads resolved, not held.
+    if:
+      - base = main
+      - -head ~= ^mergify/merge-queue/
+    success_conditions: *ready_conditions
+
+merge_protections_settings:
+  auto_merge_conditions:
+    - base = main
+
+# Contributions come from forks, so the queue never pushes to a contributor's
+# branch: it tests each PR on top of main in a draft PR inside this repo (a
+# separate merge_conditions list is what selects that mode), then squashes
+# the original PR. One PR at a time.
+merge_queue:
+  max_parallel_checks: 1
+
+queue_rules:
+  - name: default
+    queue_conditions:
+      - base = main
+      - -draft
+      - and: *ready_conditions
+    merge_conditions:
+      - and: *ci_checks
+    merge_method: squash
+    batch_size: 1
