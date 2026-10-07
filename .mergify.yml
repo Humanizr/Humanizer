@@ -7,7 +7,8 @@
 # Only a maintainer can let a PR in: it must be authored by clairernovotny or
 # approved by someone with write access (Mergify ignores other approvals).
 # Pull requests from anyone else, bots included, wait for that approval, and
-# any new push dismisses earlier approvals, so only reviewed code can land.
+# new commits pushed by anyone dismiss earlier approvals, so only reviewed
+# code can land. (Mergify's own branch updates only bring in main.)
 # Checks are pinned to the app that posts them.
 
 shared:
@@ -38,11 +39,12 @@ merge_protections:
     if:
       - base = main
       # Mergify's own draft PRs are checked by merge_conditions instead. Only a
-      # branch in this repo qualifies, so a fork branch with that name cannot
-      # switch the protection off.
+      # PR Mergify opened, on a queue branch in this repo, qualifies, so no one
+      # can switch the protection off by naming a branch.
       - or:
           - -head ~= ^mergify/merge-queue/
           - head-repo-full-name != Humanizr/Humanizer
+          - -author = mergify[bot]
     success_conditions: *ready_conditions
 
 merge_protections_settings:
