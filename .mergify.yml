@@ -6,11 +6,13 @@
 #
 # Only a maintainer can let a PR in: it must be authored by clairernovotny or
 # approved by someone with write access (Mergify ignores other approvals).
-# Pull requests from anyone else, bots included, wait for that approval.
+# Pull requests from anyone else, bots included, wait for that approval, and
+# a new push by anyone but clairernovotny dismisses earlier approvals, so
+# only reviewed code can land. Checks are pinned to the app that posts them.
 
 shared:
   ci_checks: &ci_checks
-    - check-success = Humanizer-CI
+    - check-success = @azure-pipelines/Humanizer-CI
   ready_conditions: &ready_conditions
     - and: *ci_checks
     - or:
@@ -19,6 +21,17 @@ shared:
     - "#changes-requested-reviews-by = 0"
     - "#review-threads-unresolved = 0"
     - -label = do-not-merge
+
+pull_request_rules:
+  # Mergify's own branch updates do not trigger this, only new commits.
+  - name: Dismiss approvals when someone else pushes new commits
+    conditions:
+      - base = main
+      - -author = clairernovotny
+    actions:
+      dismiss_reviews:
+        approved: true
+        changes_requested: false
 
 merge_protections:
   - name: Ready to land on main
