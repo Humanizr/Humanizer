@@ -1,0 +1,70 @@
+# Mergify: the same merge flow as Claire's other repos. A PR lands through
+# the merge queue, squashed into one commit on main titled and described by
+# the PR. The main ruleset requires the `Mergify Merge Protections` check, so
+# every merge goes through the rules below, and a PR is queued as soon as it
+# is ready. Add the `do-not-merge` label to hold one back.
+#
+# Only a maintainer can let a PR in: it must be authored by clairernovotny or
+# approved by someone with write access (Mergify ignores other approvals).
+# Pull requests from anyone else, bots included, wait for that approval, and
+# new commits pushed by anyone dismiss earlier approvals, so only reviewed
+# code can land. (Mergify's own branch updates only bring in main.)
+# Checks are pinned to the app that posts them.
+
+shared:
+  ci_checks: &ci_checks
+    - check-success = @azure-pipelines/Humanizer-CI
+  ready_conditions: &ready_conditions
+    - and: *ci_checks
+    - or:
+        - author = clairernovotny
+        - "#approved-reviews-by >= 1"
+    - "#changes-requested-reviews-by = 0"
+    - "#review-threads-unresolved = 0"
+    - -label = do-not-merge
+
+pull_request_rules:
+  # Mergify's own branch updates do not trigger this, only new commits.
+  - name: Dismiss approvals when new commits are pushed
+    conditions:
+      - base = main
+    actions:
+      dismiss_reviews:
+        approved: true
+        changes_requested: false
+
+merge_protections:
+  - name: Ready to land on main
+    description: CI green, authored or approved by a maintainer, review threads resolved, not held.
+    if:
+      - base = main
+      # Mergify's own draft PRs are checked by merge_conditions instead. Only a
+      # PR Mergify opened, on a queue branch in this repo, qualifies, so no one
+      # can switch the protection off by naming a branch.
+      - or:
+          - -head ~= ^mergify/merge-queue/
+          - head-repo-full-name != Humanizr/Humanizer
+          - -author = mergify[bot]
+    success_conditions: *ready_conditions
+
+merge_protections_settings:
+  auto_merge_conditions:
+    - base = main
+
+# Contributions come from forks, so the queue never pushes to a contributor's
+# branch: it tests each PR on top of main in a draft PR inside this repo (a
+# separate merge_conditions list is what selects that mode), then squashes
+# the original PR. One PR at a time.
+merge_queue:
+  max_parallel_checks: 1
+
+queue_rules:
+  - name: default
+    queue_conditions:
+      - base = main
+      - -draft
+      - and: *ready_conditions
+    merge_conditions:
+      - and: *ci_checks
+    merge_method: squash
+    batch_size: 1
