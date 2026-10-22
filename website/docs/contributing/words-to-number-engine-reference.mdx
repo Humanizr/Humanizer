@@ -217,6 +217,7 @@ Notes:
 - `gluedOrdinalScaleSuffixes` supports glued ordinal forms where the scale is expressed as a suffix.
 - `gluedScaleSuffixes` supports glued cardinal forms where a cardinal count is immediately followed by a scale suffix.
 - `compositeScaleMap` supports composite multi-token scales.
+- A `cardinalMap` value at or above `scaleThreshold` is a scale and closes the current group. When it is a power of ten, the part of the running total below it is part of its count, so `mil millones` is 1000 × 10^6 rather than 1000 + 10^6. Values that already carry their count, such as Burmese `လေးသိန်း` (400000), are added as they are.
 - `ordinalGenderVariant` is validated as token-map metadata when present. Do not rely on it by itself to create parseable ordinal tokens; token-map parsing recognizes explicit ordinal maps and the prefix/suffix rules emitted into `TokenMapWordsToNumberRules`.
 - `ordinalNumberToWordsKind: 'self'` is an authoring alias for the current locale's generated number-to-words profile. The generator normalizes that alias to the concrete locale profile key, but token-map locales should still author the ordinal lexemes they need to parse in `ordinalMap`, `ordinalScaleMap`, `gluedOrdinalScaleSuffixes`, or `compositeScaleMap` unless the token-map emitter is extended to synthesize additional ordinal maps.
 - `normalizationProfile` is the first field to pick for a new locale because it determines how aggressively the generated parser cleans incoming text before tokenization. The same normalization is applied to explicit ordinal tokens.
