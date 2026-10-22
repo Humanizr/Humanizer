@@ -701,7 +701,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
     /// <summary>
     /// Removes non-spacing marks from the supplied text.
     /// </summary>
-    static string RemoveDiacritics(string value)
+    internal static string RemoveDiacritics(string value)
     {
         var normalized = value.Normalize(NormalizationForm.FormD);
         var builder = new StringBuilder(normalized.Length);
@@ -734,35 +734,50 @@ sealed class SuffixScaleWordsToNumberProfile(
     /// <summary>
     /// Gets the token-to-value map used for ordinary cardinals.
     /// </summary>
-    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = FoldKeys(cardinalMap);
     /// <summary>
     /// Gets the scale tokens that can stand on their own when the phrase omits a multiplier.
     /// </summary>
-    public FrozenDictionary<string, long> BareScaleMap { get; } = bareScaleMap;
+    public FrozenDictionary<string, long> BareScaleMap { get; } = FoldKeys(bareScaleMap);
     /// <summary>
     /// Gets the suffix-scale definitions that drive compound parsing.
     /// </summary>
-    public SuffixScaleWord[] Scales { get; } = scales;
+    public SuffixScaleWord[] Scales { get; } = Array.ConvertAll(scales, scale => scale with { Singular = Fold(scale.Singular), Plural = Fold(scale.Plural) });
     /// <summary>
     /// Gets the singular token used for "hundred".
     /// </summary>
-    public string HundredSingularToken { get; } = hundredSingularToken;
+    public string HundredSingularToken { get; } = Fold(hundredSingularToken);
     /// <summary>
     /// Gets the plural token used for "hundred".
     /// </summary>
-    public string HundredPluralToken { get; } = hundredPluralToken;
+    public string HundredPluralToken { get; } = Fold(hundredPluralToken);
     /// <summary>
     /// Gets the suffix token used to express tens compounds.
     /// </summary>
-    public string TensSuffixToken { get; } = tensSuffixToken;
+    public string TensSuffixToken { get; } = Fold(tensSuffixToken);
     /// <summary>
     /// Gets the suffix token used to express teen compounds.
     /// </summary>
-    public string TeenSuffixToken { get; } = teenSuffixToken;
+    public string TeenSuffixToken { get; } = Fold(teenSuffixToken);
     /// <summary>
     /// Gets the prefixes that mark a negative number phrase.
     /// </summary>
-    public string[] NegativePrefixes { get; } = negativePrefixes;
+    public string[] NegativePrefixes { get; } = Array.ConvertAll(negativePrefixes, Fold);
+
+    // Input is lowercased and stripped of diacritics before parsing, so the locale tokens must be too.
+    static string Fold(string value) =>
+        SuffixScaleWordsToNumberConverter.RemoveDiacritics(value.ToLowerInvariant());
+
+    static FrozenDictionary<string, long> FoldKeys(FrozenDictionary<string, long> map)
+    {
+        var folded = new Dictionary<string, long>(map.Count, map.Comparer);
+        foreach (var pair in map)
+        {
+            folded.TryAdd(Fold(pair.Key), pair.Value);
+        }
+
+        return folded.ToFrozenDictionary(map.Comparer);
+    }
 }
 
 /// <summary>
