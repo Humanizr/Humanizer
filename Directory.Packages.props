@@ -18,6 +18,7 @@
     <PackageVersion Include="System.Collections.Immutable" Version="$(SystemDependencyVersion)" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
+    <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="9.0.21" />
     <PackageVersion Include="System.Text.Json" Version="$(SystemDependencyVersion)" />
     <PackageVersion Include="Verify.DiffPlex" Version="3.3.1" />
     <PackageVersion Include="Verify.XunitV3" Version="31.27.0" />
