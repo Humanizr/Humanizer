@@ -466,8 +466,33 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
     static bool TryAddScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
     {
-        var count = current == 0 ? 1UL : current;
-        return TryAddScaledMagnitude(total, count, scaleValue, maxMagnitude, out value);
+        // The part of the total below a power-of-ten scale is part of its count, so "mil millones" is
+        // 1000 * 10^6 rather than 1000 + 10^6. Larger scales already in the total are multiples of this one and
+        // stay additive. Tokens that already carry their count, such as Burmese 400000, are added as they are.
+        var lower = IsPowerOfTen(scaleValue) ? total % scaleValue : 0;
+        if (lower == 0)
+        {
+            var count = current == 0 ? 1UL : current;
+            return TryAddScaledMagnitude(total, count, scaleValue, maxMagnitude, out value);
+        }
+
+        if (!TryAddMagnitude(lower, current, maxMagnitude, out var lowerCount))
+        {
+            value = default;
+            return false;
+        }
+
+        return TryAddScaledMagnitude(total - lower, lowerCount, scaleValue, maxMagnitude, out value);
+    }
+
+    static bool IsPowerOfTen(ulong value)
+    {
+        while (value >= 10 && value % 10 == 0)
+        {
+            value /= 10;
+        }
+
+        return value == 1;
     }
 
     static bool TryAddScaledMagnitude(ulong total, ulong count, ulong scaleValue, ulong maxMagnitude, out ulong value)
