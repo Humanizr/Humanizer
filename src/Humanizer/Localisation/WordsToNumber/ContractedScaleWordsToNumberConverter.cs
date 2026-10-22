@@ -102,10 +102,11 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
 
         long total = 0;
         long current = 0;
+        long lastUnit = 0;
 
         // The main parsing loop is a tiny state machine:
         // - additive tokens increase the current local group
-        // - contracted teen/tens tokens reshape the current local group
+        // - contracted teen/tens tokens reshape the last additive token of the local group
         // - hundred tokens multiply the current group by 100
         // - large scales flush the current group into the running total
         foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
@@ -126,23 +127,28 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
             if (token == "belas")
             {
                 current = checked((current == 0 ? 1 : current) + 10);
+                lastUnit = 0;
             }
             else if (token == "puluh")
             {
-                current = checked((current == 0 ? 1 : current) * 10);
+                current = checked(current - lastUnit + (lastUnit == 0 ? 1 : lastUnit) * 10);
+                lastUnit = 0;
             }
             else if (tokenValue >= 1000)
             {
                 total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
                 current = 0;
+                lastUnit = 0;
             }
             else if (tokenValue == 100)
             {
                 current = checked((current == 0 ? 1 : current) * tokenValue);
+                lastUnit = 0;
             }
             else
             {
                 current = checked(current + tokenValue);
+                lastUnit = tokenValue;
             }
         }
 
