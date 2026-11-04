@@ -22,7 +22,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
         if (truncationString.Length > length)
         {
-            return truncateFrom == TruncateFrom.Right ? value[..length] : value[^length..];
+            return truncateFrom == TruncateFrom.Right ? value[..Truncator.PrefixLength(value, length)] : value[Truncator.SuffixStart(value, value.Length - length)..];
         }
 
         // Count letter or digit characters up to length + 1 to determine if truncation is needed
@@ -56,7 +56,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
                 if (alphaNumericalCharactersProcessed + truncationString.Length == length)
                 {
-                    return StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(i));
+                    return StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(Truncator.SuffixStart(value, i)));
                 }
             }
         }
@@ -70,7 +70,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
             if (alphaNumericalCharactersProcessed + truncationString.Length == length)
             {
-                return StringHumanizeExtensions.Concat(value.AsSpan(0, i + 1), truncationString.AsSpan());
+                return StringHumanizeExtensions.Concat(value.AsSpan(0, Truncator.PrefixLength(value, i + 1)), truncationString.AsSpan());
             }
         }
 

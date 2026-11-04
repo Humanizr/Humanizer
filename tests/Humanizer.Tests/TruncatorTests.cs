@@ -327,4 +327,27 @@ public class TruncatorTests
     [InlineData("221B Baker Street\nLondon NW1 6XE", 20, "221B Baker Street\u2026")]
     public void TruncateWithDynamicLengthAndPreserveWordsTruncatorTreatsAllWhitespaceAsWordBoundary(string input, int length, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.DynamicLengthAndPreserveWords));
+
+    [Theory(DisplayName = "23 - TruncateDoesNotSplitSurrogatePairs")]
+    [InlineData(nameof(Truncator.FixedLength), "Hello \U0001F604 You", 8, "…", TruncateFrom.Right, "Hello …")]
+    [InlineData(nameof(Truncator.FixedLength), "Hello \U0001F604 You", 6, "…", TruncateFrom.Left, "… You")]
+    [InlineData(nameof(Truncator.FixedLength), "Hello \U0001F604 You", 7, null, TruncateFrom.Right, "Hello ")]
+    [InlineData(nameof(Truncator.FixedLength), "Hello \U0001F604 You", 5, null, TruncateFrom.Left, " You")]
+    [InlineData(nameof(Truncator.FixedNumberOfCharacters), "\U0001F604 abc def", 1, "…", TruncateFrom.Right, "…")]
+    [InlineData(nameof(Truncator.FixedNumberOfCharacters), "abc def \U0001F604", 1, "…", TruncateFrom.Left, "…")]
+    [InlineData(nameof(Truncator.FixedNumberOfCharacters), "a\U0001F604bc", 2, "...", TruncateFrom.Right, "a")]
+    [InlineData(nameof(Truncator.FixedNumberOfCharacters), "ab\U0001F604c", 2, "...", TruncateFrom.Left, "c")]
+    [InlineData(nameof(Truncator.DynamicLengthAndPreserveWords), "a\U0001F604 bc", 2, "...", TruncateFrom.Right, "a")]
+    [InlineData(nameof(Truncator.DynamicLengthAndPreserveWords), "ab \U0001F604c", 2, "...", TruncateFrom.Left, "c")]
+    public void TruncateDoesNotSplitSurrogatePairs(string truncatorName, string input, int length, string? truncationString, TruncateFrom truncateFrom, string expectedOutput)
+    {
+        var truncator = truncatorName switch
+        {
+            nameof(Truncator.FixedLength) => Truncator.FixedLength,
+            nameof(Truncator.FixedNumberOfCharacters) => Truncator.FixedNumberOfCharacters,
+            _ => Truncator.DynamicLengthAndPreserveWords
+        };
+
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, truncator, truncateFrom));
+    }
 }

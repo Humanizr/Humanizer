@@ -29,4 +29,12 @@ public static class Truncator
     /// Dynamic number of characters And Preserve Words truncator
     /// </summary>
     public static ITruncator DynamicNumberOfCharactersAndPreserveWords { get; } = new DynamicNumberOfCharactersAndPreserveWordsTruncator();
+
+    // Moves a cut that would land between the halves of a surrogate pair to before the pair.
+    internal static int PrefixLength(string value, int length) =>
+        length > 0 && length < value.Length && char.IsSurrogatePair(value[length - 1], value[length]) ? length - 1 : length;
+
+    // Moves a cut that would land between the halves of a surrogate pair to after the pair.
+    internal static int SuffixStart(string value, int start) =>
+        start > 0 && start < value.Length && char.IsSurrogatePair(value[start - 1], value[start]) ? start + 1 : start;
 }

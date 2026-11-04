@@ -30,8 +30,8 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
         if (truncationString.Length > length)
         {
             return truncateFrom == TruncateFrom.Right
-                ? value[..length]
-                : value[^length..];
+                ? value[..Truncator.PrefixLength(value, length)]
+                : value[Truncator.SuffixStart(value, value.Length - length)..];
         }
 
         // If the whole string fits, return it.
