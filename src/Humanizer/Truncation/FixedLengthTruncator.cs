@@ -21,10 +21,10 @@ class FixedLengthTruncator : ITruncator
         if (truncationString == null || truncationString.Length > length)
         {
             return truncateFrom == TruncateFrom.Right
-                ? value[..length]
-                : value[^length..];
+                ? value[..Truncator.PrefixLength(value, length)]
+                : value[Truncator.SuffixStart(value, value.Length - length)..];
         }
 
-        return truncateFrom == TruncateFrom.Left ? StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(value.Length - length + truncationString.Length)) : StringHumanizeExtensions.Concat(value.AsSpan(0, length - truncationString.Length), truncationString.AsSpan());
+        return truncateFrom == TruncateFrom.Left ? StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(Truncator.SuffixStart(value, value.Length - length + truncationString.Length))) : StringHumanizeExtensions.Concat(value.AsSpan(0, Truncator.PrefixLength(value, length - truncationString.Length)), truncationString.AsSpan());
     }
 }
