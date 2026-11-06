@@ -45,7 +45,7 @@ jobs:
     # or others). This is typically only required for manual builds.
     # - name: Setup runtime (example)
     #   uses: actions/setup-example@v1
-    - uses: actions/setup-dotnet@v6
+    - uses: actions/setup-dotnet@v6.1.0
       with:
         global-json-file: global.json
     # Initializes the CodeQL tools for scanning.

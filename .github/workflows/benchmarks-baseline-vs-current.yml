@@ -39,17 +39,17 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET 8
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: '8.0.x'
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: '10.0.x'
 
       - name: Setup .NET 11 RC
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: '11.0.100-rc.1.26425.128'
 
@@ -135,17 +135,17 @@ jobs:
           path: current
       
       - name: Setup .NET 8
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: '8.0.x'
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: '10.0.x'
 
       - name: Setup .NET 11 RC
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: '11.0.100-rc.1.26425.128'
       
