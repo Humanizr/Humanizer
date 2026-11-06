@@ -31,6 +31,6 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - uses: actions/setup-dotnet@v6
+      - uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
