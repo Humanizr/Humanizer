@@ -5,5 +5,8 @@
   </PropertyGroup>
 
   <Import Project="Humanizer.Analyzers.props" />
+  <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" VersionOverride="11.0.0" />
+  </ItemGroup>
 
 </Project>
