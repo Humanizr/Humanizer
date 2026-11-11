@@ -15,7 +15,7 @@
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '3.8'">3.0.0</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.8'">4.8.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '4.8'">3.3.4</RoslynAnalyzerVersion>
-    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.14'">4.14.0</RoslynCSharpVersion>
+    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.14'">5.9.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '4.14'">3.11.0</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynCSharpVersion)' == ''">3.8.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynAnalyzerVersion)' == ''">3.0.0</RoslynAnalyzerVersion>
