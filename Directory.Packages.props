@@ -13,7 +13,7 @@
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.9.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="2.3.2" />
     <PackageVersion Include="Microsoft.Testing.Platform" Version="2.3.2" />
-    <PackageVersion Include="Polyfill" Version="11.0.1" />
+    <PackageVersion Include="Polyfill" Version="11.4.5" />
     <PackageVersion Include="PublicApiGenerator" Version="11.5.4" />
     <PackageVersion Include="System.Collections.Immutable" Version="$(SystemDependencyVersion)" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
