@@ -612,7 +612,7 @@ surfaces:
     duration:
       zero: 'vaqt yo''q'
       age:
-        template: '{value} yosh'
+        template: '{value}'
       millisecond:
         single:
           numeric: '1 millisekund'
