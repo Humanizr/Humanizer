@@ -39,6 +39,18 @@ public class ToStringTests
         Assert.Equal("10.1234 KB", ByteSize.FromKilobytes(10.1234).ToString("#.#### KB"));
 
     [Fact]
+    public void ReturnsNumberFormatOfEachProvidedCulture()
+    {
+        var custom = (CultureInfo)CultureInfo.GetCultureInfo("en-US").Clone();
+        custom.NumberFormat.NumberDecimalSeparator = "_";
+        var finnish = new CultureInfo("fi-FI");
+
+        Assert.Equal("10_5 KB", ByteSize.FromKilobytes(10.5).ToString("#.# KB", custom));
+        Assert.Equal("\u221210,5 KB", ByteSize.FromKilobytes(-10.5).ToString("#.# KB", finnish));
+        Assert.Equal("10_5 KB", ByteSize.FromKilobytes(10.5).ToString("#.# KB", custom));
+    }
+
+    [Fact]
     public void ReturnsBits() =>
         Assert.Equal("10 b", ByteSize.FromBits(10).ToString("##.#### b"));
 
